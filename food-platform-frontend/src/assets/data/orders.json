@@ -1,0 +1,73 @@
+[
+  {
+    "id": "ord-001",
+    "customerId": "user-customer",
+    "restaurantId": "rest-01",
+    "restaurantName": "Bangkok Bowl Lab",
+    "status": "ON_THE_WAY",
+    "createdAt": "2026-06-22T12:05:00.000Z",
+    "estimatedDeliveryAt": "2026-06-22T12:38:00.000Z",
+    "deliveryAddress": "88 Sukhumvit Road, Khlong Toei, Bangkok",
+    "items": [
+      { "id": "item-101", "name": "Crispy Basil Chicken Bowl", "quantity": 1, "price": 159 },
+      { "id": "item-103", "name": "Green Mango Slaw", "quantity": 1, "price": 79 }
+    ],
+    "timeline": [
+      { "status": "PLACED", "label": "Order placed", "time": "12:05" },
+      { "status": "ACCEPTED", "label": "Kitchen accepted", "time": "12:09" },
+      { "status": "PREPARING", "label": "Cooking in progress", "time": "12:12" },
+      { "status": "READY_FOR_PICKUP", "label": "Ready for pickup", "time": "12:24" },
+      { "status": "RIDER_ASSIGNED", "label": "Rider assigned", "time": "12:26" },
+      { "status": "PICKED_UP", "label": "Order picked up", "time": "12:30" },
+      { "status": "ON_THE_WAY", "label": "Rider is on the way", "time": "12:31" }
+    ],
+    "subtotal": 238,
+    "deliveryFee": 29,
+    "discount": 25,
+    "total": 242,
+    "riderName": "Rico Rider"
+  },
+  {
+    "id": "ord-002",
+    "customerId": "user-customer",
+    "restaurantId": "rest-02",
+    "restaurantName": "Firefly Pizza Club",
+    "status": "DELIVERED",
+    "createdAt": "2026-06-20T10:18:00.000Z",
+    "estimatedDeliveryAt": "2026-06-20T11:00:00.000Z",
+    "deliveryAddress": "45 Silom Complex, Bang Rak, Bangkok",
+    "items": [
+      { "id": "item-201", "name": "Truffle Mushroom Pizza", "quantity": 1, "price": 329 }
+    ],
+    "timeline": [
+      { "status": "PLACED", "label": "Order placed", "time": "10:18" },
+      { "status": "DELIVERED", "label": "Delivered to customer", "time": "10:56" }
+    ],
+    "subtotal": 329,
+    "deliveryFee": 39,
+    "discount": 0,
+    "total": 368,
+    "riderName": "Rico Rider"
+  },
+  {
+    "id": "ord-003",
+    "customerId": "user-customer",
+    "restaurantId": "rest-01",
+    "restaurantName": "Bangkok Bowl Lab",
+    "status": "PLACED",
+    "createdAt": "2026-06-22T14:45:00.000Z",
+    "estimatedDeliveryAt": "2026-06-22T15:15:00.000Z",
+    "deliveryAddress": "88 Sukhumvit Road, Khlong Toei, Bangkok",
+    "items": [
+      { "id": "item-102", "name": "Lemongrass Beef Bowl", "quantity": 2, "price": 189 }
+    ],
+    "timeline": [
+      { "status": "PLACED", "label": "Order placed", "time": "14:45" }
+    ],
+    "subtotal": 378,
+    "deliveryFee": 29,
+    "discount": 30,
+    "total": 377,
+    "riderName": null
+  }
+]

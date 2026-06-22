@@ -1,0 +1,203 @@
+[
+  {
+    "id": "rest-01",
+    "name": "Bangkok Bowl Lab",
+    "slug": "bangkok-bowl-lab",
+    "cuisine": ["Thai", "Rice Bowls"],
+    "rating": 4.8,
+    "deliveryTime": "18-28 min",
+    "deliveryFee": 29,
+    "heroColor": "from-orange-500 to-amber-400",
+    "coverImage": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "branches": [
+      { "id": "branch-01a", "name": "Thonglor Hub", "zone": "Central Bangkok", "lat": 13.7305, "lng": 100.5777 },
+      { "id": "branch-01b", "name": "Ari Kitchen", "zone": "North Bangkok", "lat": 13.7797, "lng": 100.5447 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-101",
+        "name": "Signature Bowls",
+        "items": [
+          {
+            "id": "item-101",
+            "name": "Crispy Basil Chicken Bowl",
+            "description": "Jasmine rice, basil chili glaze, fried egg and pickled cucumber.",
+            "price": 159,
+            "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 14,
+            "modifiers": ["Extra Egg", "Spicy Boost", "Brown Rice"]
+          },
+          {
+            "id": "item-102",
+            "name": "Lemongrass Beef Bowl",
+            "description": "Charred beef, lime aioli, grilled broccoli and toasted rice.",
+            "price": 189,
+            "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 17,
+            "modifiers": ["Extra Beef", "No Onion", "Sticky Rice"]
+          }
+        ]
+      },
+      {
+        "id": "cat-102",
+        "name": "Fresh Sides",
+        "items": [
+          {
+            "id": "item-103",
+            "name": "Green Mango Slaw",
+            "description": "Crunchy mango, peanuts, chili-lime dressing.",
+            "price": 79,
+            "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 6,
+            "modifiers": ["Extra Peanut", "No Chili"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-02",
+    "name": "Firefly Pizza Club",
+    "slug": "firefly-pizza-club",
+    "cuisine": ["Pizza", "Italian"],
+    "rating": 4.7,
+    "deliveryTime": "25-35 min",
+    "deliveryFee": 39,
+    "heroColor": "from-rose-500 to-orange-400",
+    "coverImage": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "branches": [
+      { "id": "branch-02a", "name": "Sathorn Oven", "zone": "CBD", "lat": 13.7201, "lng": 100.5271 },
+      { "id": "branch-02b", "name": "Ladprao Slice Bar", "zone": "North", "lat": 13.8151, "lng": 100.5658 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-201",
+        "name": "Stone Baked",
+        "items": [
+          {
+            "id": "item-201",
+            "name": "Truffle Mushroom Pizza",
+            "description": "Roasted mushrooms, mozzarella, truffle crema and rocket.",
+            "price": 329,
+            "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 20,
+            "modifiers": ["Thin Crust", "Extra Cheese", "No Rocket"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-03",
+    "name": "Sushi Circuit",
+    "slug": "sushi-circuit",
+    "cuisine": ["Japanese", "Sushi"],
+    "rating": 4.9,
+    "deliveryTime": "22-30 min",
+    "deliveryFee": 45,
+    "heroColor": "from-cyan-500 to-sky-400",
+    "coverImage": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80",
+    "status": "Busy",
+    "verified": true,
+    "branches": [
+      { "id": "branch-03a", "name": "Ekkamai Roll Bar", "zone": "East", "lat": 13.7308, "lng": 100.5853 },
+      { "id": "branch-03b", "name": "Rama 9 Bento Station", "zone": "East Central", "lat": 13.7578, "lng": 100.5656 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-301",
+        "name": "Chef Specials",
+        "items": [
+          {
+            "id": "item-301",
+            "name": "Salmon Aburi Box",
+            "description": "Torched salmon nigiri, spicy cucumber and tamago.",
+            "price": 249,
+            "image": "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 12,
+            "modifiers": ["Extra Wasabi", "Soy on Side"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-04",
+    "name": "Garden Wrap House",
+    "slug": "garden-wrap-house",
+    "cuisine": ["Healthy", "Wraps"],
+    "rating": 4.6,
+    "deliveryTime": "16-24 min",
+    "deliveryFee": 19,
+    "heroColor": "from-emerald-500 to-lime-400",
+    "coverImage": "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": false,
+    "branches": [
+      { "id": "branch-04a", "name": "Phrom Phong Wrap Lab", "zone": "Central", "lat": 13.7304, "lng": 100.5698 },
+      { "id": "branch-04b", "name": "Victory Monument Prep", "zone": "Central North", "lat": 13.7629, "lng": 100.5377 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-401",
+        "name": "Power Wraps",
+        "items": [
+          {
+            "id": "item-401",
+            "name": "Chipotle Chicken Wrap",
+            "description": "Smoked chicken, romaine, avocado mash and corn salsa.",
+            "price": 149,
+            "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 10,
+            "modifiers": ["Protein Boost", "No Corn", "Gluten Free Wrap"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-05",
+    "name": "Midnight Noodle Dept",
+    "slug": "midnight-noodle-dept",
+    "cuisine": ["Noodles", "Asian Fusion"],
+    "rating": 4.5,
+    "deliveryTime": "20-32 min",
+    "deliveryFee": 35,
+    "heroColor": "from-violet-500 to-fuchsia-500",
+    "coverImage": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "branches": [
+      { "id": "branch-05a", "name": "Asok Broth Line", "zone": "Central", "lat": 13.7395, "lng": 100.5601 },
+      { "id": "branch-05b", "name": "Chatuchak Night Station", "zone": "North", "lat": 13.7993, "lng": 100.5531 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-501",
+        "name": "Ramen Nights",
+        "items": [
+          {
+            "id": "item-501",
+            "name": "Black Garlic Tonkotsu",
+            "description": "Creamy pork broth, slow chashu, ajitama and spring onion.",
+            "price": 229,
+            "image": "https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=900&q=80",
+            "available": true,
+            "prepTime": 16,
+            "modifiers": ["Extra Noodles", "Spicy Oil", "No Pork"]
+          }
+        ]
+      }
+    ]
+  }
+]

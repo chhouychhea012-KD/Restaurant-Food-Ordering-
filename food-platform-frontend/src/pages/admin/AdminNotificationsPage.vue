@@ -1,0 +1,186 @@
+<template>
+  <div class="space-y-6">
+    <section class="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#0f172a_0%,#1e293b_55%,#ea580c_120%)] px-6 py-8 text-white shadow-[0_25px_80px_rgba(15,23,42,0.24)] sm:px-8">
+      <div class="absolute -right-12 top-0 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+      <div class="absolute bottom-0 left-1/3 h-28 w-28 rounded-full bg-orange-300/20 blur-2xl" />
+      <div class="relative grid gap-6 xl:grid-cols-[1.1fr_0.9fr] xl:items-end">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.35em] text-orange-200">Operations Signals</p>
+          <h1 class="mt-4 max-w-3xl text-4xl font-extrabold leading-tight">A clearer notification center for platform events, order escalations, and admin actions.</h1>
+          <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-200">
+            This admin module helps your team understand what changed, what needs action, and which updates are flowing into the customer and operational experience.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3 xl:grid-cols-1 xl:gap-3">
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Unread</p>
+            <p class="mt-2 text-3xl font-bold">{{ notificationStore.unreadCount }}</p>
+            <p class="mt-2 text-sm text-slate-200">Still waiting for review</p>
+          </div>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Total</p>
+            <p class="mt-2 text-3xl font-bold">{{ notificationStore.items.length }}</p>
+            <p class="mt-2 text-sm text-slate-200">Notifications in the admin feed</p>
+          </div>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Focus</p>
+            <p class="mt-2 text-3xl font-bold">{{ activeFilterLabel }}</p>
+            <p class="mt-2 text-sm text-slate-200">Filtered view for faster review</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionCard eyebrow="Admin Notifications" title="Platform activity feed" description="Notifications here help admins monitor customer order flow, catalog changes, and account-level system events from one page.">
+      <template #actions>
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-secondary" type="button" @click="markAllRead" :disabled="!authStore.user || !notificationStore.unreadCount">Mark all read</button>
+          <select v-model="filter" class="field-input w-52">
+            <option value="all">All notifications</option>
+            <option value="unread">Unread only</option>
+            <option value="order">Order updates</option>
+            <option value="catalog">Catalog</option>
+            <option value="system">System</option>
+            <option value="account">Account</option>
+          </select>
+        </div>
+      </template>
+
+      <div v-if="filteredNotifications.length" class="space-y-4">
+        <article
+          v-for="notification in filteredNotifications"
+          :key="notification.id"
+          class="rounded-[1.75rem] border p-5 shadow-sm transition"
+          :class="isRead(notification) ? 'border-slate-200 bg-white/90' : 'border-orange-200 bg-orange-50/50 shadow-orange-100/40'"
+        >
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="pill" :class="toneClass(notification.kind)">{{ formatKind(notification.kind) }}</span>
+                <span v-if="!isRead(notification)" class="pill bg-slate-900 text-white">Needs review</span>
+              </div>
+              <h3 class="mt-3 text-xl font-bold text-slate-950">{{ notification.title }}</h3>
+              <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{{ notification.message }}</p>
+            </div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{{ formatShortDate(notification.createdAt) }}</p>
+          </div>
+
+          <div class="mt-5 flex flex-wrap items-center gap-3">
+            <RouterLink
+              v-if="notification.ctaTo && notification.ctaLabel"
+              :to="notification.ctaTo"
+              class="btn-primary"
+              @click="markRead(notification.id)"
+            >
+              {{ notification.ctaLabel }}
+            </RouterLink>
+            <button v-if="!isRead(notification)" class="btn-secondary" type="button" @click="markRead(notification.id)">Mark as read</button>
+            <button class="rounded-2xl bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeNotification(notification.id)">Remove</button>
+          </div>
+        </article>
+      </div>
+
+      <div v-else class="rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
+        <p class="text-lg font-semibold text-slate-900">No notifications for this filter</p>
+        <p class="mt-2 text-sm text-slate-500">As customer orders and admin operations move through the system, fresh updates will appear here.</p>
+      </div>
+    </SectionCard>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, onMounted, ref, watch } from 'vue';
+import { RouterLink } from 'vue-router';
+import type { AppNotification, NotificationKind } from '@/types';
+import SectionCard from '@/components/common/SectionCard.vue';
+import { useAuthStore } from '@/stores/auth.store';
+import { useNotificationStore } from '@/stores/notification.store';
+import { formatShortDate } from '@/utils/format';
+
+const authStore = useAuthStore();
+const notificationStore = useNotificationStore();
+const filter = ref<'all' | 'unread' | NotificationKind>('all');
+
+const filteredNotifications = computed(() => {
+  return notificationStore.items.filter((notification) => {
+    if (filter.value === 'all') {
+      return true;
+    }
+    if (filter.value === 'unread') {
+      return !isRead(notification);
+    }
+    return notification.kind === filter.value;
+  });
+});
+
+const activeFilterLabel = computed(() => {
+  if (filter.value === 'all') {
+    return 'All';
+  }
+  if (filter.value === 'unread') {
+    return 'Unread';
+  }
+  return formatKind(filter.value);
+});
+
+onMounted(() => {
+  notificationStore.initialize(authStore.user);
+});
+
+watch(
+  () => authStore.user,
+  (user) => {
+    notificationStore.syncUser(user);
+  },
+  { immediate: true },
+);
+
+function isRead(notification: AppNotification) {
+  return Boolean(authStore.user && notification.readBy.includes(authStore.user.id));
+}
+
+function markRead(notificationId: string) {
+  if (!authStore.user) {
+    return;
+  }
+
+  notificationStore.markRead(notificationId, authStore.user);
+}
+
+function markAllRead() {
+  if (!authStore.user) {
+    return;
+  }
+
+  notificationStore.markEverythingRead(authStore.user);
+}
+
+function removeNotification(notificationId: string) {
+  if (!authStore.user) {
+    return;
+  }
+
+  notificationStore.removeNotification(notificationId, authStore.user);
+}
+
+function formatKind(kind: NotificationKind) {
+  return kind.charAt(0).toUpperCase() + kind.slice(1);
+}
+
+function toneClass(kind: NotificationKind) {
+  switch (kind) {
+    case 'order':
+      return 'bg-sky-100 text-sky-700';
+    case 'promo':
+      return 'bg-emerald-100 text-emerald-700';
+    case 'catalog':
+      return 'bg-amber-100 text-amber-700';
+    case 'account':
+      return 'bg-violet-100 text-violet-700';
+    case 'system':
+    default:
+      return 'bg-slate-100 text-slate-700';
+  }
+}
+</script>

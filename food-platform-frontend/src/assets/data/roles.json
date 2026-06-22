@@ -1,0 +1,63 @@
+[
+  {
+    "id": "role-admin",
+    "name": "admin",
+    "label": "Platform Admin",
+    "permissions": [
+      "dashboard.view",
+      "roles.manage",
+      "restaurants.manage",
+      "orders.manage",
+      "analytics.view",
+      "users.manage",
+      "riders.manage",
+      "zones.manage",
+      "profile.manage"
+    ]
+  },
+  {
+    "id": "role-owner",
+    "name": "owner",
+    "label": "Restaurant Owner",
+    "permissions": [
+      "dashboard.view",
+      "restaurant.manage",
+      "menu.manage",
+      "orders.view",
+      "staff.manage",
+      "analytics.restaurant"
+    ]
+  },
+  {
+    "id": "role-kitchen",
+    "name": "kitchen",
+    "label": "Kitchen Staff",
+    "permissions": [
+      "dashboard.view",
+      "kitchen.queue",
+      "orders.prepare"
+    ]
+  },
+  {
+    "id": "role-rider",
+    "name": "rider",
+    "label": "Delivery Rider",
+    "permissions": [
+      "dashboard.view",
+      "deliveries.view",
+      "deliveries.update",
+      "availability.toggle"
+    ]
+  },
+  {
+    "id": "role-customer",
+    "name": "customer",
+    "label": "Customer",
+    "permissions": [
+      "restaurants.view",
+      "orders.create",
+      "orders.view_own",
+      "profile.manage"
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "notif-customer-001",
+    "title": "Welcome to Flavor Fleet",
+    "message": "Your customer account is ready. Explore restaurants, browse categories, and track your next order from one protected workspace.",
+    "kind": "account",
+    "audienceRole": "customer",
+    "userId": "user-customer",
+    "ctaLabel": "Open dashboard",
+    "ctaTo": "/dashboard",
+    "createdAt": "2026-06-22T09:15:00.000Z",
+    "readBy": []
+  },
+  {
+    "id": "notif-customer-002",
+    "title": "Promo discount unlocked",
+    "message": "You crossed the THB 300 threshold, so your next eligible checkout receives the automatic THB 30 promo benefit.",
+    "kind": "promo",
+    "audienceRole": "customer",
+    "userId": "user-customer",
+    "ctaLabel": "Start shopping",
+    "ctaTo": "/restaurants",
+    "createdAt": "2026-06-22T12:40:00.000Z",
+    "readBy": ["user-customer"]
+  },
+  {
+    "id": "notif-admin-001",
+    "title": "Daily control center ready",
+    "message": "Your admin workspace is seeded with live dashboard, catalog, and order control data for today's operations review.",
+    "kind": "system",
+    "audienceRole": "admin",
+    "userId": null,
+    "ctaLabel": "Open analytics",
+    "ctaTo": "/admin/analytics",
+    "createdAt": "2026-06-22T07:30:00.000Z",
+    "readBy": []
+  },
+  {
+    "id": "notif-admin-002",
+    "title": "Catalog review queue updated",
+    "message": "Product and category changes from the admin CRUD modules now flow directly into the customer browsing experience.",
+    "kind": "catalog",
+    "audienceRole": "admin",
+    "userId": null,
+    "ctaLabel": "View products",
+    "ctaTo": "/admin/products",
+    "createdAt": "2026-06-22T14:05:00.000Z",
+    "readBy": ["user-admin"]
+  }
+]

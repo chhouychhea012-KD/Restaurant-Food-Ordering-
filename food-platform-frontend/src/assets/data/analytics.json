@@ -1,0 +1,18 @@
+{
+  "totalOrdersToday": 184,
+  "grossSalesToday": 58240,
+  "avgDeliveryTime": 27,
+  "activeRiders": 24,
+  "breachedSla": 8,
+  "topRestaurants": [
+    { "name": "Bangkok Bowl Lab", "orders": 44, "revenue": 18500 },
+    { "name": "Firefly Pizza Club", "orders": 36, "revenue": 16500 },
+    { "name": "Sushi Circuit", "orders": 27, "revenue": 13200 }
+  ],
+  "hourlyOrders": [12, 18, 22, 26, 17, 13, 19, 24],
+  "zoneLoad": [
+    { "zone": "Central Bangkok", "value": 72 },
+    { "zone": "CBD", "value": 58 },
+    { "zone": "North", "value": 43 }
+  ]
+}

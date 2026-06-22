@@ -1,0 +1,80 @@
+[
+  {
+    "id": "user-admin",
+    "name": "Ariana Admin",
+    "email": "admin@flavorfleet.app",
+    "passwordHash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
+    "role": "admin",
+    "phone": "+66 800 111 111",
+    "avatar": "AA",
+    "restaurantId": null,
+    "shiftActive": true
+  },
+  {
+    "id": "user-owner",
+    "name": "Oscar Owner",
+    "email": "owner@flavorfleet.app",
+    "passwordHash": "553feacf899a72916b2b50e4c95f587a06d6d1b8b4e6b433beb5fea315d0acb0",
+    "role": "owner",
+    "phone": "+66 800 222 222",
+    "avatar": "OO",
+    "restaurantId": "rest-01",
+    "shiftActive": true
+  },
+  {
+    "id": "user-kitchen",
+    "name": "Kira Kitchen",
+    "email": "kitchen@flavorfleet.app",
+    "passwordHash": "651e20ba013a41a7aa0e7eb81569d3fc6b0d54ca5a6893d9bd3cc289906c89af",
+    "role": "kitchen",
+    "phone": "+66 800 333 333",
+    "avatar": "KK",
+    "restaurantId": "rest-01",
+    "shiftActive": true
+  },
+  {
+    "id": "user-rider",
+    "name": "Rico Rider",
+    "email": "rider@flavorfleet.app",
+    "passwordHash": "301d71f784fe27a3b04a7f7cb0f054527349694135546dc083e2c8a34bc4079c",
+    "role": "rider",
+    "phone": "+66 800 444 444",
+    "avatar": "RR",
+    "restaurantId": null,
+    "shiftActive": true
+  },
+  {
+    "id": "user-customer",
+    "name": "Clara Customer",
+    "email": "customer@flavorfleet.app",
+    "passwordHash": "98ec654a8df28f8f0f8f02220483d46916b85017de0b74d8ec755c28cb8539a8",
+    "role": "customer",
+    "phone": "+66 800 555 555",
+    "avatar": "CC",
+    "restaurantId": null,
+    "shiftActive": true,
+    "loyaltyPoints": 450,
+    "addresses": [
+      {
+        "id": "addr-01",
+        "label": "Home",
+        "line1": "88 Sukhumvit Road",
+        "district": "Khlong Toei",
+        "city": "Bangkok",
+        "isDefault": true,
+        "lat": 13.725,
+        "lng": 100.569
+      },
+      {
+        "id": "addr-02",
+        "label": "Office",
+        "line1": "45 Silom Complex",
+        "district": "Bang Rak",
+        "city": "Bangkok",
+        "isDefault": false,
+        "lat": 13.728,
+        "lng": 100.534
+      }
+    ]
+  }
+]
