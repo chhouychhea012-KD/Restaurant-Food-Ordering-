@@ -183,7 +183,7 @@ const links = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Restaurants', to: '/restaurants' },
-  { label: 'Categories', to: '/categories' },
+  // { label: 'Categories', to: '/categories' },
   { label: 'Track Order', to: '/track-order' },
 ];
 

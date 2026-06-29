@@ -15,7 +15,7 @@
         </div>
         <div class="mt-5 flex items-center justify-between">
           <div>
-            <p class="text-xl font-bold text-slate-950">฿{{ item.price }}</p>
+            <p class="text-xl font-bold text-slate-950">${{ item.price }}</p>
             <p class="text-sm text-slate-500">{{ item.prepTime }} min prep</p>
           </div>
           <slot />

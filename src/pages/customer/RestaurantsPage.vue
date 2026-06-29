@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <SectionCard eyebrow="Restaurant Directory" title="Browse all delivery partners" description="Search by restaurant name, cuisine tag, or admin-created menu category. Customer filters below read from the same editable local catalog used in the dashboard.">
+    <SectionCard eyebrow="Restaurant Directory" title="Browse all delivery partners" description="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
           <input v-model="query" class="field-input w-72" type="search" placeholder="Search cuisine, restaurant, or category" @input="updateRoute" />

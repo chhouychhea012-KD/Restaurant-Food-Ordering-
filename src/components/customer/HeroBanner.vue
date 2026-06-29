@@ -230,7 +230,7 @@ function goToNextSlide(restart = true) {
 }
 
 function formatPrice(price: number) {
-  return `THB ${price}`;
+  return `$ ${price}`;
 }
 
 watch(

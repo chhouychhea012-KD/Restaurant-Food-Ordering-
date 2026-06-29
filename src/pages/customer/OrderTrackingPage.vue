@@ -1,38 +1,94 @@
 <template>
-  <div class="grid gap-6 xl:grid-cols-[1fr_340px]">
-    <SectionCard eyebrow="Live Tracking" title="Follow your latest order" description="Order timelines update from the same stored order state that operations views use.">
-      <div v-if="order" class="grid gap-6 lg:grid-cols-[1fr_300px]">
-        <div>
-          <div class="surface-muted mb-5 flex flex-wrap items-center justify-between gap-3 p-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900">Order Details</h1>
+        <p class="text-slate-500 mt-1">#{{ order?.id || 'N/A' }}</p>
+      </div>
+      <button class="btn-primary px-6 py-3">Download Invoice</button>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-12">
+      <!-- Main Content -->
+      <div class="lg:col-span-8 space-y-8">
+        <!-- Order Header -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-100">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-y-6">
             <div>
-              <p class="text-sm text-slate-500">{{ order.id }}</p>
-              <h3 class="mt-1 text-2xl font-bold text-slate-950">{{ order.restaurantName }}</h3>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Order Number</p>
+              <p class="font-mono font-medium text-slate-900 mt-1">{{ order?.id || '—' }}</p>
             </div>
-            <StatusBadge :status="order.status" />
+            <div>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Placed On</p>
+              <p class="font-medium text-slate-900 mt-1">{{ order?.createdAt ? new Date(order.createdAt).toLocaleDateString() : '—' }}</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Restaurant</p>
+              <p class="font-medium text-slate-900 mt-1">{{ order?.restaurantName }}</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Status</p>
+              <div class="mt-1">
+                <StatusBadge :status="order?.status || 'pending'" />
+              </div>
+            </div>
           </div>
-          <OrderTimeline :timeline="order.timeline" />
         </div>
-        <div class="space-y-4">
-          <div class="surface-muted p-5">
-            <p class="text-sm font-semibold text-slate-900">Delivery address</p>
-            <p class="mt-2 text-sm text-slate-600">{{ order.deliveryAddress }}</p>
+
+        <!-- Order Tracking -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-100">
+          <h2 class="font-semibold mb-6">Order Progress</h2>
+          <OrderTimeline :timeline="order?.timeline || []" />
+        </div>
+
+        <!-- Delivery Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-3xl p-6 border border-slate-100">
+            <p class="font-semibold mb-3">Delivery Address</p>
+            <p class="text-slate-600">{{ order?.deliveryAddress || 'No address available' }}</p>
           </div>
-          <div class="surface-muted p-5">
-            <p class="text-sm font-semibold text-slate-900">Assigned rider</p>
-            <p class="mt-2 text-sm text-slate-600">{{ order.riderName ?? 'Waiting for assignment' }}</p>
+          <div class="bg-white rounded-3xl p-6 border border-slate-100">
+            <p class="font-semibold mb-3">Assigned Rider</p>
+            <p class="text-slate-600">{{ order?.riderName ?? 'Waiting for rider assignment' }}</p>
           </div>
         </div>
       </div>
-      <EmptyState v-else title="No active order found" message="Place a new order or review your order history from the customer dashboard." />
-    </SectionCard>
+
+      <!-- Sticky Sidebar -->
+      <div class="lg:col-span-4">
+        <div class="bg-slate-900 text-white rounded-3xl p-6 lg:sticky lg:top-6">
+          <h3 class="text-lg font-semibold mb-5">Order Summary</h3>
+          
+          <div class="space-y-4 text-sm">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Subtotal</span>
+              <span>$ {{ order?.subtotal ?? 0 }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Delivery Fee</span>
+              <span>$ {{ order?.deliveryFee ?? 0 }}</span>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-700 my-6"></div>
+
+          <div class="flex justify-between text-lg font-semibold">
+            <span>Total</span>
+            <span>$ {{ order?.total ?? 0 }}</span>
+          </div>
+
+          <button class="w-full mt-8 bg-brand-500 hover:bg-brand-600 py-4 rounded-2xl font-semibold transition">
+            View Full Receipt
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import EmptyState from '@/components/common/EmptyState.vue';
-import SectionCard from '@/components/common/SectionCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
 import OrderTimeline from '@/components/orders/OrderTimeline.vue';
 import { useAuthStore } from '@/stores/auth.store';
@@ -43,11 +99,11 @@ const orderStore = useOrderStore();
 const route = useRoute();
 
 const requestedOrderId = computed(() => (typeof route.query.orderId === 'string' ? route.query.orderId : null));
+
 const order = computed(() => {
   if (requestedOrderId.value) {
     return orderStore.orders.find((entry) => entry.id === requestedOrderId.value) ?? null;
   }
-
   return orderStore.activeOrder ?? orderStore.orders[0] ?? null;
 });
 

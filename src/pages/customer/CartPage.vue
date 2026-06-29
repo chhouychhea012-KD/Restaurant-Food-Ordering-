@@ -13,7 +13,7 @@
             <button class="btn-secondary px-3 py-2" @click="cartStore.updateQuantity(item.id, item.quantity + 1)">+</button>
           </div>
           <div class="flex items-center gap-4">
-            <p class="text-base font-bold text-slate-950">฿{{ item.price * item.quantity }}</p>
+            <p class="text-base font-bold text-slate-950">${{ item.price * item.quantity }}</p>
             <button class="text-sm font-semibold text-rose-500" @click="cartStore.removeItem(item.id)">Remove</button>
           </div>
         </div>

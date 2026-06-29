@@ -1,101 +1,90 @@
 <template>
-  <div class="space-y-6">
-    <SectionCard eyebrow="Category Discovery" title="Browse menu categories" description="Every category below is generated from the admin-managed restaurant catalog, so customer filters stay in sync with the dashboard CRUD data.">
+  <div class="space-y-8">
+    <!-- Category Discovery -->
+    <SectionCard eyebrow="Discover Categories" title="What are you craving?" description="Browse popular categories from our restaurants">
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <input v-model="query" class="field-input w-72" type="search" placeholder="Search category or restaurant" @input="updateRoute" />
-          <RouterLink to="/restaurants" class="btn-secondary">Open restaurants</RouterLink>
+          <input 
+            v-model="query" 
+            class="field-input w-80" 
+            type="search" 
+            placeholder="Search categories..." 
+            @input="updateRoute" 
+          />
+          <RouterLink to="/restaurants" class="btn-secondary">All Restaurants</RouterLink>
         </div>
       </template>
 
-      <div class="grid gap-4 md:grid-cols-3 xl:grid-cols-4">
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Dynamic categories</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantStore.categories.length }}</p>
-          <p class="mt-2 text-sm text-slate-500">Live from admin dashboard catalog data</p>
-        </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Matching restaurants</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantStore.restaurants.length }}</p>
-          <p class="mt-2 text-sm text-slate-500">Customer-visible partners in this filter</p>
-        </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Products mapped</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ highlightedProductCount }}</p>
-          <p class="mt-2 text-sm text-slate-500">Menu items connected to the active category set</p>
-        </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Active filter</p>
-          <p class="mt-2 text-2xl font-bold text-slate-950">{{ activeCategory || 'All categories' }}</p>
-          <p class="mt-2 text-sm text-slate-500">Switch categories to refine restaurant results</p>
-        </div>
-      </div>
-
+      <!-- Category Pills -->
       <div class="mt-6 flex flex-wrap gap-3">
-        <button class="pill px-4 py-2 text-sm transition" :class="!activeCategory ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" type="button" @click="selectCategory('')">
-          All categories
+        <button 
+          class="pill px-5 py-2 text-sm transition" 
+          :class="!activeCategory ? 'bg-slate-900 text-white' : 'bg-slate-100 hover:bg-slate-200'"
+          @click="selectCategory('')"
+        >
+          All Categories
         </button>
         <button
           v-for="category in filteredCategories"
           :key="category.slug"
-          class="pill px-4 py-2 text-sm transition"
-          :class="activeCategory === category.name ? 'bg-brand-500 text-white' : 'bg-brand-50 text-brand-700 hover:bg-brand-100'"
-          type="button"
+          class="pill px-5 py-2 text-sm transition"
+          :class="activeCategory === category.name ? 'bg-brand-500 text-white' : 'bg-white hover:bg-slate-50 border border-slate-200'"
           @click="selectCategory(category.name)"
         >
           {{ category.name }}
         </button>
       </div>
 
-      <div v-if="filteredCategories.length" class="mt-6 grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
+      <!-- Visual Category Cards -->
+      <div v-if="filteredCategories.length" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <button
           v-for="category in filteredCategories"
-          :key="`${category.slug}-card`"
-          class="text-left rounded-[1.75rem] border border-slate-200 bg-white/90 p-5 shadow-sm transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg"
-          type="button"
+          :key="category.slug"
+          class="group text-left rounded-3xl overflow-hidden border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg"
           @click="selectCategory(category.name)"
         >
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0">
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">Category</p>
-              <h3 class="mt-2 text-xl font-bold text-slate-950">{{ category.name }}</h3>
+          <div class="relative h-44 bg-slate-100">
+            <!-- You can replace with real category images later -->
+            <div class="absolute inset-0 flex items-center justify-center text-6xl opacity-75">
+              {{ getCategoryEmoji(category.name) }}
             </div>
-            <span class="pill" :class="activeCategory === category.name ? 'bg-brand-500 text-white' : 'bg-slate-100 text-slate-700'">
+            <div class="absolute bottom-3 right-3 bg-white/90 text-xs font-semibold px-3 py-1 rounded-full shadow">
               {{ category.restaurantCount }} stores
-            </span>
-          </div>
-
-          <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
-            <div class="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4 text-center">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Restaurants</p>
-              <p class="mt-2 text-lg font-bold text-slate-950">{{ category.restaurantCount }}</p>
-            </div>
-            <div class="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4 text-center">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">Products</p>
-              <p class="mt-2 text-lg font-bold text-slate-950">{{ category.productCount }}</p>
             </div>
           </div>
 
-          <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Restaurant preview</p>
-            <p class="mt-2 text-sm leading-6 text-slate-600">{{ category.restaurantNames.slice(0, 3).join(' � ') }}</p>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-slate-900">{{ category.name }}</h3>
+            <p class="mt-1 text-sm text-slate-600 line-clamp-2">
+              {{ category.restaurantNames.slice(0, 2).join(' • ') }}
+            </p>
           </div>
         </button>
       </div>
 
-      <div v-else class="mt-6 rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
-        <p class="text-lg font-semibold text-slate-900">No category matched your search</p>
-        <p class="mt-2 text-sm text-slate-500">Try another keyword or create more categories from the admin dashboard.</p>
+      <div v-else class="mt-12 rounded-3xl border border-dashed border-slate-300 bg-slate-50 py-16 text-center">
+        <p class="text-2xl">😕</p>
+        <p class="mt-3 text-lg font-medium">No matching categories</p>
+        <p class="text-slate-500">Try different keywords</p>
       </div>
     </SectionCard>
 
-    <SectionCard eyebrow="Filtered Restaurants" :title="activeCategory ? `${activeCategory} results` : 'Restaurants across all categories'" description="Customer restaurant cards below update from the selected category and search filter.">
-      <div v-if="restaurantStore.restaurants.length" class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        <RestaurantCard v-for="restaurant in restaurantStore.restaurants" :key="restaurant.id" :restaurant="restaurant" />
+    <!-- Filtered Restaurants -->
+    <SectionCard 
+      eyebrow="Available Restaurants" 
+      :title="activeCategory ? `${activeCategory} Restaurants` : 'All Restaurants'"
+      :description="activeCategory ? `Best places for ${activeCategory.toLowerCase()}` : 'Discover great restaurants near you'"
+    >
+      <div v-if="restaurantStore.restaurants.length" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <RestaurantCard 
+          v-for="restaurant in restaurantStore.restaurants" 
+          :key="restaurant.id" 
+          :restaurant="restaurant" 
+        />
       </div>
-      <div v-else class="rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
-        <p class="text-lg font-semibold text-slate-900">No restaurants found</p>
-        <p class="mt-2 text-sm text-slate-500">Adjust the category or search filter to see more customer results.</p>
+      <div v-else class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 py-20 text-center">
+        <p class="text-xl">No restaurants found</p>
+        <p class="mt-2 text-slate-500">Try changing category or search term</p>
       </div>
     </SectionCard>
   </div>
@@ -111,51 +100,51 @@ import { useRestaurantStore } from '@/stores/restaurant.store';
 const restaurantStore = useRestaurantStore();
 const route = useRoute();
 const router = useRouter();
+
 const query = ref('');
 const activeCategory = ref('');
 
 const filteredCategories = computed(() => {
   const term = query.value.trim().toLowerCase();
-  if (!term) {
-    return restaurantStore.categories;
-  }
+  if (!term) return restaurantStore.categories;
 
-  return restaurantStore.categories.filter((category) =>
-    [category.name, ...category.restaurantNames].some((value) => value.toLowerCase().includes(term)),
+  return restaurantStore.categories.filter((cat) =>
+    cat.name.toLowerCase().includes(term) ||
+    cat.restaurantNames.some(name => name.toLowerCase().includes(term))
   );
 });
 
-const highlightedProductCount = computed(() => {
-  if (activeCategory.value) {
-    return restaurantStore.categories.find((category) => category.name === activeCategory.value)?.productCount ?? 0;
-  }
+// Simple emoji mapping for categories
+function getCategoryEmoji(name: string): string {
+  const lower = name.toLowerCase();
+  if (lower.includes('pizza') || lower.includes('italian')) return '🍕';
+  if (lower.includes('burger') || lower.includes('fast')) return '🍔';
+  if (lower.includes('asian') || lower.includes('thai')) return '🍜';
+  if (lower.includes('dessert') || lower.includes('sweet')) return '🍰';
+  if (lower.includes('healthy') || lower.includes('salad')) return '🥗';
+  if (lower.includes('chicken')) return '🍗';
+  if (lower.includes('seafood')) return '🐟';
+  return '🍽️';
+}
 
-  return filteredCategories.value.reduce((sum, category) => sum + category.productCount, 0);
-});
-
-async function loadFromRoute() {
+const loadFromRoute = async () => {
   query.value = typeof route.query.q === 'string' ? route.query.q : '';
   activeCategory.value = typeof route.query.category === 'string' ? route.query.category : '';
   await restaurantStore.loadCategories();
   await restaurantStore.filter(query.value, activeCategory.value);
-}
+};
 
-function updateRoute() {
+const updateRoute = () => {
   const nextQuery: Record<string, string> = {};
-  if (query.value.trim()) {
-    nextQuery.q = query.value.trim();
-  }
-  if (activeCategory.value) {
-    nextQuery.category = activeCategory.value;
-  }
+  if (query.value.trim()) nextQuery.q = query.value.trim();
+  if (activeCategory.value) nextQuery.category = activeCategory.value;
+  router.replace({ path: '/categories', query: nextQuery });
+};
 
-  void router.replace({ path: '/categories', query: nextQuery });
-}
-
-function selectCategory(categoryName: string) {
-  activeCategory.value = categoryName;
+const selectCategory = (name: string) => {
+  activeCategory.value = name;
   updateRoute();
-}
+};
 
 onMounted(loadFromRoute);
 watch(() => route.query, loadFromRoute);

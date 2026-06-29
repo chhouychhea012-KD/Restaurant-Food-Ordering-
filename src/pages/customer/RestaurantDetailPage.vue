@@ -6,7 +6,7 @@
         <div class="absolute bottom-0 left-0 p-6 text-white sm:p-8">
           <StatusBadge :status="restaurant.status" :label="restaurant.status" />
           <h1 class="mt-4 text-4xl font-extrabold">{{ restaurant.name }}</h1>
-          <p class="mt-3 text-sm text-slate-200">{{ restaurant.cuisine.join(' • ') }} • {{ restaurant.deliveryTime }} • ฿{{ restaurant.deliveryFee }} delivery fee</p>
+          <p class="mt-3 text-sm text-slate-200">{{ restaurant.cuisine.join(' • ') }} • {{ restaurant.deliveryTime }} • ${{ restaurant.deliveryFee }} delivery fee</p>
         </div>
       </div>
     </section>

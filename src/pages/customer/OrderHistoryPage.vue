@@ -8,7 +8,7 @@
           <p class="text-sm text-slate-500">{{ formatShortDate(order.createdAt) }}</p>
         </div>
         <div class="flex items-center gap-4">
-          <p class="text-base font-bold text-slate-950">฿{{ order.total }}</p>
+          <p class="text-base font-bold text-slate-950">${{ order.total }}</p>
           <StatusBadge :status="order.status" />
         </div>
       </div>
