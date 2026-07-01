@@ -51,7 +51,7 @@
           <div class="flex flex-col gap-3 text-sm">
             <RouterLink to="/" class="text-slate-600 hover:text-slate-900 transition">Home</RouterLink>
             <RouterLink to="/restaurants" class="text-slate-600 hover:text-slate-900 transition">Restaurants</RouterLink>
-            <RouterLink to="/categories" class="text-slate-600 hover:text-slate-900 transition">Categories</RouterLink>
+            <!-- <RouterLink to="/categories" class="text-slate-600 hover:text-slate-900 transition">Categories</RouterLink> -->
             <RouterLink to="/track-order" class="text-slate-600 hover:text-slate-900 transition">Track Order</RouterLink>
             <RouterLink to="/auth/login" class="text-slate-600 hover:text-slate-900 transition">Login</RouterLink>
           </div>

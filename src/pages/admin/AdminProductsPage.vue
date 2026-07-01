@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <SectionCard eyebrow="Catalog Control" title="Admin product management" description="Create, edit, delete, and review dynamic menu products across every restaurant from one dashboard module.">
+    <SectionCard eyebrow="Catalog Control" title="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
           <input v-model="query" class="field-input w-64" type="search" placeholder="Search product or restaurant" />
@@ -9,28 +9,63 @@
         </div>
       </template>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Total products</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ products.length }}</p>
-          <p class="mt-2 text-sm text-slate-500">Across all admin-managed restaurants</p>
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <!-- Total Products -->
+    <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="rounded-2xl bg-blue-100 p-3.5 text-blue-600">
+          <Package :size="28" />
         </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Active products</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ activeProducts }}</p>
-          <p class="mt-2 text-sm text-slate-500">Currently available to order</p>
-        </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Categories</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ categories.length }}</p>
-          <p class="mt-2 text-sm text-slate-500">Dynamic menu groups in storage</p>
-        </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Restaurant coverage</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
-          <p class="mt-2 text-sm text-slate-500">Restaurants with products listed</p>
+        <div class="flex-1">
+          <p class="text-sm font-semibold text-slate-900">Total Products</p>
+          <p class="mt-2 text-4xl font-bold text-slate-950">{{ products.length }}</p>
         </div>
       </div>
+      <p class="mt-4 text-sm text-slate-500">Across all restaurants</p>
+    </div>
+
+    <!-- Active Products -->
+    <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="rounded-2xl bg-emerald-100 p-3.5 text-emerald-600">
+          <CheckCircle :size="28" />
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold text-slate-900">Active Products</p>
+          <p class="mt-2 text-4xl font-bold text-slate-950">{{ activeProducts }}</p>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-slate-500">Ready to order</p>
+    </div>
+
+  <!-- Categories -->
+  <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+    <div class="flex items-center gap-4">
+      <div class="rounded-2xl bg-violet-100 p-3.5 text-violet-600">
+        <Tags :size="28" />
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-slate-900">Categories</p>
+        <p class="mt-2 text-4xl font-bold text-slate-950">{{ categories.length }}</p>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-slate-500">Menu groups</p>
+  </div>
+
+  <!-- Restaurant Coverage -->
+  <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+    <div class="flex items-center gap-4">
+      <div class="rounded-2xl bg-amber-100 p-3.5 text-amber-600">
+        <Building2 :size="28" />
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-slate-900">Restaurant Coverage</p>
+        <p class="mt-2 text-4xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-slate-500">With active products</p>
+  </div>
+</div>
 
       <div class="mt-6 space-y-4">
         <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm">
@@ -38,7 +73,7 @@
             <div class="flex gap-4">
               <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-[1.25rem] object-cover" />
               <div>
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ product.restaurantName }} · {{ product.categoryName }}</p>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ product.restaurantName }} ï¿½ {{ product.categoryName }}</p>
                 <h3 class="mt-2 text-xl font-bold text-slate-950">{{ product.item.name }}</h3>
                 <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{{ product.item.description }}</p>
                 <div class="mt-3 flex flex-wrap gap-2">
@@ -187,6 +222,7 @@ import type { AdminCategory, AdminProduct, MenuCategoryInput, MenuItemInput, Res
 import AppModal from '@/components/common/AppModal.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import { formatCurrency } from '@/utils/format';
+import { Package, CheckCircle, Tags, Building2 } from 'lucide-vue-next';
 import {
   createMenuCategory,
   createMenuItem,

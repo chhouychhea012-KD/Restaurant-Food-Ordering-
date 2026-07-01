@@ -1,38 +1,58 @@
 <template>
   <div class="space-y-6">
-    <section class="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#0f172a_0%,#1e293b_55%,#ea580c_120%)] px-6 py-8 text-white shadow-[0_25px_80px_rgba(15,23,42,0.24)] sm:px-8">
-      <div class="absolute -right-12 top-0 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-      <div class="absolute bottom-0 left-1/3 h-28 w-28 rounded-full bg-orange-300/20 blur-2xl" />
-      <div class="relative grid gap-6 xl:grid-cols-[1.1fr_0.9fr] xl:items-end">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.35em] text-orange-200">Operations Signals</p>
-          <h1 class="mt-4 max-w-3xl text-4xl font-extrabold leading-tight">A clearer notification center for platform events, order escalations, and admin actions.</h1>
-          <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-200">
-            This admin module helps your team understand what changed, what needs action, and which updates are flowing into the customer and operational experience.
-          </p>
-        </div>
+   <section class="space-y-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[0.35em] text-orange-600">Operations Signals</p>
+      <h1 class="text-3xl font-extrabold text-slate-900">Notification Center</h1>
+    </div>
+    <Bell class="text-orange-500" :size="32" />
+  </div>
 
-        <div class="grid gap-4 sm:grid-cols-3 xl:grid-cols-1 xl:gap-3">
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
-            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Unread</p>
-            <p class="mt-2 text-3xl font-bold">{{ notificationStore.unreadCount }}</p>
-            <p class="mt-2 text-sm text-slate-200">Still waiting for review</p>
-          </div>
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
-            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Total</p>
-            <p class="mt-2 text-3xl font-bold">{{ notificationStore.items.length }}</p>
-            <p class="mt-2 text-sm text-slate-200">Notifications in the admin feed</p>
-          </div>
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
-            <p class="text-xs uppercase tracking-[0.2em] text-orange-100">Focus</p>
-            <p class="mt-2 text-3xl font-bold">{{ activeFilterLabel }}</p>
-            <p class="mt-2 text-sm text-slate-200">Filtered view for faster review</p>
-          </div>
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    
+    <!-- Card 1: Unread -->
+    <div class="rounded-3xl bg-white p-6 shadow-sm border border-slate-100">
+      <div class="flex items-start justify-between">
+        <p class="text-sm font-medium text-slate-500">Unread</p>
+        <div class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-600">
+          New
         </div>
       </div>
-    </section>
+      <p class="mt-3 text-4xl font-bold text-slate-900">{{ notificationStore.unreadCount }}</p>
+      <p class="mt-2 text-sm text-slate-500">Still waiting for review</p>
+    </div>
 
-    <SectionCard eyebrow="Admin Notifications" title="Platform activity feed" description="Notifications here help admins monitor customer order flow, catalog changes, and account-level system events from one page.">
+    <!-- Card 2: Total -->
+    <div class="rounded-3xl bg-white p-6 shadow-sm border border-slate-100">
+      <div class="flex items-start justify-between">
+        <p class="text-sm font-medium text-slate-500">Total</p>
+        <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+          All
+        </div>
+      </div>
+      <p class="mt-3 text-4xl font-bold text-slate-900">{{ notificationStore.items.length }}</p>
+      <p class="mt-2 text-sm text-slate-500">Notifications in the admin feed</p>
+    </div>
+
+    <!-- Card 3: Focus -->
+    <div class="rounded-3xl bg-white p-6 shadow-sm border border-slate-100">
+      <div class="flex items-start justify-between">
+        <p class="text-sm font-medium text-slate-500">Filter the notification</p>
+        <div class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-600">
+          Active
+        </div>
+      </div>
+      <p class="mt-3 text-4xl font-bold text-slate-900">{{ activeFilterLabel }}</p>
+      <p class="mt-2 text-sm text-slate-500">Filtered view for faster review</p>
+    </div>
+
+  </div>
+</section>
+
+    <SectionCard eyebrow="Admin Notifications" title="Platform activity feed" description="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
           <button class="btn-secondary" type="button" @click="markAllRead" :disabled="!authStore.user || !notificationStore.unreadCount">Mark all read</button>

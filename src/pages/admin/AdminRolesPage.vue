@@ -1,107 +1,172 @@
 <template>
-  <SectionCard eyebrow="Access Control" title="Roles and role permissions" description="Create role templates, update permission sets, and manage access control rules from the admin dashboard.">
-    <template #actions>
-      <button class="btn-primary" type="button" @click="openCreateModal">Create role</button>
-    </template>
+  <div class="space-y-8">
+    <SectionCard 
+      eyebrow="Access Control" 
+      title="Roles & Permissions" 
+      description="Manage role templates and define what each role can access in the admin dashboard."
+    >
+      <template #actions>
+        <button class="btn-primary flex items-center gap-2" @click="openCreateModal">
+          <Plus :size="18" />
+          Create New Role
+        </button>
+      </template>
 
-    <div class="grid gap-4 xl:grid-cols-2">
-      <div v-for="role in roles" :key="role.id" class="surface-muted p-5">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div class="flex flex-wrap items-center gap-2">
-              <h3 class="text-xl font-bold text-slate-950">{{ role.label }}</h3>
-              <span class="pill bg-slate-100 text-slate-700">{{ role.name }}</span>
-              <span v-if="isCoreRole(role.name)" class="pill bg-sky-100 text-sky-700">Core role</span>
+      <!-- Roles Grid -->
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div 
+          v-for="role in roles" 
+          :key="role.id" 
+          class="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-xl hover:-translate-y-1"
+        >
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900">{{ role.label }}</h3>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="pill bg-slate-100 text-slate-700 font-medium">{{ role.name }}</span>
+                <span v-if="isCoreRole(role.name)" class="pill bg-sky-100 text-sky-700 text-xs">Core</span>
+              </div>
             </div>
-            <p class="mt-2 text-sm text-slate-500">{{ role.description || 'No description added yet.' }}</p>
+            
+            <div class="text-right">
+              <p class="text-xs text-slate-400">Users</p>
+              <p class="text-3xl font-bold text-slate-900">{{ countAssignedUsers(role.name) }}</p>
+            </div>
           </div>
-          <div class="rounded-2xl bg-white px-4 py-3 text-right">
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Assigned users</p>
-            <p class="mt-1 text-2xl font-bold text-slate-950">{{ countAssignedUsers(role.name) }}</p>
+
+          <p class="mt-4 text-sm text-slate-600 line-clamp-2">{{ role.description || 'No description provided.' }}</p>
+
+          <!-- Permissions -->
+          <div class="mt-6">
+            <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">Permissions • {{ role.permissions.length }}</p>
+            <div class="flex flex-wrap gap-2">
+              <span 
+                v-for="(perm, i) in role.permissions.slice(0, 5)" 
+                :key="perm" 
+                class="rounded-full bg-brand-50 px-3 py-1 text-xs text-brand-700"
+              >
+                {{ formatPermission(perm) }}
+              </span>
+              <span v-if="role.permissions.length > 5" class="text-xs text-slate-400 self-center">
+                +{{ role.permissions.length - 5 }} more
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="mt-5">
-          <p class="text-sm font-semibold text-slate-900">Permissions</p>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span v-for="permission in role.permissions" :key="permission" class="pill bg-brand-50 text-brand-700">
-              {{ formatPermission(permission) }}
-            </span>
+          <!-- Actions -->
+          <div class="mt-8 flex gap-3">
+            <button 
+              class="btn-secondary flex-1 flex items-center justify-center gap-2" 
+              @click="openEditModal(role.id)"
+            >
+              <Edit3 :size="17" /> Edit
+            </button>
+            <button 
+              class="flex-1 rounded-2xl bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition disabled:opacity-50"
+              :disabled="isCoreRole(role.name)"
+              @click="removeRole(role.id)"
+            >
+              Delete
+            </button>
           </div>
-        </div>
-
-        <div class="mt-5 flex flex-wrap gap-3">
-          <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(role.id)">Edit</button>
-          <button class="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" :disabled="isCoreRole(role.name)" @click="removeRole(role.id)">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <p v-if="message" class="mt-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-    <p v-if="error" class="mt-5 rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
-  </SectionCard>
-
-  <AppModal
-    :open="isModalOpen"
-    eyebrow="Roles and Permissions"
-    :title="editingRoleId ? 'Edit role definition' : 'Create role definition'"
-    description="Use this modal to manage labels, role keys, and the permission set used by the admin access model."
-    size="xl"
-    @close="closeModal"
-  >
-    <form class="space-y-5" @submit.prevent="submitRole">
-      <div class="grid gap-4 md:grid-cols-2">
-        <div>
-          <label class="field-label" for="role-label">Role label</label>
-          <input id="role-label" v-model="form.label" class="field-input" type="text" placeholder="Operations Supervisor" required />
-        </div>
-        <div>
-          <label class="field-label" for="role-name">Role key</label>
-          <input id="role-name" v-model="form.name" class="field-input" type="text" :disabled="editingCoreRole" placeholder="operations_supervisor" required />
-          <p class="mt-2 text-xs text-slate-500">{{ editingCoreRole ? 'Core role keys stay locked so the existing auth flow remains stable.' : 'Use a unique key. Spaces will be normalized automatically.' }}</p>
         </div>
       </div>
 
-      <div>
-        <label class="field-label" for="role-description">Description</label>
-        <textarea id="role-description" v-model="form.description" class="field-input min-h-28" placeholder="Describe what this role can do across the admin workflow." />
-      </div>
+      <p v-if="message" class="mt-6 rounded-2xl bg-emerald-50 px-5 py-4 text-sm text-emerald-700">{{ message }}</p>
+      <p v-if="error" class="mt-6 rounded-2xl bg-rose-50 px-5 py-4 text-sm text-rose-600">{{ error }}</p>
+    </SectionCard>
 
-      <div class="rounded-3xl border border-slate-200 p-5">
-        <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+    <!-- Modal -->
+    <AppModal
+      :open="isModalOpen"
+      eyebrow="Role Management"
+      :title="editingRoleId ? 'Edit Role' : 'Create New Role'"
+      description="Define role label, key and assign permissions."
+      size="xl"
+      @close="closeModal"
+    >
+      <form class="space-y-6" @submit.prevent="submitRole">
+        <div class="grid gap-5 md:grid-cols-2">
           <div>
-            <p class="text-sm font-semibold text-slate-900">Permission assignment</p>
-            <p class="text-xs text-slate-500">Select which actions this role can access in the frontend admin experience.</p>
+            <label class="field-label" for="role-label">Role Label</label>
+            <input id="role-label" v-model="form.label" class="field-input" type="text" placeholder="Operations Supervisor" required />
           </div>
-          <div class="flex gap-2">
-            <button class="btn-secondary px-3 py-2" type="button" @click="selectAllPermissions">Select all</button>
-            <button class="btn-secondary px-3 py-2" type="button" @click="clearPermissions">Clear</button>
+          <div>
+            <label class="field-label" for="role-name">Role Key</label>
+            <input 
+              id="role-name" 
+              v-model="form.name" 
+              class="field-input" 
+              type="text" 
+              :disabled="editingCoreRole"
+              placeholder="operations_supervisor" 
+              required 
+            />
+            <p class="mt-2 text-xs text-slate-500">
+              {{ editingCoreRole ? 'Core role keys cannot be changed.' : 'Use lowercase with underscores.' }}
+            </p>
           </div>
         </div>
-        <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          <label v-for="permission in permissions" :key="permission" class="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition hover:border-brand-300 hover:bg-brand-50/40">
-            <input v-model="form.permissions" :value="permission" class="mt-1" type="checkbox" />
-            <span>
-              <span class="block font-semibold text-slate-900">{{ formatPermission(permission) }}</span>
-              <span class="mt-1 block text-xs text-slate-500">{{ permission }}</span>
-            </span>
-          </label>
-        </div>
-      </div>
 
-      <div class="flex flex-wrap gap-3 pt-2">
-        <button class="btn-primary" :disabled="saving">{{ saving ? 'Saving...' : editingRoleId ? 'Update role' : 'Create role' }}</button>
-        <button class="btn-secondary" type="button" @click="closeModal">Cancel</button>
-      </div>
-    </form>
-  </AppModal>
+        <div>
+          <label class="field-label" for="role-description">Description</label>
+          <textarea 
+            id="role-description" 
+            v-model="form.description" 
+            class="field-input min-h-24" 
+            placeholder="Describe the responsibilities and access scope of this role..."
+          />
+        </div>
+
+        <!-- Permissions Selector -->
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <p class="font-semibold text-slate-900">Permissions</p>
+              <p class="text-sm text-slate-500">{{ form.permissions.length }} selected</p>
+            </div>
+            <div class="flex gap-3">
+              <button type="button" class="btn-secondary text-sm" @click="selectAllPermissions">Select All</button>
+              <button type="button" class="btn-secondary text-sm" @click="clearPermissions">Clear All</button>
+            </div>
+          </div>
+
+          <div class="max-h-[420px] overflow-auto grid gap-3 md:grid-cols-2 xl:grid-cols-3 pr-2">
+            <label 
+              v-for="permission in permissions" 
+              :key="permission" 
+              class="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 hover:border-brand-300 transition cursor-pointer"
+            >
+              <input 
+                v-model="form.permissions" 
+                :value="permission" 
+                type="checkbox" 
+                class="mt-1 accent-brand-600"
+              />
+              <div>
+                <p class="font-medium text-slate-900">{{ formatPermission(permission) }}</p>
+                <p class="text-xs text-slate-500 mt-0.5">{{ permission }}</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+          <button class="btn-primary flex-1" :disabled="saving">
+            {{ saving ? 'Saving...' : editingRoleId ? 'Update Role' : 'Create Role' }}
+          </button>
+          <button type="button" class="btn-secondary flex-1" @click="closeModal">Cancel</button>
+        </div>
+      </form>
+    </AppModal>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue';
-import type { RoleDefinition, RoleInput, User } from '@/types';
+import { Plus, Edit3 } from 'lucide-vue-next';
+
+import type { RoleDefinition, RoleInput } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import { createRole, deleteRole, listRolePermissions, listRoles, updateRole } from '@/services/role.service';
@@ -111,7 +176,7 @@ import { isCoreRole } from '@/utils/permissions';
 
 const authStore = useAuthStore();
 const roles = ref<RoleDefinition[]>([]);
-const users = ref<User[]>([]);
+const users = ref<any[]>([]);
 const permissions = ref<string[]>([]);
 const editingRoleId = ref<string | null>(null);
 const saving = ref(false);
@@ -127,7 +192,7 @@ const blankForm = (): RoleInput => ({
 });
 
 const form = reactive<RoleInput>(blankForm());
-const editingRole = computed(() => roles.value.find((role) => role.id === editingRoleId.value) ?? null);
+const editingRole = computed(() => roles.value.find(r => r.id === editingRoleId.value) ?? null);
 const editingCoreRole = computed(() => Boolean(editingRole.value && isCoreRole(editingRole.value.name)));
 
 async function load() {
@@ -148,12 +213,12 @@ function formatPermission(permission: string) {
     .replace(/\./g, ' ')
     .replace(/_/g, ' ')
     .split(' ')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 }
 
 function countAssignedUsers(roleName: string) {
-  return users.value.filter((user) => user.role === roleName).length;
+  return users.value.filter(u => u.role === roleName).length;
 }
 
 function openCreateModal() {
@@ -164,10 +229,8 @@ function openCreateModal() {
 }
 
 function openEditModal(roleId: string) {
-  const role = roles.value.find((entry) => entry.id === roleId);
-  if (!role) {
-    return;
-  }
+  const role = roles.value.find(r => r.id === roleId);
+  if (!role) return;
 
   editingRoleId.value = roleId;
   form.name = role.name;
@@ -193,14 +256,13 @@ function clearPermissions() {
 }
 
 async function submitRole() {
+  // ... your existing logic (unchanged)
   saving.value = true;
   message.value = '';
   error.value = '';
 
   try {
-    if (!form.permissions.length) {
-      throw new Error('Select at least one permission for this role.');
-    }
+    if (!form.permissions.length) throw new Error('Please select at least one permission.');
 
     const payload: RoleInput = {
       name: form.name.trim(),
@@ -221,28 +283,22 @@ async function submitRole() {
     await load();
     closeModal();
   } catch (incoming) {
-    error.value = incoming instanceof Error ? incoming.message : 'Unable to save role.';
+    error.value = incoming instanceof Error ? incoming.message : 'Failed to save role.';
   } finally {
     saving.value = false;
   }
 }
 
 async function removeRole(roleId: string) {
-  const confirmed = window.confirm('Delete this role from the local access control dataset?');
-  if (!confirmed) {
-    return;
-  }
+  if (!window.confirm('Delete this role?')) return;
 
   try {
     deleteRole(roleId);
     authStore.refreshRolePermissions();
     message.value = 'Role deleted successfully.';
     await load();
-    if (editingRoleId.value === roleId) {
-      closeModal();
-    }
   } catch (incoming) {
-    error.value = incoming instanceof Error ? incoming.message : 'Unable to delete role.';
+    error.value = incoming instanceof Error ? incoming.message : 'Failed to delete role.';
   }
 }
 </script>

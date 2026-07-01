@@ -1,68 +1,118 @@
 <template>
   <div class="space-y-6">
     <SectionCard
-      eyebrow="Category Control"
-      title="Admin category management"
-      description="Create, edit, delete, and review product categories across every restaurant from a dedicated admin module."
+      eyebrow=""
+      title=""
+      description=""
     >
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <input v-model="query" class="field-input w-64" type="search" placeholder="Search category, restaurant, or product" />
-          <RouterLink to="/admin/products" class="btn-secondary">Open products</RouterLink>
-          <button class="btn-primary" type="button" @click="openCreateCategoryModal">Create category</button>
+          <div class="relative">
+            <input 
+              v-model="query" 
+              class="field-input w-72 pl-11" 
+              type="search" 
+              placeholder="Search category, restaurant, or product" 
+            />
+            <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" :size="20" />
+          </div>
+          <RouterLink to="/admin/products" class="btn-secondary flex items-center gap-2">
+            <Package :size="18" />
+            Open products
+          </RouterLink>
+          <button class="btn-primary flex items-center gap-2" type="button" @click="openCreateCategoryModal">
+            <Plus :size="18" />
+            Create category
+          </button>
         </div>
       </template>
 
+      <!-- Modern Stats Grid -->
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Total categories</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ categories.length }}</p>
-          <p class="mt-2 text-sm text-slate-500">Stored in the admin catalog</p>
+        <div class="surface-muted rounded-3xl p-6">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-blue-100 p-3.5 text-blue-600">
+              <FolderTree :size="28" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Total categories</p>
+              <p class="mt-2 text-3xl font-bold text-slate-950">{{ categories.length }}</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">Stored in the admin catalog</p>
         </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Covered restaurants</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
-          <p class="mt-2 text-sm text-slate-500">Restaurants using categories right now</p>
+
+        <div class="surface-muted rounded-3xl p-6">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-emerald-100 p-3.5 text-emerald-600">
+              <Building2 :size="28" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Covered restaurants</p>
+              <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">Restaurants using categories right now</p>
         </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Products mapped</p>
-          <p class="mt-2 text-3xl font-bold text-slate-950">{{ totalProducts }}</p>
-          <p class="mt-2 text-sm text-slate-500">Products assigned to category groups</p>
+
+        <div class="surface-muted rounded-3xl p-6">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-violet-100 p-3.5 text-violet-600">
+              <Tags :size="28" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Products mapped</p>
+              <p class="mt-2 text-3xl font-bold text-slate-950">{{ totalProducts }}</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-slate-500">Products assigned to category groups</p>
         </div>
-        <div class="surface-muted p-5">
-          <p class="text-sm font-semibold text-slate-900">Largest category</p>
-          <p class="mt-2 text-2xl font-bold text-slate-950">{{ largestCategoryName }}</p>
-          <p class="mt-2 text-sm text-slate-500">{{ largestCategoryCount }} products in the busiest group</p>
+
+        <div class="surface-muted rounded-3xl p-6">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-amber-100 p-3.5 text-amber-600">
+              <Trophy :size="28" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Largest category</p>
+              <p class="mt-2 text-2xl font-bold text-slate-950">{{ largestCategoryName }}</p>
+              <p class="text-sm text-slate-500">{{ largestCategoryCount }} products</p>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Category Cards -->
       <div v-if="filteredCategories.length" class="mt-6 grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
         <article
           v-for="entry in filteredCategories"
           :key="entry.category.id"
-          class="rounded-[1.75rem] border border-slate-200 bg-white/90 p-5 shadow-sm shadow-slate-200/60"
+          class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all duration-200"
         >
           <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0">
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ entry.restaurantName }}</p>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <Building2 class="text-slate-400" :size="18" />
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ entry.restaurantName }}</p>
+              </div>
               <h3 class="mt-2 text-xl font-bold text-slate-950">{{ entry.category.name }}</h3>
               <p class="mt-2 text-sm text-slate-500">{{ entry.category.items.length }} linked products in this category</p>
             </div>
-            <span class="pill bg-slate-100 text-slate-700">{{ entry.category.items.length }} items</span>
+            <span class="pill bg-slate-100 text-slate-700 font-medium">{{ entry.category.items.length }} items</span>
           </div>
 
-          <div class="mt-5 rounded-[1.5rem] border border-slate-200 bg-slate-50/80 p-4">
-            <div class="flex items-center justify-between gap-3">
+          <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50/80 p-5">
+            <div class="flex items-center justify-between">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Category health</p>
                 <p class="mt-1 text-sm font-medium text-slate-600">{{ healthLabel(entry.category.items.length) }}</p>
               </div>
-              <span class="rounded-full px-3 py-1 text-xs font-semibold" :class="healthTone(entry.category.items.length)">
+              <span class="rounded-full px-4 py-1 text-xs font-semibold" :class="healthTone(entry.category.items.length)">
                 {{ healthTag(entry.category.items.length) }}
               </span>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-5">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Product preview</p>
               <div class="mt-3 flex flex-wrap gap-2">
                 <span
@@ -77,11 +127,15 @@
             </div>
           </div>
 
-          <div class="mt-5 flex flex-wrap gap-3">
-            <button class="btn-secondary px-3 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">Edit</button>
-            <button class="btn-secondary px-3 py-2" type="button" @click="openProductsFor">View products</button>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button class="btn-secondary flex items-center gap-2 px-4 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">
+              <Edit3 :size="17" /> Edit
+            </button>
+            <button class="btn-secondary flex items-center gap-2 px-4 py-2" type="button" @click="openProductsFor">
+              <Package :size="17" /> View products
+            </button>
             <button
-              class="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100"
+              class="rounded-2xl bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition"
               type="button"
               @click="removeCategory(entry.category.id)"
             >
@@ -91,7 +145,9 @@
         </article>
       </div>
 
-      <div v-else class="mt-6 rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
+      <!-- Empty State -->
+      <div v-else class="mt-6 rounded-3xl border border-dashed border-slate-300 bg-slate-50/80 p-12 text-center">
+        <FolderTree class="mx-auto mb-4 text-slate-300" :size="48" />
         <p class="text-lg font-semibold text-slate-900">No category matches your search</p>
         <p class="mt-2 text-sm text-slate-500">Try another keyword or create a new category for a restaurant.</p>
       </div>
@@ -138,6 +194,18 @@ import SectionCard from '@/components/common/SectionCard.vue';
 import { createMenuCategory, deleteMenuCategory, listAdminCategories, updateMenuCategory } from '@/services/menu.service';
 import { listRestaurants } from '@/services/restaurant.service';
 
+// Lucide Icons
+import { 
+  Search, 
+  Plus, 
+  Package, 
+  Building2, 
+  FolderTree, 
+  Tags, 
+  Trophy, 
+  Edit3 
+} from 'lucide-vue-next';
+
 const router = useRouter();
 const categories = ref<AdminCategory[]>([]);
 const restaurants = ref<Restaurant[]>([]);
@@ -157,12 +225,11 @@ const categoryForm = reactive<MenuCategoryInput>(blankCategoryForm());
 
 const filteredCategories = computed(() => {
   const term = query.value.trim().toLowerCase();
-  if (!term) {
-    return categories.value;
-  }
+  if (!term) return categories.value;
 
   return categories.value.filter((entry) =>
-    [entry.category.name, entry.restaurantName, ...entry.category.items.map((item) => item.name)].some((value) => value.toLowerCase().includes(term)),
+    [entry.category.name, entry.restaurantName, ...entry.category.items.map((item) => item.name)]
+      .some((value) => value.toLowerCase().includes(term))
   );
 });
 
@@ -170,11 +237,9 @@ const restaurantCoverage = computed(() => new Set(categories.value.map((entry) =
 const totalProducts = computed(() => categories.value.reduce((sum, entry) => sum + entry.category.items.length, 0));
 const largestCategoryEntry = computed(() =>
   categories.value.reduce<AdminCategory | null>((largest, entry) => {
-    if (!largest || entry.category.items.length > largest.category.items.length) {
-      return entry;
-    }
+    if (!largest || entry.category.items.length > largest.category.items.length) return entry;
     return largest;
-  }, null),
+  }, null)
 );
 const largestCategoryName = computed(() => largestCategoryEntry.value?.category.name ?? 'No categories');
 const largestCategoryCount = computed(() => largestCategoryEntry.value?.category.items.length ?? 0);
@@ -200,9 +265,7 @@ function openCreateCategoryModal() {
 
 function openEditCategoryModal(categoryId: string) {
   const entry = categories.value.find((item) => item.category.id === categoryId);
-  if (!entry) {
-    return;
-  }
+  if (!entry) return;
 
   editingCategoryId.value = categoryId;
   Object.assign(categoryForm, {
@@ -220,32 +283,20 @@ function closeCategoryModal() {
 }
 
 function healthTag(itemCount: number) {
-  if (itemCount >= 6) {
-    return 'Strong';
-  }
-  if (itemCount >= 3) {
-    return 'Growing';
-  }
+  if (itemCount >= 6) return 'Strong';
+  if (itemCount >= 3) return 'Growing';
   return 'Light';
 }
 
 function healthLabel(itemCount: number) {
-  if (itemCount >= 6) {
-    return 'This category has strong product depth.';
-  }
-  if (itemCount >= 3) {
-    return 'This category has a balanced product mix.';
-  }
+  if (itemCount >= 6) return 'This category has strong product depth.';
+  if (itemCount >= 3) return 'This category has a balanced product mix.';
   return 'This category could use more products.';
 }
 
 function healthTone(itemCount: number) {
-  if (itemCount >= 6) {
-    return 'bg-emerald-100 text-emerald-700';
-  }
-  if (itemCount >= 3) {
-    return 'bg-amber-100 text-amber-700';
-  }
+  if (itemCount >= 6) return 'bg-emerald-100 text-emerald-700';
+  if (itemCount >= 3) return 'bg-amber-100 text-amber-700';
   return 'bg-slate-200 text-slate-700';
 }
 
@@ -260,12 +311,8 @@ async function submitCategory() {
       name: categoryForm.name.trim(),
     };
 
-    if (!payload.restaurantId) {
-      throw new Error('Please choose a restaurant.');
-    }
-    if (!payload.name) {
-      throw new Error('Please enter a category name.');
-    }
+    if (!payload.restaurantId) throw new Error('Please choose a restaurant.');
+    if (!payload.name) throw new Error('Please enter a category name.');
 
     if (editingCategoryId.value) {
       await updateMenuCategory(editingCategoryId.value, payload);
@@ -286,9 +333,7 @@ async function submitCategory() {
 
 async function removeCategory(categoryId: string) {
   const confirmed = window.confirm('Delete this category from the menu dataset?');
-  if (!confirmed) {
-    return;
-  }
+  if (!confirmed) return;
 
   try {
     await deleteMenuCategory(categoryId);
@@ -303,6 +348,3 @@ function openProductsFor() {
   void router.push('/admin/products');
 }
 </script>
-
-
-

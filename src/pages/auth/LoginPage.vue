@@ -58,8 +58,8 @@ const form = reactive({
 const demoAccounts = [
   { role: 'Platform Admin', email: 'admin@flavorfleet.app', password: 'Admin@123' },
   { role: 'Restaurant Owner', email: 'owner@flavorfleet.app', password: 'Owner@123' },
-  { role: 'Kitchen Staff', email: 'kitchen@flavorfleet.app', password: 'Kitchen@123' },
-  { role: 'Delivery Rider', email: 'rider@flavorfleet.app', password: 'Rider@123' },
+  // { role: 'Kitchen Staff', email: 'kitchen@flavorfleet.app', password: 'Kitchen@123' },
+  // { role: 'Delivery Rider', email: 'rider@flavorfleet.app', password: 'Rider@123' },
   { role: 'Customer', email: 'customer@flavorfleet.app', password: 'Customer@123' },
 ];
 
