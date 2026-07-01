@@ -181,10 +181,11 @@ const accountMenuRef = ref<HTMLElement | null>(null);
 
 const links = [
   { label: 'Home', to: '/' },
-  { label: 'About Us', to: '/about' },
   { label: 'Restaurants', to: '/restaurants' },
   // { label: 'Categories', to: '/categories' },
   { label: 'Track Order', to: '/track-order' },
+  { label: 'About Us', to: '/about' },
+
 ];
 
 const dashboardLink = computed(() => {

@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-8">
     <!-- Stats -->
-    <div class="grid gap-4 md:grid-cols-3">
+    <!-- <div class="grid gap-4 md:grid-cols-3">
       <div class="surface-card p-6 rounded-3xl">
         <div class="flex items-center gap-4">
           <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-4xl">🛎️</div>
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Notifications Section -->
     <SectionCard 
