@@ -1,12 +1,13 @@
 <template>
-  <span :class="badgeClass" class="pill">
+  <span :class="badgeClass" data-i18n-ignore class="pill">
     <span class="mr-2 h-2 w-2 rounded-full bg-current/70" />
-    {{ label }}
+    {{ translatedLabel }}
   </span>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { translateText } from '@/composables/useI18n';
 
 const props = defineProps<{
   status: string;
@@ -27,5 +28,6 @@ const colorMap: Record<string, string> = {
 };
 
 const label = computed(() => props.label ?? props.status.replace(/_/g, ' '));
+const translatedLabel = computed(() => translateText(label.value));
 const badgeClass = computed(() => colorMap[props.status.toUpperCase()] ?? 'bg-slate-100 text-slate-700');
 </script>

@@ -1,0 +1,2176 @@
+{
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English",
+      "flag": "🇺🇸",
+      "flagUrl": "https://tse1.mm.bing.net/th/id/OIP.58oAqx8Virj0KOxlMFuGYwHaEx?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "code": "km",
+      "name": "Khmer",
+      "nativeName": "ភាសាខ្មែរ",
+      "flag": "🇰🇭",
+      "flagUrl": "https://cdn.britannica.com/27/4027-050-15A75C70/Flag-Cambodia.jpg"
+    }
+  ],
+  "phrases": {
+    "Language": {
+      "en": "Language",
+      "km": "ភាសា"
+    },
+    "English": {
+      "en": "English",
+      "km": "អង់គ្លេស"
+    },
+    "Khmer": {
+      "en": "Khmer",
+      "km": "ខ្មែរ"
+    },
+    "Flavor Fleet": {
+      "en": "Flavor Fleet",
+      "km": "Flavor Fleet"
+    },
+    "Flavor Fleet logo": {
+      "en": "Flavor Fleet logo",
+      "km": "ស្លាកសញ្ញា Flavor Fleet"
+    },
+    "Restaurant platform": {
+      "en": "Restaurant platform",
+      "km": "ប្រព័ន្ធភោជនីយដ្ឋាន"
+    },
+    "Simple, fast, and reliable food delivery.": {
+      "en": "Simple, fast, and reliable food delivery.",
+      "km": "ការដឹកជញ្ជូនអាហារងាយស្រួល រហ័ស និងទុកចិត្តបាន។"
+    },
+    "Delivery": {
+      "en": "Delivery",
+      "km": "ការដឹកជញ្ជូន"
+    },
+    "City-wide": {
+      "en": "City-wide",
+      "km": "ទូទាំងទីក្រុង"
+    },
+    "Secure": {
+      "en": "Secure",
+      "km": "សុវត្ថិភាព"
+    },
+    "Checkout": {
+      "en": "Checkout",
+      "km": "ទូទាត់ប្រាក់"
+    },
+    "For Customers": {
+      "en": "For Customers",
+      "km": "សម្រាប់អតិថិជន"
+    },
+    "Order in Minutes": {
+      "en": "Order in Minutes",
+      "km": "បញ្ជាទិញក្នុងប៉ុន្មាននាទី"
+    },
+    "Browse restaurants, add to cart, and checkout securely.": {
+      "en": "Browse restaurants, add to cart, and checkout securely.",
+      "km": "រកមើលភោជនីយដ្ឋាន បន្ថែមទៅរទេះ និងទូទាត់ដោយសុវត្ថិភាព។"
+    },
+    "Live Tracking": {
+      "en": "Live Tracking",
+      "km": "តាមដានផ្ទាល់"
+    },
+    "Follow your order from kitchen to your doorstep in real-time.": {
+      "en": "Follow your order from kitchen to your doorstep in real-time.",
+      "km": "តាមដានការបញ្ជាទិញពីផ្ទះបាយដល់មាត់ទ្វាររបស់អ្នកតាមពេលវេលាពិត។"
+    },
+    "Quick Links": {
+      "en": "Quick Links",
+      "km": "តំណភ្ជាប់រហ័ស"
+    },
+    "All rights reserved.": {
+      "en": "All rights reserved.",
+      "km": "រក្សាសិទ្ធិគ្រប់យ៉ាង។"
+    },
+    "Fast Delivery": {
+      "en": "Fast Delivery",
+      "km": "ដឹកជញ្ជូនរហ័ស"
+    },
+    "Secure Payments": {
+      "en": "Secure Payments",
+      "km": "ការទូទាត់សុវត្ថិភាព"
+    },
+    "Real-time Tracking": {
+      "en": "Real-time Tracking",
+      "km": "តាមដានពេលវេលាពិត"
+    },
+    "Home": {
+      "en": "Home",
+      "km": "ទំព័រដើម"
+    },
+    "Restaurants": {
+      "en": "Restaurants",
+      "km": "ភោជនីយដ្ឋាន"
+    },
+    "Track Order": {
+      "en": "Track Order",
+      "km": "តាមដានការបញ្ជាទិញ"
+    },
+    "About Us": {
+      "en": "About Us",
+      "km": "អំពីយើង"
+    },
+    "Cart": {
+      "en": "Cart",
+      "km": "រទេះទំនិញ"
+    },
+    "Login": {
+      "en": "Login",
+      "km": "ចូលប្រើ"
+    },
+    "Logout": {
+      "en": "Logout",
+      "km": "ចាកចេញ"
+    },
+    "Notifications": {
+      "en": "Notifications",
+      "km": "ការជូនដំណឹង"
+    },
+    "View Profile": {
+      "en": "View Profile",
+      "km": "មើលប្រវត្តិរូប"
+    },
+    "Profile": {
+      "en": "Profile",
+      "km": "ប្រវត្តិរូប"
+    },
+    "Dashboard": {
+      "en": "Dashboard",
+      "km": "ផ្ទាំងគ្រប់គ្រង"
+    },
+    "Workspace": {
+      "en": "Workspace",
+      "km": "កន្លែងធ្វើការ"
+    },
+    "Open": {
+      "en": "Open",
+      "km": "បើក"
+    },
+    "Exit": {
+      "en": "Exit",
+      "km": "ចេញ"
+    },
+    "Account": {
+      "en": "Account",
+      "km": "គណនី"
+    },
+    "Customer Account": {
+      "en": "Customer Account",
+      "km": "គណនីអតិថិជន"
+    },
+    "Customer View": {
+      "en": "Customer View",
+      "km": "មើលជាអតិថិជន"
+    },
+    "Signed in as": {
+      "en": "Signed in as",
+      "km": "បានចូលប្រើជា"
+    },
+    "Admin control center": {
+      "en": "Admin control center",
+      "km": "មជ្ឈមណ្ឌលគ្រប់គ្រង"
+    },
+    "Overview": {
+      "en": "Overview",
+      "km": "ទិដ្ឋភាពសរុប"
+    },
+    "Roles & Permissions": {
+      "en": "Roles & Permissions",
+      "km": "តួនាទី និងសិទ្ធិ"
+    },
+    "Users": {
+      "en": "Users",
+      "km": "អ្នកប្រើប្រាស់"
+    },
+    "Products": {
+      "en": "Products",
+      "km": "ផលិតផល"
+    },
+    "Categories": {
+      "en": "Categories",
+      "km": "ប្រភេទ"
+    },
+    "Orders": {
+      "en": "Orders",
+      "km": "ការបញ្ជាទិញ"
+    },
+    "Analytics": {
+      "en": "Analytics",
+      "km": "វិភាគទិន្នន័យ"
+    },
+    "Menu": {
+      "en": "Menu",
+      "km": "ម៉ឺនុយ"
+    },
+    "Close": {
+      "en": "Close",
+      "km": "បិទ"
+    },
+    "Cancel": {
+      "en": "Cancel",
+      "km": "បោះបង់"
+    },
+    "Save changes": {
+      "en": "Save changes",
+      "km": "រក្សាទុកការផ្លាស់ប្តូរ"
+    },
+    "Create": {
+      "en": "Create",
+      "km": "បង្កើត"
+    },
+    "Update": {
+      "en": "Update",
+      "km": "ធ្វើបច្ចុប្បន្នភាព"
+    },
+    "Edit": {
+      "en": "Edit",
+      "km": "កែប្រែ"
+    },
+    "Delete": {
+      "en": "Delete",
+      "km": "លុប"
+    },
+    "Remove": {
+      "en": "Remove",
+      "km": "ដកចេញ"
+    },
+    "Default": {
+      "en": "Default",
+      "km": "លំនាំដើម"
+    },
+    "Search": {
+      "en": "Search",
+      "km": "ស្វែងរក"
+    },
+    "Total": {
+      "en": "Total",
+      "km": "សរុប"
+    },
+    "Subtotal": {
+      "en": "Subtotal",
+      "km": "សរុបរង"
+    },
+    "Delivery fee": {
+      "en": "Delivery fee",
+      "km": "ថ្លៃដឹកជញ្ជូន"
+    },
+    "Delivery Fee": {
+      "en": "Delivery Fee",
+      "km": "ថ្លៃដឹកជញ្ជូន"
+    },
+    "Discount": {
+      "en": "Discount",
+      "km": "បញ្ចុះតម្លៃ"
+    },
+    "Cart Summary": {
+      "en": "Cart Summary",
+      "km": "សង្ខេបរទេះទំនិញ"
+    },
+    "MVP Frontend Experience": {
+      "en": "MVP Frontend Experience",
+      "km": "បទពិសោធន៍ Frontend MVP"
+    },
+    "Explore Restaurants": {
+      "en": "Explore Restaurants",
+      "km": "ស្វែងរកភោជនីយដ្ឋាន"
+    },
+    "Ready Fast": {
+      "en": "Ready Fast",
+      "km": "រួចរាល់រហ័ស"
+    },
+    "Single-store checkout with live cart flow.": {
+      "en": "Single-store checkout with live cart flow.",
+      "km": "ទូទាត់ពីហាងតែមួយជាមួយលំហូររទេះផ្ទាល់។"
+    },
+    "Featured item": {
+      "en": "Featured item",
+      "km": "មុខម្ហូបពិសេស"
+    },
+    "Active restaurants": {
+      "en": "Active restaurants",
+      "km": "ភោជនីយដ្ឋានសកម្ម"
+    },
+    "Verified, responsive storefronts": {
+      "en": "Verified, responsive storefronts",
+      "km": "ហាងដែលបានផ្ទៀងផ្ទាត់ និងឆ្លើយតបរហ័ស"
+    },
+    "Average delivery": {
+      "en": "Average delivery",
+      "km": "ពេលដឹកជញ្ជូនមធ្យម"
+    },
+    "Bangkok demo SLA": {
+      "en": "Bangkok demo SLA",
+      "km": "SLA សាកល្បងសម្រាប់បាងកក"
+    },
+    "Promo unlocked": {
+      "en": "Promo unlocked",
+      "km": "បានបើកប្រូម៉ូសិន"
+    },
+    "Applied automatically over $ 300": {
+      "en": "Applied automatically over $ 300",
+      "km": "អនុវត្តដោយស្វ័យប្រវត្តិនៅលើស $ 300"
+    },
+    "Today": {
+      "en": "Today",
+      "km": "ថ្ងៃនេះ"
+    },
+    "Featured Restaurants": {
+      "en": "Featured Restaurants",
+      "km": "ភោជនីយដ្ឋានពិសេស"
+    },
+    "Popular tonight": {
+      "en": "Popular tonight",
+      "km": "ពេញនិយមយប់នេះ"
+    },
+    "Every card below is wired to a detailed menu page with add-to-cart controls and single-restaurant cart validation.": {
+      "en": "Every card below is wired to a detailed menu page with add-to-cart controls and single-restaurant cart validation.",
+      "km": "កាតនីមួយៗភ្ជាប់ទៅទំព័រម៉ឺនុយលម្អិត មានប៊ូតុងបន្ថែមទៅរទេះ និងការត្រួតពិនិត្យរទេះសម្រាប់ភោជនីយដ្ឋានតែមួយ។"
+    },
+    "Restaurant Directory": {
+      "en": "Restaurant Directory",
+      "km": "បញ្ជីភោជនីយដ្ឋាន"
+    },
+    "Browse all delivery partners": {
+      "en": "Browse all delivery partners",
+      "km": "រកមើលដៃគូដឹកជញ្ជូនទាំងអស់"
+    },
+    "Search cuisine, restaurant, or category": {
+      "en": "Search cuisine, restaurant, or category",
+      "km": "ស្វែងរកម្ហូប ភោជនីយដ្ឋាន ឬប្រភេទ"
+    },
+    "All categories": {
+      "en": "All categories",
+      "km": "ប្រភេទទាំងអស់"
+    },
+    "No restaurants matched your filter": {
+      "en": "No restaurants matched your filter",
+      "km": "មិនមានភោជនីយដ្ឋានត្រូវនឹងតម្រងរបស់អ្នកទេ"
+    },
+    "Try another search keyword or switch to a different category.": {
+      "en": "Try another search keyword or switch to a different category.",
+      "km": "សាកល្បងពាក្យស្វែងរកផ្សេង ឬប្តូរទៅប្រភេទផ្សេង។"
+    },
+    "Open Now": {
+      "en": "Open Now",
+      "km": "កំពុងបើក"
+    },
+    "Add to cart": {
+      "en": "Add to cart",
+      "km": "បន្ថែមទៅរទេះ"
+    },
+    "Go to cart": {
+      "en": "Go to cart",
+      "km": "ទៅរទេះទំនិញ"
+    },
+    "Restaurant not found": {
+      "en": "Restaurant not found",
+      "km": "រកមិនឃើញភោជនីយដ្ឋាន"
+    },
+    "This restaurant could not be loaded from the local dataset.": {
+      "en": "This restaurant could not be loaded from the local dataset.",
+      "km": "មិនអាចផ្ទុកភោជនីយដ្ឋាននេះពីទិន្នន័យមូលដ្ឋានបានទេ។"
+    },
+    "Customer Cart": {
+      "en": "Customer Cart",
+      "km": "រទេះអតិថិជន"
+    },
+    "Review your items": {
+      "en": "Review your items",
+      "km": "ពិនិត្យមើលទំនិញរបស់អ្នក"
+    },
+    "Cart validation prevents mixing restaurants in the same checkout session.": {
+      "en": "Cart validation prevents mixing restaurants in the same checkout session.",
+      "km": "ការត្រួតពិនិត្យរទេះការពារការលាយភោជនីយដ្ឋានច្រើនក្នុងការទូទាត់តែមួយ។"
+    },
+    "Your cart is empty": {
+      "en": "Your cart is empty",
+      "km": "រទេះរបស់អ្នកទទេ"
+    },
+    "Browse a restaurant and add items to start a checkout flow.": {
+      "en": "Browse a restaurant and add items to start a checkout flow.",
+      "km": "រកមើលភោជនីយដ្ឋាន ហើយបន្ថែមទំនិញដើម្បីចាប់ផ្តើមការទូទាត់។"
+    },
+    "Secure Checkout": {
+      "en": "Secure Checkout",
+      "km": "ទូទាត់ដោយសុវត្ថិភាព"
+    },
+    "Confirm address and place order": {
+      "en": "Confirm address and place order",
+      "km": "បញ្ជាក់អាសយដ្ឋាន និងដាក់ការបញ្ជាទិញ"
+    },
+    "This checkout flow uses the authenticated customer profile and persists new orders into mock storage for tracking across customer, kitchen, admin, and rider pages.": {
+      "en": "This checkout flow uses the authenticated customer profile and persists new orders into mock storage for tracking across customer, kitchen, admin, and rider pages.",
+      "km": "លំហូរទូទាត់នេះប្រើប្រវត្តិអតិថិជនដែលបានចូលប្រើ និងរក្សាការបញ្ជាទិញថ្មីក្នុង mock storage សម្រាប់តាមដានលើទំព័រអតិថិជន ផ្ទះបាយ អ្នកគ្រប់គ្រង និងអ្នកដឹកជញ្ជូន។"
+    },
+    "Authenticated route guard is active for this page.": {
+      "en": "Authenticated route guard is active for this page.",
+      "km": "ការពារផ្លូវសម្រាប់អ្នកចូលប្រើកំពុងដំណើរការលើទំព័រនេះ។"
+    },
+    "Single-restaurant cart validation is enforced before checkout.": {
+      "en": "Single-restaurant cart validation is enforced before checkout.",
+      "km": "ការត្រួតពិនិត្យរទេះសម្រាប់ភោជនីយដ្ឋានតែមួយត្រូវបានអនុវត្តមុនទូទាត់។"
+    },
+    "Delivery fee and promo discount are calculated before order placement.": {
+      "en": "Delivery fee and promo discount are calculated before order placement.",
+      "km": "ថ្លៃដឹកជញ្ជូន និងការបញ្ចុះតម្លៃត្រូវបានគណនាមុនដាក់ការបញ្ជាទិញ។"
+    },
+    "Order Details": {
+      "en": "Order Details",
+      "km": "ព័ត៌មានលម្អិតការបញ្ជាទិញ"
+    },
+    "Download Invoice": {
+      "en": "Download Invoice",
+      "km": "ទាញយកវិក្កយបត្រ"
+    },
+    "Order Number": {
+      "en": "Order Number",
+      "km": "លេខការបញ្ជាទិញ"
+    },
+    "Placed On": {
+      "en": "Placed On",
+      "km": "បានដាក់នៅ"
+    },
+    "Status": {
+      "en": "Status",
+      "km": "ស្ថានភាព"
+    },
+    "Order Progress": {
+      "en": "Order Progress",
+      "km": "ដំណើរការការបញ្ជាទិញ"
+    },
+    "Delivery Address": {
+      "en": "Delivery Address",
+      "km": "អាសយដ្ឋានដឹកជញ្ជូន"
+    },
+    "Assigned Rider": {
+      "en": "Assigned Rider",
+      "km": "អ្នកដឹកជញ្ជូនដែលបានចាត់តាំង"
+    },
+    "Order Summary": {
+      "en": "Order Summary",
+      "km": "សង្ខេបការបញ្ជាទិញ"
+    },
+    "Order History": {
+      "en": "Order History",
+      "km": "ប្រវត្តិបញ្ជាទិញ"
+    },
+    "All customer orders": {
+      "en": "All customer orders",
+      "km": "ការបញ្ជាទិញអតិថិជនទាំងអស់"
+    },
+    "Every order you place from checkout appears here and is shared across operational role pages.": {
+      "en": "Every order you place from checkout appears here and is shared across operational role pages.",
+      "km": "ការបញ្ជាទិញទាំងអស់ដែលអ្នកដាក់ពីទំព័រទូទាត់នឹងបង្ហាញនៅទីនេះ និងចែករំលែកទៅទំព័រតួនាទីប្រតិបត្តិការ។"
+    },
+    "Track": {
+      "en": "Track",
+      "km": "តាមដាន"
+    },
+    "Customer Workspace": {
+      "en": "Customer Workspace",
+      "km": "កន្លែងធ្វើការអតិថិជន"
+    },
+    "Your account overview": {
+      "en": "Your account overview",
+      "km": "ទិដ្ឋភាពគណនីរបស់អ្នក"
+    },
+    "These panels demonstrate protected customer pages using the same auth state as checkout, tracking, and your personal notification feed.": {
+      "en": "These panels demonstrate protected customer pages using the same auth state as checkout, tracking, and your personal notification feed.",
+      "km": "ផ្ទាំងទាំងនេះបង្ហាញទំព័រអតិថិជនដែលការពារ ដោយប្រើស្ថានភាពចូលប្រើដូចគ្នានឹងទូទាត់ តាមដាន និងព័ត៌មានជូនដំណឹងផ្ទាល់ខ្លួន។"
+    },
+    "Loyalty points": {
+      "en": "Loyalty points",
+      "km": "ពិន្ទុសមាជិក"
+    },
+    "Earned from completed orders": {
+      "en": "Earned from completed orders",
+      "km": "ទទួលបានពីការបញ្ជាទិញដែលបានបញ្ចប់"
+    },
+    "Saved addresses": {
+      "en": "Saved addresses",
+      "km": "អាសយដ្ឋានដែលបានរក្សាទុក"
+    },
+    "Fast checkout defaults": {
+      "en": "Fast checkout defaults",
+      "km": "លំនាំដើមសម្រាប់ទូទាត់រហ័ស"
+    },
+    "Recent orders": {
+      "en": "Recent orders",
+      "km": "ការបញ្ជាទិញថ្មីៗ"
+    },
+    "Persisted in local mock history": {
+      "en": "Persisted in local mock history",
+      "km": "បានរក្សាទុកក្នុងប្រវត្តិសាកល្បងមូលដ្ឋាន"
+    },
+    "Recent Orders": {
+      "en": "Recent Orders",
+      "km": "ការបញ្ជាទិញថ្មីៗ"
+    },
+    "Your latest activity": {
+      "en": "Your latest activity",
+      "km": "សកម្មភាពចុងក្រោយរបស់អ្នក"
+    },
+    "Manage addresses": {
+      "en": "Manage addresses",
+      "km": "គ្រប់គ្រងអាសយដ្ឋាន"
+    },
+    "View and edit your account details.": {
+      "en": "View and edit your account details.",
+      "km": "មើល និងកែប្រែព័ត៌មានគណនីរបស់អ្នក។"
+    },
+    "Manage delivery locations and defaults.": {
+      "en": "Manage delivery locations and defaults.",
+      "km": "គ្រប់គ្រងទីតាំងដឹកជញ្ជូន និងលំនាំដើម។"
+    },
+    "Review your full purchase activity.": {
+      "en": "Review your full purchase activity.",
+      "km": "ពិនិត្យសកម្មភាពទិញទាំងអស់របស់អ្នក។"
+    },
+    "Check order, promo, and account updates.": {
+      "en": "Check order, promo, and account updates.",
+      "km": "ពិនិត្យការបញ្ជាទិញ ប្រូម៉ូសិន និងបច្ចុប្បន្នភាពគណនី។"
+    },
+    "Saved Addresses": {
+      "en": "Saved Addresses",
+      "km": "អាសយដ្ឋានដែលបានរក្សាទុក"
+    },
+    "Manage delivery addresses": {
+      "en": "Manage delivery addresses",
+      "km": "គ្រប់គ្រងអាសយដ្ឋានដឹកជញ្ជូន"
+    },
+    "Create, update, delete, and set defaults for the addresses used by checkout.": {
+      "en": "Create, update, delete, and set defaults for the addresses used by checkout.",
+      "km": "បង្កើត ធ្វើបច្ចុប្បន្នភាព លុប និងកំណត់លំនាំដើមសម្រាប់អាសយដ្ឋានដែលប្រើពេលទូទាត់។"
+    },
+    "Add address": {
+      "en": "Add address",
+      "km": "បន្ថែមអាសយដ្ឋាន"
+    },
+    "Set default": {
+      "en": "Set default",
+      "km": "កំណត់លំនាំដើម"
+    },
+    "Label": {
+      "en": "Label",
+      "km": "ស្លាក"
+    },
+    "Address line": {
+      "en": "Address line",
+      "km": "បន្ទាត់អាសយដ្ឋាន"
+    },
+    "District": {
+      "en": "District",
+      "km": "ខណ្ឌ/ស្រុក"
+    },
+    "City": {
+      "en": "City",
+      "km": "ទីក្រុង"
+    },
+    "Latitude": {
+      "en": "Latitude",
+      "km": "រយៈទទឹង"
+    },
+    "Longitude": {
+      "en": "Longitude",
+      "km": "រយៈបណ្តោយ"
+    },
+    "Edit saved address": {
+      "en": "Edit saved address",
+      "km": "កែប្រែអាសយដ្ឋានដែលបានរក្សាទុក"
+    },
+    "Add a new address": {
+      "en": "Add a new address",
+      "km": "បន្ថែមអាសយដ្ឋានថ្មី"
+    },
+    "Customer Profile": {
+      "en": "Customer Profile",
+      "km": "ប្រវត្តិរូបអតិថិជន"
+    },
+    "Available on your next order": {
+      "en": "Available on your next order",
+      "km": "អាចប្រើបានលើការបញ្ជាទិញបន្ទាប់"
+    },
+    "Account status": {
+      "en": "Account status",
+      "km": "ស្ថានភាពគណនី"
+    },
+    "Active": {
+      "en": "Active",
+      "km": "សកម្ម"
+    },
+    "Authenticated and protected": {
+      "en": "Authenticated and protected",
+      "km": "បានផ្ទៀងផ្ទាត់ និងបានការពារ"
+    },
+    "Quick Access": {
+      "en": "Quick Access",
+      "km": "ចូលប្រើរហ័ស"
+    },
+    "Profile shortcuts": {
+      "en": "Profile shortcuts",
+      "km": "ផ្លូវកាត់ប្រវត្តិរូប"
+    },
+    "Move quickly between the areas most connected to your customer account.": {
+      "en": "Move quickly between the areas most connected to your customer account.",
+      "km": "ផ្លាស់ទីរហ័សរវាងផ្នែកដែលភ្ជាប់ជាមួយគណនីអតិថិជនរបស់អ្នក។"
+    },
+    "Order history": {
+      "en": "Order history",
+      "km": "ប្រវត្តិបញ្ជាទិញ"
+    },
+    "Track live order": {
+      "en": "Track live order",
+      "km": "តាមដានការបញ្ជាទិញផ្ទាល់"
+    },
+    "Customer dashboard": {
+      "en": "Customer dashboard",
+      "km": "ផ្ទាំងគ្រប់គ្រងអតិថិជន"
+    },
+    "Account Details": {
+      "en": "Account Details",
+      "km": "ព័ត៌មានគណនី"
+    },
+    "Personal information": {
+      "en": "Personal information",
+      "km": "ព័ត៌មានផ្ទាល់ខ្លួន"
+    },
+    "Your profile information is stored in the local JSON-backed frontend data layer.": {
+      "en": "Your profile information is stored in the local JSON-backed frontend data layer.",
+      "km": "ព័ត៌មានប្រវត្តិរូបរបស់អ្នកត្រូវបានរក្សាទុកក្នុងស្រទាប់ទិន្នន័យ frontend ដែលផ្អែកលើ JSON។"
+    },
+    "Full name": {
+      "en": "Full name",
+      "km": "ឈ្មោះពេញ"
+    },
+    "Email": {
+      "en": "Email",
+      "km": "អ៊ីមែល"
+    },
+    "Phone": {
+      "en": "Phone",
+      "km": "ទូរស័ព្ទ"
+    },
+    "Account role": {
+      "en": "Account role",
+      "km": "តួនាទីគណនី"
+    },
+    "Security": {
+      "en": "Security",
+      "km": "សុវត្ថិភាព"
+    },
+    "Account protection": {
+      "en": "Account protection",
+      "km": "ការពារគណនី"
+    },
+    "This MVP uses validated frontend auth state, role routing, and route guards after login.": {
+      "en": "This MVP uses validated frontend auth state, role routing, and route guards after login.",
+      "km": "MVP នេះប្រើស្ថានភាពចូលប្រើ frontend ដែលបានផ្ទៀងផ្ទាត់ ការផ្លូវតាមតួនាទី និង route guards បន្ទាប់ពីចូលប្រើ។"
+    },
+    "Session status": {
+      "en": "Session status",
+      "km": "ស្ថានភាពសម័យ"
+    },
+    "You are currently logged in and your protected customer routes are active.": {
+      "en": "You are currently logged in and your protected customer routes are active.",
+      "km": "អ្នកកំពុងចូលប្រើ ហើយផ្លូវអតិថិជនដែលបានការពារកំពុងសកម្ម។"
+    },
+    "Frontend validation": {
+      "en": "Frontend validation",
+      "km": "ការផ្ទៀងផ្ទាត់ Frontend"
+    },
+    "Profile updates validate email uniqueness and keep the local mock database in sync with your session user.": {
+      "en": "Profile updates validate email uniqueness and keep the local mock database in sync with your session user.",
+      "km": "ការធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូបផ្ទៀងផ្ទាត់អ៊ីមែលមិនឱ្យស្ទួន និងរក្សាទិន្នន័យសាកល្បងឱ្យស៊ីគ្នាជាមួយអ្នកប្រើក្នុងសម័យ។"
+    },
+    "Danger zone": {
+      "en": "Danger zone",
+      "km": "តំបន់ប្រុងប្រយ័ត្ន"
+    },
+    "Deleting your account removes the local customer record and logs you out of the frontend.": {
+      "en": "Deleting your account removes the local customer record and logs you out of the frontend.",
+      "km": "ការលុបគណនីនឹងដកកំណត់ត្រាអតិថិជនមូលដ្ឋាន និងចាកចេញពី frontend។"
+    },
+    "Edit account details": {
+      "en": "Edit account details",
+      "km": "កែប្រែព័ត៌មានគណនី"
+    },
+    "Important Updates": {
+      "en": "Important Updates",
+      "km": "បច្ចុប្បន្នភាពសំខាន់"
+    },
+    "Unread Alerts": {
+      "en": "Unread Alerts",
+      "km": "សារជូនដំណឹងមិនទាន់អាន"
+    },
+    "Total Notifications": {
+      "en": "Total Notifications",
+      "km": "ការជូនដំណឹងសរុប"
+    },
+    "Current Filter": {
+      "en": "Current Filter",
+      "km": "តម្រងបច្ចុប្បន្ន"
+    },
+    "All Notifications": {
+      "en": "All Notifications",
+      "km": "ការជូនដំណឹងទាំងអស់"
+    },
+    "Unread Only": {
+      "en": "Unread Only",
+      "km": "មិនទាន់អានប៉ុណ្ណោះ"
+    },
+    "Order Updates": {
+      "en": "Order Updates",
+      "km": "បច្ចុប្បន្នភាពការបញ្ជាទិញ"
+    },
+    "Promotions": {
+      "en": "Promotions",
+      "km": "ប្រូម៉ូសិន"
+    },
+    "No notifications yet": {
+      "en": "No notifications yet",
+      "km": "មិនទាន់មានការជូនដំណឹងទេ"
+    },
+    "Admin Notifications": {
+      "en": "Admin Notifications",
+      "km": "ការជូនដំណឹងអ្នកគ្រប់គ្រង"
+    },
+    "Platform activity feed": {
+      "en": "Platform activity feed",
+      "km": "ព័ត៌មានសកម្មភាពវេទិកា"
+    },
+    "Operations Signals": {
+      "en": "Operations Signals",
+      "km": "សញ្ញាប្រតិបត្តិការ"
+    },
+    "Notification Center": {
+      "en": "Notification Center",
+      "km": "មជ្ឈមណ្ឌលការជូនដំណឹង"
+    },
+    "Unread": {
+      "en": "Unread",
+      "km": "មិនទាន់អាន"
+    },
+    "Still waiting for review": {
+      "en": "Still waiting for review",
+      "km": "នៅរង់ចាំការពិនិត្យ"
+    },
+    "Notifications in the admin feed": {
+      "en": "Notifications in the admin feed",
+      "km": "ការជូនដំណឹងក្នុងព័ត៌មានអ្នកគ្រប់គ្រង"
+    },
+    "Filter the notification": {
+      "en": "Filter the notification",
+      "km": "តម្រងការជូនដំណឹង"
+    },
+    "Filtered view for faster review": {
+      "en": "Filtered view for faster review",
+      "km": "ទិដ្ឋភាពតម្រងសម្រាប់ពិនិត្យរហ័ស"
+    },
+    "Mark all read": {
+      "en": "Mark all read",
+      "km": "សម្គាល់ថាអានទាំងអស់"
+    },
+    "All notifications": {
+      "en": "All notifications",
+      "km": "ការជូនដំណឹងទាំងអស់"
+    },
+    "Unread only": {
+      "en": "Unread only",
+      "km": "មិនទាន់អានប៉ុណ្ណោះ"
+    },
+    "Order updates": {
+      "en": "Order updates",
+      "km": "បច្ចុប្បន្នភាពការបញ្ជាទិញ"
+    },
+    "Catalog": {
+      "en": "Catalog",
+      "km": "កាតាឡុក"
+    },
+    "System": {
+      "en": "System",
+      "km": "ប្រព័ន្ធ"
+    },
+    "Needs review": {
+      "en": "Needs review",
+      "km": "ត្រូវការពិនិត្យ"
+    },
+    "Mark as read": {
+      "en": "Mark as read",
+      "km": "សម្គាល់ថាអាន"
+    },
+    "No notifications for this filter": {
+      "en": "No notifications for this filter",
+      "km": "មិនមានការជូនដំណឹងសម្រាប់តម្រងនេះទេ"
+    },
+    "Admin Profile": {
+      "en": "Admin Profile",
+      "km": "ប្រវត្តិរូបអ្នកគ្រប់គ្រង"
+    },
+    "Platform access": {
+      "en": "Platform access",
+      "km": "ការចូលប្រើវេទិកា"
+    },
+    "Permissions": {
+      "en": "Permissions",
+      "km": "សិទ្ធិ"
+    },
+    "Active capabilities": {
+      "en": "Active capabilities",
+      "km": "សមត្ថភាពសកម្ម"
+    },
+    "Workspace access": {
+      "en": "Workspace access",
+      "km": "ការចូលប្រើកន្លែងធ្វើការ"
+    },
+    "Admin Shortcuts": {
+      "en": "Admin Shortcuts",
+      "km": "ផ្លូវកាត់អ្នកគ្រប់គ្រង"
+    },
+    "Manage Users": {
+      "en": "Manage Users",
+      "km": "គ្រប់គ្រងអ្នកប្រើ"
+    },
+    "Operators, customers & staff": {
+      "en": "Operators, customers & staff",
+      "km": "ប្រតិបត្តិករ អតិថិជន និងបុគ្គលិក"
+    },
+    "Control access levels": {
+      "en": "Control access levels",
+      "km": "គ្រប់គ្រងកម្រិតចូលប្រើ"
+    },
+    "Products & Categories": {
+      "en": "Products & Categories",
+      "km": "ផលិតផល និងប្រភេទ"
+    },
+    "Catalog management": {
+      "en": "Catalog management",
+      "km": "គ្រប់គ្រងកាតាឡុក"
+    },
+    "Platform performance": {
+      "en": "Platform performance",
+      "km": "ប្រសិទ្ធភាពវេទិកា"
+    },
+    "Administrator Information": {
+      "en": "Administrator Information",
+      "km": "ព័ត៌មានអ្នកគ្រប់គ្រង"
+    },
+    "Route Protection Active": {
+      "en": "Route Protection Active",
+      "km": "ការពារផ្លូវកំពុងសកម្ម"
+    },
+    "This session has full access to protected dashboard modules.": {
+      "en": "This session has full access to protected dashboard modules.",
+      "km": "សម័យនេះមានការចូលប្រើពេញលេញទៅម៉ូឌុលផ្ទាំងគ្រប់គ្រងដែលបានការពារ។"
+    },
+    "Permission Coverage": {
+      "en": "Permission Coverage",
+      "km": "ការគ្របដណ្តប់សិទ្ធិ"
+    },
+    "Update Administrator": {
+      "en": "Update Administrator",
+      "km": "ធ្វើបច្ចុប្បន្នភាពអ្នកគ្រប់គ្រង"
+    },
+    "Order Control": {
+      "en": "Order Control",
+      "km": "គ្រប់គ្រងការបញ្ជាទិញ"
+    },
+    "Admin order CRUD": {
+      "en": "Admin order CRUD",
+      "km": "CRUD ការបញ្ជាទិញសម្រាប់អ្នកគ្រប់គ្រង"
+    },
+    "Review order records, update delivery assignments and status, or remove test orders from the local operational dataset.": {
+      "en": "Review order records, update delivery assignments and status, or remove test orders from the local operational dataset.",
+      "km": "ពិនិត្យកំណត់ត្រាការបញ្ជាទិញ ធ្វើបច្ចុប្បន្នភាពការចាត់តាំងដឹកជញ្ជូន និងស្ថានភាព ឬលុបការបញ្ជាទិញសាកល្បងពីទិន្នន័យប្រតិបត្តិការមូលដ្ឋាន។"
+    },
+    "Edit order details": {
+      "en": "Edit order details",
+      "km": "កែប្រែព័ត៌មានការបញ្ជាទិញ"
+    },
+    "Catalog Control": {
+      "en": "Catalog Control",
+      "km": "គ្រប់គ្រងកាតាឡុក"
+    },
+    "Search product or restaurant": {
+      "en": "Search product or restaurant",
+      "km": "ស្វែងរកផលិតផល ឬភោជនីយដ្ឋាន"
+    },
+    "Open categories": {
+      "en": "Open categories",
+      "km": "បើកប្រភេទ"
+    },
+    "Create product": {
+      "en": "Create product",
+      "km": "បង្កើតផលិតផល"
+    },
+    "Total Products": {
+      "en": "Total Products",
+      "km": "ផលិតផលសរុប"
+    },
+    "Across all restaurants": {
+      "en": "Across all restaurants",
+      "km": "ទូទាំងភោជនីយដ្ឋានទាំងអស់"
+    },
+    "Active Products": {
+      "en": "Active Products",
+      "km": "ផលិតផលសកម្ម"
+    },
+    "Ready to order": {
+      "en": "Ready to order",
+      "km": "រួចរាល់សម្រាប់បញ្ជាទិញ"
+    },
+    "Menu groups": {
+      "en": "Menu groups",
+      "km": "ក្រុមម៉ឺនុយ"
+    },
+    "Restaurant Coverage": {
+      "en": "Restaurant Coverage",
+      "km": "ការគ្របដណ្តប់ភោជនីយដ្ឋាន"
+    },
+    "With active products": {
+      "en": "With active products",
+      "km": "មានផលិតផលសកម្ម"
+    },
+    "Create category": {
+      "en": "Create category",
+      "km": "បង្កើតប្រភេទ"
+    },
+    "Category Control": {
+      "en": "Category Control",
+      "km": "គ្រប់គ្រងប្រភេទ"
+    },
+    "Admin category management": {
+      "en": "Admin category management",
+      "km": "ការគ្រប់គ្រងប្រភេទរបស់អ្នកគ្រប់គ្រង"
+    },
+    "Create, edit, and delete product categories per restaurant from the same module.": {
+      "en": "Create, edit, and delete product categories per restaurant from the same module.",
+      "km": "បង្កើត កែប្រែ និងលុបប្រភេទផលិតផលតាមភោជនីយដ្ឋានពីម៉ូឌុលតែមួយ។"
+    },
+    "Edit product item": {
+      "en": "Edit product item",
+      "km": "កែប្រែផលិតផល"
+    },
+    "Create product item": {
+      "en": "Create product item",
+      "km": "បង្កើតផលិតផល"
+    },
+    "Product name": {
+      "en": "Product name",
+      "km": "ឈ្មោះផលិតផល"
+    },
+    "Description": {
+      "en": "Description",
+      "km": "ការពិពណ៌នា"
+    },
+    "Price": {
+      "en": "Price",
+      "km": "តម្លៃ"
+    },
+    "Prep time": {
+      "en": "Prep time",
+      "km": "ពេលរៀបចំ"
+    },
+    "Image URL": {
+      "en": "Image URL",
+      "km": "URL រូបភាព"
+    },
+    "Modifiers": {
+      "en": "Modifiers",
+      "km": "ជម្រើសបន្ថែម"
+    },
+    "Select a restaurant": {
+      "en": "Select a restaurant",
+      "km": "ជ្រើសរើសភោជនីយដ្ឋាន"
+    },
+    "Category": {
+      "en": "Category",
+      "km": "ប្រភេទ"
+    },
+    "Category name": {
+      "en": "Category name",
+      "km": "ឈ្មោះប្រភេទ"
+    },
+    "Edit category": {
+      "en": "Edit category",
+      "km": "កែប្រែប្រភេទ"
+    },
+    "Search category, restaurant, or product": {
+      "en": "Search category, restaurant, or product",
+      "km": "ស្វែងរកប្រភេទ ភោជនីយដ្ឋាន ឬផលិតផល"
+    },
+    "Total categories": {
+      "en": "Total categories",
+      "km": "ប្រភេទសរុប"
+    },
+    "Stored in the admin catalog": {
+      "en": "Stored in the admin catalog",
+      "km": "បានរក្សាទុកក្នុងកាតាឡុកអ្នកគ្រប់គ្រង"
+    },
+    "Covered restaurants": {
+      "en": "Covered restaurants",
+      "km": "ភោជនីយដ្ឋានដែលគ្របដណ្តប់"
+    },
+    "Restaurants using categories right now": {
+      "en": "Restaurants using categories right now",
+      "km": "ភោជនីយដ្ឋានដែលកំពុងប្រើប្រភេទ"
+    },
+    "Products mapped": {
+      "en": "Products mapped",
+      "km": "ផលិតផលដែលបានផ្គូផ្គង"
+    },
+    "Products assigned to category groups": {
+      "en": "Products assigned to category groups",
+      "km": "ផលិតផលដែលបានចាត់ទៅក្រុមប្រភេទ"
+    },
+    "Largest category": {
+      "en": "Largest category",
+      "km": "ប្រភេទធំបំផុត"
+    },
+    "Category health": {
+      "en": "Category health",
+      "km": "សុខភាពប្រភេទ"
+    },
+    "Product preview": {
+      "en": "Product preview",
+      "km": "មើលផលិតផលជាមុន"
+    },
+    "No products linked yet": {
+      "en": "No products linked yet",
+      "km": "មិនទាន់មានផលិតផលភ្ជាប់ទេ"
+    },
+    "No category matches your search": {
+      "en": "No category matches your search",
+      "km": "មិនមានប្រភេទត្រូវនឹងការស្វែងរកទេ"
+    },
+    "Try another keyword or create a new category for a restaurant.": {
+      "en": "Try another keyword or create a new category for a restaurant.",
+      "km": "សាកពាក្យគន្លឹះផ្សេង ឬបង្កើតប្រភេទថ្មីសម្រាប់ភោជនីយដ្ឋាន។"
+    },
+    "Restaurants & Branches": {
+      "en": "Restaurants & Branches",
+      "km": "ភោជនីយដ្ឋាន និងសាខា"
+    },
+    "Add New Restaurant": {
+      "en": "Add New Restaurant",
+      "km": "បន្ថែមភោជនីយដ្ឋានថ្មី"
+    },
+    "Edit Restaurant": {
+      "en": "Edit Restaurant",
+      "km": "កែប្រែភោជនីយដ្ឋាន"
+    },
+    "Restaurant Name": {
+      "en": "Restaurant Name",
+      "km": "ឈ្មោះភោជនីយដ្ឋាន"
+    },
+    "Cuisine Tags": {
+      "en": "Cuisine Tags",
+      "km": "ស្លាកប្រភេទម្ហូប"
+    },
+    "Delivery Time": {
+      "en": "Delivery Time",
+      "km": "ពេលដឹកជញ្ជូន"
+    },
+    "Cover Image URL": {
+      "en": "Cover Image URL",
+      "km": "URL រូបភាពគម្រប"
+    },
+    "Hero Gradient": {
+      "en": "Hero Gradient",
+      "km": "ពណ៌ Gradient គម្រប"
+    },
+    "Verified Restaurant": {
+      "en": "Verified Restaurant",
+      "km": "ភោជនីយដ្ឋានបានផ្ទៀងផ្ទាត់"
+    },
+    "Delivery Branches": {
+      "en": "Delivery Branches",
+      "km": "សាខាដឹកជញ្ជូន"
+    },
+    "Add locations where this restaurant operates": {
+      "en": "Add locations where this restaurant operates",
+      "km": "បន្ថែមទីតាំងដែលភោជនីយដ្ឋាននេះដំណើរការ"
+    },
+    "Branch Name": {
+      "en": "Branch Name",
+      "km": "ឈ្មោះសាខា"
+    },
+    "Zone / Area": {
+      "en": "Zone / Area",
+      "km": "តំបន់"
+    },
+    "Roles &amp; Permissions": {
+      "en": "Roles & Permissions",
+      "km": "តួនាទី និងសិទ្ធិ"
+    },
+    "Role Label": {
+      "en": "Role Label",
+      "km": "ស្លាកតួនាទី"
+    },
+    "Role Key": {
+      "en": "Role Key",
+      "km": "កូនសោតួនាទី"
+    },
+    "Select All": {
+      "en": "Select All",
+      "km": "ជ្រើសទាំងអស់"
+    },
+    "Clear All": {
+      "en": "Clear All",
+      "km": "សម្អាតទាំងអស់"
+    },
+    "Core": {
+      "en": "Core",
+      "km": "ស្នូល"
+    },
+    "Create New Role": {
+      "en": "Create New Role",
+      "km": "បង្កើតតួនាទីថ្មី"
+    },
+    "Edit Role": {
+      "en": "Edit Role",
+      "km": "កែប្រែតួនាទី"
+    },
+    "Users, Roles and Permissions": {
+      "en": "Users, Roles and Permissions",
+      "km": "អ្នកប្រើ តួនាទី និងសិទ្ធិ"
+    },
+    "Admin user CRUD": {
+      "en": "Admin user CRUD",
+      "km": "CRUD អ្នកប្រើសម្រាប់អ្នកគ្រប់គ្រង"
+    },
+    "Create, edit, and delete platform users while keeping role assignments and restaurant ownership associations on the frontend data layer.": {
+      "en": "Create, edit, and delete platform users while keeping role assignments and restaurant ownership associations on the frontend data layer.",
+      "km": "បង្កើត កែប្រែ និងលុបអ្នកប្រើវេទិកា ខណៈរក្សាការចាត់តួនាទី និងទំនាក់ទំនងម្ចាស់ភោជនីយដ្ឋានក្នុងស្រទាប់ទិន្នន័យ frontend។"
+    },
+    "Create user": {
+      "en": "Create user",
+      "km": "បង្កើតអ្នកប្រើ"
+    },
+    "Edit platform user": {
+      "en": "Edit platform user",
+      "km": "កែប្រែអ្នកប្រើវេទិកា"
+    },
+    "Create platform user": {
+      "en": "Create platform user",
+      "km": "បង្កើតអ្នកប្រើវេទិកា"
+    },
+    "Role": {
+      "en": "Role",
+      "km": "តួនាទី"
+    },
+    "No restaurant linked": {
+      "en": "No restaurant linked",
+      "km": "មិនមានភោជនីយដ្ឋានភ្ជាប់"
+    },
+    "New users receive the seeded password for their system role, or `Welcome@123` for custom roles.": {
+      "en": "New users receive the seeded password for their system role, or `Welcome@123` for custom roles.",
+      "km": "អ្នកប្រើថ្មីនឹងទទួលពាក្យសម្ងាត់គំរូសម្រាប់តួនាទីប្រព័ន្ធ ឬ `Welcome@123` សម្រាប់តួនាទីផ្ទាល់ខ្លួន។"
+    },
+    "Orders today": {
+      "en": "Orders today",
+      "km": "ការបញ្ជាទិញថ្ងៃនេះ"
+    },
+    "Platform-wide demand": {
+      "en": "Platform-wide demand",
+      "km": "តម្រូវការទូទាំងវេទិកា"
+    },
+    "Gross sales": {
+      "en": "Gross sales",
+      "km": "ការលក់សរុប"
+    },
+    "Revenue pulse today": {
+      "en": "Revenue pulse today",
+      "km": "ចលនាចំណូលថ្ងៃនេះ"
+    },
+    "Active riders": {
+      "en": "Active riders",
+      "km": "អ្នកដឹកជញ្ជូនសកម្ម"
+    },
+    "Dispatchable network": {
+      "en": "Dispatchable network",
+      "km": "បណ្តាញអាចចាត់ចែងបាន"
+    },
+    "Products live": {
+      "en": "Products live",
+      "km": "ផលិតផលកំពុងផ្សាយ"
+    },
+    "Catalog items under admin control": {
+      "en": "Catalog items under admin control",
+      "km": "ទំនិញកាតាឡុកក្រោមការគ្រប់គ្រង"
+    },
+    "Delayed orders": {
+      "en": "Delayed orders",
+      "km": "ការបញ្ជាទិញយឺត"
+    },
+    "Needs rapid action": {
+      "en": "Needs rapid action",
+      "km": "ត្រូវការសកម្មភាពរហ័ស"
+    },
+    "Demand Pulse": {
+      "en": "Demand Pulse",
+      "km": "ចលនាតម្រូវការ"
+    },
+    "Hourly platform order flow across the peak service window": {
+      "en": "Hourly platform order flow across the peak service window",
+      "km": "លំហូរការបញ្ជាទិញរៀងរាល់ម៉ោងក្នុងពេលសេវាកំពូល"
+    },
+    "Revenue Momentum": {
+      "en": "Revenue Momentum",
+      "km": "ល្បឿនចំណូល"
+    },
+    "Estimated revenue progression derived from live order volume": {
+      "en": "Estimated revenue progression derived from live order volume",
+      "km": "ការរីកចម្រើនចំណូលប៉ាន់ស្មានពីបរិមាណការបញ្ជាទិញផ្ទាល់"
+    },
+    "Catalog Snapshot": {
+      "en": "Catalog Snapshot",
+      "km": "សង្ខេបកាតាឡុក"
+    },
+    "Latest admin product data": {
+      "en": "Latest admin product data",
+      "km": "ទិន្នន័យផលិតផលអ្នកគ្រប់គ្រងចុងក្រោយ"
+    },
+    "Product CRUD changes made in the admin product module show up here immediately.": {
+      "en": "Product CRUD changes made in the admin product module show up here immediately.",
+      "km": "ការផ្លាស់ប្តូរ CRUD ផលិតផលក្នុងម៉ូឌុលអ្នកគ្រប់គ្រងនឹងបង្ហាញទីនេះភ្លាមៗ។"
+    },
+    "Operations Watch": {
+      "en": "Operations Watch",
+      "km": "តាមដានប្រតិបត្តិការ"
+    },
+    "Live order queue": {
+      "en": "Live order queue",
+      "km": "ជួរការបញ្ជាទិញផ្ទាល់"
+    },
+    "Orders still in motion are surfaced here so admins can spot service friction quickly.": {
+      "en": "Orders still in motion are surfaced here so admins can spot service friction quickly.",
+      "km": "ការបញ្ជាទិញដែលកំពុងដំណើរការនឹងបង្ហាញទីនេះ ដើម្បីឱ្យអ្នកគ្រប់គ្រងរកឃើញបញ្ហាសេវាបានរហ័ស។"
+    },
+    "Recent Activity": {
+      "en": "Recent Activity",
+      "km": "សកម្មភាពថ្មីៗ"
+    },
+    "Platform orders stream": {
+      "en": "Platform orders stream",
+      "km": "លំហូរការបញ្ជាទិញវេទិកា"
+    },
+    "A fuller recent orders list with richer spacing and fast status visibility.": {
+      "en": "A fuller recent orders list with richer spacing and fast status visibility.",
+      "km": "បញ្ជីការបញ្ជាទិញថ្មីៗដែលពេញលេញ ជាមួយចន្លោះល្អ និងមើលស្ថានភាពបានរហ័ស។"
+    },
+    "Network Analytics": {
+      "en": "Network Analytics",
+      "km": "វិភាគបណ្តាញ"
+    },
+    "Demand and zone load": {
+      "en": "Demand and zone load",
+      "km": "តម្រូវការ និងបន្ទុកតំបន់"
+    },
+    "This upgraded analytics workspace turns the frontend seed data into richer operational visuals for the admin team.": {
+      "en": "This upgraded analytics workspace turns the frontend seed data into richer operational visuals for the admin team.",
+      "km": "កន្លែងវិភាគដែលបានកែលម្អនេះបម្លែងទិន្នន័យគំរូ frontend ទៅជារូបភាពប្រតិបត្តិការលម្អិតសម្រាប់ក្រុមអ្នកគ្រប់គ្រង។"
+    },
+    "Orders per Hour": {
+      "en": "Orders per Hour",
+      "km": "ការបញ្ជាទិញក្នុងមួយម៉ោង"
+    },
+    "Peak lunch and dinner volume shown as a cleaner line-based chart": {
+      "en": "Peak lunch and dinner volume shown as a cleaner line-based chart",
+      "km": "បរិមាណពេលថ្ងៃត្រង់ និងល្ងាចបង្ហាញជាតារាងខ្សែស្អាត"
+    },
+    "Revenue Velocity": {
+      "en": "Revenue Velocity",
+      "km": "ល្បឿនចំណូល"
+    },
+    "Estimated revenue generated from hourly order demand": {
+      "en": "Estimated revenue generated from hourly order demand",
+      "km": "ចំណូលប៉ាន់ស្មានពីតម្រូវការបញ្ជាទិញរៀងរាល់ម៉ោង"
+    },
+    "Hourly volume bars": {
+      "en": "Hourly volume bars",
+      "km": "របារបរិមាណរៀងរាល់ម៉ោង"
+    },
+    "A denser chart treatment for quick peak-time scanning.": {
+      "en": "A denser chart treatment for quick peak-time scanning.",
+      "km": "ការបង្ហាញតារាងខ្លីច្បាស់សម្រាប់ស្កេនពេលកំពូលបានរហ័ស។"
+    },
+    "Peak hour": {
+      "en": "Peak hour",
+      "km": "ម៉ោងកំពូល"
+    },
+    "Avg hourly volume": {
+      "en": "Avg hourly volume",
+      "km": "បរិមាណមធ្យមក្នុងមួយម៉ោង"
+    },
+    "Orders per tracked hour": {
+      "en": "Orders per tracked hour",
+      "km": "ការបញ្ជាទិញក្នុងម៉ោងដែលបានតាមដាន"
+    },
+    "Revenue per hour": {
+      "en": "Revenue per hour",
+      "km": "ចំណូលក្នុងមួយម៉ោង"
+    },
+    "Estimated blended pace": {
+      "en": "Estimated blended pace",
+      "km": "ល្បឿនប៉ាន់ស្មានសរុប"
+    },
+    "Zone load distribution": {
+      "en": "Zone load distribution",
+      "km": "ការចែកចាយបន្ទុកតំបន់"
+    },
+    "Dispatch pressure by delivery area with proportional load bars.": {
+      "en": "Dispatch pressure by delivery area with proportional load bars.",
+      "km": "សម្ពាធចាត់ចែងតាមតំបន់ដឹកជញ្ជូនជាមួយរបារបន្ទុកតាមសមាមាត្រ។"
+    },
+    "Revenue share": {
+      "en": "Revenue share",
+      "km": "ចំណែកចំណូល"
+    },
+    "Top Performers": {
+      "en": "Top Performers",
+      "km": "អ្នកដំណើរការល្អបំផុត"
+    },
+    "Restaurant revenue split": {
+      "en": "Restaurant revenue split",
+      "km": "ការបែងចែកចំណូលភោជនីយដ្ឋាន"
+    },
+    "Map View": {
+      "en": "Map View",
+      "km": "ទិដ្ឋភាពផែនទី"
+    },
+    "Delivery zone preview": {
+      "en": "Delivery zone preview",
+      "km": "មើលតំបន់ដឹកជញ្ជូនជាមុន"
+    },
+    "The map panel stays available for spatial context beside the upgraded chart set.": {
+      "en": "The map panel stays available for spatial context beside the upgraded chart set.",
+      "km": "ផ្ទាំងផែនទីនៅតែមានសម្រាប់បរិបទទីតាំងជាមួយសំណុំតារាងដែលបានកែលម្អ។"
+    },
+    "Fast": {
+      "en": "Fast",
+      "km": "រហ័ស"
+    },
+    "Browse • Order • Track": {
+      "en": "Browse • Order • Track",
+      "km": "រកមើល • បញ្ជាទិញ • តាមដាន"
+    },
+    "Connected": {
+      "en": "Connected",
+      "km": "ភ្ជាប់គ្នា"
+    },
+    "All teams in one system": {
+      "en": "All teams in one system",
+      "km": "ក្រុមទាំងអស់ក្នុងប្រព័ន្ធតែមួយ"
+    },
+    "Reliable": {
+      "en": "Reliable",
+      "km": "ទុកចិត្តបាន"
+    },
+    "End-to-end delivery": {
+      "en": "End-to-end delivery",
+      "km": "ដឹកជញ្ជូនពីដើមដល់ចប់"
+    },
+    "For Restaurants": {
+      "en": "For Restaurants",
+      "km": "សម្រាប់ភោជនីយដ្ឋាន"
+    },
+    "For Riders": {
+      "en": "For Riders",
+      "km": "សម្រាប់អ្នកដឹកជញ្ជូន"
+    },
+    "Key Features": {
+      "en": "Key Features",
+      "km": "មុខងារសំខាន់ៗ"
+    },
+    "Simple 4-Step Process": {
+      "en": "Simple 4-Step Process",
+      "km": "ដំណើរការ ៤ ជំហានងាយស្រួល"
+    },
+    "Secure Access": {
+      "en": "Secure Access",
+      "km": "ចូលប្រើដោយសុវត្ថិភាព"
+    },
+    "Login to your workspace": {
+      "en": "Login to your workspace",
+      "km": "ចូលទៅកន្លែងធ្វើការរបស់អ្នក"
+    },
+    "Password": {
+      "en": "Password",
+      "km": "ពាក្យសម្ងាត់"
+    },
+    "Demo accounts": {
+      "en": "Demo accounts",
+      "km": "គណនីសាកល្បង"
+    },
+    "Use": {
+      "en": "Use",
+      "km": "ប្រើ"
+    },
+    "Create customer account": {
+      "en": "Create customer account",
+      "km": "បង្កើតគណនីអតិថិជន"
+    },
+    "Forgot password?": {
+      "en": "Forgot password?",
+      "km": "ភ្លេចពាក្យសម្ងាត់?"
+    },
+    "Recovery": {
+      "en": "Recovery",
+      "km": "ស្ដារឡើងវិញ"
+    },
+    "Forgot your password?": {
+      "en": "Forgot your password?",
+      "km": "ភ្លេចពាក្យសម្ងាត់របស់អ្នក?"
+    },
+    "Email address": {
+      "en": "Email address",
+      "km": "អាសយដ្ឋានអ៊ីមែល"
+    },
+    "Request reset link": {
+      "en": "Request reset link",
+      "km": "ស្នើតំណកំណត់ឡើងវិញ"
+    },
+    "Demo note: use one of the seeded passwords shown on the login page to continue testing the protected routes.": {
+      "en": "Demo note: use one of the seeded passwords shown on the login page to continue testing the protected routes.",
+      "km": "ចំណាំសាកល្បង៖ ប្រើពាក្យសម្ងាត់គំរូមួយដែលបង្ហាញនៅទំព័រចូលប្រើ ដើម្បីបន្តសាកល្បងផ្លូវដែលបានការពារ។"
+    },
+    "Full Frontend MVP": {
+      "en": "Full Frontend MVP",
+      "km": "Frontend MVP ពេញលេញ"
+    },
+    "One platform for every food delivery role.": {
+      "en": "One platform for every food delivery role.",
+      "km": "វេទិកាតែមួយសម្រាប់គ្រប់តួនាទីដឹកជញ្ជូនអាហារ។"
+    },
+    "Role-based workspaces": {
+      "en": "Role-based workspaces",
+      "km": "កន្លែងធ្វើការតាមតួនាទី"
+    },
+    "Mock persistent data layer": {
+      "en": "Mock persistent data layer",
+      "km": "ស្រទាប់ទិន្នន័យសាកល្បងដែលរក្សាទុក"
+    },
+    "OPEN": {
+      "en": "OPEN",
+      "km": "បើក"
+    },
+    "OPENED": {
+      "en": "OPENED",
+      "km": "បានបើក"
+    },
+    "BUSY": {
+      "en": "BUSY",
+      "km": "រវល់"
+    },
+    "ON THE WAY": {
+      "en": "ON THE WAY",
+      "km": "កំពុងដឹកជញ្ជូន"
+    },
+    "PREPARING": {
+      "en": "PREPARING",
+      "km": "កំពុងរៀបចំ"
+    },
+    "PLACED": {
+      "en": "PLACED",
+      "km": "បានដាក់"
+    },
+    "DELIVERED": {
+      "en": "DELIVERED",
+      "km": "បានដឹកជញ្ជូន"
+    },
+    "READY FOR PICKUP": {
+      "en": "READY FOR PICKUP",
+      "km": "រួចរាល់សម្រាប់យក"
+    },
+    "ONLINE": {
+      "en": "ONLINE",
+      "km": "អនឡាញ"
+    },
+    "OFFLINE": {
+      "en": "OFFLINE",
+      "km": "ក្រៅបណ្តាញ"
+    },
+    "-3 min": {
+      "en": "-3 min",
+      "km": "-3 នាទី"
+    },
+    "+1 new": {
+      "en": "+1 new",
+      "km": "+1 ថ្មី"
+    },
+    "+3 this week": {
+      "en": "+3 this week",
+      "km": "+3 សប្តាហ៍នេះ"
+    },
+    "+42 pts": {
+      "en": "+42 pts",
+      "km": "+42 ពិន្ទុ"
+    },
+    "+catalog": {
+      "en": "+catalog",
+      "km": "+កាតាឡុក"
+    },
+    "? Verified": {
+      "en": "? Verified",
+      "km": "✓ បានផ្ទៀងផ្ទាត់"
+    },
+    "$ 30 off": {
+      "en": "$ 30 off",
+      "km": "បញ្ចុះ $ 30"
+    },
+    "27 min": {
+      "en": "27 min",
+      "km": "27 នាទី"
+    },
+    "A compact rider workspace that keeps the mobile operational context visible.": {
+      "en": "A compact rider workspace that keeps the mobile operational context visible.",
+      "km": "កន្លែងធ្វើការអ្នកដឹកជញ្ជូនខ្លីច្បាស់ ដែលរក្សាបរិបទប្រតិបត្តិការលើទូរស័ព្ទឱ្យមើលឃើញ។"
+    },
+    "A complete platform connecting customers, restaurants, and delivery teams in one seamless experience.": {
+      "en": "A complete platform connecting customers, restaurants, and delivery teams in one seamless experience.",
+      "km": "វេទិកាពេញលេញដែលភ្ជាប់អតិថិជន ភោជនីយដ្ឋាន និងក្រុមដឹកជញ្ជូនក្នុងបទពិសោធន៍តែមួយរលូន។"
+    },
+    "Access Control": {
+      "en": "Access Control",
+      "km": "គ្រប់គ្រងការចូលប្រើ"
+    },
+    "Activity Center": {
+      "en": "Activity Center",
+      "km": "មជ្ឈមណ្ឌលសកម្មភាព"
+    },
+    "Add items and complete checkout.": {
+      "en": "Add items and complete checkout.",
+      "km": "បន្ថែមមុខម្ហូប ហើយបញ្ចប់ការទូទាត់។"
+    },
+    "Add Restaurant": {
+      "en": "Add Restaurant",
+      "km": "បន្ថែមភោជនីយដ្ឋាន"
+    },
+    "Addresses": {
+      "en": "Addresses",
+      "km": "អាសយដ្ឋាន"
+    },
+    "Admin Control": {
+      "en": "Admin Control",
+      "km": "ការគ្រប់គ្រងអ្នកគ្រប់គ្រង"
+    },
+    "All": {
+      "en": "All",
+      "km": "ទាំងអស់"
+    },
+    "All Restaurants": {
+      "en": "All Restaurants",
+      "km": "ភោជនីយដ្ឋានទាំងអស់"
+    },
+    "Already have an account? Login": {
+      "en": "Already have an account? Login",
+      "km": "មានគណនីរួចហើយ? ចូលប្រើ"
+    },
+    "Assigned Work": {
+      "en": "Assigned Work",
+      "km": "ការងារដែលបានចាត់តាំង"
+    },
+    "Availability": {
+      "en": "Availability",
+      "km": "ភាពអាចប្រើបាន"
+    },
+    "Availability and earnings snapshot": {
+      "en": "Availability and earnings snapshot",
+      "km": "សង្ខេបភាពអាចធ្វើការ និងប្រាក់ចំណូល"
+    },
+    "Avatar Code": {
+      "en": "Avatar Code",
+      "km": "កូដ Avatar"
+    },
+    "Branch count": {
+      "en": "Branch count",
+      "km": "ចំនួនសាខា"
+    },
+    "Branch-ready menu inventory": {
+      "en": "Branch-ready menu inventory",
+      "km": "សារពើភ័ណ្ឌម៉ឺនុយសម្រាប់សាខា"
+    },
+    "Browse": {
+      "en": "Browse",
+      "km": "រកមើល"
+    },
+    "Browse Customer App": {
+      "en": "Browse Customer App",
+      "km": "មើលកម្មវិធីអតិថិជន"
+    },
+    "Browse popular categories from our restaurants": {
+      "en": "Browse popular categories from our restaurants",
+      "km": "រកមើលប្រភេទពេញនិយមពីភោជនីយដ្ឋានរបស់យើង"
+    },
+    "Browse verified restaurants, build single-store carts, check out with delivery fee previews, and follow orders across every operational handoff.": {
+      "en": "Browse verified restaurants, build single-store carts, check out with delivery fee previews, and follow orders across every operational handoff.",
+      "km": "រកមើលភោជនីយដ្ឋានដែលបានផ្ទៀងផ្ទាត់ បង្កើតរទេះពីហាងតែមួយ ទូទាត់ជាមួយការមើលថ្លៃដឹកជាមុន ហើយតាមដានការបញ្ជាទិញគ្រប់ដំណាក់កាលប្រតិបត្តិការ។"
+    },
+    "Built to serve all sides of the food delivery ecosystem": {
+      "en": "Built to serve all sides of the food delivery ecosystem",
+      "km": "បង្កើតឡើងដើម្បីបម្រើគ្រប់ផ្នែកនៃប្រព័ន្ធដឹកជញ្ជូនអាហារ"
+    },
+    "Confirm password": {
+      "en": "Confirm password",
+      "km": "បញ្ជាក់ពាក្យសម្ងាត់"
+    },
+    "Create your ordering account": {
+      "en": "Create your ordering account",
+      "km": "បង្កើតគណនីបញ្ជាទិញរបស់អ្នក"
+    },
+    "Current delivery stack": {
+      "en": "Current delivery stack",
+      "km": "បញ្ជីដឹកជញ្ជូនបច្ចុប្បន្ន"
+    },
+    "Customer": {
+      "en": "Customer",
+      "km": "អតិថិជន"
+    },
+    "Customer satisfaction snapshot": {
+      "en": "Customer satisfaction snapshot",
+      "km": "សង្ខេបការពេញចិត្តអតិថិជន"
+    },
+    "Customer Signup": {
+      "en": "Customer Signup",
+      "km": "ចុះឈ្មោះអតិថិជន"
+    },
+    "Customer, admin, owner, kitchen, and rider routes are protected by role-aware frontend guards and session validation.": {
+      "en": "Customer, admin, owner, kitchen, and rider routes are protected by role-aware frontend guards and session validation.",
+      "km": "ផ្លូវអតិថិជន អ្នកគ្រប់គ្រង ម្ចាស់ហាង ផ្ទះបាយ និងអ្នកដឹកជញ្ជូន ត្រូវបានការពារដោយ route guards តាមតួនាទី និងការផ្ទៀងផ្ទាត់សម័យ។"
+    },
+    "Delete account": {
+      "en": "Delete account",
+      "km": "លុបគណនី"
+    },
+    "Deliver": {
+      "en": "Deliver",
+      "km": "ដឹកជញ្ជូន"
+    },
+    "Delivered": {
+      "en": "Delivered",
+      "km": "បានដឹកជញ្ជូន"
+    },
+    "Delivery Actions": {
+      "en": "Delivery Actions",
+      "km": "សកម្មភាពដឹកជញ្ជូន"
+    },
+    "Delivery address": {
+      "en": "Delivery address",
+      "km": "អាសយដ្ឋានដឹកជញ្ជូន"
+    },
+    "Delivery Rider": {
+      "en": "Delivery Rider",
+      "km": "អ្នកដឹកជញ្ជូន"
+    },
+    "Demo auth, protected routes, local JSON data, customer checkout, admin monitoring, kitchen queue, and rider dispatch views are all wired together in a single frontend build.": {
+      "en": "Demo auth, protected routes, local JSON data, customer checkout, admin monitoring, kitchen queue, and rider dispatch views are all wired together in a single frontend build.",
+      "km": "ការចូលប្រើសាកល្បង ផ្លូវការពារ ទិន្នន័យ JSON មូលដ្ឋាន ការទូទាត់អតិថិជន ការត្រួតពិនិត្យអ្នកគ្រប់គ្រង ជួរផ្ទះបាយ និងទិដ្ឋភាពចាត់ចែងអ្នកដឹកជញ្ជូន ត្រូវបានភ្ជាប់គ្នាក្នុង frontend build តែមួយ។"
+    },
+    "Discover Categories": {
+      "en": "Discover Categories",
+      "km": "ស្វែងរកប្រភេទ"
+    },
+    "Discover great food and enjoy a smooth, fast ordering experience.": {
+      "en": "Discover great food and enjoy a smooth, fast ordering experience.",
+      "km": "ស្វែងរកអាហារឆ្ងាញ់ ហើយរីករាយជាមួយបទពិសោធន៍បញ្ជាទិញរលូន និងរហ័ស។"
+    },
+    "Discover restaurants and delicious meals.": {
+      "en": "Discover restaurants and delicious meals.",
+      "km": "ស្វែងរកភោជនីយដ្ឋាន និងអាហារឆ្ងាញ់ៗ។"
+    },
+    "Dispatch Coverage": {
+      "en": "Dispatch Coverage",
+      "km": "ការគ្របដណ្តប់ចាត់ចែង"
+    },
+    "Easy browsing with smart filters and beautiful restaurant pages.": {
+      "en": "Easy browsing with smart filters and beautiful restaurant pages.",
+      "km": "រកមើលងាយស្រួលជាមួយតម្រងឆ្លាតវៃ និងទំព័រភោជនីយដ្ឋានស្រស់ស្អាត។"
+    },
+    "Edit profile": {
+      "en": "Edit profile",
+      "km": "កែប្រវត្តិរូប"
+    },
+    "Edit Profile": {
+      "en": "Edit Profile",
+      "km": "កែប្រវត្តិរូប"
+    },
+    "Editable through menu controls": {
+      "en": "Editable through menu controls",
+      "km": "អាចកែបានតាមឧបករណ៍គ្រប់គ្រងម៉ឺនុយ"
+    },
+    "Efficient delivery management with live order tracking.": {
+      "en": "Efficient delivery management with live order tracking.",
+      "km": "គ្រប់គ្រងការដឹកជញ្ជូនប្រកបដោយប្រសិទ្ធភាព ជាមួយការតាមដានការបញ្ជាទិញផ្ទាល់។"
+    },
+    "Estimated delivery": {
+      "en": "Estimated delivery",
+      "km": "ពេលដឹកជញ្ជូនប៉ាន់ស្មាន"
+    },
+    "Failed to delete role.": {
+      "en": "Failed to delete role.",
+      "km": "លុបតួនាទីមិនបាន។"
+    },
+    "Failed to save role.": {
+      "en": "Failed to save role.",
+      "km": "រក្សាទុកតួនាទីមិនបាន។"
+    },
+    "Failed to update profile.": {
+      "en": "Failed to update profile.",
+      "km": "ធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូបមិនបាន។"
+    },
+    "Fast Meal Delivery": {
+      "en": "Fast Meal Delivery",
+      "km": "ដឹកជញ្ជូនអាហាររហ័ស"
+    },
+    "Food ordering made simple,": {
+      "en": "Food ordering made simple,",
+      "km": "ការបញ្ជាទិញអាហារធ្វើឱ្យងាយស្រួល,"
+    },
+    "for everyone": {
+      "en": "for everyone",
+      "km": "សម្រាប់គ្រប់គ្នា"
+    },
+    "From browsing to delivery": {
+      "en": "From browsing to delivery",
+      "km": "ពីការរកមើលដល់ការដឹកជញ្ជូន"
+    },
+    "Full management of restaurants, orders, users, and analytics.": {
+      "en": "Full management of restaurants, orders, users, and analytics.",
+      "km": "គ្រប់គ្រងភោជនីយដ្ឋាន ការបញ្ជាទិញ អ្នកប្រើ និងវិភាគទិន្នន័យពេញលេញ។"
+    },
+    "Full Name": {
+      "en": "Full Name",
+      "km": "ឈ្មោះពេញ"
+    },
+    "How It Works": {
+      "en": "How It Works",
+      "km": "របៀបដំណើរការ"
+    },
+    "JSON": {
+      "en": "JSON",
+      "km": "JSON"
+    },
+    "Jump into your current order progress page.": {
+      "en": "Jump into your current order progress page.",
+      "km": "ទៅកាន់ទំព័រដំណើរការការបញ្ជាទិញបច្ចុប្បន្នរបស់អ្នក។"
+    },
+    "Jump to key management areas": {
+      "en": "Jump to key management areas",
+      "km": "ទៅកាន់តំបន់គ្រប់គ្រងសំខាន់ៗ"
+    },
+    "Kitchen Dispatch Board": {
+      "en": "Kitchen Dispatch Board",
+      "km": "ផ្ទាំងចាត់ចែងផ្ទះបាយ"
+    },
+    "Kitchen receives and prepares the order.": {
+      "en": "Kitchen receives and prepares the order.",
+      "km": "ផ្ទះបាយទទួល និងរៀបចំការបញ្ជាទិញ។"
+    },
+    "Kitchen Staff": {
+      "en": "Kitchen Staff",
+      "km": "បុគ្គលិកផ្ទះបាយ"
+    },
+    "Manage partner restaurants, their branches, and operational details.": {
+      "en": "Manage partner restaurants, their branches, and operational details.",
+      "km": "គ្រប់គ្រងភោជនីយដ្ឋានដៃគូ សាខា និងព័ត៌មានប្រតិបត្តិការរបស់ពួកគេ។"
+    },
+    "Manage role templates and define what each role can access in the admin dashboard.": {
+      "en": "Manage role templates and define what each role can access in the admin dashboard.",
+      "km": "គ្រប់គ្រងគំរូតួនាទី និងកំណត់អ្វីដែលតួនាទីនីមួយៗអាចចូលប្រើក្នុងផ្ទាំងគ្រប់គ្រង។"
+    },
+    "Mark all as read": {
+      "en": "Mark all as read",
+      "km": "សម្គាល់ថាអានទាំងអស់"
+    },
+    "Mark ready": {
+      "en": "Mark ready",
+      "km": "សម្គាល់ថារួចរាល់"
+    },
+    "Menu categories": {
+      "en": "Menu categories",
+      "km": "ប្រភេទម៉ឺនុយ"
+    },
+    "Menu Management": {
+      "en": "Menu Management",
+      "km": "គ្រប់គ្រងម៉ឺនុយ"
+    },
+    "Mock Map": {
+      "en": "Mock Map",
+      "km": "ផែនទីសាកល្បង"
+    },
+    "Modify your admin identity and contact details.": {
+      "en": "Modify your admin identity and contact details.",
+      "km": "កែប្រែអត្តសញ្ញាណអ្នកគ្រប់គ្រង និងព័ត៌មានទំនាក់ទំនង។"
+    },
+    "Move over the graph to inspect each point dynamically.": {
+      "en": "Move over the graph to inspect each point dynamically.",
+      "km": "រំកិលលើក្រាហ្វដើម្បីពិនិត្យចំណុចនីមួយៗដោយផ្ទាល់។"
+    },
+    "Name": {
+      "en": "Name",
+      "km": "ឈ្មោះ"
+    },
+    "New": {
+      "en": "New",
+      "km": "ថ្មី"
+    },
+    "Next": {
+      "en": "Next",
+      "km": "បន្ទាប់"
+    },
+    "Open Demo Access": {
+      "en": "Open Demo Access",
+      "km": "បើកការចូលប្រើសាកល្បង"
+    },
+    "Open products": {
+      "en": "Open products",
+      "km": "បើកផលិតផល"
+    },
+    "Order": {
+      "en": "Order",
+      "km": "បញ្ជាទិញ"
+    },
+    "Owner Workspace": {
+      "en": "Owner Workspace",
+      "km": "កន្លែងធ្វើការម្ចាស់ហាង"
+    },
+    "Owners can review item availability states. Toggle actions here are persisted into the local mock restaurant dataset.": {
+      "en": "Owners can review item availability states. Toggle actions here are persisted into the local mock restaurant dataset.",
+      "km": "ម្ចាស់ហាងអាចពិនិត្យស្ថានភាពមុខម្ហូប។ សកម្មភាពបិទបើកនៅទីនេះត្រូវបានរក្សាទុកក្នុងទិន្នន័យភោជនីយដ្ឋានសាកល្បងមូលដ្ឋាន។"
+    },
+    "Performance rating": {
+      "en": "Performance rating",
+      "km": "ពិន្ទុប្រសិទ្ធភាព"
+    },
+    "Phone number": {
+      "en": "Phone number",
+      "km": "លេខទូរស័ព្ទ"
+    },
+    "Picked up": {
+      "en": "Picked up",
+      "km": "បានយកហើយ"
+    },
+    "Platform Admin": {
+      "en": "Platform Admin",
+      "km": "អ្នកគ្រប់គ្រងវេទិកា"
+    },
+    "Powerful tools to manage menus, orders, and kitchen operations.": {
+      "en": "Powerful tools to manage menus, orders, and kitchen operations.",
+      "km": "ឧបករណ៍មានអានុភាពសម្រាប់គ្រប់គ្រងម៉ឺនុយ ការបញ្ជាទិញ និងប្រតិបត្តិការផ្ទះបាយ។"
+    },
+    "Premium ordering flows for customers, operators, kitchens, and riders.": {
+      "en": "Premium ordering flows for customers, operators, kitchens, and riders.",
+      "km": "លំហូរបញ្ជាទិញគុណភាពខ្ពស់សម្រាប់អតិថិជន ប្រតិបត្តិករ ផ្ទះបាយ និងអ្នកដឹកជញ្ជូន។"
+    },
+    "Prepare": {
+      "en": "Prepare",
+      "km": "រៀបចំ"
+    },
+    "Proceed to checkout": {
+      "en": "Proceed to checkout",
+      "km": "បន្តទៅទូទាត់"
+    },
+    "Protected Access": {
+      "en": "Protected Access",
+      "km": "ការចូលប្រើដែលបានការពារ"
+    },
+    "Radius-based preview for Bangkok delivery zones": {
+      "en": "Radius-based preview for Bangkok delivery zones",
+      "km": "ការមើលជាមុនតាមរង្វង់សម្រាប់តំបន់ដឹកជញ្ជូនបាងកក"
+    },
+    "Ready for faster checkout": {
+      "en": "Ready for faster checkout",
+      "km": "រួចរាល់សម្រាប់ការទូទាត់រហ័ស"
+    },
+    "Real-time tracking and efficient rider management.": {
+      "en": "Real-time tracking and efficient rider management.",
+      "km": "ការតាមដានពេលវេលាពិត និងការគ្រប់គ្រងអ្នកដឹកជញ្ជូនប្រកបដោយប្រសិទ្ធភាព។"
+    },
+    "Registration writes a new customer profile into the local JSON-backed mock database and opens the protected customer dashboard.": {
+      "en": "Registration writes a new customer profile into the local JSON-backed mock database and opens the protected customer dashboard.",
+      "km": "ការចុះឈ្មោះនឹងបង្កើតប្រវត្តិអតិថិជនថ្មីក្នុងមូលដ្ឋានទិន្នន័យសាកល្បងដែលគាំទ្រដោយ JSON ហើយបើកផ្ទាំងគ្រប់គ្រងអតិថិជនដែលបានការពារ។"
+    },
+    "Restaurant Discovery": {
+      "en": "Restaurant Discovery",
+      "km": "ស្វែងរកភោជនីយដ្ឋាន"
+    },
+    "Restaurant Operations": {
+      "en": "Restaurant Operations",
+      "km": "ប្រតិបត្តិការភោជនីយដ្ឋាន"
+    },
+    "Restaurant Orders": {
+      "en": "Restaurant Orders",
+      "km": "ការបញ្ជាទិញភោជនីយដ្ឋាន"
+    },
+    "Restaurant Owner": {
+      "en": "Restaurant Owner",
+      "km": "ម្ចាស់ភោជនីយដ្ឋាន"
+    },
+    "Restaurant profile": {
+      "en": "Restaurant profile",
+      "km": "ប្រវត្តិភោជនីយដ្ឋាន"
+    },
+    "Restaurant rating": {
+      "en": "Restaurant rating",
+      "km": "ពិន្ទុភោជនីយដ្ឋាន"
+    },
+    "Return to your protected customer workspace.": {
+      "en": "Return to your protected customer workspace.",
+      "km": "ត្រឡប់ទៅកន្លែងធ្វើការអតិថិជនដែលបានការពារ។"
+    },
+    "Review your latest purchases and statuses.": {
+      "en": "Review your latest purchases and statuses.",
+      "km": "ពិនិត្យការទិញ និងស្ថានភាពចុងក្រោយរបស់អ្នក។"
+    },
+    "Rider": {
+      "en": "Rider",
+      "km": "អ្នកដឹកជញ្ជូន"
+    },
+    "Rider Console": {
+      "en": "Rider Console",
+      "km": "កុងសូលអ្នកដឹកជញ្ជូន"
+    },
+    "Rider delivers your food on time.": {
+      "en": "Rider delivers your food on time.",
+      "km": "អ្នកដឹកជញ្ជូននឹងដឹកអាហាររបស់អ្នកទាន់ពេល។"
+    },
+    "Rider Profile": {
+      "en": "Rider Profile",
+      "km": "ប្រវត្តិរូបអ្នកដឹកជញ្ជូន"
+    },
+    "Rider state is role-protected and tuned for quick mobile actions.": {
+      "en": "Rider state is role-protected and tuned for quick mobile actions.",
+      "km": "ស្ថានភាពអ្នកដឹកជញ្ជូនត្រូវបានការពារតាមតួនាទី និងរៀបចំសម្រាប់សកម្មភាពរហ័សលើទូរស័ព្ទ។"
+    },
+    "Search categories...": {
+      "en": "Search categories...",
+      "km": "ស្វែងរកប្រភេទ..."
+    },
+    "Security & validation": {
+      "en": "Security & validation",
+      "km": "សុវត្ថិភាព និងការផ្ទៀងផ្ទាត់"
+    },
+    "Selected order": {
+      "en": "Selected order",
+      "km": "ការបញ្ជាទិញដែលបានជ្រើស"
+    },
+    "Service-hour order management": {
+      "en": "Service-hour order management",
+      "km": "គ្រប់គ្រងការបញ្ជាទិញម៉ោងសេវាកម្ម"
+    },
+    "Shift status": {
+      "en": "Shift status",
+      "km": "ស្ថានភាពវេន"
+    },
+    "Single restaurant cart with smooth and secure checkout.": {
+      "en": "Single restaurant cart with smooth and secure checkout.",
+      "km": "រទេះភោជនីយដ្ឋានតែមួយ ជាមួយការទូទាត់រលូន និងសុវត្ថិភាព។"
+    },
+    "Smart Ordering": {
+      "en": "Smart Ordering",
+      "km": "ការបញ្ជាទិញឆ្លាតវៃ"
+    },
+    "Stable": {
+      "en": "Stable",
+      "km": "មានស្ថេរភាព"
+    },
+    "Start preparing": {
+      "en": "Start preparing",
+      "km": "ចាប់ផ្តើមរៀបចំ"
+    },
+    "Stay informed about your orders, promotions, and account activity in one place.": {
+      "en": "Stay informed about your orders, promotions, and account activity in one place.",
+      "km": "ទទួលព័ត៌មានអំពីការបញ្ជាទិញ ប្រូម៉ូសិន និងសកម្មភាពគណនីរបស់អ្នកនៅកន្លែងតែមួយ។"
+    },
+    "This MVP is frontend-only, so password reset is presented as a secure support workflow placeholder instead of pretending there is a live email backend.": {
+      "en": "This MVP is frontend-only, so password reset is presented as a secure support workflow placeholder instead of pretending there is a live email backend.",
+      "km": "MVP នេះជា frontend ប៉ុណ្ណោះ ដូច្នេះការកំណត់ពាក្យសម្ងាត់ឡើងវិញត្រូវបានបង្ហាញជាលំហូរគាំទ្រសុវត្ថិភាព ជំនួសឱ្យការធ្វើដូចមាន backend អ៊ីមែលពិត។"
+    },
+    "This owner view shows orders tied to the logged-in restaurant only, preventing cross-restaurant access in the frontend MVP.": {
+      "en": "This owner view shows orders tied to the logged-in restaurant only, preventing cross-restaurant access in the frontend MVP.",
+      "km": "ទិដ្ឋភាពម្ចាស់ហាងនេះបង្ហាញតែការបញ្ជាទិញដែលភ្ជាប់នឹងភោជនីយដ្ឋានដែលបានចូលប្រើ ដើម្បីការពារការចូលឆ្លងភោជនីយដ្ឋានក្នុង frontend MVP។"
+    },
+    "Today's estimated earnings": {
+      "en": "Today's estimated earnings",
+      "km": "ប្រាក់ចំណូលប៉ាន់ស្មានថ្ងៃនេះ"
+    },
+    "Toggle availability": {
+      "en": "Toggle availability",
+      "km": "បិទ/បើកភាពអាចប្រើបាន"
+    },
+    "Trip state changes here write back into the shared order dataset, so customer tracking and admin views stay aligned.": {
+      "en": "Trip state changes here write back into the shared order dataset, so customer tracking and admin views stay aligned.",
+      "km": "ការផ្លាស់ប្តូរស្ថានភាពដំណើរនៅទីនេះនឹងសរសេរត្រឡប់ទៅទិន្នន័យការបញ្ជាទិញរួម ដូច្នេះការតាមដានអតិថិជន និងទិដ្ឋភាពអ្នកគ្រប់គ្រងនៅតែស៊ីគ្នា។"
+    },
+    "Unable to add item.": {
+      "en": "Unable to add item.",
+      "km": "មិនអាចបន្ថែមមុខម្ហូបបានទេ។"
+    },
+    "Unable to delete category.": {
+      "en": "Unable to delete category.",
+      "km": "មិនអាចលុបប្រភេទបានទេ។"
+    },
+    "Unable to delete product.": {
+      "en": "Unable to delete product.",
+      "km": "មិនអាចលុបផលិតផលបានទេ។"
+    },
+    "Unable to register.": {
+      "en": "Unable to register.",
+      "km": "មិនអាចចុះឈ្មោះបានទេ។"
+    },
+    "Unable to save address.": {
+      "en": "Unable to save address.",
+      "km": "មិនអាចរក្សាទុកអាសយដ្ឋានបានទេ។"
+    },
+    "Unable to save category.": {
+      "en": "Unable to save category.",
+      "km": "មិនអាចរក្សាទុកប្រភេទបានទេ។"
+    },
+    "Unable to save product.": {
+      "en": "Unable to save product.",
+      "km": "មិនអាចរក្សាទុកផលិតផលបានទេ។"
+    },
+    "Unable to save user.": {
+      "en": "Unable to save user.",
+      "km": "មិនអាចរក្សាទុកអ្នកប្រើបានទេ។"
+    },
+    "Unable to update availability.": {
+      "en": "Unable to update availability.",
+      "km": "មិនអាចធ្វើបច្ចុប្បន្នភាពភាពអាចប្រើបានទេ។"
+    },
+    "Unable to update order.": {
+      "en": "Unable to update order.",
+      "km": "មិនអាចធ្វើបច្ចុប្បន្នភាពការបញ្ជាទិញបានទេ។"
+    },
+    "Unable to update your profile.": {
+      "en": "Unable to update your profile.",
+      "km": "មិនអាចធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូបរបស់អ្នកបានទេ។"
+    },
+    "Unassigned": {
+      "en": "Unassigned",
+      "km": "មិនទាន់ចាត់តាំង"
+    },
+    "Update the assigned rider, delivery ETA, and status in a focused popup form.": {
+      "en": "Update the assigned rider, delivery ETA, and status in a focused popup form.",
+      "km": "ធ្វើបច្ចុប្បន្នភាពអ្នកដឹកជញ្ជូន ពេលដល់ប៉ាន់ស្មាន និងស្ថានភាពក្នុងផ្ទាំងលេចឡើង។"
+    },
+    "Update trip progress": {
+      "en": "Update trip progress",
+      "km": "ធ្វើបច្ចុប្បន្នភាពដំណើរការដំណើរ"
+    },
+    "Update your account information in a focused popup form.": {
+      "en": "Update your account information in a focused popup form.",
+      "km": "ធ្វើបច្ចុប្បន្នភាពព័ត៌មានគណនីរបស់អ្នកក្នុងផ្ទាំងលេចឡើង។"
+    },
+    "Update your delivery locations and defaults.": {
+      "en": "Update your delivery locations and defaults.",
+      "km": "ធ្វើបច្ចុប្បន្នភាពទីតាំងដឹកជញ្ជូន និងលំនាំដើមរបស់អ្នក។"
+    },
+    "Updated": {
+      "en": "Updated",
+      "km": "បានធ្វើបច្ចុប្បន្នភាព"
+    },
+    "View Full Receipt": {
+      "en": "View Full Receipt",
+      "km": "មើលបង្កាន់ដៃពេញ"
+    },
+    "View Menu ?": {
+      "en": "View Menu ?",
+      "km": "មើលម៉ឺនុយ →"
+    },
+    "Visible from owner profile": {
+      "en": "Visible from owner profile",
+      "km": "មើលឃើញពីប្រវត្តិម្ចាស់ហាង"
+    },
+    "What are you craving?": {
+      "en": "What are you craving?",
+      "km": "អ្នកចង់ញ៉ាំអ្វី?"
+    },
+    "What We Offer": {
+      "en": "What We Offer",
+      "km": "អ្វីដែលយើងផ្តល់ជូន"
+    },
+    "Your account is connected to checkout, saved addresses, order history, and loyalty rewards across the full frontend workflow.": {
+      "en": "Your account is connected to checkout, saved addresses, order history, and loyalty rewards across the full frontend workflow.",
+      "km": "គណនីរបស់អ្នកភ្ជាប់ទៅការទូទាត់ អាសយដ្ឋានដែលបានរក្សាទុក ប្រវត្តិបញ្ជាទិញ និងរង្វាន់សមាជិកទូទាំងលំហូរ frontend។"
+    },
+    "account": {
+      "en": "account",
+      "km": "គណនី"
+    },
+    "all": {
+      "en": "all",
+      "km": "ទាំងអស់"
+    },
+    "catalog": {
+      "en": "catalog",
+      "km": "កាតាឡុក"
+    },
+    "customer": {
+      "en": "customer",
+      "km": "អតិថិជន"
+    },
+    "order": {
+      "en": "order",
+      "km": "ការបញ្ជាទិញ"
+    },
+    "promo": {
+      "en": "promo",
+      "km": "ប្រូម៉ូសិន"
+    },
+    "system": {
+      "en": "system",
+      "km": "ប្រព័ន្ធ"
+    },
+    "unread": {
+      "en": "unread",
+      "km": "មិនទាន់អាន"
+    },
+    "admin": {
+      "en": "admin",
+      "km": "អ្នកគ្រប់គ្រង"
+    },
+    "owner": {
+      "en": "owner",
+      "km": "ម្ចាស់ហាង"
+    },
+    "kitchen": {
+      "en": "kitchen",
+      "km": "ផ្ទះបាយ"
+    },
+    "rider": {
+      "en": "rider",
+      "km": "អ្នកដឹកជញ្ជូន"
+    },
+    "pending": {
+      "en": "pending",
+      "km": "កំពុងរង់ចាំ"
+    },
+    "status": {
+      "en": "status",
+      "km": "ស្ថានភាព"
+    },
+    "✓ Verified": {
+      "en": "✓ Verified",
+      "km": "✓ បានផ្ទៀងផ្ទាត់"
+    },
+    "View Menu →": {
+      "en": "View Menu →",
+      "km": "មើលម៉ឺនុយ →"
+    },
+    "you@example.com": {
+      "en": "you@example.com",
+      "km": "you@example.com"
+    },
+    "customer@flavorfleet.app": {
+      "en": "customer@flavorfleet.app",
+      "km": "customer@flavorfleet.app"
+    }
+  }
+}

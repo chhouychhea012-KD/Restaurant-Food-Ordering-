@@ -18,6 +18,7 @@
         </RouterLink>
       </nav>
       <div class="flex items-center gap-3">
+        <LanguageSelect class="hidden sm:inline-flex" />
         <RouterLink
           v-if="authStore.user?.role === 'customer'"
           to="/notifications"
@@ -170,6 +171,7 @@ import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 import { useNotificationStore } from '@/stores/notification.store';
 import AppLogo from './AppLogo.vue';
+import LanguageSelect from './LanguageSelect.vue';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();

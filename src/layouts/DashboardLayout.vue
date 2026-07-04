@@ -12,6 +12,7 @@
           </div>
 
           <div ref="menuRef" class="relative flex items-center gap-3 lg:ml-auto">
+            <LanguageSelect />
             <RouterLink
               v-if="authStore.user?.role === 'admin'"
               to="/admin/notifications"
@@ -136,6 +137,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router';
 import SidebarNav from '@/components/common/SidebarNav.vue';
+import LanguageSelect from '@/components/common/LanguageSelect.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useNotificationStore } from '@/stores/notification.store';
 
