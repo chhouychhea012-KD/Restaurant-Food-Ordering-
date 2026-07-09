@@ -1,38 +1,43 @@
 <template>
   <div>
-    <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Secure Access</p>
-    <h1 class="mt-3 text-3xl font-bold text-slate-950">Login to your workspace</h1>
+    <p class="text-center text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Welcome Back</p>
+    <h2 class="mt-3 text-center text-3xl font-bold text-slate-950">Sign in to your account</h2>
 
-    <form class="mt-8 space-y-5 " @submit.prevent="submit">
+    <form class="mt-8 space-y-5" @submit.prevent="submit">
       <div>
         <label class="field-label" for="email">Email</label>
-        <input id="email" v-model="form.email" class="field-input" type="email" placeholder="you@example.com" required />
+        <input id="email" v-model="form.email" class="field-input" type="email" placeholder="you@example.com" autocomplete="email" required />
       </div>
       <div>
         <label class="field-label" for="password">Password</label>
-        <input id="password" v-model="form.password" class="field-input" type="password" placeholder="Password" required minlength="8" />
+        <input id="password" v-model="form.password" class="field-input" type="password" placeholder="Password" autocomplete="current-password" required minlength="8" />
+      </div>
+      <div class="flex items-center justify-end text-sm">
+        <RouterLink class="font-medium text-slate-500 transition hover:text-brand-600" to="/auth/forgot-password">Forgot password?</RouterLink>
       </div>
       <p v-if="errorMessage" class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ errorMessage }}</p>
-      <button class="btn-primary w-full" :disabled="loading">{{ loading ? 'Signing in...' : 'Login' }}</button>
+      <button class="btn-primary w-full text-base" :disabled="loading">{{ loading ? 'Signing in...' : 'Continue' }}</button>
     </form>
 
-    <div class="mt-8 space-y-3 rounded-xl bg-slate-50 p-5">
-      <p class="text-sm font-semibold text-slate-900">Demo accounts</p>
-      <div class="grid gap-3 text-sm text-slate-600">
-        <div v-for="account in demoAccounts" :key="account.email" class="flex items-center justify-between rounded-xl bg-white px-4 py-3">
-          <div>
-            <p class="font-semibold text-slate-900">{{ account.role }}</p>
-            <p>{{ account.email }}</p>
-          </div>
-          <button class="text-brand-600" type="button" @click="fillDemo(account.email, account.password)">Use</button>
-        </div>
+    <div class="mt-6">
+      <p class="text-center text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Quick Demo Access</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-2">
+        <button
+          v-for="account in demoAccounts"
+          :key="account.email"
+          class="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
+          type="button"
+          @click="fillDemo(account.email, account.password)"
+        >
+          {{ account.role }}
+        </button>
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-between text-sm">
-      <RouterLink class="font-medium text-brand-600" to="/auth/register">Create customer account</RouterLink>
-      <RouterLink class="text-slate-500" to="/auth/forgot-password">Forgot password?</RouterLink>
-    </div>
+    <p class="mt-8 text-center text-sm text-slate-500">
+      Don't have an account?
+      <RouterLink class="font-semibold text-brand-600" to="/auth/register">Sign up</RouterLink>
+    </p>
   </div>
 </template>
 
@@ -55,8 +60,6 @@ const form = reactive({
 const demoAccounts = [
   { role: 'Platform Admin', email: 'admin@flavorfleet.app', password: 'Admin@123' },
   { role: 'Restaurant Owner', email: 'owner@flavorfleet.app', password: 'Owner@123' },
-  // { role: 'Kitchen Staff', email: 'kitchen@flavorfleet.app', password: 'Kitchen@123' },
-  // { role: 'Delivery Rider', email: 'rider@flavorfleet.app', password: 'Rider@123' },
   { role: 'Customer', email: 'customer@flavorfleet.app', password: 'Customer@123' },
 ];
 

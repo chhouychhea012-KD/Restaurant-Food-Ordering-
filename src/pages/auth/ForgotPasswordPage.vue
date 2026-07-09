@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Recovery</p>
-    <h1 class="mt-3 text-3xl font-bold text-slate-950">Forgot your password?</h1>
+    <h2 class="mt-3 text-3xl font-bold text-slate-950">Forgot your password?</h2>
 
     <div class="mt-8 rounded-xl bg-slate-50 p-6">
       <label class="field-label" for="recoveryEmail">Email address</label>

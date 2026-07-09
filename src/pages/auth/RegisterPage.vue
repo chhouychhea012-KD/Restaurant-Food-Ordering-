@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Customer Signup</p>
-    <h1 class="mt-3 text-3xl font-bold text-slate-950">Create your ordering account</h1>
+    <h2 class="mt-3 text-3xl font-bold text-slate-950">Create your ordering account</h2>
 
 
     <form class="mt-8 space-y-5" @submit.prevent="submit">
