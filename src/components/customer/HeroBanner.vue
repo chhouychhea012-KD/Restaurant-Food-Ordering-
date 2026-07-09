@@ -1,5 +1,5 @@
 <template>
-  <section class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-900 via-slate-800 to-orange-600 px-6 py-10 text-white shadow-glow sm:px-10">
+  <section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-orange-600 px-6 py-10 text-white shadow-glow sm:px-10">
     <div class="absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18),transparent_55%)] lg:block" />
     <div class="absolute left-10 top-10 h-32 w-32 rounded-full bg-orange-300/15 blur-3xl" />
     <div class="absolute bottom-6 right-10 h-40 w-40 rounded-full bg-cyan-300/10 blur-3xl" />
@@ -22,7 +22,7 @@
       </div>
 
       <div v-if="activeSlide" class=" relative mx-auto w-full max-w-[540px] xl:justify-self-end xl:pl-16 xl:pr-36">
-        <div class=" -left-12 mb-4 top-10 hidden w-40 rounded-[1.5rem] border border-white/15 bg-white/10 p-3 shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur xl:block">
+        <div class=" -left-12 mb-4 top-10 hidden w-40 rounded-xl border border-white/15 bg-white/10 p-3 shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur xl:block">
           <p class="text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">Ready Fast</p>
           <p class="mt-2 text-2xl font-extrabold text-white">{{ activeSlide.deliveryTime }}</p>
           <p class="mt-1 text-sm text-slate-200">Single-store checkout with live cart flow.</p>
@@ -32,11 +32,11 @@
           <button
             v-for="preview in previewSlides"
             :key="preview.id"
-            class="preview-card flex w-40 items-center gap-3 rounded-[1.5rem] border border-white/15 bg-white/10 p-3 text-left shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
+            class="preview-card flex w-40 items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-3 text-left shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
             type="button"
             @click="setActiveSlide(preview.slideIndex)"
           >
-            <img :src="preview.image" :alt="preview.name" class="h-14 w-14 rounded-[1rem] object-cover" />
+            <img :src="preview.image" :alt="preview.name" class="h-14 w-14 rounded-xl object-cover" />
             <div class="min-w-0">
               <p class="truncate text-sm font-semibold text-white">{{ preview.name }}</p>
               <p class="mt-1 text-xs text-slate-200">{{ formatPrice(preview.price) }}</p>
@@ -47,7 +47,7 @@
         <transition name="hero-slide" mode="out-in">
           <article
             :key="activeSlide.id"
-            class="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 shadow-[0_28px_90px_rgba(15,23,42,0.3)] backdrop-blur"
+            class="relative overflow-hidden rounded-xl border border-white/15 bg-white/10 shadow-[0_28px_90px_rgba(15,23,42,0.3)] backdrop-blur"
           >
             <div class="relative aspect-[4/5] overflow-hidden">
               <img :src="activeSlide.image" :alt="activeSlide.name" class="h-full w-full object-cover" />
@@ -58,7 +58,7 @@
               </div>
 
               <div class="absolute inset-x-0 bottom-0 p-5">
-                <div class="rounded-[1.5rem] border border-white/15 bg-slate-950/35 p-4 backdrop-blur-md">
+                <div class="rounded-xl border border-white/15 bg-slate-950/35 p-4 backdrop-blur-md">
                   <div class="flex items-start justify-between gap-4">
                     <div class="min-w-0">
                       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">{{ activeSlide.restaurantName }}</p>
@@ -77,7 +77,7 @@
           </article>
         </transition>
 
-        <div class="mt-4 rounded-[1.25rem] border border-white/15 bg-white/10 px-4 py-3 backdrop-blur xl:hidden">
+        <div class="mt-4 rounded-xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur xl:hidden">
           <div class="flex items-center justify-between gap-3">
             <div>
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">Ready Fast</p>
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div class="mt-5 flex items-center justify-between gap-4 rounded-[1.5rem] border border-white/15 bg-white/10 px-4 py-3 backdrop-blur">
+        <div class="mt-5 flex items-center justify-between gap-4 rounded-xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur">
           <div class="flex flex-wrap gap-2">
             <button
               v-for="(slide, index) in slides"
@@ -114,11 +114,11 @@
           <button
             v-for="preview in previewSlides"
             :key="preview.id"
-            class="preview-card flex min-w-[210px] items-center gap-3 rounded-[1.5rem] border border-white/15 bg-white/10 p-3 text-left shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
+            class="preview-card flex min-w-[210px] items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-3 text-left shadow-[0_20px_60px_rgba(15,23,42,0.24)] backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
             type="button"
             @click="setActiveSlide(preview.slideIndex)"
           >
-            <img :src="preview.image" :alt="preview.name" class="h-14 w-14 rounded-[1rem] object-cover" />
+            <img :src="preview.image" :alt="preview.name" class="h-14 w-14 rounded-xl object-cover" />
             <div class="min-w-0">
               <p class="truncate text-sm font-semibold text-white">{{ preview.name }}</p>
               <p class="mt-1 text-xs text-slate-200">{{ formatPrice(preview.price) }}</p>

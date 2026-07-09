@@ -7,7 +7,7 @@
           v-for="item in links"
           :key="item.to"
           :to="item.to"
-          class="group relative rounded-2xl px-4 py-2 transition"
+          class="group relative rounded-xl px-4 py-2 transition"
           :class="isActiveLink(item.to) ? 'text-slate-950' : 'text-slate-600 hover:text-slate-950'"
         >
           <span>{{ item.label }}</span>
@@ -22,7 +22,7 @@
         <RouterLink
           v-if="authStore.user?.role === 'customer'"
           to="/notifications"
-          class="group relative flex h-12 w-12 items-center justify-center rounded-2xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
+          class="group relative flex h-12 w-12 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
           :class="isActiveLink('/notifications')
             ? 'border-brand-200 bg-brand-50 text-brand-600 shadow-brand-100/70'
             : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -77,7 +77,7 @@
         </RouterLink>
         <div v-else ref="accountMenuRef" class="relative">
           <button
-            class="flex items-center gap-3 rounded-2xl border bg-white px-3 py-2 text-left shadow-sm ring-offset-2 transition hover:-translate-y-0.5"
+            class="flex items-center gap-3 rounded-xl border bg-white px-3 py-2 text-left shadow-sm ring-offset-2 transition hover:-translate-y-0.5"
             :class="isAccountMenuOpen
               ? 'border-brand-200 bg-brand-50 shadow-brand-100/70 ring-2 ring-brand-200'
               : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -86,7 +86,7 @@
             :aria-expanded="isAccountMenuOpen ? 'true' : 'false'"
             @click="toggleAccountMenu"
           >
-            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
               {{ authStore.user?.avatar }}
             </div>
             <div class="hidden min-w-0 sm:block">
@@ -114,11 +114,11 @@
           >
             <div
               v-if="isAccountMenuOpen"
-              class="absolute right-0 top-[calc(100%+0.85rem)] z-50 w-[290px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
+              class="absolute right-0 top-[calc(100%+0.85rem)] z-50 w-[290px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
             >
               <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_32%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-12 w-12 items-center justify-center rounded-[1.25rem] bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
                     {{ authStore.user?.avatar }}
                   </div>
                   <div class="min-w-0">
@@ -131,7 +131,7 @@
               <div class="space-y-3 px-4 py-4">
                 <RouterLink
                   :to="profileLink"
-                  class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
+                  class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                   @click="closeAccountMenu"
                 >
                   <span>View Profile</span>
@@ -140,7 +140,7 @@
 
                 <RouterLink
                   :to="dashboardLink"
-                  class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
+                  class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                   @click="closeAccountMenu"
                 >
                   <span>{{ dashboardMenuLabel }}</span>
@@ -148,7 +148,7 @@
                 </RouterLink>
 
                 <button
-                  class="flex w-full items-center justify-between rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
+                  class="flex w-full items-center justify-between rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
                   type="button"
                   @click="handleLogout"
                 >

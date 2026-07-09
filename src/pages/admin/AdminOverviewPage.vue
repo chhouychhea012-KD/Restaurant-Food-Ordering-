@@ -31,9 +31,9 @@
     <section class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
       <SectionCard eyebrow="Catalog Snapshot" title="Latest admin product data" description="Product CRUD changes made in the admin product module show up here immediately.">
         <div class="space-y-4">
-          <div v-for="product in products.slice(0, 4)" :key="product.item.id" class="rounded-[1.5rem] border border-slate-200 bg-white/80 p-4">
+          <div v-for="product in products.slice(0, 4)" :key="product.item.id" class="rounded-xl border border-slate-200 bg-white/80 p-4">
             <div class="flex items-center gap-4">
-              <img :src="product.item.image" :alt="product.item.name" class="h-16 w-16 rounded-2xl object-cover" />
+              <img :src="product.item.image" :alt="product.item.name" class="h-16 w-16 rounded-xl object-cover" />
               <div class="min-w-0 flex-1">
                 <p class="text-base font-bold text-slate-950">{{ product.item.name }}</p>
                 <p class="mt-1 truncate text-sm text-slate-500">{{ product.restaurantName }} � {{ product.categoryName }}</p>
@@ -51,7 +51,7 @@
 
       <SectionCard eyebrow="Operations Watch" title="Live order queue" description="Orders still in motion are surfaced here so admins can spot service friction quickly.">
         <div class="space-y-4">
-          <div v-for="order in queuedOrders" :key="order.id" class="rounded-[1.5rem] border border-slate-200 bg-white/80 p-4">
+          <div v-for="order in queuedOrders" :key="order.id" class="rounded-xl border border-slate-200 bg-white/80 p-4">
             <div class="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <p class="text-xs uppercase tracking-[0.2em] text-slate-400">{{ order.id }}</p>
@@ -72,7 +72,7 @@
 
     <SectionCard eyebrow="Recent Activity" title="Platform orders stream" description="A fuller recent orders list with richer spacing and fast status visibility.">
       <div class="space-y-4">
-        <div v-for="order in orders.slice(0, 6)" :key="order.id" class="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm">
+        <div v-for="order in orders.slice(0, 6)" :key="order.id" class="rounded-xl border border-slate-200 bg-white/85 p-5 shadow-sm">
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p class="text-sm text-slate-500">{{ order.id }}</p>

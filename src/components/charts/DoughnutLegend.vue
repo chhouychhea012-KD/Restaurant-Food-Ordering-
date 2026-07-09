@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-3">
-    <div v-for="(item, index) in items" :key="item.zone" class="rounded-2xl border border-slate-200 bg-white/80 p-4">
+    <div v-for="(item, index) in items" :key="item.zone" class="rounded-xl border border-slate-200 bg-white/80 p-4">
       <div class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
           <span class="h-3 w-3 rounded-full" :style="{ backgroundColor: colors[index % colors.length] }" />

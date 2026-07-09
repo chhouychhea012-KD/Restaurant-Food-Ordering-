@@ -15,13 +15,13 @@
         </div>
         <div class="mt-4 flex flex-wrap gap-3">
           <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(order.id)">Edit</button>
-          <button class="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeOrder(order.id)">Delete</button>
+          <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeOrder(order.id)">Delete</button>
         </div>
       </div>
     </div>
 
-    <p v-if="message" class="mt-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-    <p v-if="error" class="mt-5 rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
+    <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
+    <p v-if="error" class="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
   </SectionCard>
 
   <AppModal

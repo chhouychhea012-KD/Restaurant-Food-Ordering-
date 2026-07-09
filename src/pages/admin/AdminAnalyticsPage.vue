@@ -30,17 +30,17 @@
             </div>
           </div>
           <div class="grid gap-4 md:grid-cols-3">
-            <div class="rounded-[1.5rem] border border-slate-200 bg-white/85 p-4">
+            <div class="rounded-xl border border-slate-200 bg-white/85 p-4">
               <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Peak hour</p>
               <p class="mt-2 text-2xl font-bold text-slate-950">{{ peakHourLabel }}</p>
               <p class="mt-2 text-sm text-slate-500">{{ peakHourValue }} orders</p>
             </div>
-            <div class="rounded-[1.5rem] border border-slate-200 bg-white/85 p-4">
+            <div class="rounded-xl border border-slate-200 bg-white/85 p-4">
               <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Avg hourly volume</p>
               <p class="mt-2 text-2xl font-bold text-slate-950">{{ averageOrdersPerHour }}</p>
               <p class="mt-2 text-sm text-slate-500">Orders per tracked hour</p>
             </div>
-            <div class="rounded-[1.5rem] border border-slate-200 bg-white/85 p-4">
+            <div class="rounded-xl border border-slate-200 bg-white/85 p-4">
               <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Revenue per hour</p>
               <p class="mt-2 text-2xl font-bold text-slate-950">{{ formatCurrency(Math.round((analytics?.grossSalesToday ?? 0) / hourLabels.length)) }}</p>
               <p class="mt-2 text-sm text-slate-500">Estimated blended pace</p>
@@ -61,7 +61,7 @@
     <section class="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
       <SectionCard eyebrow="Top Performers" title="Restaurant revenue split">
         <div class="space-y-4">
-          <div v-for="restaurant in analytics?.topRestaurants ?? []" :key="restaurant.name" class="rounded-[1.5rem] border border-slate-200 bg-white/80 p-4">
+          <div v-for="restaurant in analytics?.topRestaurants ?? []" :key="restaurant.name" class="rounded-xl border border-slate-200 bg-white/80 p-4">
             <div class="flex items-center justify-between gap-3">
               <div>
                 <p class="text-base font-bold text-slate-950">{{ restaurant.name }}</p>

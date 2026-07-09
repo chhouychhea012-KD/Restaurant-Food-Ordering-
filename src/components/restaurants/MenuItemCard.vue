@@ -21,7 +21,7 @@
           <slot />
         </div>
       </div>
-      <img :src="item.image" :alt="item.name" class="h-52 w-full rounded-[1.5rem] object-cover" />
+      <img :src="item.image" :alt="item.name" class="h-52 w-full rounded-xl object-cover" />
     </div>
   </div>
 </template>

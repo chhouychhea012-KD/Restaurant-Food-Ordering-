@@ -2,7 +2,7 @@
   <div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Customer Signup</p>
     <h1 class="mt-3 text-3xl font-bold text-slate-950">Create your ordering account</h1>
-    <p class="mt-3 text-sm leading-6 text-slate-600">Registration writes a new customer profile into the local JSON-backed mock database and opens the protected customer dashboard.</p>
+
 
     <form class="mt-8 space-y-5" @submit.prevent="submit">
       <div>
@@ -25,7 +25,7 @@
         <label class="field-label" for="confirmPassword">Confirm password</label>
         <input id="confirmPassword" v-model="form.confirmPassword" class="field-input" type="password" required minlength="8" />
       </div>
-      <p v-if="localError" class="rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ localError }}</p>
+      <p v-if="localError" class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ localError }}</p>
       <button class="btn-primary w-full" :disabled="loading">{{ loading ? 'Creating account...' : 'Register' }}</button>
     </form>
 

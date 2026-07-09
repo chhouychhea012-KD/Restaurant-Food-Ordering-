@@ -1,6 +1,6 @@
 <template>
   <RouterLink :to="to" data-i18n-ignore class="flex items-center gap-4">
-    <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-[1.75rem] bg-white shadow-lg shadow-brand-200 ring-1 ring-slate-200">
+    <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg shadow-brand-200 ring-1 ring-slate-200">
       <img src="/image/logo.png" :alt="t('Flavor Fleet logo')" class="h-full w-full object-cover" />
     </div>
     <div>

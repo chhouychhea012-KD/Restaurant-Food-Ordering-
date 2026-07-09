@@ -16,7 +16,7 @@
             <RouterLink
               v-if="authStore.user?.role === 'admin'"
               to="/admin/notifications"
-              class="group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.5rem] border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
+              class="group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
               :class="route.path === '/admin/notifications'
                 ? 'border-brand-200 bg-brand-50 text-brand-600 shadow-brand-100/70'
                 : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -42,13 +42,13 @@
               </span>
             </RouterLink>
 
-            <div class="rounded-[1.5rem] border border-slate-200 bg-slate-50/80 px-4 py-3 text-right">
+            <div class="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-right">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Workspace</p>
               <p class="mt-1 text-sm font-semibold text-slate-900">Admin control center</p>
             </div>
 
             <button
-              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.5rem] bg-brand-500 text-lg font-bold text-white shadow-lg shadow-brand-200 ring-offset-2 transition hover:scale-[1.02] hover:bg-brand-600"
+              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-500 text-lg font-bold text-white shadow-lg shadow-brand-200 ring-offset-2 transition hover:scale-[1.02] hover:bg-brand-600"
               :class="isMenuOpen ? 'ring-2 ring-brand-300' : ''"
               type="button"
               @click="toggleMenu"
@@ -66,11 +66,11 @@
             >
               <div
                 v-if="isMenuOpen"
-                class="absolute right-0 top-[calc(100%+1rem)] z-50 w-[320px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
+                class="absolute right-0 top-[calc(100%+1rem)] z-50 w-[320px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
               >
                 <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_30%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-[1.25rem] bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
                       {{ authStore.user?.avatar }}
                     </div>
                     <div class="min-w-0">
@@ -83,7 +83,7 @@
                 <div class="space-y-3 px-4 py-4">
                   <RouterLink
                     :to="profileLink"
-                    class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
+                    class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                     @click="closeMenu"
                   >
                     <span>Profile</span>
@@ -93,7 +93,7 @@
                   <RouterLink
                     v-if="authStore.user?.role === 'admin'"
                     to="/admin/notifications"
-                    class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
+                    class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                     @click="closeMenu"
                   >
                     <span>Notifications</span>
@@ -102,7 +102,7 @@
 
                   <RouterLink
                     to="/"
-                    class="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
+                    class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                     @click="closeMenu"
                   >
                     <span>Customer View</span>
@@ -110,7 +110,7 @@
                   </RouterLink>
 
                   <button
-                    class="flex w-full items-center justify-between rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
+                    class="flex w-full items-center justify-between rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
                     type="button"
                     @click="handleLogout"
                   >

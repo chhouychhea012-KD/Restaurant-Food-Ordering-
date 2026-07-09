@@ -11,9 +11,9 @@
 
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
     <!-- Total Products -->
-    <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+    <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
       <div class="flex items-center gap-4">
-        <div class="rounded-2xl bg-blue-100 p-3.5 text-blue-600">
+        <div class="rounded-xl bg-blue-100 p-3.5 text-blue-600">
           <Package :size="28" />
         </div>
         <div class="flex-1">
@@ -25,9 +25,9 @@
     </div>
 
     <!-- Active Products -->
-    <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+    <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
       <div class="flex items-center gap-4">
-        <div class="rounded-2xl bg-emerald-100 p-3.5 text-emerald-600">
+        <div class="rounded-xl bg-emerald-100 p-3.5 text-emerald-600">
           <CheckCircle :size="28" />
         </div>
         <div class="flex-1">
@@ -39,9 +39,9 @@
     </div>
 
   <!-- Categories -->
-  <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+  <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
     <div class="flex items-center gap-4">
-      <div class="rounded-2xl bg-violet-100 p-3.5 text-violet-600">
+      <div class="rounded-xl bg-violet-100 p-3.5 text-violet-600">
         <Tags :size="28" />
       </div>
       <div class="flex-1">
@@ -53,9 +53,9 @@
   </div>
 
   <!-- Restaurant Coverage -->
-  <div class="surface-muted rounded-3xl p-6 transition hover:shadow-md">
+  <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
     <div class="flex items-center gap-4">
-      <div class="rounded-2xl bg-amber-100 p-3.5 text-amber-600">
+      <div class="rounded-xl bg-amber-100 p-3.5 text-amber-600">
         <Building2 :size="28" />
       </div>
       <div class="flex-1">
@@ -68,10 +68,10 @@
 </div>
 
       <div class="mt-6 space-y-4">
-        <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm">
+        <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-xl border border-slate-200 bg-white/85 p-5 shadow-sm">
           <div class="flex flex-wrap items-start justify-between gap-4">
             <div class="flex gap-4">
-              <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-[1.25rem] object-cover" />
+              <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-xl object-cover" />
               <div>
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ product.restaurantName }} � {{ product.categoryName }}</p>
                 <h3 class="mt-2 text-xl font-bold text-slate-950">{{ product.item.name }}</h3>
@@ -92,7 +92,7 @@
           <div class="mt-5 flex flex-wrap gap-3">
             <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(product.item.id)">Edit</button>
             <button class="btn-secondary px-3 py-2" type="button" @click="toggleAvailability(product)">{{ product.item.available ? 'Pause' : 'Activate' }}</button>
-            <button class="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeProduct(product.item.id)">Delete</button>
+            <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeProduct(product.item.id)">Delete</button>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
       </template>
 
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <div v-for="entry in filteredCategories" :key="entry.category.id" class="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm">
+        <div v-for="entry in filteredCategories" :key="entry.category.id" class="rounded-xl border border-slate-200 bg-white/85 p-5 shadow-sm">
           <div class="flex items-start justify-between gap-3">
             <div>
               <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ entry.restaurantName }}</p>
@@ -115,13 +115,13 @@
           </div>
           <div class="mt-5 flex flex-wrap gap-3">
             <button class="btn-secondary px-3 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">Edit</button>
-            <button class="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeCategory(entry.category.id)">Delete</button>
+            <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeCategory(entry.category.id)">Delete</button>
           </div>
         </div>
       </div>
 
-      <p v-if="message" class="mt-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-      <p v-if="error" class="mt-5 rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
+      <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
+      <p v-if="error" class="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
     </SectionCard>
 
     <AppModal
@@ -166,7 +166,7 @@
             <label class="field-label" for="prepTime">Prep time</label>
             <input id="prepTime" v-model.number="form.prepTime" class="field-input" type="number" min="1" required />
           </div>
-          <label class="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700 md:mt-8">
+          <label class="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700 md:mt-8">
             <input v-model="form.available" type="checkbox" />
             Available now
           </label>

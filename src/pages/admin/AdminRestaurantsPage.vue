@@ -17,7 +17,7 @@
         <div 
           v-for="restaurant in restaurants" 
           :key="restaurant.id" 
-          class="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1"
+          class="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1"
         >
           <!-- Header -->
           <div class="flex items-start justify-between">
@@ -43,7 +43,7 @@
               <div 
                 v-for="branch in restaurant.branches" 
                 :key="branch.id" 
-                class="rounded-2xl bg-slate-50 p-4 text-sm"
+                class="rounded-xl bg-slate-50 p-4 text-sm"
               >
                 <p class="font-medium">{{ branch.name }}</p>
                 <p class="text-slate-500">{{ branch.zone }}</p>
@@ -66,7 +66,7 @@
               {{ restaurant.verified ? 'Unverify' : 'Verify' }}
             </button>
             <button 
-              class="rounded-2xl bg-rose-50 px-5 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition"
+              class="rounded-xl bg-rose-50 px-5 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition"
               @click="removeRestaurant(restaurant.id)"
             >
               Delete
@@ -75,8 +75,8 @@
         </div>
       </div>
 
-      <p v-if="message" class="mt-6 rounded-2xl bg-emerald-50 px-5 py-4 text-sm text-emerald-700">{{ message }}</p>
-      <p v-if="error" class="mt-6 rounded-2xl bg-rose-50 px-5 py-4 text-sm text-rose-600">{{ error }}</p>
+      <p v-if="message" class="mt-6 rounded-xl bg-emerald-50 px-5 py-4 text-sm text-emerald-700">{{ message }}</p>
+      <p v-if="error" class="mt-6 rounded-xl bg-rose-50 px-5 py-4 text-sm text-rose-600">{{ error }}</p>
     </SectionCard>
 
     <!-- Create/Edit Modal -->
@@ -137,13 +137,13 @@
           </div>
         </div>
 
-        <label class="flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-slate-700">
+        <label class="flex items-center gap-3 rounded-xl bg-slate-50 p-4 text-slate-700">
           <input v-model="form.verified" type="checkbox" class="accent-brand-600" />
           <span class="font-medium">Verified Restaurant</span>
         </label>
 
         <!-- Branches Section -->
-        <div class="rounded-3xl border border-slate-200 p-6">
+        <div class="rounded-xl border border-slate-200 p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
               <p class="font-semibold text-slate-900">Delivery Branches</p>
@@ -158,7 +158,7 @@
             <div 
               v-for="(branch, index) in form.branches" 
               :key="index"
-              class="rounded-2xl border border-slate-100 bg-slate-50 p-5"
+              class="rounded-xl border border-slate-100 bg-slate-50 p-5"
             >
               <div class="grid gap-4 lg:grid-cols-[1.3fr_1fr_0.8fr_0.8fr_auto]">
                 <div>
@@ -179,7 +179,7 @@
                 </div>
                 <button 
                   type="button" 
-                  class="self-end rounded-2xl bg-rose-50 px-4 py-3 text-rose-600 hover:bg-rose-100"
+                  class="self-end rounded-xl bg-rose-50 px-4 py-3 text-rose-600 hover:bg-rose-100"
                   @click="removeBranch(index)"
                 >
                   Remove

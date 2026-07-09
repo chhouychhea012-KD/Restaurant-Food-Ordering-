@@ -1,10 +1,10 @@
 <template>
   <RouterLink
     :to="`/restaurants/${restaurant.slug}`"
-    class="group surface-card flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white transition-all hover:-translate-y-1 hover:shadow-xl"
+    class="group surface-card flex h-full flex-col overflow-hidden rounded-xl border border-slate-100 bg-white transition-all hover:-translate-y-1 hover:shadow-xl"
   >
     <!-- Image -->
-    <div class="relative h-52 overflow-hidden rounded-t-3xl">
+    <div class="relative h-52 overflow-hidden rounded-t-xl">
       <div
         class="absolute inset-0 bg-cover bg-center transition duration-500 group-hover:scale-105"
         :style="{ backgroundImage: `url(${restaurant.coverImage})` }"
@@ -60,7 +60,7 @@
 
       <!-- View Menu Button -->
       <div class="mt-5">
-        <div class="w-full rounded-2xl bg-brand-500 py-3 text-center text-sm font-semibold text-white transition group-hover:bg-brand-600">
+        <div class="w-full rounded-xl bg-brand-500 py-3 text-center text-sm font-semibold text-white transition group-hover:bg-brand-600">
           View Menu →
         </div>
       </div>

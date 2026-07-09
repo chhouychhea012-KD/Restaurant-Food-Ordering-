@@ -2,9 +2,9 @@
   <div class="space-y-8">
     <!-- Stats -->
     <!-- <div class="grid gap-4 md:grid-cols-3">
-      <div class="surface-card p-6 rounded-3xl">
+      <div class="surface-card p-6 rounded-xl">
         <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-4xl">🛎️</div>
+          <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-4xl">🛎️</div>
           <div>
             <p class="text-4xl font-bold text-slate-900">{{ notificationStore.unreadCount }}</p>
             <p class="text-sm text-slate-500">Unread Alerts</p>
@@ -12,9 +12,9 @@
         </div>
       </div>
 
-      <div class="surface-card p-6 rounded-3xl">
+      <div class="surface-card p-6 rounded-xl">
         <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-4xl">📥</div>
+          <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-4xl">📥</div>
           <div>
             <p class="text-4xl font-bold text-slate-900">{{ notificationStore.items.length }}</p>
             <p class="text-sm text-slate-500">Total Notifications</p>
@@ -22,9 +22,9 @@
         </div>
       </div>
 
-      <div class="surface-card p-6 rounded-3xl">
+      <div class="surface-card p-6 rounded-xl">
         <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center text-4xl">🔍</div>
+          <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-4xl">🔍</div>
           <div>
             <p class="text-3xl font-bold text-slate-900">{{ activeFilterLabel }}</p>
             <p class="text-sm text-slate-500">Current Filter</p>
@@ -58,7 +58,7 @@
         <article
           v-for="notification in filteredNotifications"
           :key="notification.id"
-          class="rounded-3xl border p-6 shadow-sm hover:shadow transition-all duration-200"
+          class="rounded-xl border p-6 shadow-sm hover:shadow transition-all duration-200"
           :class="isRead(notification) ? 'bg-white border-slate-200' : 'bg-brand-50 border-brand-200'"
         >
           <div class="flex gap-5">
@@ -116,7 +116,7 @@
         </article>
       </div>
 
-      <div v-else class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 py-20 text-center">
+      <div v-else class="rounded-xl border border-dashed border-slate-300 bg-slate-50 py-20 text-center">
         <p class="text-6xl mb-4">📭</p>
         <p class="text-xl font-medium text-slate-900">No notifications yet</p>
         <p class="text-slate-500 mt-2 max-w-md mx-auto">

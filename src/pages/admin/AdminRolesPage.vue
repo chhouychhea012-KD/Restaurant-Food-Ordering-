@@ -17,7 +17,7 @@
         <div 
           v-for="role in roles" 
           :key="role.id" 
-          class="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-xl hover:-translate-y-1"
+          class="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-xl hover:-translate-y-1"
         >
           <div class="flex items-start justify-between">
             <div>
@@ -62,7 +62,7 @@
               <Edit3 :size="17" /> Edit
             </button>
             <button 
-              class="flex-1 rounded-2xl bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition disabled:opacity-50"
+              class="flex-1 rounded-xl bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition disabled:opacity-50"
               :disabled="isCoreRole(role.name)"
               @click="removeRole(role.id)"
             >
@@ -72,8 +72,8 @@
         </div>
       </div>
 
-      <p v-if="message" class="mt-6 rounded-2xl bg-emerald-50 px-5 py-4 text-sm text-emerald-700">{{ message }}</p>
-      <p v-if="error" class="mt-6 rounded-2xl bg-rose-50 px-5 py-4 text-sm text-rose-600">{{ error }}</p>
+      <p v-if="message" class="mt-6 rounded-xl bg-emerald-50 px-5 py-4 text-sm text-emerald-700">{{ message }}</p>
+      <p v-if="error" class="mt-6 rounded-xl bg-rose-50 px-5 py-4 text-sm text-rose-600">{{ error }}</p>
     </SectionCard>
 
     <!-- Modal -->
@@ -119,7 +119,7 @@
         </div>
 
         <!-- Permissions Selector -->
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-6">
           <div class="flex items-center justify-between mb-5">
             <div>
               <p class="font-semibold text-slate-900">Permissions</p>
@@ -135,7 +135,7 @@
             <label 
               v-for="permission in permissions" 
               :key="permission" 
-              class="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 hover:border-brand-300 transition cursor-pointer"
+              class="group flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 hover:border-brand-300 transition cursor-pointer"
             >
               <input 
                 v-model="form.permissions" 

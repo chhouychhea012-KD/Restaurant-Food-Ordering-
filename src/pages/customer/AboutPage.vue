@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-16">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-orange-600 px-6 py-16 text-white shadow-2xl sm:px-10 sm:py-20">
+    <section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-orange-600 px-6 py-16 text-white shadow-2xl sm:px-10 sm:py-20">
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent)]" />
 
       <div class="relative max-w-5xl mx-auto grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -32,17 +32,17 @@
 
         <!-- Stats Cards -->
         <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <div class="rounded-3xl bg-white/10 p-6 backdrop-blur border border-white/10">
+          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
             <Zap class="h-9 w-9 text-orange-300" />
             <p class="mt-5 text-3xl font-bold">Fast</p>
             <p class="text-sm text-slate-200 mt-1">Browse • Order • Track</p>
           </div>
-          <div class="rounded-3xl bg-white/10 p-6 backdrop-blur border border-white/10">
+          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
             <Users class="h-9 w-9 text-blue-300" />
             <p class="mt-5 text-3xl font-bold">Connected</p>
             <p class="text-sm text-slate-200 mt-1">All teams in one system</p>
           </div>
-          <div class="rounded-3xl bg-white/10 p-6 backdrop-blur border border-white/10">
+          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
             <Target class="h-9 w-9 text-emerald-300" />
             <p class="mt-5 text-3xl font-bold">Reliable</p>
             <p class="text-sm text-slate-200 mt-1">End-to-end delivery</p>
@@ -53,8 +53,8 @@
 
     <!-- Core Values -->
     <section class="grid gap-6 md:grid-cols-3">
-      <div class="surface-card rounded-3xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center">
+      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
+        <div class="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center">
           <Store class="h-8 w-8 text-orange-600" />
         </div>
         <h3 class="mt-6 text-2xl font-bold text-slate-900">For Customers</h3>
@@ -63,8 +63,8 @@
         </p>
       </div>
 
-      <div class="surface-card rounded-3xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
+      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
+        <div class="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
           <ChefHat class="h-8 w-8 text-emerald-600" />
         </div>
         <h3 class="mt-6 text-2xl font-bold text-slate-900">For Restaurants</h3>
@@ -73,8 +73,8 @@
         </p>
       </div>
 
-      <div class="surface-card rounded-3xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center">
+      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
+        <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
           <Bike class="h-8 w-8 text-blue-600" />
         </div>
         <h3 class="mt-6 text-2xl font-bold text-slate-900">For Riders</h3>
@@ -94,7 +94,7 @@
         <article
           v-for="item in highlights"
           :key="item.title"
-          class="rounded-3xl border border-slate-100 bg-white p-8 hover:shadow-md transition"
+          class="rounded-xl border border-slate-100 bg-white p-8 hover:shadow-md transition"
         >
           <component :is="item.icon" class="h-10 w-10 text-brand-500" />
           <h3 class="mt-5 text-2xl font-semibold text-slate-900">{{ item.title }}</h3>
@@ -113,9 +113,9 @@
         <div
           v-for="(step, index) in workflow"
           :key="step.title"
-          class="rounded-3xl bg-white border border-slate-100 p-8 text-center"
+          class="rounded-xl bg-white border border-slate-100 p-8 text-center"
         >
-          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-xl font-bold text-white shadow">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-xl font-bold text-white shadow">
             {{ index + 1 }}
           </div>
           <h3 class="mt-6 text-xl font-semibold">{{ step.title }}</h3>

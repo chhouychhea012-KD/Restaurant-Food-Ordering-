@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-5 lg:grid-cols-3">
-    <div v-for="order in orders" :key="order.id" class="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-lg backdrop-blur">
+    <div v-for="order in orders" :key="order.id" class="rounded-xl border border-white/10 bg-white/5 p-5 shadow-lg backdrop-blur">
       <div class="flex items-center justify-between gap-3">
         <div>
           <p class="text-sm text-slate-400">{{ order.id }}</p>

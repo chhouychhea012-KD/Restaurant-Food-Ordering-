@@ -6,7 +6,7 @@ import { getRestaurantBySlug, listRestaurantCategories, listRestaurants, searchR
 export const useRestaurantStore = defineStore('restaurants', () => {
   const restaurants = ref<Restaurant[]>([]);
   const categories = ref<CustomerCategorySummary[]>([]);
-  const featured = computed(() => restaurants.value.slice(0, 4));
+  const featured = computed(() => restaurants.value.slice(0, 8));
 
   async function loadAll() {
     restaurants.value = await listRestaurants();

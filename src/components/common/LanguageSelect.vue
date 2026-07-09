@@ -1,7 +1,7 @@
 <template>
   <div ref="menuRef" data-i18n-ignore class="relative inline-flex">
     <button
-      class="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-200"
+      class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-200"
       type="button"
       :aria-label="t('Language')"
       :title="t('Language')"
@@ -35,7 +35,7 @@
     >
       <div
         v-if="isOpen"
-        class="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-48 overflow-hidden rounded-2xl border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]"
+        class="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]"
         role="listbox"
         :aria-label="t('Language')"
       >

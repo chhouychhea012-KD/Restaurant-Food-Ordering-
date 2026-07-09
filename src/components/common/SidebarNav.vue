@@ -9,7 +9,7 @@
           v-for="item in items"
           :key="item.to"
           :to="item.to"
-          class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition"
+          class="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition"
           :class="route.path === item.to ? 'bg-slate-900 text-white shadow-lg shadow-slate-200/60' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950'"
         >
           <span>{{ item.label }}</span>

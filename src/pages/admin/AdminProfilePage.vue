@@ -1,12 +1,12 @@
 <template>
   <div class="space-y-8">
     <!-- Hero Profile Section -->
-    <div class="surface-card overflow-hidden rounded-3xl">
+    <div class="surface-card overflow-hidden rounded-xl">
       <div class="bg-gradient-to-br from-orange-50 via-white to-slate-50 p-8 lg:p-10">
         <div class="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div class="flex items-center gap-6">
             <!-- Avatar -->
-            <div class="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-orange-500 to-amber-500 text-5xl font-bold text-white shadow-xl shadow-orange-200 ring-8 ring-white">
+            <div class="flex h-24 w-24 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-5xl font-bold text-white shadow-xl shadow-orange-200 ring-8 ring-white">
               {{ authStore.user?.avatar || authStore.user?.name?.charAt(0) || '👤' }}
             </div>
 
@@ -25,19 +25,19 @@
 
         <!-- Quick Stats -->
         <div class="mt-10 grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <p class="text-xs uppercase tracking-widest text-slate-400">Role</p>
             <p class="mt-2 text-3xl font-bold capitalize text-slate-900">{{ authStore.user?.role }}</p>
             <p class="text-sm text-slate-500 mt-1">Platform access</p>
           </div>
 
-          <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <p class="text-xs uppercase tracking-widest text-slate-400">Permissions</p>
             <p class="mt-2 text-3xl font-bold text-slate-900">{{ authStore.permissions.length }}</p>
             <p class="text-sm text-slate-500 mt-1">Active capabilities</p>
           </div>
 
-          <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <p class="text-xs uppercase tracking-widest text-slate-400">Status</p>
             <p class="mt-2 text-3xl font-bold text-emerald-600">
               {{ authStore.user?.shiftActive ? 'Active' : 'Paused' }}
@@ -57,7 +57,7 @@
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <RouterLink 
           to="/admin/users"
-          class="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
+          class="group rounded-xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
         >
           <Users class="text-slate-400 group-hover:text-brand-500 transition" :size="28" />
           <p class="mt-4 font-semibold text-slate-900">Manage Users</p>
@@ -66,7 +66,7 @@
 
         <RouterLink 
           to="/admin/roles"
-          class="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
+          class="group rounded-xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
         >
           <Shield class="text-slate-400 group-hover:text-brand-500 transition" :size="28" />
           <p class="mt-4 font-semibold text-slate-900">Roles &amp; Permissions</p>
@@ -75,7 +75,7 @@
 
         <RouterLink 
           to="/admin/products"
-          class="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
+          class="group rounded-xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
         >
           <Package class="text-slate-400 group-hover:text-brand-500 transition" :size="28" />
           <p class="mt-4 font-semibold text-slate-900">Products &amp; Categories</p>
@@ -84,7 +84,7 @@
 
         <RouterLink 
           to="/admin/analytics"
-          class="group rounded-3xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
+          class="group rounded-xl border border-slate-200 bg-white p-6 transition hover:shadow-md hover:-translate-y-0.5"
         >
           <BarChart3 class="text-slate-400 group-hover:text-brand-500 transition" :size="28" />
           <p class="mt-4 font-semibold text-slate-900">Analytics</p>
@@ -98,19 +98,19 @@
       <!-- Account Details -->
       <SectionCard eyebrow="Account Details" title="Administrator Information">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl bg-slate-50 p-5">
+          <div class="rounded-xl bg-slate-50 p-5">
             <p class="text-sm text-slate-500">Full Name</p>
             <p class="mt-1 font-medium">{{ authStore.user?.name }}</p>
           </div>
-          <div class="rounded-2xl bg-slate-50 p-5">
+          <div class="rounded-xl bg-slate-50 p-5">
             <p class="text-sm text-slate-500">Email</p>
             <p class="mt-1 font-medium break-all">{{ authStore.user?.email }}</p>
           </div>
-          <div class="rounded-2xl bg-slate-50 p-5">
+          <div class="rounded-xl bg-slate-50 p-5">
             <p class="text-sm text-slate-500">Phone</p>
             <p class="mt-1 font-medium">{{ authStore.user?.phone }}</p>
           </div>
-          <div class="rounded-2xl bg-slate-50 p-5">
+          <div class="rounded-xl bg-slate-50 p-5">
             <p class="text-sm text-slate-500">Avatar Code</p>
             <p class="mt-1 font-mono text-slate-600">{{ authStore.user?.avatar }}</p>
           </div>
@@ -120,7 +120,7 @@
       <!-- Security -->
       <SectionCard eyebrow="Security" title="Protected Access">
         <div class="space-y-5">
-          <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-6">
             <div class="flex items-center gap-3">
               <ShieldCheck class="text-emerald-600" :size="26" />
               <div>
@@ -130,7 +130,7 @@
             </div>
           </div>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+          <div class="rounded-xl border border-slate-200 bg-white p-6">
             <p class="font-semibold text-slate-900 mb-3">Permission Coverage</p>
             <div class="flex flex-wrap gap-2">
               <span 
@@ -146,8 +146,8 @@
       </SectionCard>
     </div>
 
-    <p v-if="message" class="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-    <p v-if="error" class="rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
+    <p v-if="message" class="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
+    <p v-if="error" class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
   </div>
 
   <!-- Edit Modal -->

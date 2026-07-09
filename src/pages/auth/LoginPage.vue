@@ -2,11 +2,8 @@
   <div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Secure Access</p>
     <h1 class="mt-3 text-3xl font-bold text-slate-950">Login to your workspace</h1>
-    <p class="mt-3 text-sm leading-6 text-slate-600">
-      Customer, admin, owner, kitchen, and rider routes are protected by role-aware frontend guards and session validation.
-    </p>
 
-    <form class="mt-8 space-y-5" @submit.prevent="submit">
+    <form class="mt-8 space-y-5 " @submit.prevent="submit">
       <div>
         <label class="field-label" for="email">Email</label>
         <input id="email" v-model="form.email" class="field-input" type="email" placeholder="you@example.com" required />
@@ -15,14 +12,14 @@
         <label class="field-label" for="password">Password</label>
         <input id="password" v-model="form.password" class="field-input" type="password" placeholder="Password" required minlength="8" />
       </div>
-      <p v-if="errorMessage" class="rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ errorMessage }}</p>
+      <p v-if="errorMessage" class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ errorMessage }}</p>
       <button class="btn-primary w-full" :disabled="loading">{{ loading ? 'Signing in...' : 'Login' }}</button>
     </form>
 
-    <div class="mt-8 space-y-3 rounded-[1.75rem] bg-slate-50 p-5">
+    <div class="mt-8 space-y-3 rounded-xl bg-slate-50 p-5">
       <p class="text-sm font-semibold text-slate-900">Demo accounts</p>
       <div class="grid gap-3 text-sm text-slate-600">
-        <div v-for="account in demoAccounts" :key="account.email" class="flex items-center justify-between rounded-2xl bg-white px-4 py-3">
+        <div v-for="account in demoAccounts" :key="account.email" class="flex items-center justify-between rounded-xl bg-white px-4 py-3">
           <div>
             <p class="font-semibold text-slate-900">{{ account.role }}</p>
             <p>{{ account.email }}</p>

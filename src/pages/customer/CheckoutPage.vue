@@ -13,7 +13,7 @@
           <p class="text-sm text-slate-500">{{ defaultAddress?.district }}, {{ defaultAddress?.city }}</p>
         </div>
       </div>
-      <div class="mt-6 rounded-[1.75rem] bg-slate-50 p-5">
+      <div class="mt-6 rounded-xl bg-slate-50 p-5">
         <p class="text-sm font-semibold text-slate-900">Security & validation</p>
         <ul class="mt-3 space-y-2 text-sm text-slate-600">
           <li>Authenticated route guard is active for this page.</li>

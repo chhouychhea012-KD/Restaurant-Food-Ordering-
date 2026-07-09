@@ -27,10 +27,12 @@
         </button>
       </div>
 
+      <CategoryProductPreview :category-name="activeCategory" :restaurants="restaurantStore.restaurants" />
+
       <div v-if="restaurantStore.restaurants.length" class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         <RestaurantCard v-for="restaurant in restaurantStore.restaurants" :key="restaurant.id" :restaurant="restaurant" />
       </div>
-      <div v-else class="rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
+      <div v-else class="rounded-xl border border-dashed border-slate-300 bg-slate-50/80 p-10 text-center">
         <p class="text-lg font-semibold text-slate-900">No restaurants matched your filter</p>
         <p class="mt-2 text-sm text-slate-500">Try another search keyword or switch to a different category.</p>
       </div>
@@ -42,6 +44,7 @@
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import SectionCard from '@/components/common/SectionCard.vue';
+import CategoryProductPreview from '@/components/customer/CategoryProductPreview.vue';
 import RestaurantCard from '@/components/customer/RestaurantCard.vue';
 import { useRestaurantStore } from '@/stores/restaurant.store';
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/90 p-5 shadow-sm">
+  <div class="overflow-hidden rounded-xl border border-slate-200 bg-white/90 p-5 shadow-sm">
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div>
         <p class="text-sm font-semibold text-slate-900">{{ title }}</p>
@@ -22,7 +22,7 @@
       <div>
         <div
           ref="chartAreaRef"
-          class="relative h-56 cursor-crosshair overflow-hidden rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(248,250,252,0.95),rgba(241,245,249,0.6))] touch-none"
+          class="relative h-56 cursor-crosshair overflow-hidden rounded-xl bg-[linear-gradient(180deg,rgba(248,250,252,0.95),rgba(241,245,249,0.6))] touch-none"
           @mousemove="handlePointerMove"
           @mouseleave="clearHover"
           @touchmove.passive="handleTouchMove"
@@ -34,7 +34,7 @@
 
           <div
             v-if="activePoint"
-            class="pointer-events-none absolute top-3 z-20 rounded-2xl border border-slate-200 bg-white/95 px-3 py-2 shadow-lg shadow-slate-200/80 backdrop-blur"
+            class="pointer-events-none absolute top-3 z-20 rounded-xl border border-slate-200 bg-white/95 px-3 py-2 shadow-lg shadow-slate-200/80 backdrop-blur"
             :class="tooltipAlignmentClass"
             :style="{ left: `${activePoint.x}%` }"
           >
@@ -87,7 +87,7 @@
           </span>
         </div>
 
-        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-[1.25rem] bg-slate-50/80 px-4 py-3 text-xs text-slate-500">
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-slate-50/80 px-4 py-3 text-xs text-slate-500">
           <span>Move over the graph to inspect each point dynamically.</span>
           <span class="font-semibold text-slate-700">Focused point: {{ activeLabel }}</span>
         </div>

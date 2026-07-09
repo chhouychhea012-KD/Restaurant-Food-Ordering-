@@ -27,6 +27,31 @@ function mergeCoreRoles(storedRoles: RoleDefinition[]) {
   return [...merged, ...customRoles];
 }
 
+function mergeSeedRestaurants(storedRestaurants: Restaurant[]) {
+  const seedRestaurants = restaurantsData as Restaurant[];
+  const merged = seedRestaurants.map((seedRestaurant) => {
+    const storedRestaurant = storedRestaurants.find((entry) => entry.id === seedRestaurant.id);
+    if (!storedRestaurant) {
+      return seedRestaurant;
+    }
+
+    return {
+      ...seedRestaurant,
+      ...storedRestaurant,
+      branches: storedRestaurant.branches?.length ? storedRestaurant.branches : seedRestaurant.branches,
+      menuCategories: storedRestaurant.menuCategories?.length
+        ? storedRestaurant.menuCategories
+        : seedRestaurant.menuCategories,
+    };
+  });
+
+  const customRestaurants = storedRestaurants.filter(
+    (storedRestaurant) => !seedRestaurants.some((seedRestaurant) => seedRestaurant.id === storedRestaurant.id),
+  );
+
+  return [...merged, ...customRestaurants];
+}
+
 export async function seedDatabase() {
   if (!localStorage.getItem(storageKeys.users)) {
     writeStorage(storageKeys.users, usersData);
@@ -39,6 +64,9 @@ export async function seedDatabase() {
   }
   if (!localStorage.getItem(storageKeys.restaurants)) {
     writeStorage(storageKeys.restaurants, restaurantsData);
+  } else {
+    const nextRestaurants = mergeSeedRestaurants(readStorage<Restaurant[]>(storageKeys.restaurants, restaurantsData as Restaurant[]));
+    writeStorage(storageKeys.restaurants, nextRestaurants);
   }
   if (!localStorage.getItem(storageKeys.orders)) {
     writeStorage(storageKeys.orders, ordersData);
