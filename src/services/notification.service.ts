@@ -18,8 +18,15 @@ function matchesAudienceRole(notification: AppNotification, user: User) {
   }
 
   const workspaceArea = resolveWorkspaceArea(user, getUserPermissions(user, dbRoles()));
-  const audienceRole = workspaceArea === 'customer' ? 'customer' : 'admin';
-  return notification.audienceRole === audienceRole;
+  if (workspaceArea === 'customer') {
+    return notification.audienceRole === 'customer';
+  }
+
+  if (workspaceArea === 'admin') {
+    return notification.audienceRole === 'admin';
+  }
+
+  return false;
 }
 
 export function getNotificationsUpdatedEventName() {

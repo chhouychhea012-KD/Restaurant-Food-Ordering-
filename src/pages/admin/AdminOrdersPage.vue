@@ -3,63 +3,43 @@
     eyebrow="Orders"
     title="Order operations"
   >
-    <div class="space-y-4">
-      <div v-for="order in orders" :key="order.id" class="surface-muted p-4">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p class="text-sm text-slate-500">{{ order.id }}</p>
-            <h3 class="text-lg font-bold text-slate-950">{{ order.restaurantName }}</h3>
-            <p class="mt-1 text-sm text-slate-500">{{ order.deliveryAddress }}</p>
-            <p class="mt-2 text-xs text-slate-500">Created {{ formatPreciseDateTime(order.createdAt) }}</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-3">
-            <StatusBadge :status="order.status" />
-            <span class="pill bg-slate-100 text-slate-700">{{ order.riderName ?? 'No rider' }}</span>
-            <span
-              class="pill"
-              :class="order.refundStatus === 'APPROVED' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-50 text-amber-700'"
-            >
-              {{ order.refundStatus === 'APPROVED' ? 'Refund Approved' : 'Refund Pending' }}
-            </span>
-          </div>
-        </div>
-
-        <div class="mt-4 grid gap-3 md:grid-cols-3">
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Items</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ order.items.length }} line items</p>
-          </div>
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">ETA</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ formatPreciseDateTime(order.estimatedDeliveryAt) }}</p>
-          </div>
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Latest transition</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ statusLabel(order.timeline.at(-1)?.status ?? order.status) }}</p>
-          </div>
-        </div>
-
-        <div class="mt-5 flex flex-wrap gap-3">
-          <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(order.id)">Edit</button>
-          <button
-            class="btn-secondary px-3 py-2"
-            type="button"
-            :disabled="order.refundStatus === 'APPROVED'"
-            @click="approveRefundRequest(order.id)"
-          >
-            {{ order.refundStatus === 'APPROVED' ? 'Refund approved' : 'Approve refund' }}
-          </button>
-          <button
-            class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100"
-            type="button"
-            @click="removeOrder(order.id)"
-          >
-            Delete
-          </button>
-        </div>
+    <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+      <div class="thin-scrollbar overflow-x-auto">
+        <table class="w-full min-w-[900px] text-left text-sm">
+          <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+            <tr>
+              <th class="px-5 py-4">Order</th>
+              <th class="px-5 py-4">Restaurant</th>
+              <th class="px-5 py-4">Status</th>
+              <th class="px-5 py-4">Rider</th>
+              <th class="px-5 py-4">Items</th>
+              <th class="px-5 py-4">ETA</th>
+              <th class="px-5 py-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr v-for="order in orders" :key="order.id" class="transition hover:bg-orange-50/40">
+              <td class="px-5 py-4"><p class="font-mono text-xs font-bold text-slate-900">{{ order.id }}</p><p class="mt-1 text-xs text-slate-500">{{ formatPreciseDateTime(order.createdAt) }}</p></td>
+              <td class="px-5 py-4"><p class="font-bold text-slate-950">{{ order.restaurantName }}</p><p class="mt-1 max-w-64 truncate text-xs text-slate-500">{{ order.deliveryAddress }}</p></td>
+              <td class="px-5 py-4"><StatusBadge :status="order.status" /></td>
+              <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ order.riderName ?? 'No rider' }}</span></td>
+              <td class="px-5 py-4 font-bold text-slate-950">{{ order.items.length }}</td>
+              <td class="px-5 py-4 text-sm text-slate-600">{{ formatPreciseDateTime(order.estimatedDeliveryAt) }}</td>
+              <td class="px-5 py-4">
+                <div class="relative flex justify-end">
+                  <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleActionMenu(order.id)"><MoreVertical :size="18" /></button>
+                  <div v-if="openActionMenuOrderId === order.id" class="absolute right-0 top-11 z-30 w-48 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                    <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editFromMenu(order.id)"><Pencil :size="15" /> Edit</button>
+                    <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-50" type="button" :disabled="order.refundStatus === 'APPROVED'" @click="refundFromMenu(order.id)"><ReceiptText :size="15" /> {{ order.refundStatus === 'APPROVED' ? 'Refund approved' : 'Approve refund' }}</button>
+                    <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50" type="button" @click="deleteFromMenu(order.id)"><Trash2 :size="15" /> Delete</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
     <p v-if="message" class="mt-5 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
     <p v-if="error" class="mt-5 rounded-lg bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
   </SectionCard>
@@ -104,15 +84,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { MoreVertical, Pencil, ReceiptText, Trash2 } from 'lucide-vue-next';
 import type { Order, User } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
 import { approveRefund, deleteOrder, listOrders, updateOrder } from '@/services/order.service';
 import { listUsers } from '@/services/user.service';
 import { formatPreciseDateTime, titleCase } from '@/utils/format';
 
+const { confirmDialog, promptDialog } = useAppDialog();
 const orders = ref<Order[]>([]);
 const riders = ref<User[]>([]);
 const selectedOrderId = ref<string | null>(null);
@@ -120,6 +103,7 @@ const saving = ref(false);
 const message = ref('');
 const error = ref('');
 const isModalOpen = ref(false);
+const openActionMenuOrderId = ref<string | null>(null);
 
 const statuses = ['PLACED', 'ACCEPTED', 'PREPARING', 'READY_FOR_PICKUP', 'RIDER_ASSIGNED', 'PICKED_UP', 'ON_THE_WAY', 'DELIVERED', 'COMPLETED', 'CANCELLED'];
 const form = reactive({
@@ -135,8 +119,37 @@ async function load() {
   riders.value = (await listUsers()).filter((user) => user.role === 'rider');
 }
 
-onMounted(load);
+onMounted(() => {
+  void load();
+  window.addEventListener('click', closeActionMenu);
+});
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenu);
+});
+
+function toggleActionMenu(orderId: string) {
+  openActionMenuOrderId.value = openActionMenuOrderId.value === orderId ? null : orderId;
+}
+
+function closeActionMenu() {
+  openActionMenuOrderId.value = null;
+}
+
+function editFromMenu(orderId: string) {
+  closeActionMenu();
+  openEditModal(orderId);
+}
+
+function refundFromMenu(orderId: string) {
+  closeActionMenu();
+  void approveRefundRequest(orderId);
+}
+
+function deleteFromMenu(orderId: string) {
+  closeActionMenu();
+  void removeOrder(orderId);
+}
 function statusLabel(status: string) {
   return titleCase(status);
 }
@@ -198,7 +211,14 @@ async function approveRefundRequest(orderId: string) {
     return;
   }
 
-  const reason = window.prompt('Optional refund reason for the activity log', order.refundReason ?? 'Customer dispute resolved');
+  const reason = await promptDialog({
+    title: 'Approve refund',
+    message: 'Add an optional refund reason for the activity log.',
+    inputLabel: 'Refund reason',
+    inputValue: order.refundReason ?? 'Customer dispute resolved',
+    confirmLabel: 'Approve refund',
+    tone: 'success',
+  });
   if (reason === null) {
     return;
   }
@@ -214,7 +234,12 @@ async function approveRefundRequest(orderId: string) {
 }
 
 async function removeOrder(orderId: string) {
-  const confirmed = window.confirm('Delete this order from the frontend dataset?');
+  const confirmed = await confirmDialog({
+    title: 'Delete order',
+    message: 'Delete this order from the frontend dataset?',
+    confirmLabel: 'Delete order',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

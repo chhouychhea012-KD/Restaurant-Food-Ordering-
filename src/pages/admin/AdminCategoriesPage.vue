@@ -82,67 +82,38 @@
         </div>
       </div>
 
-      <!-- Category Cards -->
-      <div v-if="filteredCategories.length" class="mt-6 grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
-        <article
-          v-for="entry in filteredCategories"
-          :key="entry.category.id"
-          class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-all duration-200"
-        >
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2">
-                <Building2 class="text-slate-400" :size="18" />
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ entry.restaurantName }}</p>
-              </div>
-              <h3 class="mt-2 text-xl font-bold text-slate-950">{{ entry.category.name }}</h3>
-              <p class="mt-2 text-sm text-slate-500">{{ entry.category.items.length }} linked products in this category</p>
-            </div>
-            <span class="pill bg-slate-100 text-slate-700 font-medium">{{ entry.category.items.length }} items</span>
-          </div>
-
-          <div class="mt-5 rounded-xl border border-slate-200 bg-slate-50/80 p-5">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Category health</p>
-                <p class="mt-1 text-sm font-medium text-slate-600">{{ healthLabel(entry.category.items.length) }}</p>
-              </div>
-              <span class="rounded-full px-4 py-1 text-xs font-semibold" :class="healthTone(entry.category.items.length)">
-                {{ healthTag(entry.category.items.length) }}
-              </span>
-            </div>
-
-            <div class="mt-5">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Product preview</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <span
-                  v-for="item in entry.category.items.slice(0, 4)"
-                  :key="item.id"
-                  class="pill bg-white text-slate-600 shadow-sm ring-1 ring-slate-200"
-                >
-                  {{ item.name }}
-                </span>
-                <span v-if="!entry.category.items.length" class="text-sm text-slate-400">No products linked yet</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-6 flex flex-wrap gap-3">
-            <button class="btn-secondary flex items-center gap-2 px-4 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">
-              <Edit3 :size="17" /> Edit
-            </button>
-            <button class="btn-secondary flex items-center gap-2 px-4 py-2" type="button" @click="openProductsFor">
-              <Package :size="17" /> View products
-            </button>
-            <button
-              class="rounded-xl bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-100 transition"
-              type="button"
-              @click="removeCategory(entry.category.id)"
-            >
-              Delete
-            </button>
-          </div>
-        </article>
+      <div v-if="filteredCategories.length" class="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="thin-scrollbar overflow-x-auto">
+          <table class="w-full min-w-[760px] text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+              <tr>
+                <th class="px-5 py-4">Category</th>
+                <th class="px-5 py-4">Restaurant</th>
+                <th class="px-5 py-4">Products</th>
+                <th class="px-5 py-4">Health</th>
+                <th class="px-5 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-for="entry in filteredCategories" :key="entry.category.id" class="transition hover:bg-orange-50/40">
+                <td class="px-5 py-4 font-bold text-slate-950">{{ entry.category.name }}</td>
+                <td class="px-5 py-4 text-slate-700">{{ entry.restaurantName }}</td>
+                <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ entry.category.items.length }} items</span></td>
+                <td class="px-5 py-4"><span class="pill" :class="healthTone(entry.category.items.length)">{{ healthTag(entry.category.items.length) }}</span></td>
+                <td class="px-5 py-4">
+                  <div class="relative flex justify-end">
+                    <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleActionMenu(entry.category.id)"><MoreVertical :size="18" /></button>
+                    <div v-if="openActionMenuCategoryId === entry.category.id" class="absolute right-0 top-11 z-30 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editFromMenu(entry.category.id)"><Pencil :size="15" /> Edit</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="openProductsFor"><Package :size="15" /> View products</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50" type="button" @click="deleteFromMenu(entry.category.id)"><Trash2 :size="15" /> Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Empty State -->
@@ -186,10 +157,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import type { AdminCategory, MenuCategoryInput, Restaurant } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import { createMenuCategory, deleteMenuCategory, listAdminCategories, updateMenuCategory } from '@/services/menu.service';
 import { listRestaurants } from '@/services/restaurant.service';
@@ -203,9 +175,12 @@ import {
   FolderTree, 
   Tags, 
   Trophy, 
-  Edit3 
+  MoreVertical, 
+  Pencil,
+  Trash2 
 } from 'lucide-vue-next';
 
+const { confirmDialog } = useAppDialog();
 const router = useRouter();
 const categories = ref<AdminCategory[]>([]);
 const restaurants = ref<Restaurant[]>([]);
@@ -215,6 +190,7 @@ const message = ref('');
 const error = ref('');
 const isCategoryModalOpen = ref(false);
 const editingCategoryId = ref<string | null>(null);
+const openActionMenuCategoryId = ref<string | null>(null);
 
 const blankCategoryForm = (): MenuCategoryInput => ({
   restaurantId: '',
@@ -249,8 +225,32 @@ async function load() {
   restaurants.value = await listRestaurants();
 }
 
-onMounted(load);
+onMounted(() => {
+  void load();
+  window.addEventListener('click', closeActionMenu);
+});
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenu);
+});
+
+function toggleActionMenu(categoryId: string) {
+  openActionMenuCategoryId.value = openActionMenuCategoryId.value === categoryId ? null : categoryId;
+}
+
+function closeActionMenu() {
+  openActionMenuCategoryId.value = null;
+}
+
+function editFromMenu(categoryId: string) {
+  closeActionMenu();
+  openEditCategoryModal(categoryId);
+}
+
+function deleteFromMenu(categoryId: string) {
+  closeActionMenu();
+  void removeCategory(categoryId);
+}
 function resetCategoryForm() {
   editingCategoryId.value = null;
   Object.assign(categoryForm, blankCategoryForm());
@@ -332,7 +332,12 @@ async function submitCategory() {
 }
 
 async function removeCategory(categoryId: string) {
-  const confirmed = window.confirm('Delete this category from the menu dataset?');
+  const confirmed = await confirmDialog({
+    title: 'Delete category',
+    message: 'Delete this category from the menu dataset?',
+    confirmLabel: 'Delete category',
+    tone: 'danger',
+  });
   if (!confirmed) return;
 
   try {

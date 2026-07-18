@@ -9,9 +9,16 @@ const validForms = {
     cvc: '123',
   },
   bank: {
-    bankName: 'Bangkok Bank',
+    bankName: 'ABA Bank',
     accountName: 'Clara Customer',
     accountNumber: '1234567890',
+  },
+  paypal: {
+    email: 'clara@example.com',
+  },
+  abaPayway: {
+    accountName: 'Clara Customer',
+    phone: '012345678',
   },
 };
 
@@ -33,9 +40,25 @@ describe('checkout payment utilities', () => {
     const details = buildPaymentDetails('bank_account', validForms);
 
     expect(validatePayment('bank_account', validForms)).toEqual([]);
-    expect(details.bankName).toBe('Bangkok Bank');
+    expect(details.bankName).toBe('ABA Bank');
     expect(details.last4).toBe('7890');
-    expect(formatPaymentSummary('bank_account', details)).toBe('Bangkok Bank ending 7890');
+    expect(formatPaymentSummary('bank_account', details)).toBe('ABA Bank ending 7890');
+  });
+
+  it('validates PayPal details and creates a safe summary', () => {
+    const details = buildPaymentDetails('paypal', validForms);
+
+    expect(validatePayment('paypal', validForms)).toEqual([]);
+    expect(details.email).toBe('clara@example.com');
+    expect(formatPaymentSummary('paypal', details)).toBe('PayPal clara@example.com');
+  });
+
+  it('validates ABA PayWay details and creates a safe summary', () => {
+    const details = buildPaymentDetails('aba_payway', validForms);
+
+    expect(validatePayment('aba_payway', validForms)).toEqual([]);
+    expect(details.phoneLast4).toBe('5678');
+    expect(formatPaymentSummary('aba_payway', details)).toBe('ABA PayWay ending 5678');
   });
 
   it('returns clear issues for invalid card details', () => {

@@ -155,12 +155,14 @@
 import { computed, reactive, ref, watch } from 'vue';
 import { useRouter, RouterLink } from 'vue-router';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import UserAvatar from '@/components/common/UserAvatar.vue';
 import { deleteCustomerAccount, updateCustomerProfile } from '@/services/customer.service';
 import { useAuthStore } from '@/stores/auth.store';
 import { readProfileImageFile } from '@/utils/avatar';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const router = useRouter();
 const saving = ref(false);
@@ -259,7 +261,12 @@ async function removeAccount() {
     return;
   }
 
-  const confirmed = window.confirm('Delete this customer account from the local frontend data?');
+  const confirmed = await confirmDialog({
+    title: 'Delete account',
+    message: 'Delete this customer account from the local frontend data?',
+    confirmLabel: 'Delete account',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

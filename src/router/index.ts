@@ -131,7 +131,10 @@ const router = createRouter({
       children: [
         { path: '', name: 'partner-overview', component: () => import('@/pages/restaurant/RestaurantOverviewPage.vue'), meta: { permissions: ['restaurants.read'] } },
         { path: 'menu', name: 'partner-menu', component: () => import('@/pages/restaurant/RestaurantMenuPage.vue'), meta: { permissions: ['menus.read'] } },
+        { path: 'products', name: 'partner-products', component: () => import('@/pages/restaurant/RestaurantMenuPage.vue'), meta: { permissions: ['menus.read'] } },
+        { path: 'notifications', name: 'partner-notifications', component: () => import('@/pages/restaurant/RestaurantNotificationsPage.vue'), meta: { permissions: ['orders.read'] } },
         { path: 'orders', name: 'partner-orders', component: () => import('@/pages/restaurant/RestaurantOrdersPage.vue'), meta: { permissions: ['orders.read'] } },
+        { path: 'users', name: 'partner-users', component: () => import('@/pages/restaurant/RestaurantUsersPage.vue'), meta: { permissions: ['users.manage'] } },
       ],
     },
     {
@@ -141,7 +144,10 @@ const router = createRouter({
       children: [
         { path: '', name: 'restaurant-overview', component: () => import('@/pages/restaurant/RestaurantOverviewPage.vue'), meta: { permissions: ['restaurants.read'] } },
         { path: 'menu', name: 'restaurant-menu', component: () => import('@/pages/restaurant/RestaurantMenuPage.vue'), meta: { permissions: ['menus.read'] } },
+        { path: 'products', name: 'restaurant-products', component: () => import('@/pages/restaurant/RestaurantMenuPage.vue'), meta: { permissions: ['menus.read'] } },
+        { path: 'notifications', name: 'restaurant-notifications', component: () => import('@/pages/restaurant/RestaurantNotificationsPage.vue'), meta: { permissions: ['orders.read'] } },
         { path: 'orders', name: 'restaurant-orders', component: () => import('@/pages/restaurant/RestaurantOrdersPage.vue'), meta: { permissions: ['orders.read'] } },
+        { path: 'users', name: 'restaurant-users', component: () => import('@/pages/restaurant/RestaurantUsersPage.vue'), meta: { permissions: ['users.manage'] } },
       ],
     },
     {

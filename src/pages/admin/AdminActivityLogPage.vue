@@ -73,56 +73,37 @@
 
       <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
 
-      <div v-if="filteredLogs.length" class="mt-6 space-y-4">
-        <div v-for="entry in filteredLogs" :key="entry.id" class="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
-          <div class="flex flex-wrap items-start justify-between gap-4">
-            <div class="min-w-0 flex-1">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="pill bg-brand-50 text-brand-700">{{ domainLabel(entry.domain) }}</span>
-                <span class="pill bg-slate-100 text-slate-700">{{ roleLabel(entry.actorRole) }}</span>
-                <span v-if="entry.orderId" class="pill bg-amber-50 text-amber-700">{{ entry.orderId }}</span>
-              </div>
-              <h3 class="mt-3 text-lg font-bold text-slate-950">{{ entry.title }}</h3>
-              <p class="mt-2 text-sm leading-6 text-slate-600">{{ entry.description }}</p>
-            </div>
-            <div class="text-right">
-              <p class="text-sm font-semibold text-slate-900">{{ formatPreciseDateTime(entry.createdAt) }}</p>
-              <p class="mt-1 text-xs text-slate-500">{{ entry.createdAt }}</p>
-            </div>
-          </div>
-
-          <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            <div class="rounded-xl bg-slate-50 px-4 py-3">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Actor</p>
-              <p class="mt-2 text-sm font-semibold text-slate-900">{{ entry.actorName }}</p>
-            </div>
-            <div class="rounded-xl bg-slate-50 px-4 py-3">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Restaurant</p>
-              <p class="mt-2 text-sm font-semibold text-slate-900">{{ entry.restaurantName ?? 'Platform-wide event' }}</p>
-            </div>
-            <div class="rounded-xl bg-slate-50 px-4 py-3">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Action</p>
-              <p class="mt-2 break-all font-mono text-xs text-slate-700">{{ entry.action }}</p>
-            </div>
-            <div class="rounded-xl bg-slate-50 px-4 py-3">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Metadata</p>
-              <p class="mt-2 text-sm font-semibold text-slate-900">{{ Object.keys(entry.metadata ?? {}).length }} fields</p>
-            </div>
-          </div>
-
-          <div v-if="Object.keys(entry.metadata ?? {}).length" class="mt-4 flex flex-wrap gap-2">
-            <span
-              v-for="[key, value] in Object.entries(entry.metadata ?? {})"
-              :key="`${entry.id}-${key}`"
-              class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
-            >
-              {{ key }}: {{ value }}
-            </span>
-          </div>
-
-          <div class="mt-4 flex justify-end">
-            <button class="btn-secondary px-3 py-2" type="button" @click="selectedEntry = entry">View details</button>
-          </div>
+      <div v-if="filteredLogs.length" class="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="thin-scrollbar overflow-x-auto">
+          <table class="w-full min-w-[920px] text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+              <tr>
+                <th class="px-5 py-4">Event</th>
+                <th class="px-5 py-4">Type</th>
+                <th class="px-5 py-4">Actor</th>
+                <th class="px-5 py-4">Restaurant</th>
+                <th class="px-5 py-4">Time</th>
+                <th class="px-5 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-for="entry in filteredLogs" :key="entry.id" class="transition hover:bg-orange-50/40">
+                <td class="px-5 py-4"><p class="font-bold text-slate-950">{{ entry.title }}</p><p class="mt-1 max-w-md truncate text-xs text-slate-500">{{ entry.action }}</p></td>
+                <td class="px-5 py-4"><span class="pill bg-brand-50 text-brand-700">{{ domainLabel(entry.domain) }}</span></td>
+                <td class="px-5 py-4"><p class="font-semibold text-slate-700">{{ entry.actorName }}</p><p class="mt-1 text-xs text-slate-500">{{ roleLabel(entry.actorRole) }}</p></td>
+                <td class="px-5 py-4 text-slate-700">{{ entry.restaurantName ?? 'Platform' }}</td>
+                <td class="px-5 py-4 text-slate-600">{{ formatPreciseDateTime(entry.createdAt) }}</td>
+                <td class="px-5 py-4">
+                  <div class="relative flex justify-end">
+                    <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleActionMenu(entry.id)"><MoreVertical :size="18" /></button>
+                    <div v-if="openActionMenuLogId === entry.id" class="absolute right-0 top-11 z-30 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="viewFromMenu(entry)"><Eye :size="15" /> View details</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -165,7 +146,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { Eye, MoreVertical } from 'lucide-vue-next';
 import type { ActivityLogEntry, Restaurant } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
 import EmptyState from '@/components/common/EmptyState.vue';
@@ -179,6 +161,7 @@ const logs = ref<ActivityLogEntry[]>([]);
 const restaurants = ref<Restaurant[]>([]);
 const selectedEntry = ref<ActivityLogEntry | null>(null);
 const message = ref('');
+const openActionMenuLogId = ref<string | null>(null);
 const filters = reactive({
   role: 'all',
   domain: 'all',
@@ -237,8 +220,25 @@ useSocket(activityLogCreatedEvent, (payload) => {
 onMounted(async () => {
   logs.value = await listActivityLogs();
   restaurants.value = await listRestaurants();
+  window.addEventListener('click', closeActionMenu);
 });
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenu);
+});
+
+function toggleActionMenu(logId: string) {
+  openActionMenuLogId.value = openActionMenuLogId.value === logId ? null : logId;
+}
+
+function closeActionMenu() {
+  openActionMenuLogId.value = null;
+}
+
+function viewFromMenu(entry: ActivityLogEntry) {
+  closeActionMenu();
+  selectedEntry.value = entry;
+}
 function roleLabel(value: string) {
   return value === 'system' ? 'System' : titleCase(value);
 }

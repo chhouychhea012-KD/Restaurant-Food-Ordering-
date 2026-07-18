@@ -13,10 +13,10 @@
           <div ref="menuRef" class="relative flex shrink-0 items-center gap-3 lg:ml-auto">
             <LanguageSelect />
             <RouterLink
-              v-if="authStore.workspaceArea === 'admin'"
-              to="/admin/notifications"
+              v-if="showWorkspaceNotifications"
+              :to="notificationsLink"
               class="group relative flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border bg-white text-slate-600 shadow-sm transition hover:text-slate-950"
-              :class="route.path === '/admin/notifications'
+              :class="route.path === notificationsLink
                 ? 'border-brand-200 bg-brand-50 text-brand-600 shadow-brand-100/70'
                 : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
               :aria-label="notificationAriaLabel"
@@ -85,8 +85,8 @@
                   </RouterLink>
 
                   <RouterLink
-                    v-if="authStore.workspaceArea === 'admin'"
-                    to="/admin/notifications"
+                    v-if="showWorkspaceNotifications"
+              :to="notificationsLink"
                     class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                     @click="closeMenu"
                   >
@@ -146,6 +146,9 @@ const menuRef = ref<HTMLElement | null>(null);
 
 const accountButtonLabel = computed(() => (authStore.user ? `Profile menu for ${authStore.user.name}` : 'Profile menu'));
 const compactCount = computed(() => (notificationStore.unreadCount > 99 ? '99+' : String(notificationStore.unreadCount || 0)));
+const showWorkspaceNotifications = computed(() => ['admin', 'partner'].includes(authStore.workspaceArea));
+const notificationsLink = computed(() => (authStore.workspaceArea === 'partner' ? '/partner/notifications' : '/admin/notifications'));
+
 const notificationAriaLabel = computed(() => {
   const unreadCount = notificationStore.unreadCount;
 
@@ -195,9 +198,10 @@ const navItems = computed(() => {
       { label: 'Analytics', to: '/admin/analytics', permissions: ['analytics.read'] },
     ],
     partner: [
-      { label: 'Overview', to: '/partner', permissions: ['restaurants.read'] },
-      { label: 'Menu', to: '/partner/menu', permissions: ['menus.read'] },
+      { label: 'Restaurant', to: '/partner', permissions: ['restaurants.read'] },
+      { label: 'Products', to: '/partner/products', permissions: ['menus.read'] },
       { label: 'Orders', to: '/partner/orders', permissions: ['orders.read'] },
+      { label: 'Staff Users', to: '/partner/users', permissions: ['users.manage'] },
     ],
     kitchen: [
       { label: 'Kitchen Queue', to: '/kitchen', permissions: ['orders.read'] },

@@ -13,53 +13,56 @@
     </div>
 
     <div v-else-if="users.length" class="space-y-4">
-      <div v-for="user in users" :key="user.id" class="surface-muted p-5">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div class="flex min-w-0 items-start gap-4">
-            <UserAvatar :user="user" size="md" />
-            <div class="min-w-0">
-              <p class="text-lg font-semibold text-slate-950">{{ user.name }}</p>
-              <p class="mt-1 truncate text-sm text-slate-500">{{ user.email }}</p>
-              <p class="mt-1 text-sm text-slate-500">{{ user.phone }}</p>
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="pill bg-slate-100 text-slate-700">{{ roleLabel(user.role) }}</span>
-            <span class="pill" :class="statusPillClass(user.status)">{{ statusLabel(user.status) }}</span>
-            <span class="pill" :class="accessPillClass(user)">{{ accessStateLabel(user) }}</span>
-          </div>
-        </div>
+      <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <label class="sr-only" for="user-search">Search users</label>
+        <input id="user-search" v-model="query" class="field-input bg-white" type="search" placeholder="Search name, email, phone, or role" />
+      </div>
 
-        <div class="mt-4 grid gap-3 lg:grid-cols-3">
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Access state</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ accessMessage(user) }}</p>
-          </div>
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Restaurant scope</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ restaurantName(primaryRestaurantId(user)) }}</p>
-          </div>
-          <div class="rounded-xl bg-white/80 px-4 py-3">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Schedule</p>
-            <p class="mt-2 text-sm font-semibold text-slate-900">{{ scheduleSummary(user) }}</p>
-          </div>
-        </div>
-
-        <div class="mt-4 flex flex-wrap gap-3">
-          <button v-if="canManageUsers" class="btn-secondary px-3 py-2" type="button" @click="startEdit(user.id)">Edit</button>
-          <button
-            v-if="canManageUsers"
-            class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100"
-            type="button"
-            :disabled="user.id === authStore.user?.id"
-            @click="remove(user.id)"
-          >
-            Delete
-          </button>
+      <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="thin-scrollbar overflow-x-auto">
+          <table class="w-full min-w-[860px] text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+              <tr>
+                <th class="px-5 py-4">User</th>
+                <th class="px-5 py-4">Role</th>
+                <th class="px-5 py-4">Status</th>
+                <th class="px-5 py-4">Access</th>
+                <th class="px-5 py-4">Scope</th>
+                <th class="px-5 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-for="user in filteredUsers" :key="user.id" class="transition hover:bg-orange-50/40">
+                <td class="px-5 py-4">
+                  <div class="flex min-w-0 items-center gap-3">
+                    <UserAvatar :user="user" size="sm" />
+                    <div class="min-w-0">
+                      <p class="truncate font-bold text-slate-950">{{ user.name }}</p>
+                      <p class="mt-1 truncate text-xs text-slate-500">{{ user.email }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ roleLabel(user.role) }}</span></td>
+                <td class="px-5 py-4"><span class="pill" :class="statusPillClass(user.status)">{{ statusLabel(user.status) }}</span></td>
+                <td class="px-5 py-4"><span class="pill" :class="accessPillClass(user)">{{ accessStateLabel(user) }}</span></td>
+                <td class="px-5 py-4 text-sm font-semibold text-slate-700">{{ restaurantName(primaryRestaurantId(user)) }}</td>
+                <td class="px-5 py-4">
+                  <div v-if="canManageUsers" class="relative flex justify-end">
+                    <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleActionMenu(user.id)">
+                      <MoreVertical :size="18" />
+                    </button>
+                    <div v-if="openActionMenuUserId === user.id" class="absolute right-0 top-11 z-30 w-40 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editFromMenu(user.id)"><Pencil :size="15" /> Edit</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-50" type="button" :disabled="user.id === authStore.user?.id" @click="deleteFromMenu(user.id)"><Trash2 :size="15" /> Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-
     <EmptyState
       v-else
       title="No platform users yet"
@@ -203,9 +206,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { MoreVertical, Pencil, Trash2 } from 'lucide-vue-next';
 import type { AccessWindow, RoleDefinition, User, UserRole, UserStatus } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import EmptyState from '@/components/common/EmptyState.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import UserAvatar from '@/components/common/UserAvatar.vue';
@@ -218,6 +223,7 @@ import { evaluateUserOperationalAccess, getPrimaryAccessWindow, getPrimaryRestau
 import { formatPreciseDateTime } from '@/utils/format';
 import { readProfileImageFile } from '@/utils/avatar';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const users = ref<User[]>([]);
 const roles = ref<RoleDefinition[]>([]);
@@ -228,6 +234,8 @@ const loading = ref(false);
 const message = ref('');
 const error = ref('');
 const isModalOpen = ref(false);
+const openActionMenuUserId = ref<string | null>(null);
+const query = ref('');
 const userStatuses: UserStatus[] = ['active', 'invited', 'suspended', 'disabled'];
 const weekdayOptions = [
   { label: 'Sunday', value: 0 },
@@ -261,6 +269,18 @@ const form = reactive(blankForm());
 
 const canManageUsers = computed(() => authStore.hasPermission('users.manage'));
 const roleNeedsRestaurantScope = computed(() => ['owner', 'kitchen', 'branch_manager'].includes(form.role));
+const filteredUsers = computed(() => {
+  const term = query.value.trim().toLowerCase();
+  if (!term) {
+    return users.value;
+  }
+  return users.value.filter((user) =>
+    [user.name, user.email, user.phone, roleLabel(user.role), statusLabel(user.status)]
+      .join(' ')
+      .toLowerCase()
+      .includes(term),
+  );
+});
 const previewInitials = computed(() =>
   form.name
     .split(' ')
@@ -281,8 +301,32 @@ async function load() {
   }
 }
 
-onMounted(load);
+onMounted(() => {
+  void load();
+  window.addEventListener('click', closeActionMenu);
+});
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenu);
+});
+
+function toggleActionMenu(userId: string) {
+  openActionMenuUserId.value = openActionMenuUserId.value === userId ? null : userId;
+}
+
+function closeActionMenu() {
+  openActionMenuUserId.value = null;
+}
+
+function editFromMenu(userId: string) {
+  closeActionMenu();
+  startEdit(userId);
+}
+
+function deleteFromMenu(userId: string) {
+  closeActionMenu();
+  void remove(userId);
+}
 function resetForm() {
   editingId.value = null;
   Object.assign(form, blankForm());
@@ -502,7 +546,12 @@ async function remove(userId: string) {
     return;
   }
 
-  const confirmed = window.confirm('Delete this user from the frontend dataset?');
+  const confirmed = await confirmDialog({
+    title: 'Delete user',
+    message: 'Delete this user from the frontend dataset?',
+    confirmLabel: 'Delete user',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

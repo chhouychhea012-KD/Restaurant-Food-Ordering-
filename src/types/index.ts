@@ -189,7 +189,7 @@ export interface TimelineEntry {
   time: string;
 }
 
-export type PaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'card_mock' | 'wallet_mock';
+export type PaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway' | 'card_mock' | 'wallet_mock';
 
 export interface Order {
   id: string;

@@ -185,11 +185,11 @@
         <input id="admin-phone" v-model="form.phone" class="field-input" type="tel" required />
       </div>
 
-      <div class="flex gap-3 pt-4">
-        <button class="btn-primary flex-1" :disabled="saving">
+      <div class="flex flex-wrap gap-3 pt-2">
+        <button class="btn-primary" :disabled="saving">
           {{ saving ? 'Saving...' : 'Save Changes' }}
         </button>
-        <button type="button" class="btn-secondary flex-1" @click="closeModal">Cancel</button>
+        <button type="button" class="btn-secondary" @click="closeModal">Cancel</button>
       </div>
     </form>
   </AppModal>

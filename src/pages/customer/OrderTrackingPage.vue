@@ -234,6 +234,10 @@ function paymentLabel(currentOrder: Order) {
     case 'bank_account':
     case 'wallet_mock':
       return 'Bank account';
+    case 'paypal':
+      return 'PayPal';
+    case 'aba_payway':
+      return 'ABA PayWay';
     case 'cash':
       return 'Cash on delivery';
     default:

@@ -43,7 +43,7 @@
             <span class="pill bg-emerald-50 text-emerald-700">Mock secure payment</span>
           </div>
 
-          <div class="mt-4 grid gap-3 sm:grid-cols-3">
+          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             <label v-for="option in paymentOptions" :key="option.value" class="rounded-xl border px-4 py-4 text-sm transition" :class="paymentMethod === option.value ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-orange-50'">
               <input v-model="paymentMethod" class="sr-only" type="radio" name="payment-method" :value="option.value" />
               <span class="block text-base font-semibold">{{ option.label }}</span>
@@ -74,7 +74,7 @@
             </div>
           </div>
 
-          <div v-else class="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
+          <div v-else-if="paymentMethod === 'bank_account'" class="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="bank-name">Bank</label>
               <select id="bank-name" v-model="bankForm.bankName" class="field-input">
@@ -92,6 +92,24 @@
             </div>
           </div>
 
+
+          <div v-else-if="paymentMethod === 'paypal'" class="mt-4 rounded-xl border border-sky-100 bg-sky-50 p-4">
+            <label class="field-label" for="paypal-email">PayPal email</label>
+            <input id="paypal-email" v-model="paypalForm.email" class="field-input bg-white" type="email" autocomplete="email" placeholder="customer@example.com" />
+            <p class="mt-2 text-xs text-sky-700">Demo authorization records the PayPal account on the order summary.</p>
+          </div>
+
+          <div v-else-if="paymentMethod === 'aba_payway'" class="mt-4 grid gap-4 rounded-xl border border-sky-100 bg-sky-50 p-4 md:grid-cols-2">
+            <div>
+              <label class="field-label" for="aba-account-name">ABA account name</label>
+              <input id="aba-account-name" v-model="abaPaywayForm.accountName" class="field-input bg-white" type="text" placeholder="Clara Customer" />
+            </div>
+            <div>
+              <label class="field-label" for="aba-phone">ABA phone number</label>
+              <input id="aba-phone" v-model="abaPaywayForm.phone" class="field-input bg-white" inputmode="tel" placeholder="012345678" />
+            </div>
+            <p class="text-xs text-sky-700 md:col-span-2">Demo ABA PayWay payment simulates a KHQR/mobile banking confirmation.</p>
+          </div>
           <div v-if="paymentIssues.length" class="mt-4 space-y-2">
             <div v-for="issue in paymentIssues" :key="issue" class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
               {{ issue }}
@@ -199,6 +217,13 @@ const bankForm = ref({
   accountName: authStore.user?.name ?? '',
   accountNumber: '',
 });
+const paypalForm = ref({
+  email: authStore.user?.email ?? '',
+});
+const abaPaywayForm = ref({
+  accountName: authStore.user?.name ?? '',
+  phone: authStore.user?.phone ?? '',
+});
 const redeemLoyalty = ref(false);
 const acceptTerms = ref(false);
 const orderMessage = ref('');
@@ -206,11 +231,13 @@ const orderMessageTone = ref<'success' | 'error'>('success');
 
 const paymentOptions = [
   { value: 'cash' as const, label: 'Cash', help: 'Pay on delivery.' },
-  { value: 'visa_card' as const, label: 'Visa card', help: 'Mock card authorization.' },
-  { value: 'bank_account' as const, label: 'Bank account', help: 'Mock bank debit.' },
+  { value: 'visa_card' as const, label: 'Visa card', help: 'Card authorization.' },
+  { value: 'bank_account' as const, label: 'Bank account', help: 'Bank debit.' },
+  { value: 'paypal' as const, label: 'PayPal', help: 'PayPal account.' },
+  { value: 'aba_payway' as const, label: 'ABA PayWay', help: 'ABA/KHQR demo.' },
 ];
 
-const bankOptions = ['Bangkok Bank', 'Kasikornbank', 'SCB', 'Krungthai Bank', 'Krungsri'];
+const bankOptions = ['ABA Bank', 'ACLEDA Bank', 'Wing Bank', 'Bangkok Bank', 'Kasikornbank', 'SCB', 'Krungthai Bank', 'Krungsri'];
 
 const addresses = computed(() => authStore.user?.addresses ?? []);
 const selectedAddress = computed<Address | null>(() => addresses.value.find((address) => address.id === selectedAddressId.value) ?? addresses.value[0] ?? null);
@@ -227,6 +254,8 @@ const paymentIssues = computed(() =>
   validatePayment(paymentMethod.value, {
     visa: visaForm.value,
     bank: bankForm.value,
+    paypal: paypalForm.value,
+    abaPayway: abaPaywayForm.value,
   }),
 );
 
@@ -272,6 +301,8 @@ async function placeOrder() {
       paymentDetails: buildPaymentDetails(paymentMethod.value, {
         visa: visaForm.value,
         bank: bankForm.value,
+        paypal: paypalForm.value,
+        abaPayway: abaPaywayForm.value,
       }),
       deliveryInstructions: deliveryInstructions.value.trim(),
       voucherCode: cartStore.voucherCode,

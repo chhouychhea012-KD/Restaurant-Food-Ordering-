@@ -114,10 +114,12 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import type { AppNotification, NotificationKind } from '@/types';
 import SectionCard from '@/components/common/SectionCard.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import { useAuthStore } from '@/stores/auth.store';
 import { useNotificationStore } from '@/stores/notification.store';
 import { formatShortDate } from '@/utils/format';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();
 const filter = ref<'all' | 'unread' | NotificationKind>('all');
@@ -176,12 +178,20 @@ function markAllRead() {
   notificationStore.markEverythingRead(authStore.user);
 }
 
-function removeNotification(notificationId: string) {
+async function removeNotification(notificationId: string) {
   if (!authStore.user) {
     return;
   }
 
-  notificationStore.removeNotification(notificationId, authStore.user);
+  const confirmed = await confirmDialog({
+    title: 'Remove notification',
+    message: 'Remove this notification from the admin feed?',
+    confirmLabel: 'Remove notification',
+    tone: 'danger',
+  });
+  if (confirmed) {
+    notificationStore.removeNotification(notificationId, authStore.user);
+  }
 }
 
 function formatKind(kind: NotificationKind) {

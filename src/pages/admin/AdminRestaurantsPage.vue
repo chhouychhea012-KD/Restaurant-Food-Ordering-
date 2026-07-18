@@ -16,62 +16,50 @@
         </div>
       </div>
 
-      <div v-else-if="restaurants.length" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <article v-for="restaurant in restaurants" :key="restaurant.id" class="group rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
-          <div class="flex items-start justify-between gap-4">
-            <div class="min-w-0 flex-1">
-              <h3 class="text-xl font-bold text-slate-900">{{ restaurant.name }}</h3>
-              <p class="mt-1 text-sm text-slate-500">{{ restaurant.cuisine.join(', ') }}</p>
-              <p class="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">{{ restaurant.description }}</p>
-            </div>
-            <div class="flex flex-col items-end gap-2">
-              <span class="pill" :class="partnerStatusClass(restaurant.partnerStatus)">{{ restaurant.partnerStatus }}</span>
-              <span class="pill text-xs font-medium" :class="restaurant.verified ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'">
-                {{ restaurant.verified ? 'Verified' : 'Pending' }}
-              </span>
-            </div>
-          </div>
+      <div v-else-if="restaurants.length" class="space-y-4">
+        <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <label class="sr-only" for="restaurant-search">Search restaurants</label>
+          <input id="restaurant-search" v-model="query" class="field-input bg-white" type="search" placeholder="Search restaurant, cuisine, status, or branch" />
+        </div>
 
-          <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            <div class="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Commercial</p>
-              <p class="mt-2 font-semibold text-slate-900">{{ Math.round((restaurant.commissionRate ?? 0) * 100) }}% commission</p>
-              <p class="mt-1">Delivery fee {{ formatCurrency(restaurant.deliveryFee) }}</p>
-            </div>
-            <div class="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Reviews</p>
-              <p class="mt-2 font-semibold text-slate-900">{{ restaurant.rating.toFixed(1) }} stars</p>
-              <p class="mt-1">{{ restaurant.reviewCount ?? 0 }} ratings</p>
-            </div>
+        <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div class="thin-scrollbar overflow-x-auto">
+            <table class="w-full min-w-[920px] text-left text-sm">
+              <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                <tr>
+                  <th class="px-5 py-4">Restaurant</th>
+                  <th class="px-5 py-4">Cuisine</th>
+                  <th class="px-5 py-4">Partner</th>
+                  <th class="px-5 py-4">Branches</th>
+                  <th class="px-5 py-4">Commission</th>
+                  <th class="px-5 py-4">Rating</th>
+                  <th class="px-5 py-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr v-for="restaurant in filteredRestaurants" :key="restaurant.id" class="transition hover:bg-orange-50/40">
+                  <td class="px-5 py-4"><p class="font-bold text-slate-950">{{ restaurant.name }}</p><p class="mt-1 text-xs text-slate-500">{{ restaurant.status }}</p></td>
+                  <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ restaurant.cuisine.slice(0, 2).join(', ') }}</span></td>
+                  <td class="px-5 py-4"><span class="pill" :class="partnerStatusClass(restaurant.partnerStatus)">{{ restaurant.partnerStatus }}</span></td>
+                  <td class="px-5 py-4 font-bold text-slate-950">{{ restaurant.branches.length }}</td>
+                  <td class="px-5 py-4 text-slate-700">{{ Math.round((restaurant.commissionRate ?? 0) * 100) }}%</td>
+                  <td class="px-5 py-4 text-slate-700">{{ restaurant.rating.toFixed(1) }}</td>
+                  <td class="px-5 py-4">
+                    <div class="relative flex justify-end">
+                      <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleActionMenu(restaurant.id)"><MoreVertical :size="18" /></button>
+                      <div v-if="openActionMenuRestaurantId === restaurant.id" class="absolute right-0 top-11 z-30 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                        <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editFromMenu(restaurant.id)"><Pencil :size="15" /> Edit</button>
+                        <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="verifyFromMenu(restaurant.id)"><BadgeCheck :size="15" /> {{ restaurant.verified ? 'Unverify' : 'Verify' }}</button>
+                        <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="statusFromMenu(restaurant)"><ShieldAlert :size="15" /> Status</button>
+                        <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50" type="button" @click="deleteFromMenu(restaurant.id)"><Trash2 :size="15" /> Delete</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <p v-if="restaurant.suspensionReason" class="mt-4 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">Suspension reason: {{ restaurant.suspensionReason }}</p>
-
-          <div class="mt-6">
-            <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-400">Branches ({{ restaurant.branches.length }})</p>
-            <div class="space-y-3">
-              <div v-for="branch in restaurant.branches.slice(0, 2)" :key="branch.id" class="rounded-xl bg-slate-50 p-4 text-sm">
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <p class="font-medium text-slate-900">{{ branch.name }}</p>
-                    <p class="text-slate-500">{{ branch.zone }} • {{ branch.phone }}</p>
-                  </div>
-                  <span class="pill" :class="branch.status === 'open' ? 'bg-emerald-100 text-emerald-700' : branch.status === 'paused' ? 'bg-amber-100 text-amber-700' : 'bg-slate-200 text-slate-700'">
-                    {{ branch.status }}
-                  </span>
-                </div>
-              </div>
-              <p v-if="restaurant.branches.length > 2" class="text-xs text-slate-400">+{{ restaurant.branches.length - 2 }} more branches</p>
-            </div>
-          </div>
-
-          <div class="mt-8 flex flex-wrap gap-3">
-            <button class="btn-secondary flex-1" type="button" @click="startEdit(restaurant.id)">Edit</button>
-            <button class="btn-secondary flex-1" type="button" @click="toggleVerify(restaurant.id)">{{ restaurant.verified ? 'Unverify' : 'Verify' }}</button>
-            <button class="btn-secondary flex-1" type="button" @click="openStatusModal(restaurant)">Status</button>
-            <button class="rounded-xl bg-rose-50 px-5 py-2.5 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeRestaurantRecord(restaurant.id)">Delete</button>
-          </div>
-        </article>
+        </div>
       </div>
 
       <EmptyState v-else title="No restaurants yet" message="Create the first restaurant and branch set to start partner operations." />
@@ -242,9 +230,9 @@
           </div>
         </div>
 
-        <div class="flex gap-4 pt-4">
-          <button class="btn-primary flex-1" :disabled="saving">{{ saving ? 'Saving...' : editingId ? 'Update restaurant' : 'Create restaurant' }}</button>
-          <button type="button" class="btn-secondary flex-1" @click="closeModal">Cancel</button>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button class="btn-primary" :disabled="saving">{{ saving ? 'Saving...' : editingId ? 'Update restaurant' : 'Create restaurant' }}</button>
+          <button type="button" class="btn-secondary" @click="closeModal">Cancel</button>
         </div>
       </form>
     </AppModal>
@@ -281,10 +269,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
-import { Plus } from 'lucide-vue-next';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { BadgeCheck, MoreVertical, Pencil, Plus, ShieldAlert, Trash2 } from 'lucide-vue-next';
 import type { Branch, BranchOperatingHour, HolidayClosure, Restaurant, RestaurantInput, RestaurantPartnerStatus } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import EmptyState from '@/components/common/EmptyState.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import ImageUploadField from '@/components/forms/ImageUploadField.vue';
@@ -299,6 +288,7 @@ import {
   updateRestaurant,
 } from '@/services/restaurant.service';
 
+const { confirmDialog } = useAppDialog();
 const restaurants = ref<Restaurant[]>([]);
 const loading = ref(false);
 const editingId = ref<string | null>(null);
@@ -311,7 +301,21 @@ const isStatusModalOpen = ref(false);
 const selectedRestaurant = ref<Restaurant | null>(null);
 const branchOperatingHours = ref<string[]>([]);
 const branchHolidayClosures = ref<string[]>([]);
+const query = ref('');
+const openActionMenuRestaurantId = ref<string | null>(null);
 
+const filteredRestaurants = computed(() => {
+  const term = query.value.trim().toLowerCase();
+  if (!term) {
+    return restaurants.value;
+  }
+  return restaurants.value.filter((restaurant) =>
+    [restaurant.name, restaurant.status, restaurant.partnerStatus ?? '', restaurant.cuisine.join(' '), ...restaurant.branches.map((branch) => `${branch.name} ${branch.zone}`)]
+      .join(' ')
+      .toLowerCase()
+      .includes(term),
+  );
+});
 const blankForm = (): RestaurantInput => ({
   name: '',
   cuisine: [],
@@ -344,8 +348,42 @@ async function load() {
   }
 }
 
-onMounted(load);
+onMounted(() => {
+  void load();
+  window.addEventListener('click', closeActionMenu);
+});
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenu);
+});
+
+function toggleActionMenu(restaurantId: string) {
+  openActionMenuRestaurantId.value = openActionMenuRestaurantId.value === restaurantId ? null : restaurantId;
+}
+
+function closeActionMenu() {
+  openActionMenuRestaurantId.value = null;
+}
+
+function editFromMenu(restaurantId: string) {
+  closeActionMenu();
+  startEdit(restaurantId);
+}
+
+function verifyFromMenu(restaurantId: string) {
+  closeActionMenu();
+  void toggleVerify(restaurantId);
+}
+
+function statusFromMenu(restaurant: Restaurant) {
+  closeActionMenu();
+  openStatusModal(restaurant);
+}
+
+function deleteFromMenu(restaurantId: string) {
+  closeActionMenu();
+  void removeRestaurantRecord(restaurantId);
+}
 function resetForm() {
   editingId.value = null;
   Object.assign(form, blankForm());
@@ -616,7 +654,12 @@ async function removeRestaurantRecord(restaurantId: string) {
     return;
   }
 
-  const confirmed = window.confirm(`Delete ${restaurant.name} from the admin dataset?`);
+  const confirmed = await confirmDialog({
+    title: 'Delete restaurant',
+    message: `Delete ${restaurant.name} from the admin dataset?`,
+    confirmLabel: 'Delete restaurant',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

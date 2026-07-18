@@ -103,7 +103,8 @@
       "promotions.read",
       "promotions.manage",
       "analytics.read",
-      "profile.manage"
+      "profile.manage",
+      "users.manage"
     ]
   },
   {

@@ -1,7 +1,7 @@
 import type { CartItem, Order, OrderUpdateInput, PaymentMethod } from '@/types';
 import { createActivityLog } from '@/services/activity-log.service';
 import { createNotification } from '@/services/notification.service';
-import { dbOrders, saveOrders } from '@/utils/mockDb';
+import { dbOrders, dbUsers, saveOrders } from '@/utils/mockDb';
 import type { CheckoutPaymentMethod, PaymentDetailsPayload } from '@/utils/payment';
 import { formatPaymentSummary } from '@/utils/payment';
 
@@ -50,6 +50,22 @@ function notifyAdminOrder(title: string, message: string, ctaTo = '/admin/orders
     ctaLabel: 'Open orders',
     ctaTo,
   });
+}
+
+function notifyRestaurantTeam(order: Order, title: string, message: string, ctaTo = '/partner/orders') {
+  dbUsers()
+    .filter((user) => user.restaurantId === order.restaurantId && ['owner', 'kitchen'].includes(user.role))
+    .forEach((user) => {
+      createNotification({
+        title,
+        message,
+        kind: 'order',
+        audienceRole: 'admin',
+        userId: user.id,
+        ctaLabel: 'Open orders',
+        ctaTo,
+      });
+    });
 }
 
 async function logOrderStatusChange(previousOrder: Order, nextOrder: Order, label?: string) {
@@ -179,6 +195,11 @@ export async function createOrder(payload: {
     'New customer order received',
     `${order.restaurantName} received ${order.id} for ${order.branchName} with ${order.items.length} items and a total of THB ${order.total}.`,
   );
+  notifyRestaurantTeam(
+    order,
+    'New order for your restaurant',
+    `${order.id} was placed for ${order.branchName} with ${order.items.length} items and ${order.paymentSummary ?? 'payment selected'}.`,
+  );
 
   await createActivityLog({
     domain: 'order',
@@ -234,6 +255,7 @@ export async function updateOrderStatus(orderId: string, status: string, label?:
     const statusLabel = formatStatusLabel(status);
     notifyOrderChange(updatedOrder, `Order update: ${statusLabel}`, `${updatedOrder.restaurantName} moved ${updatedOrder.id} to ${statusLabel}.`);
     notifyAdminOrder('Order status changed', `${updatedOrder.id} is now ${statusLabel} for ${updatedOrder.restaurantName}.`);
+    notifyRestaurantTeam(updatedOrder, 'Restaurant order status changed', `${updatedOrder.id} moved to ${statusLabel}.`);
 
     if (previousOrder && previousOrder.status !== updatedOrder.status) {
       await logOrderStatusChange(previousOrder, updatedOrder, label);
@@ -285,6 +307,11 @@ export async function updateOrder(orderId: string, payload: OrderUpdateInput) {
     notifyAdminOrder(
       'Order assignment updated',
       `${updatedOrder.id} was updated to ${statusLabel}${updatedOrder.riderName ? ` and assigned to ${updatedOrder.riderName}` : ''}.`,
+    );
+    notifyRestaurantTeam(
+      updatedOrder,
+      'Restaurant order updated',
+      `${updatedOrder.id} now shows ${statusLabel}${updatedOrder.riderName ? ` with ${updatedOrder.riderName}` : ''}.`,
     );
 
     if (previousOrder && previousOrder.status !== updatedOrder.status) {
@@ -356,6 +383,7 @@ export async function approveRefund(orderId: string, reason: string) {
     '/orders',
   );
   notifyAdminOrder('Refund approved', `${updatedOrder.id} was approved for refund review.`, '/admin/activity-log');
+  notifyRestaurantTeam(updatedOrder, 'Refund review approved', `${updatedOrder.id} was approved for refund review.`, '/partner/orders');
 
   await createActivityLog({
     domain: 'refund',

@@ -78,10 +78,12 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import { addCustomerAddress, deleteCustomerAddress, setDefaultCustomerAddress, updateCustomerAddress } from '@/services/customer.service';
 import { useAuthStore } from '@/stores/auth.store';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const editingId = ref<string | null>(null);
 const saving = ref(false);
@@ -184,7 +186,12 @@ async function remove(addressId: string) {
     return;
   }
 
-  const confirmed = window.confirm('Delete this address from the frontend data?');
+  const confirmed = await confirmDialog({
+    title: 'Delete address',
+    message: 'Delete this address from the frontend data?',
+    confirmLabel: 'Delete address',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

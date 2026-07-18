@@ -63,9 +63,7 @@
         >
           <div class="flex gap-5">
             <!-- Icon -->
-            <div class="text-5xl flex-shrink-0 pt-1">
-              {{ getIcon(notification.kind) }}
-            </div>
+            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-white text-brand-500 shadow-sm"><component :is="notificationIcon(notification.kind)" :size="24" /></div>
 
             <!-- Content -->
             <div class="flex-1">
@@ -117,7 +115,7 @@
       </div>
 
       <div v-else class="rounded-xl border border-dashed border-slate-300 bg-slate-50 py-20 text-center">
-        <p class="text-6xl mb-4">📭</p>
+        <BellOff class="mx-auto mb-4 text-slate-300" :size="52" />
         <p class="text-xl font-medium text-slate-900">No notifications yet</p>
         <p class="text-slate-500 mt-2 max-w-md mx-auto">
           We'll notify you here when there are updates about your orders, promotions, and account activity.
@@ -130,11 +128,14 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
+import { Bell, BellOff, Gift, Package, Settings, UserRound } from 'lucide-vue-next';
 import SectionCard from '@/components/common/SectionCard.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import { useAuthStore } from '@/stores/auth.store';
 import { useNotificationStore } from '@/stores/notification.store';
 import { formatShortDate } from '@/utils/format';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();
 const filter = ref<'all' | 'unread' | 'order' | 'promo' | 'account'>('all');
@@ -149,13 +150,18 @@ const filteredNotifications = computed(() => {
 
 const hasUnread = computed(() => notificationStore.unreadCount > 0);
 
-function getIcon(kind: string): string {
+function notificationIcon(kind: string) {
   switch (kind) {
-    case 'order': return '📦';
-    case 'promo': return '🎁';
-    case 'account': return '👤';
-    case 'system': return '⚙️';
-    default: return '🛎️';
+    case 'order':
+      return Package;
+    case 'promo':
+      return Gift;
+    case 'account':
+      return UserRound;
+    case 'system':
+      return Settings;
+    default:
+      return Bell;
   }
 }
 
@@ -175,8 +181,16 @@ function markAllRead() {
   if (authStore.user) notificationStore.markEverythingRead(authStore.user);
 }
 
-function removeNotification(id: string) {
-  if (authStore.user) notificationStore.removeNotification(id, authStore.user);
+async function removeNotification(id: string) {
+  if (!authStore.user) return;
+
+  const confirmed = await confirmDialog({
+    title: 'Remove notification',
+    message: 'Remove this notification from your feed?',
+    confirmLabel: 'Remove notification',
+    tone: 'danger',
+  });
+  if (confirmed) notificationStore.removeNotification(id, authStore.user);
 }
 
 function formatKind(kind: string) {

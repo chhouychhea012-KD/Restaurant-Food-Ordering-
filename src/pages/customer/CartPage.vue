@@ -59,7 +59,7 @@
           </div>
           <div class="flex items-center gap-4">
             <p class="text-base font-bold text-slate-950">{{ formatCurrency(item.price * item.quantity) }}</p>
-            <button class="text-sm font-semibold text-rose-500" @click="cartStore.removeItem(item.id)">Remove</button>
+            <button class="text-sm font-semibold text-rose-500" @click="removeCartItem(item.id)">Remove</button>
           </div>
         </div>
 
@@ -117,6 +117,7 @@
 import { computed, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import EmptyState from '@/components/common/EmptyState.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import CartSummary from '@/components/customer/CartSummary.vue';
@@ -127,6 +128,7 @@ import type { Restaurant } from '@/types';
 import { formatCurrency } from '@/utils/format';
 import { evaluateBranchAvailability, getBranchById } from '@/utils/ordering';
 
+const { confirmDialog } = useAppDialog();
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const restaurant = ref<Restaurant | null>(null);
@@ -202,6 +204,19 @@ function clearVoucher() {
   voucherInput.value = '';
   voucherSuccess.value = true;
   voucherMessage.value = 'Voucher removed from the cart.';
+}
+
+async function removeCartItem(itemId: string) {
+  const item = cartStore.items.find((entry) => entry.id === itemId);
+  const confirmed = await confirmDialog({
+    title: 'Remove item',
+    message: `Remove ${item?.name ?? 'this item'} from your cart?`,
+    confirmLabel: 'Remove item',
+    tone: 'danger',
+  });
+  if (confirmed) {
+    cartStore.removeItem(itemId);
+  }
 }
 
 function confirmClearCart() {

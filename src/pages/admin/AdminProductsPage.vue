@@ -67,33 +67,47 @@
   </div>
 </div>
 
-      <div class="mt-6 space-y-4">
-        <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-sm">
-          <div class="flex flex-wrap items-start justify-between gap-4">
-            <div class="flex gap-4">
-              <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-lg object-cover" />
-              <div>
-                <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-500">{{ product.restaurantName }} / {{ product.categoryName }}</p>
-                <h3 class="mt-2 text-xl font-bold text-slate-950">{{ product.item.name }}</h3>
-                <p class="mt-2 line-clamp-2 max-w-2xl text-sm leading-6 text-slate-600">{{ product.item.description }}</p>
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <span v-for="modifier in product.item.modifiers" :key="modifier" class="pill bg-slate-100 text-slate-600">{{ modifier }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="pill" :class="product.item.available ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'">
-                {{ product.item.available ? 'Available' : 'Paused' }}
-              </span>
-              <p class="mt-3 text-2xl font-bold text-slate-950">{{ formatCurrency(product.item.price) }}</p>
-              <p class="mt-1 text-sm text-slate-500">{{ product.item.prepTime }} min prep</p>
-            </div>
-          </div>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(product.item.id)">Edit</button>
-            <button class="btn-secondary px-3 py-2" type="button" @click="toggleAvailability(product)">{{ product.item.available ? 'Pause' : 'Activate' }}</button>
-            <button class="rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeProduct(product.item.id)">Delete</button>
-          </div>
+      <div class="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="thin-scrollbar overflow-x-auto">
+          <table class="w-full min-w-[860px] text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+              <tr>
+                <th class="px-5 py-4">Product</th>
+                <th class="px-5 py-4">Restaurant</th>
+                <th class="px-5 py-4">Category</th>
+                <th class="px-5 py-4">Status</th>
+                <th class="px-5 py-4">Price</th>
+                <th class="px-5 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-for="product in filteredProducts" :key="product.item.id" class="transition hover:bg-orange-50/40">
+                <td class="px-5 py-4">
+                  <div class="flex min-w-0 items-center gap-3">
+                    <img :src="product.item.image" :alt="product.item.name" class="h-12 w-12 rounded-lg object-cover" />
+                    <div class="min-w-0">
+                      <p class="truncate font-bold text-slate-950">{{ product.item.name }}</p>
+                      <p class="mt-1 text-xs text-slate-500">{{ product.item.prepTime }} min prep</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 font-semibold text-slate-700">{{ product.restaurantName }}</td>
+                <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ product.categoryName }}</span></td>
+                <td class="px-5 py-4"><span class="pill" :class="product.item.available ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'">{{ product.item.available ? 'Available' : 'Paused' }}</span></td>
+                <td class="px-5 py-4 font-bold text-slate-950">{{ formatCurrency(product.item.price) }}</td>
+                <td class="px-5 py-4">
+                  <div class="relative flex justify-end">
+                    <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleProductMenu(product.item.id)"><MoreVertical :size="18" /></button>
+                    <div v-if="openActionMenuProductId === product.item.id" class="absolute right-0 top-11 z-30 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editProductFromMenu(product.item.id)"><Pencil :size="15" /> Edit</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="availabilityFromMenu(product)"><ToggleLeft :size="15" /> {{ product.item.available ? 'Pause' : 'Activate' }}</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50" type="button" @click="deleteProductFromMenu(product.item.id)"><Trash2 :size="15" /> Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </SectionCard>
@@ -103,20 +117,29 @@
         <button class="btn-primary" type="button" @click="openCreateCategoryModal">Create category</button>
       </template>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <div v-for="entry in filteredCategories" :key="entry.category.id" class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-sm">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-500">{{ entry.restaurantName }}</p>
-              <h3 class="mt-2 text-xl font-bold text-slate-950">{{ entry.category.name }}</h3>
-              <p class="mt-2 text-sm text-slate-500">{{ entry.category.items.length }} products in this category</p>
-            </div>
-            <span class="pill bg-slate-100 text-slate-700">{{ entry.category.items.length }} items</span>
-          </div>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <button class="btn-secondary px-3 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">Edit</button>
-            <button class="rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeCategory(entry.category.id)">Delete</button>
-          </div>
+      <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="thin-scrollbar overflow-x-auto">
+          <table class="w-full min-w-[680px] text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+              <tr><th class="px-5 py-4">Category</th><th class="px-5 py-4">Restaurant</th><th class="px-5 py-4">Products</th><th class="px-5 py-4 text-right">Actions</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-for="entry in filteredCategories" :key="entry.category.id" class="transition hover:bg-orange-50/40">
+                <td class="px-5 py-4 font-bold text-slate-950">{{ entry.category.name }}</td>
+                <td class="px-5 py-4 text-slate-700">{{ entry.restaurantName }}</td>
+                <td class="px-5 py-4"><span class="pill bg-slate-100 text-slate-700">{{ entry.category.items.length }} items</span></td>
+                <td class="px-5 py-4">
+                  <div class="relative flex justify-end">
+                    <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" type="button" @click.stop="toggleCategoryMenu(entry.category.id)"><MoreVertical :size="18" /></button>
+                    <div v-if="openActionMenuCategoryId === entry.category.id" class="absolute right-0 top-11 z-30 w-40 overflow-hidden rounded-lg border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]">
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="editCategoryFromMenu(entry.category.id)"><Pencil :size="15" /> Edit</button>
+                      <button class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50" type="button" @click="deleteCategoryFromMenu(entry.category.id)"><Trash2 :size="15" /> Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -219,14 +242,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import type { AdminCategory, AdminProduct, MenuCategoryInput, MenuItemInput, Restaurant } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
+import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import ImageUploadField from '@/components/forms/ImageUploadField.vue';
 import { formatCurrency } from '@/utils/format';
-import { Package, CheckCircle, Tags, Building2 } from 'lucide-vue-next';
+import { Building2, CheckCircle, MoreVertical, Package, Pencil, Tags, Trash2, ToggleLeft } from 'lucide-vue-next';
 import {
   createMenuCategory,
   createMenuItem,
@@ -240,6 +264,7 @@ import {
 } from '@/services/menu.service';
 import { listRestaurants } from '@/services/restaurant.service';
 
+const { confirmDialog } = useAppDialog();
 const products = ref<AdminProduct[]>([]);
 const categories = ref<AdminCategory[]>([]);
 const restaurants = ref<Restaurant[]>([]);
@@ -251,6 +276,8 @@ const isModalOpen = ref(false);
 const isCategoryModalOpen = ref(false);
 const editingItemId = ref<string | null>(null);
 const editingCategoryId = ref<string | null>(null);
+const openActionMenuProductId = ref<string | null>(null);
+const openActionMenuCategoryId = ref<string | null>(null);
 
 const blankForm = (): MenuItemInput => ({
   restaurantId: '',
@@ -302,8 +329,54 @@ async function load() {
   restaurants.value = await listRestaurants();
 }
 
-onMounted(load);
+onMounted(() => {
+  void load();
+  window.addEventListener('click', closeActionMenus);
+});
 
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeActionMenus);
+});
+
+function closeActionMenus() {
+  openActionMenuProductId.value = null;
+  openActionMenuCategoryId.value = null;
+}
+
+function toggleProductMenu(itemId: string) {
+  openActionMenuProductId.value = openActionMenuProductId.value === itemId ? null : itemId;
+  openActionMenuCategoryId.value = null;
+}
+
+function toggleCategoryMenu(categoryId: string) {
+  openActionMenuCategoryId.value = openActionMenuCategoryId.value === categoryId ? null : categoryId;
+  openActionMenuProductId.value = null;
+}
+
+function editProductFromMenu(itemId: string) {
+  closeActionMenus();
+  openEditModal(itemId);
+}
+
+function availabilityFromMenu(product: AdminProduct) {
+  closeActionMenus();
+  void toggleAvailability(product);
+}
+
+function deleteProductFromMenu(itemId: string) {
+  closeActionMenus();
+  void removeProduct(itemId);
+}
+
+function editCategoryFromMenu(categoryId: string) {
+  closeActionMenus();
+  openEditCategoryModal(categoryId);
+}
+
+function deleteCategoryFromMenu(categoryId: string) {
+  closeActionMenus();
+  void removeCategory(categoryId);
+}
 function resetForm() {
   editingItemId.value = null;
   Object.assign(form, blankForm());
@@ -463,7 +536,12 @@ async function submitCategory() {
 }
 
 async function removeProduct(itemId: string) {
-  const confirmed = window.confirm('Delete this product from the menu dataset?');
+  const confirmed = await confirmDialog({
+    title: 'Delete product',
+    message: 'Delete this product from the menu dataset?',
+    confirmLabel: 'Delete product',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }
@@ -478,7 +556,12 @@ async function removeProduct(itemId: string) {
 }
 
 async function removeCategory(categoryId: string) {
-  const confirmed = window.confirm('Delete this category from the menu dataset?');
+  const confirmed = await confirmDialog({
+    title: 'Delete category',
+    message: 'Delete this category from the menu dataset?',
+    confirmLabel: 'Delete category',
+    tone: 'danger',
+  });
   if (!confirmed) {
     return;
   }

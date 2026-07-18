@@ -1,4 +1,4 @@
-export type CheckoutPaymentMethod = 'cash' | 'visa_card' | 'bank_account';
+export type CheckoutPaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway';
 
 export interface VisaPaymentDetails {
   cardholderName: string;
@@ -13,17 +13,30 @@ export interface BankPaymentDetails {
   accountNumber: string;
 }
 
+export interface PaypalPaymentDetails {
+  email: string;
+}
+
+export interface AbaPaywayPaymentDetails {
+  accountName: string;
+  phone: string;
+}
+
 export interface PaymentDetailsPayload {
-  provider: 'cash' | 'visa' | 'bank';
+  provider: 'cash' | 'visa' | 'bank' | 'paypal' | 'aba_payway';
   label: string;
   last4?: string;
   bankName?: string;
   accountName?: string;
+  email?: string;
+  phoneLast4?: string;
 }
 
 export interface CheckoutPaymentForms {
   visa: VisaPaymentDetails;
   bank: BankPaymentDetails;
+  paypal: PaypalPaymentDetails;
+  abaPayway: AbaPaywayPaymentDetails;
 }
 
 function digitsOnly(value: string) {
@@ -40,6 +53,10 @@ function isFutureExpiry(value: string, referenceDate = new Date()) {
   const year = 2000 + Number(match[2]);
   const expiryEnd = new Date(year, month, 0, 23, 59, 59, 999);
   return expiryEnd >= referenceDate;
+}
+
+function isEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
 export function validatePayment(method: CheckoutPaymentMethod, forms: CheckoutPaymentForms, referenceDate = new Date()) {
@@ -81,6 +98,22 @@ export function validatePayment(method: CheckoutPaymentMethod, forms: CheckoutPa
     }
   }
 
+  if (method === 'paypal') {
+    if (!isEmail(forms.paypal.email)) {
+      issues.push('Enter a valid PayPal email address.');
+    }
+  }
+
+  if (method === 'aba_payway') {
+    const phone = digitsOnly(forms.abaPayway.phone);
+    if (forms.abaPayway.accountName.trim().length < 3) {
+      issues.push('Enter the ABA account name.');
+    }
+    if (phone.length < 8 || phone.length > 15) {
+      issues.push('Enter a valid ABA phone number.');
+    }
+  }
+
   return issues;
 }
 
@@ -106,6 +139,24 @@ export function buildPaymentDetails(method: CheckoutPaymentMethod, forms: Checko
     };
   }
 
+  if (method === 'paypal') {
+    return {
+      provider: 'paypal',
+      label: 'PayPal',
+      email: forms.paypal.email.trim().toLowerCase(),
+    };
+  }
+
+  if (method === 'aba_payway') {
+    const phone = digitsOnly(forms.abaPayway.phone);
+    return {
+      provider: 'aba_payway',
+      label: 'ABA PayWay',
+      accountName: forms.abaPayway.accountName.trim(),
+      phoneLast4: phone.slice(-4),
+    };
+  }
+
   return {
     provider: 'cash',
     label: 'Cash on delivery',
@@ -119,6 +170,14 @@ export function formatPaymentSummary(method: CheckoutPaymentMethod, details?: Pa
 
   if (method === 'bank_account') {
     return `${details?.bankName || 'Bank account'} ending ${details?.last4 || 'demo'}`;
+  }
+
+  if (method === 'paypal') {
+    return `PayPal ${details?.email || 'demo account'}`;
+  }
+
+  if (method === 'aba_payway') {
+    return `ABA PayWay ending ${details?.phoneLast4 || 'demo'}`;
   }
 
   return 'Cash on delivery';
