@@ -1,125 +1,74 @@
 <template>
-  <div class="space-y-16">
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-orange-600 px-6 py-16 text-white shadow-2xl sm:px-10 sm:py-20">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent)]" />
-
-      <div class="relative max-w-5xl mx-auto grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <div class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-medium">
-            <Utensils class="h-5 w-5" />
-            Flavor Fleet
-          </div>
-
-          <h1 class="mt-6 text-5xl font-extrabold leading-tight sm:text-5xl">
-            Food ordering made simple,<br>for everyone
+  <div class="space-y-8">
+    <section class="surface-card overflow-hidden bg-gradient-to-br from-orange-50 via-white to-emerald-50 text-slate-900">
+      <div class="grid min-h-[500px] lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)]">
+        <div class="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12">
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-600">About Flavor Fleet</p>
+          <h1 class="mt-4 max-w-xl text-4xl font-extrabold leading-tight sm:text-5xl">
+            Fresh food delivery, built for clear everyday ordering.
           </h1>
-
-          <p class="mt-6 max-w-lg text-lg text-slate-200">
-            A complete platform connecting customers, restaurants, and delivery teams in one seamless experience.
+          <p class="mt-4 max-w-lg text-base leading-7 text-slate-600">
+            We connect customers, restaurants, kitchens, riders, and admins in one simple food platform.
           </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <RouterLink to="/restaurants" class="btn-primary">Explore restaurants</RouterLink>
+            <RouterLink to="/auth/login" class="btn-secondary border-brand-200 bg-white text-brand-700 hover:bg-orange-50">Demo login</RouterLink>
+          </div>
 
-          <div class="mt-8 flex flex-wrap gap-4">
-            <RouterLink 
-              to="/restaurants" 
-              class="btn-primary bg-white text-slate-900 hover:bg-orange-50 flex items-center gap-3 px-8 py-4 text-base font-semibold"
-            >
-              <Store class="h-5 w-5" />
-              Explore Restaurants
-            </RouterLink>
+          <div class="mt-10 grid max-w-xl grid-cols-3 gap-3">
+            <div v-for="metric in metrics" :key="metric.label" class="rounded-lg border border-orange-100 bg-white/85 px-3 py-3 shadow-sm">
+              <p class="text-lg font-bold text-slate-950">{{ metric.value }}</p>
+              <p class="mt-1 text-xs text-slate-500">{{ metric.label }}</p>
+            </div>
           </div>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
-            <Zap class="h-9 w-9 text-orange-300" />
-            <p class="mt-5 text-3xl font-bold">Fast</p>
-            <p class="text-sm text-slate-200 mt-1">Browse • Order • Track</p>
-          </div>
-          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
-            <Users class="h-9 w-9 text-blue-300" />
-            <p class="mt-5 text-3xl font-bold">Connected</p>
-            <p class="text-sm text-slate-200 mt-1">All teams in one system</p>
-          </div>
-          <div class="rounded-xl bg-white/10 p-6 backdrop-blur border border-white/10">
-            <Target class="h-9 w-9 text-emerald-300" />
-            <p class="mt-5 text-3xl font-bold">Reliable</p>
-            <p class="text-sm text-slate-200 mt-1">End-to-end delivery</p>
+        <div class="relative min-h-[420px] overflow-hidden">
+          <img :src="heroImage" alt="Fresh food prepared for delivery" class="absolute inset-0 h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-orange-950/62 via-orange-950/8 to-transparent lg:bg-gradient-to-r lg:from-orange-950/14 lg:via-transparent lg:to-transparent" />
+          <div class="absolute inset-x-4 bottom-4 rounded-lg border border-white/40 bg-white/90 p-4 shadow-xl backdrop-blur sm:inset-x-8 sm:bottom-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Live workflow</p>
+                <h2 class="mt-2 text-2xl font-bold text-slate-950">Order, prepare, dispatch, deliver</h2>
+              </div>
+              <span class="rounded-md bg-brand-500 px-3 py-1 text-sm font-bold text-white">27 min avg</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Core Values -->
-    <section class="grid gap-6 md:grid-cols-3">
-      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center">
-          <Store class="h-8 w-8 text-orange-600" />
+    <section class="grid gap-4 md:grid-cols-3">
+      <article v-for="value in values" :key="value.title" class="surface-card p-6 transition hover:-translate-y-0.5 hover:shadow-md">
+        <div class="flex h-12 w-12 items-center justify-center rounded-lg" :class="value.iconTone">
+          <component :is="value.icon" class="h-6 w-6" />
         </div>
-        <h3 class="mt-6 text-2xl font-bold text-slate-900">For Customers</h3>
-        <p class="mt-3 text-slate-600">
-          Discover great food and enjoy a smooth, fast ordering experience.
-        </p>
-      </div>
-
-      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
-          <ChefHat class="h-8 w-8 text-emerald-600" />
-        </div>
-        <h3 class="mt-6 text-2xl font-bold text-slate-900">For Restaurants</h3>
-        <p class="mt-3 text-slate-600">
-          Powerful tools to manage menus, orders, and kitchen operations.
-        </p>
-      </div>
-
-      <div class="surface-card rounded-xl p-8 hover:shadow-lg transition group">
-        <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-          <Bike class="h-8 w-8 text-blue-600" />
-        </div>
-        <h3 class="mt-6 text-2xl font-bold text-slate-900">For Riders</h3>
-        <p class="mt-3 text-slate-600">
-          Efficient delivery management with live order tracking.
-        </p>
-      </div>
+        <h3 class="mt-5 text-xl font-bold text-slate-950">{{ value.title }}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-600">{{ value.description }}</p>
+      </article>
     </section>
 
-    <!-- Key Features -->
-    <SectionCard
-      eyebrow="What We Offer"
-      title="Key Features"
-      description="Built to serve all sides of the food delivery ecosystem"
-    >
-      <div class="grid gap-6 lg:grid-cols-2">
-        <article
-          v-for="item in highlights"
-          :key="item.title"
-          class="rounded-xl border border-slate-100 bg-white p-8 hover:shadow-md transition"
-        >
-          <component :is="item.icon" class="h-10 w-10 text-brand-500" />
-          <h3 class="mt-5 text-2xl font-semibold text-slate-900">{{ item.title }}</h3>
-          <p class="mt-4 text-slate-600 leading-relaxed">{{ item.description }}</p>
+    <SectionCard eyebrow="Platform" title="Made for the full delivery flow" description="Clean tools for each team.">
+      <div class="grid gap-4 lg:grid-cols-4">
+        <article v-for="item in highlights" :key="item.title" class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:bg-orange-50">
+          <component :is="item.icon" class="h-7 w-7 text-brand-500" />
+          <h3 class="mt-4 text-lg font-semibold text-slate-950">{{ item.title }}</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.description }}</p>
         </article>
       </div>
     </SectionCard>
 
-    <!-- How It Works -->
-    <SectionCard
-      eyebrow="How It Works"
-      title="Simple 4-Step Process"
-      description="From browsing to delivery"
-    >
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div
-          v-for="(step, index) in workflow"
-          :key="step.title"
-          class="rounded-xl bg-white border border-slate-100 p-8 text-center"
-        >
-          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-xl font-bold text-white shadow">
-            {{ index + 1 }}
+    <SectionCard eyebrow="Workflow" title="How orders move" description="Simple, visible, and easy to follow.">
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div v-for="(step, index) in workflow" :key="step.title" class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50 text-sm font-bold text-brand-600 ring-1 ring-orange-100">
+              {{ index + 1 }}
+            </span>
+            <h3 class="text-lg font-semibold text-slate-950">{{ step.title }}</h3>
           </div>
-          <h3 class="mt-6 text-xl font-semibold">{{ step.title }}</h3>
-          <p class="mt-3 text-slate-600">{{ step.description }}</p>
+          <p class="mt-4 text-sm leading-6 text-slate-600">{{ step.description }}</p>
         </div>
       </div>
     </SectionCard>
@@ -127,59 +76,66 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import SectionCard from '@/components/common/SectionCard.vue'
+import { computed, onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
+import SectionCard from '@/components/common/SectionCard.vue';
+import { useRestaurantStore } from '@/stores/restaurant.store';
+import { Bike, ChefHat, ShieldCheck, ShoppingCart, Store, Users, Zap } from 'lucide-vue-next';
 
-// Icons
-import { 
-  Utensils, 
-  Store, 
-  Zap, 
-  Users, 
-  Target, 
-  ChefHat, 
-  Bike,
-  ShoppingCart 
-} from 'lucide-vue-next'
+const restaurantStore = useRestaurantStore();
 
-type Highlight = {
-  icon: any
-  title: string
-  description: string
-}
+const heroImage = computed(() => {
+  const firstAvailableItem = restaurantStore.restaurants
+    .flatMap((restaurant) => restaurant.menuCategories.flatMap((category) => category.items))
+    .find((item) => item.available && item.image);
 
-type WorkflowStep = {
-  title: string
-  description: string
-}
+  return firstAvailableItem?.image ?? 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80';
+});
 
-const highlights: Highlight[] = [
-  { 
-    icon: Store, 
-    title: 'Restaurant Discovery', 
-    description: 'Easy browsing with smart filters and beautiful restaurant pages.' 
+const metrics = computed(() => [
+  { label: 'Restaurants', value: restaurantStore.restaurants.length || 0 },
+  { label: 'Avg delivery', value: '27 min' },
+  { label: 'Live tracking', value: 'On' },
+]);
+
+const values = [
+  {
+    icon: Store,
+    iconTone: 'bg-orange-50 text-brand-600 ring-1 ring-orange-100',
+    title: 'Easy for customers',
+    description: 'Browse restaurants, checkout faster, and track every order clearly.',
   },
-  { 
-    icon: ShoppingCart, 
-    title: 'Smart Ordering', 
-    description: 'Single restaurant cart with smooth and secure checkout.' 
+  {
+    icon: ChefHat,
+    iconTone: 'bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100',
+    title: 'Useful for restaurants',
+    description: 'Manage menus, availability, kitchen flow, and branch operations.',
   },
-  { 
-    icon: Users, 
-    title: 'Admin Control', 
-    description: 'Full management of restaurants, orders, users, and analytics.' 
+  {
+    icon: Bike,
+    iconTone: 'bg-sky-50 text-sky-600 ring-1 ring-sky-100',
+    title: 'Ready for delivery',
+    description: 'Assign riders, follow progress, and keep operations moving.',
   },
-  { 
-    icon: Bike, 
-    title: 'Fast Meal Delivery', 
-    description: 'Real-time tracking and efficient rider management.' 
-  },
-]
+];
 
-const workflow: WorkflowStep[] = [
-  { title: 'Browse', description: 'Discover restaurants and delicious meals.' },
-  { title: 'Order', description: 'Add items and complete checkout.' },
-  { title: 'Prepare', description: 'Kitchen receives and prepares the order.' },
-  { title: 'Deliver', description: 'Rider delivers your food on time.' }
-]
+const highlights = [
+  { icon: ShoppingCart, title: 'Smart cart', description: 'Single-restaurant ordering with clear totals.' },
+  { icon: Zap, title: 'Live operations', description: 'Kitchen and dispatch status in one place.' },
+  { icon: Users, title: 'Admin control', description: 'Roles, users, restaurants, and activity logs.' },
+  { icon: ShieldCheck, title: 'Reliable access', description: 'Role-aware routes and protected workflows.' },
+];
+
+const workflow = [
+  { title: 'Browse', description: 'Find restaurants, meals, and offers.' },
+  { title: 'Order', description: 'Review the cart and place checkout.' },
+  { title: 'Prepare', description: 'Kitchen accepts and updates progress.' },
+  { title: 'Deliver', description: 'Rider handles pickup and delivery.' },
+];
+
+onMounted(() => {
+  if (!restaurantStore.restaurants.length) {
+    void restaurantStore.loadAll();
+  }
+});
 </script>

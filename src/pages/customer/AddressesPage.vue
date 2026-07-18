@@ -1,5 +1,5 @@
 <template>
-  <SectionCard eyebrow="Saved Addresses" title="Manage delivery addresses" description="Create, update, delete, and set defaults for the addresses used by checkout.">
+  <SectionCard eyebrow="Saved Addresses" title="Manage delivery addresses" description="Saved checkout locations.">
     <template #actions>
       <button class="btn-primary" type="button" @click="openCreateModal">Add address</button>
     </template>
@@ -30,7 +30,7 @@
     :open="isModalOpen"
     eyebrow="Customer Address"
     :title="editingId ? 'Edit saved address' : 'Add a new address'"
-    description="Use the popup form to keep checkout addresses organized and easy to update."
+    description="Label, contact, and location."
     size="md"
     @close="closeModal"
   >

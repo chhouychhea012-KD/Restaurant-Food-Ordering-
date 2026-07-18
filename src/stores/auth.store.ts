@@ -1,9 +1,16 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import type { Session, User } from '@/types';
+import type { PermissionKey, Session, User } from '@/types';
 import { getActiveSession, login, logout, register, validateSession } from '@/services/auth.service';
-import { dbUsers } from '@/utils/mockDb';
-import { getRoleDefinition } from '@/utils/permissions';
+import { dbRoles, dbUsers } from '@/utils/mockDb';
+import {
+  evaluateUserOperationalAccess,
+  getPrimaryRoleName,
+  getUserPermissions,
+  getWorkspaceHome,
+  isUserStatusActive,
+  resolveWorkspaceArea,
+} from '@/utils/access';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null);
@@ -42,13 +49,27 @@ export const useAuthStore = defineStore('auth', () => {
 
   function refreshRolePermissions() {
     roleRevision.value += 1;
+    refreshCurrentUser();
   }
 
   const isAuthenticated = computed(() => Boolean(user.value && session.value));
-  const permissions = computed(() => {
-    roleRevision.value;
-    return user.value ? getRoleDefinition(user.value.role)?.permissions ?? [] : [];
+  const permissions = computed<PermissionKey[]>(() => {
+    void roleRevision.value;
+    return getUserPermissions(user.value, dbRoles());
   });
+  const primaryRole = computed(() => getPrimaryRoleName(user.value));
+  const isAccountActive = computed(() => isUserStatusActive(user.value?.status));
+  const accessEvaluation = computed(() => evaluateUserOperationalAccess(user.value));
+  const workspaceArea = computed(() => resolveWorkspaceArea(user.value, permissions.value));
+  const defaultWorkspaceRoute = computed(() => getWorkspaceHome(workspaceArea.value));
+
+  function hasPermission(permission: PermissionKey) {
+    return permissions.value.includes(permission);
+  }
+
+  function hasAllPermissions(required: readonly PermissionKey[]) {
+    return required.every((permission) => permissions.value.includes(permission));
+  }
 
   async function performLogin(email: string, password: string) {
     loading.value = true;
@@ -95,12 +116,20 @@ export const useAuthStore = defineStore('auth', () => {
     error,
     isAuthenticated,
     permissions,
+    primaryRole,
+    isAccountActive,
+    accessEvaluation,
+    workspaceArea,
+    defaultWorkspaceRoute,
     hydrate,
     refreshCurrentUser,
     setCurrentUser,
     refreshRolePermissions,
+    hasPermission,
+    hasAllPermissions,
     performLogin,
     performRegister,
     performLogout,
   };
 });
+

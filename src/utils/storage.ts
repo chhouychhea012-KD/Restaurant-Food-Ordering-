@@ -3,6 +3,7 @@ export const storageKeys = {
   roles: 'flavorfleet.roles',
   restaurants: 'flavorfleet.restaurants',
   orders: 'flavorfleet.orders',
+  activityLogs: 'flavorfleet.activityLogs',
   analytics: 'flavorfleet.analytics',
   notifications: 'flavorfleet.notifications',
   session: 'flavorfleet.session',
@@ -28,4 +29,10 @@ export function writeStorage<T>(key: string, value: T) {
 
 export function clearStorage(key: string) {
   localStorage.removeItem(key);
+}
+
+export function clearAppStorage() {
+  Object.values(storageKeys).forEach((key) => {
+    clearStorage(key);
+  });
 }

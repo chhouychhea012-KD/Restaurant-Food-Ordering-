@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 
@@ -11,5 +11,16 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    include: ['tests/unit/**/*.spec.ts'],
+    exclude: ['tests/e2e/**'],
+    setupFiles: ['./tests/setup/vitest.setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+    },
   },
 });

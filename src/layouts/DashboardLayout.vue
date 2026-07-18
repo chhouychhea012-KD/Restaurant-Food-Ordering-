@@ -1,22 +1,21 @@
 <template>
-  <div class="grid min-h-screen gap-6 p-4 lg:h-screen lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start lg:overflow-hidden lg:p-6">
+  <div class="grid min-h-screen gap-4 bg-slate-50/80 p-3 sm:p-4 lg:h-screen lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-5 lg:overflow-hidden lg:p-6 xl:grid-cols-[260px_minmax(0,1fr)]">
     <SidebarNav :items="navItems" />
 
-    <div class="relative flex min-h-0 flex-col gap-6 overflow-visible lg:h-[calc(100vh-3rem)]">
-      <div class="surface-card relative z-20 shrink-0 overflow-visible px-5 py-5 sm:px-6 lg:px-7">
-        <div class="flex min-h-[5.75rem] flex-wrap items-center justify-between gap-5">
+    <div class="relative flex min-h-0 flex-col gap-4 overflow-visible lg:h-[calc(100vh-3rem)]">
+      <div class="surface-card relative z-20 shrink-0 overflow-visible px-5 py-4 sm:px-6 lg:px-7">
+        <div class="flex min-h-[4.5rem] flex-wrap items-center justify-between gap-4">
           <div class="min-w-0">
-            <p class="text-sm font-medium text-slate-500">Signed in as</p>
-            <h1 class="truncate text-2xl font-bold text-slate-950">{{ authStore.user?.name }}</h1>
-            <p class="text-sm capitalize text-slate-500">{{ authStore.user?.role }} workspace</p>
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{{ workspaceLabel }}</p>
+            <h1 class="mt-1 truncate text-2xl font-bold text-slate-950">{{ authStore.user?.name }}</h1>
           </div>
 
-          <div ref="menuRef" class="relative flex items-center gap-3 lg:ml-auto">
+          <div ref="menuRef" class="relative flex shrink-0 items-center gap-3 lg:ml-auto">
             <LanguageSelect />
             <RouterLink
-              v-if="authStore.user?.role === 'admin'"
+              v-if="authStore.workspaceArea === 'admin'"
               to="/admin/notifications"
-              class="group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
+              class="group relative flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border bg-white text-slate-600 shadow-sm transition hover:text-slate-950"
               :class="route.path === '/admin/notifications'
                 ? 'border-brand-200 bg-brand-50 text-brand-600 shadow-brand-100/70'
                 : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -42,18 +41,15 @@
               </span>
             </RouterLink>
 
-            <div class="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-right">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Workspace</p>
-              <p class="mt-1 text-sm font-semibold text-slate-900">Admin control center</p>
-            </div>
-
             <button
-              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-500 text-lg font-bold text-white shadow-lg shadow-brand-200 ring-offset-2 transition hover:scale-[1.02] hover:bg-brand-600"
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white p-1 shadow-sm ring-offset-2 transition hover:border-brand-200 hover:bg-brand-50"
               :class="isMenuOpen ? 'ring-2 ring-brand-300' : ''"
               type="button"
+              :aria-label="accountButtonLabel"
+              title="Profile"
               @click="toggleMenu"
             >
-              {{ authStore.user?.avatar }}
+              <UserAvatar :user="authStore.user" size="sm" />
             </button>
 
             <transition
@@ -66,16 +62,14 @@
             >
               <div
                 v-if="isMenuOpen"
-                class="absolute right-0 top-[calc(100%+1rem)] z-50 w-[320px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
+                class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[300px] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
               >
                 <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_30%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
-                      {{ authStore.user?.avatar }}
-                    </div>
+                    <UserAvatar :user="authStore.user" size="md" />
                     <div class="min-w-0">
                       <p class="truncate text-base font-bold text-slate-950">{{ authStore.user?.name }}</p>
-                      <p class="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">{{ authStore.user?.role }} workspace</p>
+                      <p class="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">{{ roleCaption }}</p>
                     </div>
                   </div>
                 </div>
@@ -91,7 +85,7 @@
                   </RouterLink>
 
                   <RouterLink
-                    v-if="authStore.user?.role === 'admin'"
+                    v-if="authStore.workspaceArea === 'admin'"
                     to="/admin/notifications"
                     class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-slate-950"
                     @click="closeMenu"
@@ -124,7 +118,7 @@
         </div>
       </div>
 
-      <div class="relative z-0 min-h-0 flex-1 lg:overflow-y-auto lg:pr-2">
+      <div class="thin-scrollbar relative z-0 min-h-0 flex-1 overflow-visible lg:overflow-y-auto lg:pr-1 lg:[scrollbar-gutter:stable]">
         <div class="pb-6 pt-1">
           <RouterView />
         </div>
@@ -138,8 +132,10 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router';
 import SidebarNav from '@/components/common/SidebarNav.vue';
 import LanguageSelect from '@/components/common/LanguageSelect.vue';
+import UserAvatar from '@/components/common/UserAvatar.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useNotificationStore } from '@/stores/notification.store';
+import { titleCase } from '@/utils/format';
 
 const authStore = useAuthStore();
 const notificationStore = useNotificationStore();
@@ -148,6 +144,7 @@ const router = useRouter();
 const isMenuOpen = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 
+const accountButtonLabel = computed(() => (authStore.user ? `Profile menu for ${authStore.user.name}` : 'Profile menu'));
 const compactCount = computed(() => (notificationStore.unreadCount > 99 ? '99+' : String(notificationStore.unreadCount || 0)));
 const notificationAriaLabel = computed(() => {
   const unreadCount = notificationStore.unreadCount;
@@ -156,40 +153,77 @@ const notificationAriaLabel = computed(() => {
     return 'Notifications';
   }
 
-  return unreadCount === 1 ? 'Notifications, 1 unread item' : ('Notifications, ' + unreadCount + ' unread items');
+  return unreadCount === 1 ? 'Notifications, 1 unread item' : `Notifications, ${unreadCount} unread items`;
+});
+
+const workspaceLabel = computed(() => {
+  switch (authStore.workspaceArea) {
+    case 'admin':
+      return 'Admin control center';
+    case 'partner':
+      return 'Restaurant workspace';
+    case 'kitchen':
+      return 'Kitchen operations';
+    case 'rider':
+      return 'Rider workspace';
+    default:
+      return 'Customer account';
+  }
+});
+
+const roleCaption = computed(() => {
+  const role = authStore.primaryRole;
+  if (!role) {
+    return workspaceLabel.value;
+  }
+
+  return `${titleCase(role)} in ${workspaceLabel.value.toLowerCase()}`;
 });
 
 const navItems = computed(() => {
-  if (authStore.user?.role === 'admin') {
-    return [
-      { label: 'Overview', to: '/admin' },
-      { label: 'Profile', to: '/admin/profile' },
-      { label: 'Notifications', to: '/admin/notifications', badge: notificationStore.unreadCount ? compactCount.value : undefined },
-      { label: 'Roles & Permissions', to: '/admin/roles' },
-      { label: 'Users', to: '/admin/users' },
-      { label: 'Restaurants', to: '/admin/restaurants' },
-      { label: 'Products', to: '/admin/products' },
-      { label: 'Categories', to: '/admin/categories' },
-      { label: 'Orders', to: '/admin/orders' },
-      { label: 'Analytics', to: '/admin/analytics' },
-    ];
-  }
+  const itemsByWorkspace = {
+    admin: [
+      { label: 'Overview', to: '/admin', permissions: ['analytics.read'] },
+      { label: 'Notifications', to: '/admin/notifications', permissions: ['analytics.read'], badge: notificationStore.unreadCount ? compactCount.value : undefined },
+      { label: 'Roles & Permissions', to: '/admin/roles', permissions: ['roles.read'] },
+      { label: 'Users', to: '/admin/users', permissions: ['users.manage'] },
+      { label: 'Restaurants', to: '/admin/restaurants', permissions: ['restaurants.read'] },
+      { label: 'Products', to: '/admin/products', permissions: ['menus.read'] },
+      { label: 'Categories', to: '/admin/categories', permissions: ['menus.read'] },
+      { label: 'Orders', to: '/admin/orders', permissions: ['orders.read'] },
+      { label: 'Activity Log', to: '/admin/activity-log', permissions: ['activity_logs.read'] },
+      { label: 'Analytics', to: '/admin/analytics', permissions: ['analytics.read'] },
+    ],
+    partner: [
+      { label: 'Overview', to: '/partner', permissions: ['restaurants.read'] },
+      { label: 'Menu', to: '/partner/menu', permissions: ['menus.read'] },
+      { label: 'Orders', to: '/partner/orders', permissions: ['orders.read'] },
+    ],
+    kitchen: [
+      { label: 'Kitchen Queue', to: '/kitchen', permissions: ['orders.read'] },
+    ],
+    rider: [
+      { label: 'Overview', to: '/rider', permissions: ['dispatch.read'] },
+      { label: 'Deliveries', to: '/rider/deliveries', permissions: ['dispatch.read'] },
+    ],
+    customer: [],
+  } as const;
 
-  return [
-    { label: 'Overview', to: '/restaurant' },
-    { label: 'Menu', to: '/restaurant/menu' },
-    { label: 'Orders', to: '/restaurant/orders' },
-  ];
+  return itemsByWorkspace[authStore.workspaceArea].filter((item) => authStore.hasAllPermissions(item.permissions));
 });
 
 const profileLink = computed(() => {
-  switch (authStore.user?.role) {
+  switch (authStore.workspaceArea) {
     case 'admin':
       return '/admin/profile';
+    case 'partner':
+      return '/partner';
+    case 'kitchen':
+      return '/kitchen';
     case 'rider':
       return '/rider/profile';
     default:
-      return '/';
+      return '/customer/profile';
   }
 });
 
@@ -236,7 +270,3 @@ onBeforeUnmount(() => {
   window.removeEventListener('click', handleClickOutside);
 });
 </script>
-
-
-
-

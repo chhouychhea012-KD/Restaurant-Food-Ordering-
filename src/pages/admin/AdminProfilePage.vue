@@ -6,9 +6,7 @@
         <div class="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div class="flex items-center gap-6">
             <!-- Avatar -->
-            <div class="flex h-24 w-24 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-5xl font-bold text-white shadow-xl shadow-orange-200 ring-8 ring-white">
-              {{ authStore.user?.avatar || authStore.user?.name?.charAt(0) || '👤' }}
-            </div>
+            <UserAvatar :user="authStore.user" size="xl" />
 
             <div>
               <p class="text-sm font-semibold uppercase tracking-widest text-orange-600">Admin Profile</p>
@@ -17,7 +15,7 @@
             </div>
           </div>
 
-          <button @click="openEditProfile" class="btn-primary flex items-center gap-2 text-base px-6 py-3">
+          <button class="btn-primary flex items-center gap-2 text-base px-6 py-3" @click="openEditProfile">
             <Edit3 :size="20" />
             Edit Profile
           </button>
@@ -111,8 +109,8 @@
             <p class="mt-1 font-medium">{{ authStore.user?.phone }}</p>
           </div>
           <div class="rounded-xl bg-slate-50 p-5">
-            <p class="text-sm text-slate-500">Avatar Code</p>
-            <p class="mt-1 font-mono text-slate-600">{{ authStore.user?.avatar }}</p>
+            <p class="text-sm text-slate-500">Profile image</p>
+            <p class="mt-1 font-medium">{{ authStore.user?.avatarUrl ? 'Uploaded' : 'Initials fallback' }}</p>
           </div>
         </div>
       </SectionCard>
@@ -160,6 +158,20 @@
     @close="closeModal"
   >
     <form class="space-y-5" @submit.prevent="saveProfile">
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-brand-500 to-orange-400 text-2xl font-bold text-white shadow-sm ring-4 ring-white">
+            <img v-if="form.avatarUrl" :src="form.avatarUrl" alt="Profile preview" class="h-full w-full object-cover" />
+            <span v-else>{{ previewInitials }}</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <label class="btn-secondary cursor-pointer" for="admin-profile-photo">Upload photo</label>
+            <input id="admin-profile-photo" class="sr-only" type="file" accept="image/*" @change="onAvatarFileChange" />
+            <button v-if="form.avatarUrl" class="btn-secondary ml-2" type="button" @click="removeAvatar">Remove</button>
+            <p class="mt-2 text-xs text-slate-500">JPG, PNG, or WebP. Max 1.5 MB.</p>
+          </div>
+        </div>
+      </div>
       <div>
         <label class="field-label" for="admin-name">Full name</label>
         <input id="admin-name" v-model="form.name" class="field-input" type="text" required />
@@ -184,14 +196,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Edit3, Users, Shield, Package, BarChart3, ShieldCheck } from 'lucide-vue-next';
 
 import AppModal from '@/components/common/AppModal.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
+import UserAvatar from '@/components/common/UserAvatar.vue';
 import { updateUser } from '@/services/user.service';
 import { useAuthStore } from '@/stores/auth.store';
+import { readProfileImageFile } from '@/utils/avatar';
 
 const authStore = useAuthStore();
 const saving = ref(false);
@@ -203,18 +217,53 @@ const form = reactive({
   name: '',
   email: '',
   phone: '',
+  avatarUrl: null as string | null,
 });
+
+const previewInitials = computed(() =>
+  form.name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('') || 'U',
+);
 
 watch(() => authStore.user, (user) => {
   form.name = user?.name ?? '';
   form.email = user?.email ?? '';
   form.phone = user?.phone ?? '';
+  form.avatarUrl = user?.avatarUrl ?? null;
 }, { immediate: true });
 
 function openEditProfile() {
   message.value = '';
   error.value = '';
+  form.avatarUrl = authStore.user?.avatarUrl ?? null;
   isModalOpen.value = true;
+}
+
+async function onAvatarFileChange(event: Event) {
+  const input = event.target instanceof HTMLInputElement ? event.target : null;
+  const file = input?.files?.[0];
+  if (!file) {
+    return;
+  }
+
+  error.value = '';
+  try {
+    form.avatarUrl = await readProfileImageFile(file);
+  } catch (incoming) {
+    error.value = incoming instanceof Error ? incoming.message : 'Unable to upload this image.';
+  } finally {
+    if (input) {
+      input.value = '';
+    }
+  }
+}
+
+function removeAvatar() {
+  form.avatarUrl = null;
 }
 
 function closeModal() {
@@ -234,8 +283,11 @@ async function saveProfile() {
       email: form.email.trim(),
       phone: form.phone.trim(),
       role: authStore.user.role,
+      status: authStore.user.status,
       shiftActive: authStore.user.shiftActive,
       restaurantId: authStore.user.restaurantId ?? null,
+      accessWindow: authStore.user.roleAssignments[0]?.accessWindow ?? null,
+      avatarUrl: form.avatarUrl,
     });
 
     if (updatedUser) {

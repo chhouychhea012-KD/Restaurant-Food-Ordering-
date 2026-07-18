@@ -26,7 +26,9 @@ module.exports = {
         mesh: 'radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 35%), radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.18), transparent 30%)',
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        heading: ['Manrope', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        khmer: ['Battambang', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
     },
   },

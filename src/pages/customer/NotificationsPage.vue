@@ -41,7 +41,7 @@
     >
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <button class="btn-secondary" @click="markAllRead" :disabled="!hasUnread">
+          <button class="btn-secondary" :disabled="!hasUnread" @click="markAllRead">
             Mark all as read
           </button>
           <select v-model="filter" class="field-input w-52">
@@ -93,15 +93,15 @@
                 
                 <button 
                   v-if="!isRead(notification)" 
-                  @click="markRead(notification.id)"
                   class="btn-secondary"
+                  @click="markRead(notification.id)"
                 >
                   Mark as read
                 </button>
 
                 <button 
-                  @click="removeNotification(notification.id)"
                   class="text-rose-600 hover:text-rose-700 font-medium text-sm py-2 px-4"
+                  @click="removeNotification(notification.id)"
                 >
                   Remove
                 </button>
@@ -149,12 +149,6 @@ const filteredNotifications = computed(() => {
 
 const hasUnread = computed(() => notificationStore.unreadCount > 0);
 
-const activeFilterLabel = computed(() => {
-  if (filter.value === 'all') return 'All';
-  if (filter.value === 'unread') return 'Unread';
-  return filter.value.charAt(0).toUpperCase() + filter.value.slice(1);
-});
-
 function getIcon(kind: string): string {
   switch (kind) {
     case 'order': return '📦';
@@ -199,3 +193,4 @@ function toneClass(kind: string) {
   return colors[kind] || 'bg-slate-100 text-slate-700';
 }
 </script>
+

@@ -1,34 +1,74 @@
 <template>
-  <SectionCard eyebrow="Order Control" title="Admin order CRUD" description="Review order records, update delivery assignments and status, or remove test orders from the local operational dataset.">
+  <SectionCard
+    eyebrow="Orders"
+    title="Order operations"
+  >
     <div class="space-y-4">
-      <div v-for="order in orders" :key="order.id" class="surface-muted p-5">
-        <div class="flex flex-wrap items-center justify-between gap-4">
+      <div v-for="order in orders" :key="order.id" class="surface-muted p-4">
+        <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p class="text-sm text-slate-500">{{ order.id }}</p>
             <h3 class="text-lg font-bold text-slate-950">{{ order.restaurantName }}</h3>
-            <p class="text-sm text-slate-500">{{ order.deliveryAddress }}</p>
+            <p class="mt-1 text-sm text-slate-500">{{ order.deliveryAddress }}</p>
+            <p class="mt-2 text-xs text-slate-500">Created {{ formatPreciseDateTime(order.createdAt) }}</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <StatusBadge :status="order.status" />
             <span class="pill bg-slate-100 text-slate-700">{{ order.riderName ?? 'No rider' }}</span>
+            <span
+              class="pill"
+              :class="order.refundStatus === 'APPROVED' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-50 text-amber-700'"
+            >
+              {{ order.refundStatus === 'APPROVED' ? 'Refund Approved' : 'Refund Pending' }}
+            </span>
           </div>
         </div>
-        <div class="mt-4 flex flex-wrap gap-3">
+
+        <div class="mt-4 grid gap-3 md:grid-cols-3">
+          <div class="rounded-xl bg-white/80 px-4 py-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Items</p>
+            <p class="mt-2 text-sm font-semibold text-slate-900">{{ order.items.length }} line items</p>
+          </div>
+          <div class="rounded-xl bg-white/80 px-4 py-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">ETA</p>
+            <p class="mt-2 text-sm font-semibold text-slate-900">{{ formatPreciseDateTime(order.estimatedDeliveryAt) }}</p>
+          </div>
+          <div class="rounded-xl bg-white/80 px-4 py-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Latest transition</p>
+            <p class="mt-2 text-sm font-semibold text-slate-900">{{ statusLabel(order.timeline.at(-1)?.status ?? order.status) }}</p>
+          </div>
+        </div>
+
+        <div class="mt-5 flex flex-wrap gap-3">
           <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(order.id)">Edit</button>
-          <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeOrder(order.id)">Delete</button>
+          <button
+            class="btn-secondary px-3 py-2"
+            type="button"
+            :disabled="order.refundStatus === 'APPROVED'"
+            @click="approveRefundRequest(order.id)"
+          >
+            {{ order.refundStatus === 'APPROVED' ? 'Refund approved' : 'Approve refund' }}
+          </button>
+          <button
+            class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100"
+            type="button"
+            @click="removeOrder(order.id)"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
 
-    <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-    <p v-if="error" class="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
+    <p v-if="message" class="mt-5 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
+    <p v-if="error" class="mt-5 rounded-lg bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
   </SectionCard>
 
   <AppModal
     :open="isModalOpen"
     eyebrow="Order Control"
     title="Edit order details"
-    description="Update the assigned rider, delivery ETA, and status in a focused popup form."
+    description="Update rider, ETA, and status."
     size="md"
     @close="closeModal"
   >
@@ -41,7 +81,7 @@
       <div>
         <label class="field-label" for="order-status">Status</label>
         <select id="order-status" v-model="form.status" class="field-input">
-          <option v-for="status in statuses" :key="status" :value="status">{{ status }}</option>
+          <option v-for="status in statuses" :key="status" :value="status">{{ statusLabel(status) }}</option>
         </select>
       </div>
       <div>
@@ -69,8 +109,9 @@ import type { Order, User } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
-import { deleteOrder, listOrders, updateOrder } from '@/services/order.service';
+import { approveRefund, deleteOrder, listOrders, updateOrder } from '@/services/order.service';
 import { listUsers } from '@/services/user.service';
+import { formatPreciseDateTime, titleCase } from '@/utils/format';
 
 const orders = ref<Order[]>([]);
 const riders = ref<User[]>([]);
@@ -95,6 +136,10 @@ async function load() {
 }
 
 onMounted(load);
+
+function statusLabel(status: string) {
+  return titleCase(status);
+}
 
 function toLocalDatetime(iso: string) {
   const date = new Date(iso);
@@ -144,6 +189,27 @@ async function submitOrderUpdate() {
     error.value = incoming instanceof Error ? incoming.message : 'Unable to update order.';
   } finally {
     saving.value = false;
+  }
+}
+
+async function approveRefundRequest(orderId: string) {
+  const order = orders.value.find((entry) => entry.id === orderId);
+  if (!order || order.refundStatus === 'APPROVED') {
+    return;
+  }
+
+  const reason = window.prompt('Optional refund reason for the activity log', order.refundReason ?? 'Customer dispute resolved');
+  if (reason === null) {
+    return;
+  }
+
+  try {
+    await approveRefund(orderId, reason);
+    message.value = `Refund approved for ${orderId}.`;
+    error.value = '';
+    await load();
+  } catch (incoming) {
+    error.value = incoming instanceof Error ? incoming.message : 'Unable to approve refund.';
   }
 }
 

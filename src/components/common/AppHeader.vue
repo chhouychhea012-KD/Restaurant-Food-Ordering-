@@ -4,7 +4,7 @@
       <AppLogo />
       <nav class="hidden items-center gap-1 text-sm font-medium lg:flex">
         <RouterLink
-          v-for="item in links"
+          v-for="item in navLinks"
           :key="item.to"
           :to="item.to"
           class="group relative rounded-xl px-4 py-2 transition"
@@ -20,7 +20,7 @@
       <div class="flex items-center gap-3">
         <LanguageSelect class="hidden sm:inline-flex" />
         <RouterLink
-          v-if="authStore.user?.role === 'customer'"
+          v-if="authStore.isAuthenticated"
           to="/notifications"
           class="group relative flex h-12 w-12 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
           :class="isActiveLink('/notifications')
@@ -48,6 +48,7 @@
           </span>
         </RouterLink>
         <RouterLink
+          v-if="canUseCustomerOrdering"
           to="/cart"
           class="btn-secondary group relative inline-flex items-center gap-2"
           :aria-label="cartAriaLabel"
@@ -77,31 +78,18 @@
         </RouterLink>
         <div v-else ref="accountMenuRef" class="relative">
           <button
-            class="flex items-center gap-3 rounded-xl border bg-white px-3 py-2 text-left shadow-sm ring-offset-2 transition hover:-translate-y-0.5"
+            class="flex h-12 w-12 items-center justify-center rounded-xl border bg-white p-1 shadow-sm ring-offset-2 transition hover:-translate-y-0.5"
             :class="isAccountMenuOpen
               ? 'border-brand-200 bg-brand-50 shadow-brand-100/70 ring-2 ring-brand-200'
               : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
             type="button"
             aria-haspopup="menu"
             :aria-expanded="isAccountMenuOpen ? 'true' : 'false'"
+            :aria-label="accountButtonLabel"
+            title="Profile"
             @click="toggleAccountMenu"
           >
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
-              {{ authStore.user?.avatar }}
-            </div>
-            <div class="hidden min-w-0 sm:block">
-              <p class="truncate text-sm font-semibold text-slate-900">{{ authStore.user?.name }}</p>
-              <p class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ accountMenuEyebrow }}</p>
-            </div>
-            <svg
-              class="h-4 w-4 text-slate-400 transition-transform sm:block"
-              :class="isAccountMenuOpen ? 'rotate-180' : ''"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
-            </svg>
+            <UserAvatar :user="authStore.user" size="sm" />
           </button>
 
           <transition
@@ -118,9 +106,7 @@
             >
               <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_32%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500 text-sm font-bold text-white shadow-lg shadow-brand-200">
-                    {{ authStore.user?.avatar }}
-                  </div>
+                  <UserAvatar :user="authStore.user" size="md" />
                   <div class="min-w-0">
                     <p class="truncate text-base font-bold text-slate-950">{{ authStore.user?.name }}</p>
                     <p class="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">{{ accountMenuEyebrow }}</p>
@@ -172,6 +158,7 @@ import { useCartStore } from '@/stores/cart.store';
 import { useNotificationStore } from '@/stores/notification.store';
 import AppLogo from './AppLogo.vue';
 import LanguageSelect from './LanguageSelect.vue';
+import UserAvatar from './UserAvatar.vue';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
@@ -181,14 +168,34 @@ const router = useRouter();
 const isAccountMenuOpen = ref(false);
 const accountMenuRef = ref<HTMLElement | null>(null);
 
-const links = [
+const customerLinks = [
   { label: 'Home', to: '/' },
   { label: 'Restaurants', to: '/restaurants' },
-  // { label: 'Categories', to: '/categories' },
   { label: 'Track Order', to: '/track-order' },
   { label: 'About Us', to: '/about' },
-
 ];
+
+const navLinks = computed(() => {
+  if (authStore.user?.role === 'kitchen') {
+    return [
+      { label: 'Dashboard', to: '/dashboard' },
+      { label: 'Kitchen Queue', to: '/kitchen' },
+      { label: 'Restaurants', to: '/restaurants' },
+      { label: 'Notifications', to: '/notifications' },
+    ];
+  }
+
+  if (authStore.user?.role === 'rider') {
+    return [
+      { label: 'Dashboard', to: '/dashboard' },
+      { label: 'Rider Home', to: '/rider' },
+      { label: 'Deliveries', to: '/rider/deliveries' },
+      { label: 'Notifications', to: '/notifications' },
+    ];
+  }
+
+  return customerLinks;
+});
 
 const dashboardLink = computed(() => {
   switch (authStore.user?.role) {
@@ -197,9 +204,8 @@ const dashboardLink = computed(() => {
     case 'owner':
       return '/restaurant';
     case 'kitchen':
-      return '/kitchen';
     case 'rider':
-      return '/rider';
+      return '/dashboard';
     case 'customer':
     default:
       return '/dashboard';
@@ -211,7 +217,8 @@ const profileLink = computed(() => {
     case 'admin':
       return '/admin/profile';
     case 'rider':
-      return '/rider/profile';
+    case 'kitchen':
+      return '/profile';
     case 'customer':
     default:
       return '/profile';
@@ -219,6 +226,7 @@ const profileLink = computed(() => {
 });
 
 const compactCount = computed(() => (notificationStore.unreadCount > 99 ? '99+' : String(notificationStore.unreadCount)));
+const canUseCustomerOrdering = computed(() => !authStore.isAuthenticated || authStore.hasPermission('orders.create'));
 const cartItemCount = computed(() => cartStore.items.reduce((sum, item) => sum + item.quantity, 0));
 const cartBadgeCount = computed(() => (cartItemCount.value > 99 ? '99+' : String(cartItemCount.value)));
 const notificationAriaLabel = computed(() => {
@@ -237,6 +245,7 @@ const cartAriaLabel = computed(() => {
 
   return cartItemCount.value === 1 ? 'Cart, 1 item' : `Cart, ${cartItemCount.value} items`;
 });
+const accountButtonLabel = computed(() => (authStore.user ? `Profile menu for ${authStore.user.name}` : 'Profile menu'));
 const accountMenuEyebrow = computed(() => {
   if (!authStore.user) {
     return 'Account';
@@ -244,7 +253,15 @@ const accountMenuEyebrow = computed(() => {
 
   return authStore.user.role === 'customer' ? 'Customer Account' : `${authStore.user.role} Workspace`;
 });
-const dashboardMenuLabel = computed(() => (authStore.user?.role === 'customer' ? 'Dashboard' : 'Workspace'));
+const dashboardMenuLabel = computed(() => {
+  if (authStore.user?.role === 'kitchen') {
+    return 'Kitchen dashboard';
+  }
+  if (authStore.user?.role === 'rider') {
+    return 'Rider dashboard';
+  }
+  return authStore.user?.role === 'customer' ? 'Dashboard' : 'Workspace';
+});
 
 function toggleAccountMenu() {
   isAccountMenuOpen.value = !isAccountMenuOpen.value;

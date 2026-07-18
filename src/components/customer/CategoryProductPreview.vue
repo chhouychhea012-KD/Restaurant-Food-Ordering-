@@ -4,7 +4,7 @@
       <div>
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">{{ categoryName }}</p>
         <h3 class="mt-2 text-2xl font-bold text-slate-950">{{ items.length }} products to explore</h3>
-        <p class="mt-2 text-sm text-slate-500">Click any product card to open the matching restaurant menu and continue browsing that category.</p>
+        <p class="mt-2 text-sm text-slate-500">Click any product card to open only that selected item.</p>
       </div>
     </div>
 
@@ -61,7 +61,7 @@
 
           <div class="mt-5">
             <div class="w-full rounded-xl bg-brand-500 py-3 text-center text-sm font-semibold text-white transition group-hover:bg-brand-600">
-              View Menu ->
+              View item
             </div>
           </div>
         </div>

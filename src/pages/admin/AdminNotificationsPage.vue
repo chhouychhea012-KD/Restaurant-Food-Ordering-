@@ -55,7 +55,7 @@
     <SectionCard eyebrow="Admin Notifications" title="Platform activity feed" description="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <button class="btn-secondary" type="button" @click="markAllRead" :disabled="!authStore.user || !notificationStore.unreadCount">Mark all read</button>
+          <button class="btn-secondary" type="button" :disabled="!authStore.user || !notificationStore.unreadCount" @click="markAllRead">Mark all read</button>
           <select v-model="filter" class="field-input w-52">
             <option value="all">All notifications</option>
             <option value="unread">Unread only</option>
@@ -78,7 +78,7 @@
             <div class="min-w-0 flex-1">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="pill" :class="toneClass(notification.kind)">{{ formatKind(notification.kind) }}</span>
-                <span v-if="!isRead(notification)" class="pill bg-slate-900 text-white">Needs review</span>
+                <span v-if="!isRead(notification)" class="pill bg-brand-500 text-white">Needs review</span>
               </div>
               <h3 class="mt-3 text-xl font-bold text-slate-950">{{ notification.title }}</h3>
               <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{{ notification.message }}</p>

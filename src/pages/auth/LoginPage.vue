@@ -60,6 +60,8 @@ const form = reactive({
 const demoAccounts = [
   { role: 'Platform Admin', email: 'admin@flavorfleet.app', password: 'Admin@123' },
   { role: 'Restaurant Owner', email: 'owner@flavorfleet.app', password: 'Owner@123' },
+  { role: 'Kitchen Staff', email: 'kitchen@flavorfleet.app', password: 'Kitchen@123' },
+  { role: 'Delivery Rider', email: 'rider@flavorfleet.app', password: 'Rider@123' },
   { role: 'Customer', email: 'customer@flavorfleet.app', password: 'Customer@123' },
 ];
 
@@ -89,23 +91,7 @@ async function submit() {
       return;
     }
 
-    switch (authStore.user?.role) {
-      case 'admin':
-        await router.push('/admin');
-        break;
-      case 'owner':
-        await router.push('/restaurant');
-        break;
-      case 'kitchen':
-        await router.push('/kitchen');
-        break;
-      case 'rider':
-        await router.push('/rider');
-        break;
-      default:
-        await router.push('/dashboard');
-        break;
-    }
+    await router.push(authStore.defaultWorkspaceRoute);
   } catch {
     return;
   }

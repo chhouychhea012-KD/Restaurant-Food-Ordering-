@@ -1,4 +1,5 @@
 import type { AdminCategory, AdminProduct, MenuCategory, MenuCategoryInput, MenuItem, MenuItemInput } from '@/types';
+import { createActivityLog } from '@/services/activity-log.service';
 import { dbRestaurants, saveRestaurants } from '@/utils/mockDb';
 import { getRestaurantById } from './restaurant.service';
 
@@ -99,17 +100,35 @@ export async function createMenuCategory(payload: MenuCategoryInput) {
   const category = buildCategory(payload.name);
   restaurant.menuCategories.unshift(category);
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.category_created',
+    title: `Created category ${category.name}`,
+    description: `${restaurant.name} added the ${category.name} category to the menu.`,
+    restaurantId: restaurant.id,
+    restaurantName: restaurant.name,
+    metadata: {
+      categoryId: category.id,
+      categoryName: category.name,
+    },
+  });
+
   return category;
 }
 
 export async function updateMenuCategory(categoryId: string, payload: MenuCategoryInput) {
   const restaurants = dbRestaurants();
   let movedCategory: MenuCategory | null = null;
+  let sourceRestaurantName: string | null = null;
+  let previousCategoryName: string | null = null;
 
   for (const restaurant of restaurants) {
     const index = restaurant.menuCategories.findIndex((category) => category.id === categoryId);
     if (index >= 0) {
       movedCategory = restaurant.menuCategories[index];
+      sourceRestaurantName = restaurant.name;
+      previousCategoryName = movedCategory.name;
       restaurant.menuCategories.splice(index, 1);
       break;
     }
@@ -139,12 +158,33 @@ export async function updateMenuCategory(categoryId: string, payload: MenuCatego
   };
   targetRestaurant.menuCategories.unshift(nextCategory);
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.category_updated',
+    title: `Updated category ${nextCategory.name}`,
+    description: `${targetRestaurant.name} updated the ${previousCategoryName ?? nextCategory.name} category.`,
+    restaurantId: targetRestaurant.id,
+    restaurantName: targetRestaurant.name,
+    metadata: {
+      categoryId,
+      previousCategoryName,
+      nextCategoryName: nextCategory.name,
+      sourceRestaurantName,
+      targetRestaurantName: targetRestaurant.name,
+      itemCount: nextCategory.items.length,
+    },
+  });
+
   return nextCategory;
 }
 
 export async function deleteMenuCategory(categoryId: string) {
   const restaurants = dbRestaurants();
   let removed = false;
+  let removedCategoryName: string | null = null;
+  let removedRestaurantId: string | null = null;
+  let removedRestaurantName: string | null = null;
 
   for (const restaurant of restaurants) {
     const category = restaurant.menuCategories.find((entry) => entry.id === categoryId);
@@ -154,6 +194,9 @@ export async function deleteMenuCategory(categoryId: string) {
     if (category.items.length > 0) {
       throw new Error('Category still has products. Delete or move those products before removing the category.');
     }
+    removedCategoryName = category.name;
+    removedRestaurantId = restaurant.id;
+    removedRestaurantName = restaurant.name;
     restaurant.menuCategories = restaurant.menuCategories.filter((entry) => entry.id !== categoryId);
     removed = true;
   }
@@ -163,27 +206,64 @@ export async function deleteMenuCategory(categoryId: string) {
   }
 
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.category_deleted',
+    title: `Deleted category ${removedCategoryName ?? categoryId}`,
+    description: `${removedRestaurantName} removed the ${removedCategoryName} category from the menu.`,
+    restaurantId: removedRestaurantId,
+    restaurantName: removedRestaurantName,
+    metadata: {
+      categoryId,
+      categoryName: removedCategoryName,
+    },
+  });
+
   return true;
 }
 
 export async function createMenuItem(payload: MenuItemInput) {
-  const { restaurants, category } = findOrCreateCategory(payload.restaurantId, payload.categoryId, payload.categoryName);
+  const { restaurants, restaurant, category } = findOrCreateCategory(payload.restaurantId, payload.categoryId, payload.categoryName);
   const item = buildItem(payload);
   category.items.unshift(item);
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.item_created',
+    title: `Created menu item ${item.name}`,
+    description: `${restaurant.name} added ${item.name} to ${category.name}.`,
+    restaurantId: restaurant.id,
+    restaurantName: restaurant.name,
+    metadata: {
+      categoryId: category.id,
+      categoryName: category.name,
+      itemId: item.id,
+      itemName: item.name,
+      price: item.price,
+      available: item.available,
+    },
+  });
+
   return item;
 }
 
 export async function updateMenuItem(itemId: string, payload: MenuItemInput) {
   const restaurants = dbRestaurants();
   let existingItem: MenuItem | null = null;
+  let sourceRestaurantName: string | null = null;
+  let sourceCategoryName: string | null = null;
 
-  for (const restaurant of restaurants) {
+  outer: for (const restaurant of restaurants) {
     for (const category of restaurant.menuCategories) {
       const index = category.items.findIndex((item) => item.id === itemId);
       if (index >= 0) {
         existingItem = category.items[index];
+        sourceRestaurantName = restaurant.name;
+        sourceCategoryName = category.name;
         category.items.splice(index, 1);
+        break outer;
       }
     }
   }
@@ -211,20 +291,50 @@ export async function updateMenuItem(itemId: string, payload: MenuItemInput) {
   const nextItem = buildItem(payload, itemId);
   targetCategory.items.unshift(nextItem);
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.item_updated',
+    title: `Updated menu item ${nextItem.name}`,
+    description: `${targetRestaurant.name} updated ${nextItem.name} in ${targetCategory.name}.`,
+    restaurantId: targetRestaurant.id,
+    restaurantName: targetRestaurant.name,
+    metadata: {
+      itemId,
+      itemName: nextItem.name,
+      previousName: existingItem.name,
+      sourceRestaurantName,
+      sourceCategoryName,
+      targetCategoryName: targetCategory.name,
+      price: nextItem.price,
+      available: nextItem.available,
+    },
+  });
+
   return nextItem;
 }
 
 export async function deleteMenuItem(itemId: string) {
   const restaurants = dbRestaurants();
   let removed = false;
+  let removedItemName: string | null = null;
+  let removedCategoryName: string | null = null;
+  let removedRestaurantId: string | null = null;
+  let removedRestaurantName: string | null = null;
 
-  for (const restaurant of restaurants) {
+  outer: for (const restaurant of restaurants) {
     for (const category of restaurant.menuCategories) {
-      const before = category.items.length;
-      category.items = category.items.filter((item) => item.id !== itemId);
-      if (category.items.length !== before) {
-        removed = true;
+      const item = category.items.find((entry) => entry.id === itemId);
+      if (!item) {
+        continue;
       }
+      removed = true;
+      removedItemName = item.name;
+      removedCategoryName = category.name;
+      removedRestaurantId = restaurant.id;
+      removedRestaurantName = restaurant.name;
+      category.items = category.items.filter((entry) => entry.id !== itemId);
+      break outer;
     }
   }
 
@@ -233,6 +343,21 @@ export async function deleteMenuItem(itemId: string) {
   }
 
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.item_deleted',
+    title: `Deleted menu item ${removedItemName ?? itemId}`,
+    description: `${removedRestaurantName} removed ${removedItemName} from ${removedCategoryName}.`,
+    restaurantId: removedRestaurantId,
+    restaurantName: removedRestaurantName,
+    metadata: {
+      itemId,
+      itemName: removedItemName,
+      categoryName: removedCategoryName,
+    },
+  });
+
   return true;
 }
 
@@ -251,5 +376,21 @@ export async function toggleItemAvailability(restaurantId: string, itemId: strin
 
   item.available = !item.available;
   saveRestaurants(restaurants);
+
+  await createActivityLog({
+    domain: 'menu',
+    action: 'menu.item_availability_toggled',
+    title: `${item.available ? 'Activated' : 'Paused'} menu item ${item.name}`,
+    description: `${restaurant.name} ${item.available ? 'activated' : 'paused'} ${item.name} in ${category?.name}.`,
+    restaurantId: restaurant.id,
+    restaurantName: restaurant.name,
+    metadata: {
+      itemId: item.id,
+      itemName: item.name,
+      categoryName: category?.name ?? null,
+      available: item.available,
+    },
+  });
+
   return item;
 }

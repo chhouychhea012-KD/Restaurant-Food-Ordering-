@@ -1,6 +1,21 @@
-import type { CartItem, Order, OrderUpdateInput } from '@/types';
+import type { CartItem, Order, OrderUpdateInput, PaymentMethod } from '@/types';
+import { createActivityLog } from '@/services/activity-log.service';
 import { createNotification } from '@/services/notification.service';
 import { dbOrders, saveOrders } from '@/utils/mockDb';
+import type { CheckoutPaymentMethod, PaymentDetailsPayload } from '@/utils/payment';
+import { formatPaymentSummary } from '@/utils/payment';
+
+function normalizeCheckoutPaymentMethod(method: PaymentMethod): CheckoutPaymentMethod {
+  if (method === 'card_mock') {
+    return 'visa_card';
+  }
+
+  if (method === 'wallet_mock') {
+    return 'bank_account';
+  }
+
+  return method;
+}
 
 function timelineTime() {
   return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -37,6 +52,51 @@ function notifyAdminOrder(title: string, message: string, ctaTo = '/admin/orders
   });
 }
 
+async function logOrderStatusChange(previousOrder: Order, nextOrder: Order, label?: string) {
+  const statusLabel = label ?? formatStatusLabel(nextOrder.status);
+
+  await createActivityLog({
+    domain: 'order',
+    action: 'order.status_changed',
+    title: `${nextOrder.id} moved to ${statusLabel}`,
+    description: `${nextOrder.restaurantName} changed ${nextOrder.id} from ${formatStatusLabel(previousOrder.status)} to ${statusLabel}.`,
+    restaurantId: nextOrder.restaurantId,
+    restaurantName: nextOrder.restaurantName,
+    orderId: nextOrder.id,
+    metadata: {
+      previousStatus: previousOrder.status,
+      nextStatus: nextOrder.status,
+      riderName: nextOrder.riderName,
+    },
+  });
+}
+
+async function logDispatchProgress(order: Order) {
+  if (!order.riderName || !['RIDER_ASSIGNED', 'PICKED_UP', 'ON_THE_WAY'].includes(order.status)) {
+    return;
+  }
+
+  const titleByStatus: Record<string, string> = {
+    RIDER_ASSIGNED: `Rider assigned to ${order.id}`,
+    PICKED_UP: `Rider picked up ${order.id}`,
+    ON_THE_WAY: `Rider dispatched ${order.id}`,
+  };
+
+  await createActivityLog({
+    domain: 'dispatch',
+    action: `dispatch.${order.status.toLowerCase()}`,
+    title: titleByStatus[order.status] ?? `Dispatch event for ${order.id}`,
+    description: `${order.riderName} handled the ${formatStatusLabel(order.status)} step for ${order.id} from ${order.restaurantName}.`,
+    restaurantId: order.restaurantId,
+    restaurantName: order.restaurantName,
+    orderId: order.id,
+    metadata: {
+      status: order.status,
+      riderName: order.riderName,
+    },
+  });
+}
+
 export async function listOrders() {
   return dbOrders();
 }
@@ -57,11 +117,18 @@ export async function createOrder(payload: {
   customerId: string;
   restaurantId: string;
   restaurantName: string;
+  branchId: string;
+  branchName: string;
   deliveryAddress: string;
   items: CartItem[];
   subtotal: number;
   deliveryFee: number;
   discount: number;
+  paymentMethod: PaymentMethod;
+  paymentDetails?: PaymentDetailsPayload;
+  deliveryInstructions?: string;
+  voucherCode?: string | null;
+  loyaltyPointsRedeemed?: number;
 }) {
   const orders = dbOrders();
   const total = payload.subtotal + payload.deliveryFee - payload.discount;
@@ -70,8 +137,18 @@ export async function createOrder(payload: {
     customerId: payload.customerId,
     restaurantId: payload.restaurantId,
     restaurantName: payload.restaurantName,
+    branchId: payload.branchId,
+    branchName: payload.branchName,
     deliveryAddress: payload.deliveryAddress,
-    items: payload.items.map(({ id, name, quantity, price }) => ({ id, name, quantity, price })),
+    items: payload.items.map(({ id, menuItemId, name, quantity, price, modifiers, note }) => ({
+      id,
+      menuItemId: menuItemId ?? id,
+      name,
+      quantity,
+      price,
+      modifiers: modifiers ?? [],
+      note: note?.trim() ?? '',
+    })),
     subtotal: payload.subtotal,
     deliveryFee: payload.deliveryFee,
     discount: payload.discount,
@@ -80,6 +157,14 @@ export async function createOrder(payload: {
     createdAt: new Date().toISOString(),
     estimatedDeliveryAt: new Date(Date.now() + 1000 * 60 * 35).toISOString(),
     riderName: null,
+    paymentMethod: payload.paymentMethod,
+    paymentSummary: formatPaymentSummary(normalizeCheckoutPaymentMethod(payload.paymentMethod), payload.paymentDetails),
+    deliveryInstructions: payload.deliveryInstructions?.trim() ?? '',
+    voucherCode: payload.voucherCode ?? null,
+    loyaltyPointsRedeemed: payload.loyaltyPointsRedeemed ?? 0,
+    refundStatus: 'NONE',
+    refundApprovedAt: null,
+    refundReason: null,
     timeline: [{ status: 'PLACED', label: 'Order placed', time: timelineTime() }],
   };
 
@@ -92,14 +177,38 @@ export async function createOrder(payload: {
   );
   notifyAdminOrder(
     'New customer order received',
-    `${order.restaurantName} received ${order.id} with ${order.items.length} items and a total of THB ${order.total}.`,
+    `${order.restaurantName} received ${order.id} for ${order.branchName} with ${order.items.length} items and a total of THB ${order.total}.`,
   );
+
+  await createActivityLog({
+    domain: 'order',
+    action: 'order.created',
+    title: `${order.id} placed`,
+    description: `${order.restaurantName} received ${order.id} with ${order.items.length} items for a total of ${order.total}.`,
+    restaurantId: order.restaurantId,
+    restaurantName: order.restaurantName,
+    orderId: order.id,
+    metadata: {
+      branchId: order.branchId ?? null,
+      branchName: order.branchName ?? null,
+      itemCount: order.items.length,
+      total: order.total,
+      status: order.status,
+      paymentMethod: order.paymentMethod ?? null,
+      paymentSummary: order.paymentSummary ?? null,
+      paymentProvider: payload.paymentDetails?.provider ?? null,
+      paymentLast4: payload.paymentDetails?.last4 ?? null,
+      voucherCode: order.voucherCode ?? null,
+      loyaltyPointsRedeemed: order.loyaltyPointsRedeemed ?? 0,
+    },
+  });
 
   return order;
 }
 
 export async function updateOrderStatus(orderId: string, status: string, label?: string) {
   const orders = dbOrders();
+  const previousOrder = orders.find((order) => order.id === orderId) ?? null;
   const nextOrders = orders.map((order) => {
     if (order.id !== orderId) {
       return order;
@@ -125,6 +234,11 @@ export async function updateOrderStatus(orderId: string, status: string, label?:
     const statusLabel = formatStatusLabel(status);
     notifyOrderChange(updatedOrder, `Order update: ${statusLabel}`, `${updatedOrder.restaurantName} moved ${updatedOrder.id} to ${statusLabel}.`);
     notifyAdminOrder('Order status changed', `${updatedOrder.id} is now ${statusLabel} for ${updatedOrder.restaurantName}.`);
+
+    if (previousOrder && previousOrder.status !== updatedOrder.status) {
+      await logOrderStatusChange(previousOrder, updatedOrder, label);
+      await logDispatchProgress(updatedOrder);
+    }
   }
 
   return updatedOrder;
@@ -132,6 +246,7 @@ export async function updateOrderStatus(orderId: string, status: string, label?:
 
 export async function updateOrder(orderId: string, payload: OrderUpdateInput) {
   const orders = dbOrders();
+  const previousOrder = orders.find((order) => order.id === orderId) ?? null;
 
   const nextOrders = orders.map((order) => {
     if (order.id !== orderId) {
@@ -171,7 +286,92 @@ export async function updateOrder(orderId: string, payload: OrderUpdateInput) {
       'Order assignment updated',
       `${updatedOrder.id} was updated to ${statusLabel}${updatedOrder.riderName ? ` and assigned to ${updatedOrder.riderName}` : ''}.`,
     );
+
+    if (previousOrder && previousOrder.status !== updatedOrder.status) {
+      await logOrderStatusChange(previousOrder, updatedOrder);
+    }
+
+    if (previousOrder?.riderName !== updatedOrder.riderName) {
+      await createActivityLog({
+        domain: 'dispatch',
+        action: updatedOrder.riderName ? 'dispatch.rider_assigned' : 'dispatch.rider_unassigned',
+        title: updatedOrder.riderName ? `Assigned ${updatedOrder.riderName} to ${updatedOrder.id}` : `Removed rider from ${updatedOrder.id}`,
+        description: updatedOrder.riderName
+          ? `${updatedOrder.riderName} was assigned to ${updatedOrder.id} for ${updatedOrder.restaurantName}.`
+          : `The rider assignment for ${updatedOrder.id} at ${updatedOrder.restaurantName} was cleared.`,
+        restaurantId: updatedOrder.restaurantId,
+        restaurantName: updatedOrder.restaurantName,
+        orderId: updatedOrder.id,
+        metadata: {
+          previousRiderName: previousOrder?.riderName ?? null,
+          nextRiderName: updatedOrder.riderName,
+          status: updatedOrder.status,
+        },
+      });
+    }
+
+    await logDispatchProgress(updatedOrder);
   }
+
+  return updatedOrder;
+}
+
+export async function approveRefund(orderId: string, reason: string) {
+  const orders = dbOrders();
+  const previousOrder = orders.find((order) => order.id === orderId) ?? null;
+
+  if (!previousOrder) {
+    throw new Error('Order not found.');
+  }
+
+  if (previousOrder.refundStatus === 'APPROVED') {
+    return previousOrder;
+  }
+
+  const approvedAt = new Date().toISOString();
+  const nextOrders = orders.map((order) => {
+    if (order.id !== orderId) {
+      return order;
+    }
+
+    return {
+      ...order,
+      refundStatus: 'APPROVED' as const,
+      refundApprovedAt: approvedAt,
+      refundReason: reason.trim() || 'Approved by admin',
+    };
+  });
+
+  saveOrders(nextOrders);
+
+  const updatedOrder = nextOrders.find((order) => order.id === orderId) ?? null;
+  if (!updatedOrder) {
+    throw new Error('Order not found.');
+  }
+
+  notifyOrderChange(
+    updatedOrder,
+    'Refund approved',
+    `${updatedOrder.restaurantName} approved a refund review for ${updatedOrder.id}.`,
+    '/orders',
+  );
+  notifyAdminOrder('Refund approved', `${updatedOrder.id} was approved for refund review.`, '/admin/activity-log');
+
+  await createActivityLog({
+    domain: 'refund',
+    action: 'refund.approved',
+    title: `Refund approved for ${updatedOrder.id}`,
+    description: `${updatedOrder.restaurantName} approved a refund for ${updatedOrder.id}.`,
+    restaurantId: updatedOrder.restaurantId,
+    restaurantName: updatedOrder.restaurantName,
+    orderId: updatedOrder.id,
+    metadata: {
+      reason: updatedOrder.refundReason ?? null,
+      total: updatedOrder.total,
+      previousRefundStatus: previousOrder.refundStatus ?? 'NONE',
+      approvedAt,
+    },
+  });
 
   return updatedOrder;
 }
@@ -183,6 +383,19 @@ export async function deleteOrder(orderId: string) {
 
   if (removedOrder) {
     notifyAdminOrder('Order record removed', `${removedOrder.id} was removed from the admin dataset.`, '/admin/orders');
+    await createActivityLog({
+      domain: 'order',
+      action: 'order.deleted',
+      title: `Deleted ${removedOrder.id}`,
+      description: `${removedOrder.restaurantName} removed ${removedOrder.id} from the admin dataset.`,
+      restaurantId: removedOrder.restaurantId,
+      restaurantName: removedOrder.restaurantName,
+      orderId: removedOrder.id,
+      metadata: {
+        status: removedOrder.status,
+        total: removedOrder.total,
+      },
+    });
   }
 
   return true;

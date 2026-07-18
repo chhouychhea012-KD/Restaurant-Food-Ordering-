@@ -1,5 +1,5 @@
 <template>
-  <SectionCard eyebrow="Order History" title="All customer orders" description="Every order you place from checkout appears here and is shared across operational role pages.">
+  <SectionCard eyebrow="Order History" title="All customer orders" description="Past orders and reorder actions.">
     <div class="space-y-4">
       <div v-for="order in orderStore.orders" :key="order.id" class="surface-muted flex flex-wrap items-center justify-between gap-4 p-5">
         <div>

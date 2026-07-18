@@ -1,5 +1,8 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
+import type { PermissionKey } from '@/types';
+import type { WorkspaceArea } from '@/utils/access';
 import { useAuthStore } from '@/stores/auth.store';
+import { canAccessWorkspace, getUserStatusLabel } from '@/utils/access';
 
 export function authGuard(to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) {
   const authStore = useAuthStore();
@@ -7,11 +10,12 @@ export function authGuard(to: RouteLocationNormalized, _from: RouteLocationNorma
 
   const guestOnly = to.matched.some((record) => Boolean(record.meta.guestOnly));
   const requiresAuth = to.matched.some((record) => Boolean(record.meta.requiresAuth));
-  const roles = getMatchedRoles(to);
+  const workspace = getMatchedWorkspace(to);
   const permissions = getMatchedPermissions(to);
+  const requiresActiveAccess = to.matched.some((record) => record.meta.requiresActiveAccess !== false);
 
   if (guestOnly && authStore.isAuthenticated) {
-    next(getDefaultRoute(authStore.user?.role));
+    next(authStore.defaultWorkspaceRoute);
     return;
   }
 
@@ -20,42 +24,53 @@ export function authGuard(to: RouteLocationNormalized, _from: RouteLocationNorma
     return;
   }
 
-  if (roles.length && (!authStore.user || !roles.includes(authStore.user.role))) {
-    next(authStore.isAuthenticated ? { name: 'forbidden' } : { name: 'login', query: { redirect: to.fullPath } });
+  if (requiresAuth && !authStore.isAccountActive) {
+    next({
+      name: 'forbidden',
+      query: {
+        reason: 'account-status',
+        status: authStore.user?.status ? getUserStatusLabel(authStore.user.status) : 'Unknown',
+      },
+    });
     return;
   }
 
-  if (permissions.length && permissions.some((permission) => !authStore.permissions.includes(permission))) {
-    next({ name: 'forbidden' });
+  if (workspace && !canAccessWorkspace(workspace, authStore.user, authStore.permissions)) {
+    next({ name: 'forbidden', query: { reason: 'workspace' } });
+    return;
+  }
+
+  if (requiresAuth && workspace !== 'customer' && requiresActiveAccess && !authStore.accessEvaluation.isActive) {
+    next({
+      name: 'forbidden',
+      query: {
+        reason: 'access-window',
+        detail: authStore.accessEvaluation.message,
+      },
+    });
+    return;
+  }
+
+  if (permissions.length && !authStore.hasAllPermissions(permissions)) {
+    next({ name: 'forbidden', query: { reason: 'permission' } });
     return;
   }
 
   next();
 }
 
-function getMatchedRoles(to: RouteLocationNormalized) {
-  return [...new Set(to.matched.flatMap((record) => ((record.meta.roles as string[] | undefined) ?? [])))];
+function getMatchedWorkspace(to: RouteLocationNormalized) {
+  return to.matched.map((record) => record.meta.workspace as WorkspaceArea | undefined).find(Boolean);
 }
 
 function getMatchedPermissions(to: RouteLocationNormalized) {
-  return [...new Set(to.matched.flatMap((record) => {
-    const permission = record.meta.permission as string | undefined;
-    return permission ? [permission] : [];
-  }))];
-}
-
-function getDefaultRoute(role?: string) {
-  switch (role) {
-    case 'admin':
-      return { name: 'admin-overview' };
-    case 'owner':
-      return { name: 'restaurant-overview' };
-    case 'kitchen':
-      return { name: 'kitchen-queue' };
-    case 'rider':
-      return { name: 'rider-home' };
-    case 'customer':
-    default:
-      return { name: 'customer-home' };
-  }
+  return [
+    ...new Set(
+      to.matched.flatMap((record) => {
+        const singular = record.meta.permission as PermissionKey | undefined;
+        const plural = (record.meta.permissions as PermissionKey[] | undefined) ?? [];
+        return singular ? [singular, ...plural] : plural;
+      }),
+    ),
+  ];
 }

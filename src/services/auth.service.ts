@@ -1,7 +1,8 @@
 import type { Session, User } from '@/types';
 import { createNotification } from '@/services/notification.service';
+import { buildRoleAssignment, evaluateUserOperationalAccess } from '@/utils/access';
 import { createToken, hashValue } from '@/utils/crypto';
-import { clearSession, dbUsers, readSession, saveSession, saveUsers } from '@/utils/mockDb';
+import { clearSession, dbRoles, dbUsers, readSession, saveSession, saveUsers } from '@/utils/mockDb';
 
 export interface LoginPayload {
   email: string;
@@ -36,8 +37,13 @@ export async function login(payload: LoginPayload) {
     throw new Error('Invalid email or password.');
   }
 
-  if (!user.shiftActive && ['kitchen', 'rider'].includes(user.role)) {
-    throw new Error('Your operational shift is currently inactive.');
+  if (user.status !== 'active') {
+    throw new Error(`This account is ${user.status} and cannot sign in right now.`);
+  }
+
+  const accessEvaluation = evaluateUserOperationalAccess(user);
+  if (!accessEvaluation.isActive) {
+    throw new Error(accessEvaluation.message);
   }
 
   const session = buildSession(user.id);
@@ -57,6 +63,8 @@ export async function register(payload: RegisterPayload) {
   }
 
   const passwordHash = await hashValue(payload.password);
+  const now = new Date().toISOString();
+  const customerRole = dbRoles().find((role) => role.name === 'customer');
   const user: User = {
     id: `user-${crypto.randomUUID()}`,
     name: payload.name,
@@ -68,8 +76,12 @@ export async function register(payload: RegisterPayload) {
       .slice(0, 2)
       .map((part) => part.charAt(0).toUpperCase())
       .join(''),
+    avatarUrl: null,
     role: 'customer',
+    status: 'active',
     shiftActive: true,
+    restaurantId: null,
+    roleAssignments: [],
     loyaltyPoints: 120,
     addresses: [
       {
@@ -83,7 +95,17 @@ export async function register(payload: RegisterPayload) {
         lng: 100.5018,
       },
     ],
+    createdAt: now,
+    updatedAt: now,
   };
+  user.roleAssignments = [
+    buildRoleAssignment({
+      userId: user.id,
+      roleId: customerRole?.id ?? null,
+      roleName: 'customer',
+      restaurantId: null,
+    }),
+  ];
 
   saveUsers([user, ...users]);
   const session = buildSession(user.id);
@@ -96,7 +118,7 @@ export async function register(payload: RegisterPayload) {
     audienceRole: 'customer',
     userId: user.id,
     ctaLabel: 'Open dashboard',
-    ctaTo: '/dashboard',
+    ctaTo: '/customer/dashboard',
   });
 
   createNotification({
@@ -129,3 +151,4 @@ export function validateSession(session: Session | null) {
 
   return new Date(session.expiresAt).getTime() > Date.now();
 }
+

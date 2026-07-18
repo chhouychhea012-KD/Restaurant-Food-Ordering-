@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <SectionCard eyebrow="Catalog Control" title="">
+    <SectionCard eyebrow="Catalog" title="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
           <input v-model="query" class="field-input w-64" type="search" placeholder="Search product or restaurant" />
@@ -10,57 +10,57 @@
       </template>
 
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-    <!-- Total Products -->
-    <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
+    <!-- Products -->
+    <div class="surface-muted rounded-lg p-6 transition hover:shadow-md">
       <div class="flex items-center gap-4">
-        <div class="rounded-xl bg-blue-100 p-3.5 text-blue-600">
+        <div class="rounded-lg bg-blue-100 p-3.5 text-blue-600">
           <Package :size="28" />
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold text-slate-900">Total Products</p>
-          <p class="mt-2 text-4xl font-bold text-slate-950">{{ products.length }}</p>
+          <p class="text-sm font-semibold text-slate-900">Products</p>
+          <p class="mt-2 text-3xl font-bold text-slate-950">{{ products.length }}</p>
         </div>
       </div>
       <p class="mt-4 text-sm text-slate-500">Across all restaurants</p>
     </div>
 
-    <!-- Active Products -->
-    <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
+    <!-- Active -->
+    <div class="surface-muted rounded-lg p-6 transition hover:shadow-md">
       <div class="flex items-center gap-4">
-        <div class="rounded-xl bg-emerald-100 p-3.5 text-emerald-600">
+        <div class="rounded-lg bg-emerald-100 p-3.5 text-emerald-600">
           <CheckCircle :size="28" />
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold text-slate-900">Active Products</p>
-          <p class="mt-2 text-4xl font-bold text-slate-950">{{ activeProducts }}</p>
+          <p class="text-sm font-semibold text-slate-900">Active</p>
+          <p class="mt-2 text-3xl font-bold text-slate-950">{{ activeProducts }}</p>
         </div>
       </div>
       <p class="mt-4 text-sm text-slate-500">Ready to order</p>
     </div>
 
   <!-- Categories -->
-  <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
+  <div class="surface-muted rounded-lg p-6 transition hover:shadow-md">
     <div class="flex items-center gap-4">
-      <div class="rounded-xl bg-violet-100 p-3.5 text-violet-600">
+      <div class="rounded-lg bg-violet-100 p-3.5 text-violet-600">
         <Tags :size="28" />
       </div>
       <div class="flex-1">
         <p class="text-sm font-semibold text-slate-900">Categories</p>
-        <p class="mt-2 text-4xl font-bold text-slate-950">{{ categories.length }}</p>
+        <p class="mt-2 text-3xl font-bold text-slate-950">{{ categories.length }}</p>
       </div>
     </div>
     <p class="mt-4 text-sm text-slate-500">Menu groups</p>
   </div>
 
-  <!-- Restaurant Coverage -->
-  <div class="surface-muted rounded-xl p-6 transition hover:shadow-md">
+  <!-- Coverage -->
+  <div class="surface-muted rounded-lg p-6 transition hover:shadow-md">
     <div class="flex items-center gap-4">
-      <div class="rounded-xl bg-amber-100 p-3.5 text-amber-600">
+      <div class="rounded-lg bg-amber-100 p-3.5 text-amber-600">
         <Building2 :size="28" />
       </div>
       <div class="flex-1">
-        <p class="text-sm font-semibold text-slate-900">Restaurant Coverage</p>
-        <p class="mt-2 text-4xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
+        <p class="text-sm font-semibold text-slate-900">Coverage</p>
+        <p class="mt-2 text-3xl font-bold text-slate-950">{{ restaurantCoverage }}</p>
       </div>
     </div>
     <p class="mt-4 text-sm text-slate-500">With active products</p>
@@ -68,14 +68,14 @@
 </div>
 
       <div class="mt-6 space-y-4">
-        <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-xl border border-slate-200 bg-white/85 p-5 shadow-sm">
+        <div v-for="product in filteredProducts" :key="product.item.id" class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-sm">
           <div class="flex flex-wrap items-start justify-between gap-4">
             <div class="flex gap-4">
-              <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-xl object-cover" />
+              <img :src="product.item.image" :alt="product.item.name" class="h-24 w-24 rounded-lg object-cover" />
               <div>
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ product.restaurantName }} � {{ product.categoryName }}</p>
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-500">{{ product.restaurantName }} / {{ product.categoryName }}</p>
                 <h3 class="mt-2 text-xl font-bold text-slate-950">{{ product.item.name }}</h3>
-                <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{{ product.item.description }}</p>
+                <p class="mt-2 line-clamp-2 max-w-2xl text-sm leading-6 text-slate-600">{{ product.item.description }}</p>
                 <div class="mt-3 flex flex-wrap gap-2">
                   <span v-for="modifier in product.item.modifiers" :key="modifier" class="pill bg-slate-100 text-slate-600">{{ modifier }}</span>
                 </div>
@@ -92,22 +92,22 @@
           <div class="mt-5 flex flex-wrap gap-3">
             <button class="btn-secondary px-3 py-2" type="button" @click="openEditModal(product.item.id)">Edit</button>
             <button class="btn-secondary px-3 py-2" type="button" @click="toggleAvailability(product)">{{ product.item.available ? 'Pause' : 'Activate' }}</button>
-            <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeProduct(product.item.id)">Delete</button>
+            <button class="rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeProduct(product.item.id)">Delete</button>
           </div>
         </div>
       </div>
     </SectionCard>
 
-    <SectionCard eyebrow="Category Control" title="Admin category management" description="Create, edit, and delete product categories per restaurant from the same module.">
+    <SectionCard eyebrow="Category Control" title="Categories" >
       <template #actions>
         <button class="btn-primary" type="button" @click="openCreateCategoryModal">Create category</button>
       </template>
 
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <div v-for="entry in filteredCategories" :key="entry.category.id" class="rounded-xl border border-slate-200 bg-white/85 p-5 shadow-sm">
+        <div v-for="entry in filteredCategories" :key="entry.category.id" class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-sm">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">{{ entry.restaurantName }}</p>
+              <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-500">{{ entry.restaurantName }}</p>
               <h3 class="mt-2 text-xl font-bold text-slate-950">{{ entry.category.name }}</h3>
               <p class="mt-2 text-sm text-slate-500">{{ entry.category.items.length }} products in this category</p>
             </div>
@@ -115,20 +115,20 @@
           </div>
           <div class="mt-5 flex flex-wrap gap-3">
             <button class="btn-secondary px-3 py-2" type="button" @click="openEditCategoryModal(entry.category.id)">Edit</button>
-            <button class="rounded-xl bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeCategory(entry.category.id)">Delete</button>
+            <button class="rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 transition hover:bg-rose-100" type="button" @click="removeCategory(entry.category.id)">Delete</button>
           </div>
         </div>
       </div>
 
-      <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
-      <p v-if="error" class="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
+      <p v-if="message" class="mt-5 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
+      <p v-if="error" class="mt-5 rounded-lg bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ error }}</p>
     </SectionCard>
 
     <AppModal
       :open="isModalOpen"
       eyebrow="Product CRUD"
       :title="editingItemId ? 'Edit product item' : 'Create product item'"
-      description="Manage menu products with dynamic restaurant and category assignment from the admin dashboard."
+      description="Restaurant, category, price, and availability."
       size="lg"
       @close="closeModal"
     >
@@ -166,15 +166,18 @@
             <label class="field-label" for="prepTime">Prep time</label>
             <input id="prepTime" v-model.number="form.prepTime" class="field-input" type="number" min="1" required />
           </div>
-          <label class="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700 md:mt-8">
+          <label class="flex items-center gap-3 rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 md:mt-8">
             <input v-model="form.available" type="checkbox" />
             Available now
           </label>
         </div>
-        <div>
-          <label class="field-label" for="image">Image URL</label>
-          <input id="image" v-model="form.image" class="field-input" type="url" required />
-        </div>
+        <ImageUploadField
+          v-model="form.image"
+          label="Product image"
+          help="Upload a clear dish photo. JPG, PNG, or WebP. Max 3 MB."
+          :preview-alt="form.name || 'Product image preview'"
+          @error="error = $event"
+        />
         <div>
           <label class="field-label" for="modifiers">Modifiers</label>
           <input id="modifiers" v-model="modifierInput" class="field-input" type="text" placeholder="Extra Egg, Spicy Boost, Brown Rice" />
@@ -190,7 +193,7 @@
       :open="isCategoryModalOpen"
       eyebrow="Category CRUD"
       :title="editingCategoryId ? 'Edit category' : 'Create category'"
-      description="Manage restaurant product categories with their own popup form and validation."
+      description="Create or rename menu groups."
       size="md"
       @close="closeCategoryModal"
     >
@@ -221,6 +224,7 @@ import { RouterLink } from 'vue-router';
 import type { AdminCategory, AdminProduct, MenuCategoryInput, MenuItemInput, Restaurant } from '@/types';
 import AppModal from '@/components/common/AppModal.vue';
 import SectionCard from '@/components/common/SectionCard.vue';
+import ImageUploadField from '@/components/forms/ImageUploadField.vue';
 import { formatCurrency } from '@/utils/format';
 import { Package, CheckCircle, Tags, Building2 } from 'lucide-vue-next';
 import {
@@ -402,6 +406,9 @@ async function submitProduct() {
     }
     if (!payload.categoryName) {
       throw new Error('Please enter a category name.');
+    }
+    if (!payload.image) {
+      throw new Error('Please upload a product image.');
     }
 
     if (editingItemId.value) {

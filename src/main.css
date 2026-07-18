@@ -1,14 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ff-color-brand: 249 115 22;
+    --ff-color-surface: 255 255 255;
+    --ff-color-surface-muted: 248 250 252;
+    --ff-color-ink: 15 23 42;
+    --ff-color-border: 226 232 240;
+    --ff-radius-lg: 0.75rem;
+    --ff-radius-xl: 1rem;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
   body {
     @apply bg-slate-50 text-slate-900 font-sans antialiased;
-    background-image: theme('backgroundImage.mesh');
+    background:
+      linear-gradient(180deg, rgba(255, 247, 237, 0.46), rgba(248, 250, 252, 0.74) 28rem),
+      #f8fafc;
     min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  table {
+    font-family: inherit;
   }
 
   button,
@@ -17,27 +50,57 @@
   textarea {
     @apply outline-none;
   }
+
+  html:lang(km) body,
+  html:lang(km) h1,
+  html:lang(km) h2,
+  html:lang(km) h3,
+  html:lang(km) h4,
+  html:lang(km) h5,
+  html:lang(km) h6,
+  html:lang(km) button,
+  html:lang(km) input,
+  html:lang(km) select,
+  html:lang(km) textarea,
+  html:lang(km) table {
+    @apply font-khmer;
+  }
+
+  :focus-visible {
+    @apply ring-4 ring-brand-100 ring-offset-2 ring-offset-white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
   .surface-card {
-    @apply rounded-xl border border-slate-200/70 bg-white/90 shadow-glow backdrop-blur;
+    @apply rounded-lg border border-slate-200 bg-white shadow-sm;
   }
 
   .surface-muted {
-    @apply rounded-xl border border-slate-200 bg-slate-50;
+    @apply rounded-lg border border-slate-200 bg-slate-50;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100;
+    @apply inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100;
   }
 
   .pill {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+    @apply inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold;
   }
 
   .field-label {
@@ -45,6 +108,36 @@
   }
 
   .field-input {
-    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
+  }
+
+  .page-shell {
+    @apply mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8;
+  }
+  .thin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+  }
+
+  .thin-scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.45);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.58);
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
 }

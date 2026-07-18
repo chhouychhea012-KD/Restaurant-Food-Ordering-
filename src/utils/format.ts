@@ -15,6 +15,20 @@ export function formatShortDate(value: string) {
   }).format(new Date(value));
 }
 
+export function formatPreciseDateTime(value: string) {
+  const date = new Date(value);
+  const base = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+  }).format(date);
+
+  return `${base}.${String(date.getMilliseconds()).padStart(3, '0')}`;
+}
+
 export function titleCase(value: string) {
   return value
     .toLowerCase()

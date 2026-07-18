@@ -5,10 +5,24 @@
     "email": "admin@flavorfleet.app",
     "passwordHash": "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7",
     "role": "admin",
+    "status": "active",
     "phone": "+66 800 111 111",
     "avatar": "AA",
     "restaurantId": null,
-    "shiftActive": true
+    "shiftActive": true,
+    "roleAssignments": [
+      {
+        "id": "assignment-user-admin",
+        "userId": "user-admin",
+        "roleId": "role-admin",
+        "roleName": "admin",
+        "restaurantIds": [],
+        "branchIds": [],
+        "accessWindow": null
+      }
+    ],
+    "createdAt": "2026-01-10T02:00:00.000Z",
+    "updatedAt": "2026-07-10T06:45:00.000Z"
   },
   {
     "id": "user-owner",
@@ -16,10 +30,24 @@
     "email": "owner@flavorfleet.app",
     "passwordHash": "553feacf899a72916b2b50e4c95f587a06d6d1b8b4e6b433beb5fea315d0acb0",
     "role": "owner",
+    "status": "active",
     "phone": "+66 800 222 222",
     "avatar": "OO",
     "restaurantId": "rest-01",
-    "shiftActive": true
+    "shiftActive": true,
+    "roleAssignments": [
+      {
+        "id": "assignment-user-owner",
+        "userId": "user-owner",
+        "roleId": "role-owner",
+        "roleName": "owner",
+        "restaurantIds": ["rest-01"],
+        "branchIds": [],
+        "accessWindow": null
+      }
+    ],
+    "createdAt": "2026-01-11T03:00:00.000Z",
+    "updatedAt": "2026-07-10T06:50:00.000Z"
   },
   {
     "id": "user-kitchen",
@@ -27,10 +55,24 @@
     "email": "kitchen@flavorfleet.app",
     "passwordHash": "651e20ba013a41a7aa0e7eb81569d3fc6b0d54ca5a6893d9bd3cc289906c89af",
     "role": "kitchen",
+    "status": "active",
     "phone": "+66 800 333 333",
     "avatar": "KK",
     "restaurantId": "rest-01",
-    "shiftActive": true
+    "shiftActive": true,
+    "roleAssignments": [
+      {
+        "id": "assignment-user-kitchen",
+        "userId": "user-kitchen",
+        "roleId": "role-kitchen",
+        "roleName": "kitchen",
+        "restaurantIds": ["rest-01"],
+        "branchIds": [],
+        "accessWindow": null
+      }
+    ],
+    "createdAt": "2026-01-12T03:15:00.000Z",
+    "updatedAt": "2026-07-10T06:55:00.000Z"
   },
   {
     "id": "user-rider",
@@ -38,10 +80,24 @@
     "email": "rider@flavorfleet.app",
     "passwordHash": "301d71f784fe27a3b04a7f7cb0f054527349694135546dc083e2c8a34bc4079c",
     "role": "rider",
+    "status": "active",
     "phone": "+66 800 444 444",
     "avatar": "RR",
     "restaurantId": null,
-    "shiftActive": true
+    "shiftActive": true,
+    "roleAssignments": [
+      {
+        "id": "assignment-user-rider",
+        "userId": "user-rider",
+        "roleId": "role-rider",
+        "roleName": "rider",
+        "restaurantIds": [],
+        "branchIds": [],
+        "accessWindow": null
+      }
+    ],
+    "createdAt": "2026-01-13T03:30:00.000Z",
+    "updatedAt": "2026-07-10T07:00:00.000Z"
   },
   {
     "id": "user-customer",
@@ -49,10 +105,22 @@
     "email": "customer@flavorfleet.app",
     "passwordHash": "98ec654a8df28f8f0f8f02220483d46916b85017de0b74d8ec755c28cb8539a8",
     "role": "customer",
+    "status": "active",
     "phone": "+66 800 555 555",
     "avatar": "CC",
     "restaurantId": null,
     "shiftActive": true,
+    "roleAssignments": [
+      {
+        "id": "assignment-user-customer",
+        "userId": "user-customer",
+        "roleId": "role-customer",
+        "roleName": "customer",
+        "restaurantIds": [],
+        "branchIds": [],
+        "accessWindow": null
+      }
+    ],
     "loyaltyPoints": 450,
     "addresses": [
       {
@@ -75,6 +143,8 @@
         "lat": 13.728,
         "lng": 100.534
       }
-    ]
+    ],
+    "createdAt": "2026-01-14T04:00:00.000Z",
+    "updatedAt": "2026-07-10T07:05:00.000Z"
   }
 ]

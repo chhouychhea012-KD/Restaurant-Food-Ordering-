@@ -1,6 +1,5 @@
 import type { Address, User } from '@/types';
-import { dbUsers, saveUsers } from '@/utils/mockDb';
-import { clearSession, saveSession } from '@/utils/mockDb';
+import { clearSession, dbUsers, saveSession, saveUsers } from '@/utils/mockDb';
 
 function buildAvatar(name: string) {
   return name
@@ -11,7 +10,7 @@ function buildAvatar(name: string) {
     .join('');
 }
 
-export async function updateCustomerProfile(userId: string, payload: { name: string; email: string; phone: string }) {
+export async function updateCustomerProfile(userId: string, payload: { name: string; email: string; phone: string; avatarUrl?: string | null }) {
   const users = dbUsers();
   const emailTaken = users.some((user) => user.id !== userId && user.email.toLowerCase() === payload.email.toLowerCase());
   if (emailTaken) {
@@ -30,6 +29,7 @@ export async function updateCustomerProfile(userId: string, payload: { name: str
       email: payload.email.trim().toLowerCase(),
       phone: payload.phone.trim(),
       avatar: buildAvatar(payload.name),
+      avatarUrl: payload.avatarUrl === undefined ? user.avatarUrl ?? null : payload.avatarUrl,
     };
     return updatedUser;
   });
@@ -136,6 +136,26 @@ export async function setDefaultCustomerAddress(userId: string, addressId: strin
         ...address,
         isDefault: address.id === addressId,
       })),
+    };
+    return updatedUser;
+  });
+
+  saveUsers(nextUsers);
+  return updatedUser;
+}
+
+export async function applyCustomerLoyaltyTransaction(userId: string, payload: { earnedPoints: number; redeemedPoints: number }) {
+  const users = dbUsers();
+  let updatedUser: User | null = null;
+
+  const nextUsers = users.map((user) => {
+    if (user.id !== userId) {
+      return user;
+    }
+
+    updatedUser = {
+      ...user,
+      loyaltyPoints: Math.max(0, (user.loyaltyPoints ?? 0) - payload.redeemedPoints + payload.earnedPoints),
     };
     return updatedUser;
   });

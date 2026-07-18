@@ -1,5 +1,6 @@
 import type { AppNotification, NotificationKind, User } from '@/types';
-import { dbNotifications, saveNotifications } from '@/utils/mockDb';
+import { getUserPermissions, resolveWorkspaceArea } from '@/utils/access';
+import { dbNotifications, dbRoles, saveNotifications } from '@/utils/mockDb';
 
 const notificationsUpdatedEvent = 'flavorfleet:notifications-updated';
 
@@ -11,20 +12,22 @@ function sortNotifications(notifications: AppNotification[]) {
   return [...notifications].sort((left, right) => new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime());
 }
 
+function matchesAudienceRole(notification: AppNotification, user: User) {
+  if (notification.userId) {
+    return notification.userId === user.id;
+  }
+
+  const workspaceArea = resolveWorkspaceArea(user, getUserPermissions(user, dbRoles()));
+  const audienceRole = workspaceArea === 'customer' ? 'customer' : 'admin';
+  return notification.audienceRole === audienceRole;
+}
+
 export function getNotificationsUpdatedEventName() {
   return notificationsUpdatedEvent;
 }
 
 export function listNotificationsForUser(user: User) {
-  return sortNotifications(
-    dbNotifications().filter((notification) => {
-      if (notification.userId) {
-        return notification.userId === user.id;
-      }
-
-      return notification.audienceRole === user.role;
-    }),
-  );
+  return sortNotifications(dbNotifications().filter((notification) => matchesAudienceRole(notification, user)));
 }
 
 export function isNotificationRead(notification: AppNotification, userId: string) {
@@ -88,7 +91,7 @@ export function markNotificationRead(notificationId: string, userId: string) {
 
 export function markAllNotificationsRead(user: User) {
   const nextNotifications = dbNotifications().map((notification) => {
-    const canSee = notification.userId ? notification.userId === user.id : notification.audienceRole === user.role;
+    const canSee = matchesAudienceRole(notification, user);
     if (!canSee || notification.readBy.includes(user.id)) {
       return notification;
     }
@@ -109,11 +112,7 @@ export function deleteNotification(notificationId: string, user: User) {
       return true;
     }
 
-    if (notification.userId) {
-      return notification.userId !== user.id;
-    }
-
-    return notification.audienceRole !== user.role;
+    return !matchesAudienceRole(notification, user);
   });
 
   saveNotifications(nextNotifications);

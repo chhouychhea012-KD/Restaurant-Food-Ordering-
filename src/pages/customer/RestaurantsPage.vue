@@ -12,7 +12,7 @@
       </template>
 
       <div class="mb-6 flex flex-wrap gap-3">
-        <button class="pill px-4 py-2 text-sm transition" :class="!activeCategory ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" type="button" @click="selectCategory('')">
+        <button class="pill px-4 py-2 text-sm transition" :class="!activeCategory ? 'bg-brand-500 text-white shadow-sm' : 'bg-white text-slate-700 hover:bg-orange-50 hover:text-brand-700'" type="button" @click="selectCategory('')">
           All categories
         </button>
         <button
