@@ -2171,6 +2171,930 @@
     "customer@flavorfleet.app": {
       "en": "customer@flavorfleet.app",
       "km": "customer@flavorfleet.app"
+    },
+    "27 min avg": {
+      "en": "27 min avg",
+      "km": "តម្លៃមធ្យមក្នុងការកម្មង់ 27 min"
+    },
+    "3 active zones": {
+      "en": "3 active zones",
+      "km": "តំបន់សកម្ម3"
+    },
+    "ABA account name": {
+      "en": "ABA account name",
+      "km": "ABA ឈ្មោះគណនី"
+    },
+    "ABA phone number": {
+      "en": "ABA phone number",
+      "km": "លេខទូរស័ព្ទ ABA"
+    },
+    "About Flavor Fleet": {
+      "en": "About Flavor Fleet",
+      "km": "អំពី Flavor Fleet"
+    },
+    "Access denied": {
+      "en": "Access denied",
+      "km": "ការចូលប្រើត្រូវបានបដិសេធ"
+    },
+    "Account name": {
+      "en": "Account name",
+      "km": "ឈ្មោះគណនី"
+    },
+    "Account number": {
+      "en": "Account number",
+      "km": "លេខគណនី"
+    },
+    "Across demo zones": {
+      "en": "Across demo zones",
+      "km": "ឆ្លងកាត់តំបន់សាកល្បង"
+    },
+    "Action needed": {
+      "en": "Action needed",
+      "km": "ត្រូវការសកម្មភាព"
+    },
+    "Action Required": {
+      "en": "Action Required",
+      "km": "ត្រូវការសកម្មភាព"
+    },
+    "Actions": {
+      "en": "Actions",
+      "km": "សកម្មភាព"
+    },
+    "Active orders": {
+      "en": "Active orders",
+      "km": "ការកម្មង់សកម្ម"
+    },
+    "Activity Log": {
+      "en": "Activity Log",
+      "km": "កំណត់ហេតុសកម្មភាព"
+    },
+    "Add restaurant": {
+      "en": "Add restaurant",
+      "km": "បន្ថែមភោជនីយដ្ឋាន"
+    },
+    "Address:": {
+      "en": "Address:",
+      "km": "អាសយដ្ឋាន:"
+    },
+    "All visible orders": {
+      "en": "All visible orders",
+      "km": "ការកម្មង់ដែលមើលឃើញទាំងអស់"
+    },
+    "Apply available points.": {
+      "en": "Apply available points.",
+      "km": "អនុវត្តពិន្ទុដែលមាន។"
+    },
+    "Assigned delivery stack": {
+      "en": "Assigned delivery stack",
+      "km": "ការដឹកជញ្ជូនបានចាត់តាំង"
+    },
+    "Assigned restaurant products": {
+      "en": "Assigned restaurant products",
+      "km": "ផលិតផលភោជនីយដ្ឋានបានចាត់តាំង"
+    },
+    "Audit": {
+      "en": "Audit",
+      "km": "សវនកម្ម"
+    },
+    "Audit events": {
+      "en": "Audit events",
+      "km": "ព្រឹត្តិការណ៍សវនកម្ម"
+    },
+    "Available": {
+      "en": "Available",
+      "km": "អាចប្រើបាន"
+    },
+    "Average ticket": {
+      "en": "Average ticket",
+      "km": "តម្លៃមធ្យមក្នុងការកម្មង់"
+    },
+    "Back": {
+      "en": "Back",
+      "km": "ត្រលប់ថយក្រោយ"
+    },
+    "Back to home": {
+      "en": "Back to home",
+      "km": "ត្រលប់ទៅទំព័រដើម"
+    },
+    "Bangkok delivery radius and active branch flow": {
+      "en": "Bangkok delivery radius and active branch flow",
+      "km": "ការដឹកជញ្ជូនបាងកក និងលំហូរសាខាសកម្ម"
+    },
+    "Bank": {
+      "en": "Bank",
+      "km": "ធនាគារ"
+    },
+    "Branch": {
+      "en": "Branch",
+      "km": "សាខា"
+    },
+    "Browse food": {
+      "en": "Browse food",
+      "km": "រុករកអាហារ"
+    },
+    "Browse top restaurants, order from one branch, and track every handoff.": {
+      "en": "Browse top restaurants, order from one branch, and track every handoff.",
+      "km": "Browse top ភោជនីយដ្ឋាន, ការកម្មង់ from one សាខា, and track every handoff."
+    },
+    "By service area": {
+      "en": "By service area",
+      "km": "តាមតំបន់សេវាកម្ម"
+    },
+    "Campaign discount": {
+      "en": "Campaign discount",
+      "km": "ការបញ្ចុះតម្លៃយុទ្ធនាការ"
+    },
+    "Cardholder name": {
+      "en": "Cardholder name",
+      "km": "ឈ្មោះអ្នកកាន់កាត"
+    },
+    "Cart Confirmation": {
+      "en": "Cart Confirmation",
+      "km": "បញ្ជាក់កន្ត្រក់"
+    },
+    "Cart items": {
+      "en": "Cart items",
+      "km": "មុខទំនិញក្នុងកន្ត្រក់"
+    },
+    "Choose how the customer will pay for this demo order.": {
+      "en": "Choose how the customer will pay for this demo order.",
+      "km": "Choose how the អតិថិជន will pay for this demo ការកម្មង់."
+    },
+    "Clara Customer": {
+      "en": "Clara Customer",
+      "km": "Clara អតិថិជន"
+    },
+    "Clean tools for each team.": {
+      "en": "Clean tools for each team.",
+      "km": "ជាឧបករណ៍ស្អាតសម្រាប់ក្រុមនីមួយៗ"
+    },
+    "Clear cart": {
+      "en": "Clear cart",
+      "km": "សម្អាតកន្ត្រក់"
+    },
+    "Clear cart and add item": {
+      "en": "Clear cart and add item",
+      "km": "សម្អាតកន្ត្រក់ និងបន្ថែមមុខទំនិញ"
+    },
+    "Click any product card to open only that selected item.": {
+      "en": "Click any product card to open only that selected item.",
+      "km": "Click any ផលិតផល card to open only that selected item."
+    },
+    "Completed customer orders": {
+      "en": "Completed customer orders",
+      "km": "ការកម្មង់អតិថិជនបានបញ្ចប់"
+    },
+    "Confirm order details": {
+      "en": "Confirm order details",
+      "km": "បញ្ជាក់ព័ត៌មានលម្អិតការកម្មង់"
+    },
+    "Coverage": {
+      "en": "Coverage",
+      "km": "ការគ្របដណ្តប់"
+    },
+    "Create item": {
+      "en": "Create item",
+      "km": "បង្កើតមុខទំនិញ"
+    },
+    "Create new role": {
+      "en": "Create new role",
+      "km": "បង្កើតតួនាទីថ្មី"
+    },
+    "Create staff user": {
+      "en": "Create staff user",
+      "km": "បង្កើតអ្នកប្រើប្រាស់បុគ្គលិក"
+    },
+    "Current cart:": {
+      "en": "Current cart:",
+      "km": "កន្ត្រក់បច្ចុប្បន្ន:"
+    },
+    "Current preparation queue": {
+      "en": "Current preparation queue",
+      "km": "ជួររង់ចាំរៀបចំបច្ចុប្បន្ន"
+    },
+    "Current queue": {
+      "en": "Current queue",
+      "km": "ជួររង់ចាំបច្ចុប្បន្ន"
+    },
+    "Currently in kitchen": {
+      "en": "Currently in kitchen",
+      "km": "កំពុងនៅក្នុងផ្ទះបាយ"
+    },
+    "Customer Address": {
+      "en": "Customer Address",
+      "km": "អាសយដ្ឋានអតិថិជន"
+    },
+    "Customer cart only": {
+      "en": "Customer cart only",
+      "km": "កន្ត្រក់អតិថិជនតែប៉ុណ្ណោះ"
+    },
+    "Customer only": {
+      "en": "Customer only",
+      "km": "អតិថិជនតែប៉ុណ្ណោះ"
+    },
+    "Customer order list": {
+      "en": "Customer order list",
+      "km": "ការកម្មង់អតិថិជន"
+    },
+    "Customer orders for this restaurant": {
+      "en": "Customer orders for this restaurant",
+      "km": "ការកម្មង់អតិថិជនសម្រាប់ភោជនីយដ្ឋាននេះ"
+    },
+    "Customer orders for your restaurant will appear here after checkout.": {
+      "en": "Customer orders for your restaurant will appear here after checkout.",
+      "km": "អតិថិជន ការកម្មង់ for your ភោជនីយដ្ឋាន will appear here after checkout."
+    },
+    "Customer spend": {
+      "en": "Customer spend",
+      "km": "ចំណាយអតិថិជន"
+    },
+    "Delivery Details": {
+      "en": "Delivery Details",
+      "km": "ព័ត៌មានលម្អិតការដឹកជញ្ជូន"
+    },
+    "Delivery instructions": {
+      "en": "Delivery instructions",
+      "km": "កំណត់ចំណាំការដឹកជញ្ជូន"
+    },
+    "Delivery Work": {
+      "en": "Delivery Work",
+      "km": "លំហូរការងារការដឹកជញ្ជូន"
+    },
+    "Demand vs kitchen": {
+      "en": "Demand vs kitchen",
+      "km": "តម្រូវការ ធៀបនឹងផ្ទះបាយ"
+    },
+    "Demo ABA PayWay payment simulates a KHQR/mobile banking confirmation.": {
+      "en": "Demo ABA PayWay payment simulates a KHQR/mobile banking confirmation.",
+      "km": "Demo ABA PayWay ការទូទាត់ simulates a KHQR/mobile banking confirmation."
+    },
+    "Demo authorization records the PayPal account on the order summary.": {
+      "en": "Demo authorization records the PayPal account on the order summary.",
+      "km": "Demo authorization records the PayPal account on the ការកម្មង់ summary."
+    },
+    "Demo login": {
+      "en": "Demo login",
+      "km": "សាកល្បងការចូលប្រើ"
+    },
+    "Distance": {
+      "en": "Distance",
+      "km": "ចម្ងាយ"
+    },
+    "ETA": {
+      "en": "ETA",
+      "km": "ពេលវេលាប៉ាន់ស្មាន"
+    },
+    "Expiry": {
+      "en": "Expiry",
+      "km": "ផុតកំណត់"
+    },
+    "Explore restaurants": {
+      "en": "Explore restaurants",
+      "km": "រុករកភោជនីយដ្ឋាន"
+    },
+    "Export log": {
+      "en": "Export log",
+      "km": "នាំចេញកំណត់ហេតុសកម្មភាព"
+    },
+    "Featured": {
+      "en": "Featured",
+      "km": "លេចធ្លោ"
+    },
+    "Fee": {
+      "en": "Fee",
+      "km": "កម្រៃ"
+    },
+    "Filter and export operational events.": {
+      "en": "Filter and export operational events.",
+      "km": "ចម្រោះ and export operational events."
+    },
+    "Fresh food delivery, built for clear everyday ordering.": {
+      "en": "Fresh food delivery, built for clear everyday ordering.",
+      "km": "Fresh food ការដឹកជញ្ជូន, built for clear everyday ការកម្មង់ing."
+    },
+    "Fresh food prepared for delivery": {
+      "en": "Fresh food prepared for delivery",
+      "km": "Fresh food prepared for ការដឹកជញ្ជូន"
+    },
+    "Fresh meals, clear delivery, no clutter.": {
+      "en": "Fresh meals, clear delivery, no clutter.",
+      "km": "Fresh meals, clear ការដឹកជញ្ជូន, no clutter."
+    },
+    "From visible orders": {
+      "en": "From visible orders",
+      "km": "ពីការកម្មង់ដែលមើលឃើញ"
+    },
+    "Fulfillment balance": {
+      "en": "Fulfillment balance",
+      "km": "តុល្យភាពការបំពេញការកម្មង់"
+    },
+    "Go to storefront": {
+      "en": "Go to storefront",
+      "km": "ទៅកាន់ហាងមុខ"
+    },
+    "Horizontal Grouped Bar Chart": {
+      "en": "Horizontal Grouped Bar Chart",
+      "km": "ក្រាបរ។បារក្រុមផ្ដេក"
+    },
+    "How orders move": {
+      "en": "How orders move",
+      "km": "របៀបការកម្មង់ផ្លាស់ទី"
+    },
+    "I confirm this order.": {
+      "en": "I confirm this order.",
+      "km": "ខ្ញុំបញ្ជាក់ការកម្មង់នេះ។"
+    },
+    "Item total": {
+      "en": "Item total",
+      "km": "សរុបមុខទំនិញ"
+    },
+    "Items": {
+      "en": "Items",
+      "km": "មុខទំនិញ"
+    },
+    "Items, charges, and delivery.": {
+      "en": "Items, charges, and delivery.",
+      "km": "មុខទំនិញ, charges, and ការដឹកជញ្ជូន."
+    },
+    "JPG, PNG, or WebP. Max 1.5 MB.": {
+      "en": "JPG, PNG, or WebP. Max 1.5 MB.",
+      "km": "JPG, PNG, WebP. Max 1.5 MB."
+    },
+    "Keep current cart": {
+      "en": "Keep current cart",
+      "km": "រក្សាកន្ត្រក់បច្ចុប្បន្ន"
+    },
+    "Key operating metrics remain visible beside the new chart system.": {
+      "en": "Key operating metrics remain visible beside the new chart system.",
+      "km": "ម៉េត្រិកដំណើរការសំខាន់នៅតែមើលឃើញជិតប្រព័ន្ធក្រាបថ្មី។"
+    },
+    "Kitchen active now": {
+      "en": "Kitchen active now",
+      "km": "ផ្ទះបាយសកម្មឥឡូវនេះ"
+    },
+    "Kitchen and branch users assigned to your restaurant only.": {
+      "en": "Kitchen and branch users assigned to your restaurant only.",
+      "km": "ផ្ទះបាយ and សាខា អ្នកប្រើប្រាស់s assigned to your ភោជនីយដ្ឋាន only."
+    },
+    "Kitchen Orders": {
+      "en": "Kitchen Orders",
+      "km": "ការកម្មង់ផ្ទះបាយ"
+    },
+    "Kitchen Queue": {
+      "en": "Kitchen Queue",
+      "km": "ជួររង់ចាំផ្ទះបាយ"
+    },
+    "Latest": {
+      "en": "Latest",
+      "km": "ចុងក្រោយ"
+    },
+    "Latest products": {
+      "en": "Latest products",
+      "km": "ផលិតផលចុងក្រោយ"
+    },
+    "Leave at lobby, call on arrival, no doorbell, and similar delivery notes.": {
+      "en": "Leave at lobby, call on arrival, no doorbell, and similar delivery notes.",
+      "km": "Leave at lobby, call on arrival, no doorbell, and similar ការដឹកជញ្ជូន notes."
+    },
+    "Line Chart": {
+      "en": "Line Chart",
+      "km": "ក្រាបបន្ទាត់"
+    },
+    "Line Items": {
+      "en": "Line Items",
+      "km": "មុខទំនិញរាយបន្ទាត់"
+    },
+    "Live catalog": {
+      "en": "Live catalog",
+      "km": "កាតាឡុកកំពុងដំណើរការ"
+    },
+    "Live customer orders and operational signals for your restaurant.": {
+      "en": "Live customer orders and operational signals for your restaurant.",
+      "km": "កំពុងដំណើរការ អតិថិជន ការកម្មង់ and operational signals for your ភោជនីយដ្ឋាន."
+    },
+    "Live queue": {
+      "en": "Live queue",
+      "km": "ជួររង់ចាំកំពុងដំណើរការ"
+    },
+    "Live workflow": {
+      "en": "Live workflow",
+      "km": "លំហូរការងារកំពុងដំណើរការ"
+    },
+    "Live zones": {
+      "en": "Live zones",
+      "km": "តំបន់កំពុងដំណើរការ"
+    },
+    "Load": {
+      "en": "Load",
+      "km": "ផ្ទុក"
+    },
+    "Loyalty redemption": {
+      "en": "Loyalty redemption",
+      "km": "ការប្ដូរពិន្ទុភាពស្មោះត្រង់"
+    },
+    "Made for the full delivery flow": {
+      "en": "Made for the full delivery flow",
+      "km": "Made for the full ការដឹកជញ្ជូន flow"
+    },
+    "Manage products, categories, modifiers, and availability for your owned restaurant.": {
+      "en": "Manage products, categories, modifiers, and availability for your owned restaurant.",
+      "km": "Manage ផលិតផល, categories, modifiers, and availability for your owned ភោជនីយដ្ឋាន."
+    },
+    "Manage your personal details, delivery addresses, orders, and loyalty rewards.": {
+      "en": "Manage your personal details, delivery addresses, orders, and loyalty rewards.",
+      "km": "Manage your personal details, ការដឹកជញ្ជូន addresses, ការកម្មង់, and loyalty rewards."
+    },
+    "Menu Item": {
+      "en": "Menu Item",
+      "km": "មុខទំនិញ"
+    },
+    "MM/YY": {
+      "en": "MM/YY",
+      "km": "MM/YY"
+    },
+    "Mock map": {
+      "en": "Mock map",
+      "km": "ផែនទីសាកល្បង"
+    },
+    "Mock secure payment": {
+      "en": "Mock secure payment",
+      "km": "ការទូទាត់សុវត្ថិភាពសាកល្បង"
+    },
+    "Monthly order demand compared with estimated revenue velocity": {
+      "en": "Monthly order demand compared with estimated revenue velocity",
+      "km": "Monthly ការកម្មង់ demand compared with estimated revenue velocity"
+    },
+    "Most recent update": {
+      "en": "Most recent update",
+      "km": "ធ្វើបច្ចុប្បន្នភាពថ្មីៗ"
+    },
+    "Name, email, phone, and loyalty.": {
+      "en": "Name, email, phone, and loyalty.",
+      "km": "ឈ្មោះ, email, phone, and loyalty."
+    },
+    "New item source:": {
+      "en": "New item source:",
+      "km": "ថ្មី item source:"
+    },
+    "New order changes": {
+      "en": "New order changes",
+      "km": "ធ្វើបច្ចុប្បន្នភាពការកម្មង់ថ្មី"
+    },
+    "New restaurant orders will appear here when they need preparation.": {
+      "en": "New restaurant orders will appear here when they need preparation.",
+      "km": "ថ្មី ភោជនីយដ្ឋាន ការកម្មង់ will appear here when they need preparation."
+    },
+    "No active deliveries assigned right now.": {
+      "en": "No active deliveries assigned right now.",
+      "km": "មិនមានការដឹកជញ្ជូនសកម្មដែលបានចាត់តាំងឥឡូវនេះទេ។"
+    },
+    "No image": {
+      "en": "No image",
+      "km": "មិនមានរូបភាព"
+    },
+    "No kitchen orders need attention right now.": {
+      "en": "No kitchen orders need attention right now.",
+      "km": "ការកម្មង់ផ្ទះបាយ ត្រូវការសកម្មភាព"
+    },
+    "No kitchen orders right now": {
+      "en": "No kitchen orders right now",
+      "km": "ការកម្មង់ផ្ទះបាយ"
+    },
+    "No onions, pack sauce separately, extra cutlery, and so on.": {
+      "en": "No onions, pack sauce separately, extra cutlery, and so on.",
+      "km": "សេចក្តីណែនាំពិសេស កំណត់ចំណាំការដឹកជញ្ជូន"
+    },
+    "No orders for this restaurant": {
+      "en": "No orders for this restaurant",
+      "km": "ការបញ្ជាទិញ ភោជនីយដ្ឋាន"
+    },
+    "Only customer order and workflow alerts for your assigned restaurant are shown here.": {
+      "en": "Only customer order and workflow alerts for your assigned restaurant are shown here.",
+      "km": "Only អតិថិជន ការកម្មង់ and workflow alerts for your assigned ភោជនីយដ្ឋាន are shown here."
+    },
+    "Only orders tied to your owned restaurant are visible here.": {
+      "en": "Only orders tied to your owned restaurant are visible here.",
+      "km": "Only ការកម្មង់ tied to your owned ភោជនីយដ្ឋាន are visible here."
+    },
+    "Open activity log": {
+      "en": "Open activity log",
+      "km": "បើកកំណត់ហេតុសកម្មភាព"
+    },
+    "Open login": {
+      "en": "Open login",
+      "km": "បើកការចូលប្រើ"
+    },
+    "Open orders": {
+      "en": "Open orders",
+      "km": "Open ការកម្មង់"
+    },
+    "Operational Audit": {
+      "en": "Operational Audit",
+      "km": "សវនកម្មប្រតិបត្តិការ"
+    },
+    "Operations": {
+      "en": "Operations",
+      "km": "ប្រតិបត្តិការ"
+    },
+    "Operators, customers &amp; staff": {
+      "en": "Operators, customers &amp; staff",
+      "km": "Operators, អតិថិជន &amp; staff"
+    },
+    "Optional modifiers": {
+      "en": "Optional modifiers",
+      "km": "ជម្រើសបន្ថែម"
+    },
+    "Order alerts": {
+      "en": "Order alerts",
+      "km": "ការកម្មង់ alerts"
+    },
+    "Order control": {
+      "en": "Order control",
+      "km": "ការកម្មង់ control"
+    },
+    "Order operations": {
+      "en": "Order operations",
+      "km": "សកម្មភាពការកម្មង់"
+    },
+    "Order Receipt": {
+      "en": "Order Receipt",
+      "km": "ការកម្មង់ Receipt"
+    },
+    "Order status mix": {
+      "en": "Order status mix",
+      "km": "ការកម្មង់ status mix"
+    },
+    "Order summary": {
+      "en": "Order summary",
+      "km": "ការកម្មង់ summary"
+    },
+    "Order, prepare, dispatch, deliver": {
+      "en": "Order, prepare, dispatch, deliver",
+      "km": "ការកម្មង់, prepare, dispatch, deliver"
+    },
+    "Orders and estimated revenue across the current operating day": {
+      "en": "Orders and estimated revenue across the current operating day",
+      "km": "ការកម្មង់s and estimated revenue across the current operating day"
+    },
+    "Orders and revenue": {
+      "en": "Orders and revenue",
+      "km": "ការកម្មង់s and revenue"
+    },
+    "Orders over $ 300": {
+      "en": "Orders over $ 300",
+      "km": "ការកម្មង់s over $ 300"
+    },
+    "Owned Order": {
+      "en": "Owned Order",
+      "km": "Owned ការកម្មង់"
+    },
+    "Owned orders": {
+      "en": "Owned orders",
+      "km": "ការកម្មង់ដែលជារបស់អ្នក"
+    },
+    "Owned restaurant": {
+      "en": "Owned restaurant",
+      "km": "Owned ភោជនីយដ្ឋាន"
+    },
+    "Owned restaurant only": {
+      "en": "Owned restaurant only",
+      "km": "Owned ភោជនីយដ្ឋាន only"
+    },
+    "Owner Dashboard": {
+      "en": "Owner Dashboard",
+      "km": "ផ្ទាំងគ្រប់គ្រងម្ចាស់"
+    },
+    "Page not found": {
+      "en": "Page not found",
+      "km": "រកមិនឃើញទំព័រ"
+    },
+    "Paid": {
+      "en": "Paid",
+      "km": "បានទូទាត់"
+    },
+    "Partners and branches": {
+      "en": "Partners and branches",
+      "km": "Partners and សាខាes"
+    },
+    "Past orders and reorder actions.": {
+      "en": "Past orders and reorder actions.",
+      "km": "Past ការកម្មង់ and reការកម្មង់ actions."
+    },
+    "Payment": {
+      "en": "Payment",
+      "km": "ការទូទាត់"
+    },
+    "Payment method": {
+      "en": "Payment method",
+      "km": "វិធីទូទាត់"
+    },
+    "Payment Summary": {
+      "en": "Payment Summary",
+      "km": "សង្ខេបការទូទាត់"
+    },
+    "PayPal email": {
+      "en": "PayPal email",
+      "km": "អ៊ីមែល PayPal"
+    },
+    "Peak-hour summary": {
+      "en": "Peak-hour summary",
+      "km": "សង្ខេបម៉ោងមមាញឹក"
+    },
+    "Permission Guard": {
+      "en": "Permission Guard",
+      "km": "ការការពារសិទ្ធិ"
+    },
+    "Permission templates and access rules.": {
+      "en": "Permission templates and access rules.",
+      "km": "គំរូសិទ្ធិ និងច្បាប់ចូលប្រើ។"
+    },
+    "Platform": {
+      "en": "Platform",
+      "km": "វេទិកា"
+    },
+    "Prep": {
+      "en": "Prep",
+      "km": "រៀបចំ"
+    },
+    "Preparation workflow": {
+      "en": "Preparation workflow",
+      "km": "លំហូរការងាររៀបចំ"
+    },
+    "Preparing": {
+      "en": "Preparing",
+      "km": "កំពុងរៀបចំ"
+    },
+    "Product not found": {
+      "en": "Product not found",
+      "km": "ផលិតផល not found"
+    },
+    "Products &amp; Categories": {
+      "en": "Products &amp; Categories",
+      "km": "ផលិតផល &amp; Categories"
+    },
+    "Profile changes update your current session immediately.": {
+      "en": "Profile changes update your current session immediately.",
+      "km": "ការផ្លាស់ប្ដូរប្រវត្តិរូបនឹងធ្វើបច្ចុប្បន្នភាពសម័យបច្ចុប្បន្នភ្លាមៗ"
+    },
+    "Profile image": {
+      "en": "Profile image",
+      "km": "រូបភាពប្រវត្តិរូប"
+    },
+    "Profile preview": {
+      "en": "Profile preview",
+      "km": "មើលមុនប្រវត្តិរូប"
+    },
+    "Protected account access": {
+      "en": "Protected account access",
+      "km": "ការចូលប្រើគណនីដែលការពារ"
+    },
+    "Quantity": {
+      "en": "Quantity",
+      "km": "បរិមាណ"
+    },
+    "Quick Demo Access": {
+      "en": "Quick Demo Access",
+      "km": "ចូលប្រើសាកល្បងរហ័ស"
+    },
+    "Ranked partner contribution from today's completed order flow.": {
+      "en": "Ranked partner contribution from today's completed order flow.",
+      "km": "Ranked partner contribution from today's completed ការកម្មង់ flow."
+    },
+    "Rating": {
+      "en": "Rating",
+      "km": "ការវាយតម្លៃ"
+    },
+    "Ready": {
+      "en": "Ready",
+      "km": "រួចរាល់"
+    },
+    "Receipt": {
+      "en": "Receipt",
+      "km": "វិក្កយបត្រ"
+    },
+    "Recent events": {
+      "en": "Recent events",
+      "km": "ថ្មីៗ events"
+    },
+    "Reset filters": {
+      "en": "Reset filters",
+      "km": "កំណត់ចម្រោះឡើងវិញ"
+    },
+    "Restaurant": {
+      "en": "Restaurant",
+      "km": "ភោជនីយដ្ឋាន"
+    },
+    "Restaurant comparison": {
+      "en": "Restaurant comparison",
+      "km": "ភោជនីយដ្ឋាន comparison"
+    },
+    "Restaurant order alerts": {
+      "en": "Restaurant order alerts",
+      "km": "ភោជនីយដ្ឋាន ការកម្មង់ alerts"
+    },
+    "Restaurant owners can update status and delivery ETA for orders in their restaurant.": {
+      "en": "Restaurant owners can update status and delivery ETA for orders in their restaurant.",
+      "km": "ភោជនីយដ្ឋាន owners can update status and ការដឹកជញ្ជូន ETA for ការកម្មង់ in their ភោជនីយដ្ឋាន."
+    },
+    "Restaurant Performance": {
+      "en": "Restaurant Performance",
+      "km": "ភោជនីយដ្ឋាន Performance"
+    },
+    "Restaurant queue": {
+      "en": "Restaurant queue",
+      "km": "ភោជនីយដ្ឋាន queue"
+    },
+    "Restaurant Staff": {
+      "en": "Restaurant Staff",
+      "km": "ភោជនីយដ្ឋាន Staff"
+    },
+    "Return to your workspace": {
+      "en": "Return to your workspace",
+      "km": "ត្រលប់ទៅកន្លែងធ្វើការរបស់អ្នក"
+    },
+    "Revenue": {
+      "en": "Revenue",
+      "km": "ចំណូល"
+    },
+    "Review active restaurant orders, start preparation, and mark food ready for pickup.": {
+      "en": "Review active restaurant orders, start preparation, and mark food ready for pickup.",
+      "km": "ការកម្មង់សកម្ម ភោជនីយដ្ឋាន លំហូរការងាររៀបចំ Ready for pickup"
+    },
+    "Rider:": {
+      "en": "Rider:",
+      "km": "អ្នកដឹកជញ្ជូន:"
+    },
+    "Route Boundary": {
+      "en": "Route Boundary",
+      "km": "ព្រំដែនផ្លូវ"
+    },
+    "Saved checkout locations.": {
+      "en": "Saved checkout locations.",
+      "km": "អាសយដ្ឋានអតិថិជន បញ្ជាក់ព័ត៌មានលម្អិតការកម្មង់"
+    },
+    "Search product or category": {
+      "en": "Search product or category",
+      "km": "ស្វែងរក ផលិតផល or category"
+    },
+    "Security code": {
+      "en": "Security code",
+      "km": "លេខកូដសន្តិសុខ"
+    },
+    "Select bank": {
+      "en": "Select bank",
+      "km": "ជ្រើសរើសធនាគារ"
+    },
+    "Select pickup kitchen": {
+      "en": "Select pickup kitchen",
+      "km": "Select pickup ផ្ទះបាយ"
+    },
+    "Selected branch": {
+      "en": "Selected branch",
+      "km": "សាខាដែលបានជ្រើស"
+    },
+    "Service area demand share with hoverable slices": {
+      "en": "Service area demand share with hoverable slices",
+      "km": "តាមតំបន់សេវាកម្ម តម្រូវការ ធៀបនឹងផ្ទះបាយ"
+    },
+    "Sign in to your account": {
+      "en": "Sign in to your account",
+      "km": "ចូលប្រើគណនីរបស់អ្នក"
+    },
+    "Sign up": {
+      "en": "Sign up",
+      "km": "ចុះឈ្មោះ"
+    },
+    "Simple, visible, and easy to follow.": {
+      "en": "Simple, visible, and easy to follow.",
+      "km": "អាចប្រើបាន លំហូរការងារ"
+    },
+    "Special instructions": {
+      "en": "Special instructions",
+      "km": "សេចក្តីណែនាំពិសេស"
+    },
+    "Status:": {
+      "en": "Status:",
+      "km": "ស្ថានភាព:"
+    },
+    "t('Flavor Fleet logo')": {
+      "en": "t('Flavor Fleet logo')",
+      "km": "t('Flavor Fleet logo')"
+    },
+    "t('Language')": {
+      "en": "t('Language')",
+      "km": "t('Language')"
+    },
+    "Team access": {
+      "en": "Team access",
+      "km": "ការចូលប្រើក្រុម"
+    },
+    "The rider collects cash on delivery. No online authorization is needed.": {
+      "en": "The rider collects cash on delivery. No online authorization is needed.",
+      "km": "The rider collects cash on ការដឹកជញ្ជូន. No online authorization is needed."
+    },
+    "The route you requested does not exist in the current milestone build. Use the main navigation to continue.": {
+      "en": "The route you requested does not exist in the current milestone build. Use the main navigation to continue.",
+      "km": "រកមិនឃើញទំព័រ ត្រលប់ទៅទំព័រដើម"
+    },
+    "The selected product could not be found in this restaurant menu.": {
+      "en": "The selected product could not be found in this restaurant menu.",
+      "km": "The selected ផលិតផល could not be found in this ភោជនីយដ្ឋាន menu."
+    },
+    "This will clear the current cart.": {
+      "en": "This will clear the current cart.",
+      "km": "សម្អាតកន្ត្រក់ កន្ត្រក់បច្ចុប្បន្ន:"
+    },
+    "title": {
+      "en": "title",
+      "km": "title"
+    },
+    "Today deal": {
+      "en": "Today deal",
+      "km": "ការផ្តល់ជូនថ្ងៃនេះ"
+    },
+    "Top partners": {
+      "en": "Top partners",
+      "km": "ដៃគូកំពូល"
+    },
+    "Top partners compared by order count and scaled revenue": {
+      "en": "Top partners compared by order count and scaled revenue",
+      "km": "Top partners compared by ការកម្មង់ count and scaled revenue"
+    },
+    "Top restaurant revenue share with active slice details": {
+      "en": "Top restaurant revenue share with active slice details",
+      "km": "ការបែងចែកចំណូលភោជនីយដ្ឋាន ការកម្មង់សកម្ម"
+    },
+    "Update order workflow": {
+      "en": "Update order workflow",
+      "km": "ធ្វើបច្ចុប្បន្នភាព ការកម្មង់ workflow"
+    },
+    "Update rider, ETA, and status.": {
+      "en": "Update rider, ETA, and status.",
+      "km": "ធ្វើបច្ចុប្បន្នភាព rider, ETA, and status."
+    },
+    "Upload image": {
+      "en": "Upload image",
+      "km": "បង្ហោះរូបភាព"
+    },
+    "Upload photo": {
+      "en": "Upload photo",
+      "km": "បង្ហោះរូបថត"
+    },
+    "Use a customer account to build a cart and checkout.": {
+      "en": "Use a customer account to build a cart and checkout.",
+      "km": "Use a អតិថិជន account to build a cart and checkout."
+    },
+    "Verified": {
+      "en": "Verified",
+      "km": "បានផ្ទៀងផ្ទាត់"
+    },
+    "Verified partners": {
+      "en": "Verified partners",
+      "km": "ដៃគូដែលបានផ្ទៀងផ្ទាត់"
+    },
+    "View item": {
+      "en": "View item",
+      "km": "មើលមុខទំនិញ"
+    },
+    "View menu": {
+      "en": "View menu",
+      "km": "មើលមឺនុយ"
+    },
+    "Visa card number": {
+      "en": "Visa card number",
+      "km": "លេខកាត Visa"
+    },
+    "Voucher discount": {
+      "en": "Voucher discount",
+      "km": "ការបញ្ចុះតម្លៃវ៉ូឆ័រ"
+    },
+    "Waiting pickup": {
+      "en": "Waiting pickup",
+      "km": "កំពុងរង់ចាំយក"
+    },
+    "We connect customers, restaurants, kitchens, riders, and admins in one simple food platform.": {
+      "en": "We connect customers, restaurants, kitchens, riders, and admins in one simple food platform.",
+      "km": "We connect អតិថិជន, ភោជនីយដ្ឋាន, ផ្ទះបាយs, riders, and admins in one simple food platform."
+    },
+    "Welcome Back": {
+      "en": "Welcome Back",
+      "km": "សូមស្វាគមន៍ការត្រលប់"
+    },
+    "Workflow": {
+      "en": "Workflow",
+      "km": "លំហូរការងារ"
+    },
+    "Your cart is empty.": {
+      "en": "Your cart is empty.",
+      "km": "កន្ត្រក់របស់អ្នកទទេ។"
+    },
+    "Zone load": {
+      "en": "Zone load",
+      "km": "បន្ទុកតំបន់"
+    },
+    "Zones": {
+      "en": "Zones",
+      "km": "តំបន់"
     }
   }
 }

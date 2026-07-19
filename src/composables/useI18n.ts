@@ -37,6 +37,10 @@ function normalizePhrase(value: string) {
   return value.replace(/\s+/g, ' ').trim();
 }
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function applyLocaleSideEffects(code: LocaleCode) {
   if (typeof window !== 'undefined') {
     window.localStorage.setItem(STORAGE_KEY, code);
@@ -47,6 +51,33 @@ function applyLocaleSideEffects(code: LocaleCode) {
   }
 }
 
+function translateKnownSegments(value: string) {
+  if (locale.value === fallbackLocale) {
+    return value;
+  }
+
+  let translated = normalizePhrase(value);
+  let changed = false;
+
+  Object.entries(phrases)
+    .filter(([source]) => source.length >= 3 && !/[{}$]/.test(source))
+    .sort(([left], [right]) => right.length - left.length)
+    .forEach(([source, phrase]) => {
+      const replacement = phrase[locale.value] ?? phrase[fallbackLocale];
+      if (!replacement || replacement === source) {
+        return;
+      }
+
+      const next = translated.replace(new RegExp(escapeRegExp(source), 'gi'), replacement);
+      if (next !== translated) {
+        translated = next;
+        changed = true;
+      }
+    });
+
+  return changed ? translated : value;
+}
+
 export function translateText(value: string, explicitFallback = value) {
   const normalized = normalizePhrase(value);
 
@@ -55,11 +86,11 @@ export function translateText(value: string, explicitFallback = value) {
   }
 
   const phrase = phrases[normalized];
-  if (!phrase) {
-    return explicitFallback;
+  if (phrase) {
+    return phrase[locale.value] ?? phrase[fallbackLocale] ?? explicitFallback;
   }
 
-  return phrase[locale.value] ?? phrase[fallbackLocale] ?? explicitFallback;
+  return translateKnownSegments(value);
 }
 
 export function useI18n() {
@@ -100,7 +131,6 @@ export function useAutoTranslate(root: Ref<HTMLElement | null>) {
     }
 
     let attributes = originalAttributes.get(element);
-
     if (!attributes) {
       attributes = new Map<string, string>();
       originalAttributes.set(element, attributes);
@@ -116,7 +146,10 @@ export function useAutoTranslate(root: Ref<HTMLElement | null>) {
       }
 
       const original = attributes.get(attribute) ?? '';
-      element.setAttribute(attribute, translateText(original));
+      const translated = translateText(original);
+      if (element.getAttribute(attribute) !== translated) {
+        element.setAttribute(attribute, translated);
+      }
     });
   }
 
@@ -134,8 +167,11 @@ export function useAutoTranslate(root: Ref<HTMLElement | null>) {
     const leadingSpace = original.match(/^\s*/)?.[0] ?? '';
     const trailingSpace = original.match(/\s*$/)?.[0] ?? '';
     const translated = translateText(original);
+    const nextValue = translated === original ? original : `${leadingSpace}${translated}${trailingSpace}`;
 
-    node.data = translated === original ? original : `${leadingSpace}${translated}${trailingSpace}`;
+    if (node.data !== nextValue) {
+      node.data = nextValue;
+    }
   }
 
   function applyTranslations() {
@@ -175,6 +211,9 @@ export function useAutoTranslate(root: Ref<HTMLElement | null>) {
 
     observer = new MutationObserver(scheduleTranslations);
     observer.observe(root.value, {
+      attributes: true,
+      attributeFilter: translatableAttributes,
+      characterData: true,
       childList: true,
       subtree: true,
     });
