@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+
+# Production builds
+dist/
+build/
+.vite/
+
+# Test and coverage output
+coverage/
+playwright-report/
+test-results/
+.vitest/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# TypeScript / Vite generated files
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Local caches
+.cache/
+.temp/
+.tmp/
+.eslintcache
+.stylelintcache
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Package manager misc
+.npmrc.local
+.yarnrc.local
