@@ -1,6 +1,6 @@
-# Flavor Fleet Backend API
+# Golden Land Restaurant Backend API
 
-Node.js + Express + Sequelize + MySQL backend for the Flavor Fleet Vue frontend.
+Node.js + Express + Sequelize + MySQL backend for the Golden Land Restaurant Vue frontend.
 
 ## Stack
 

@@ -17,7 +17,7 @@ describe('invoice PDF', () => {
 
     expect(pdf.startsWith('%PDF-1.4')).toBe(true);
     expect(pdf).toContain(`Invoice ${order.id}`);
-    expect(pdf).toContain('Flavor Fleet Invoice');
+    expect(pdf).toContain('Golden Land Restaurant Invoice');
   });
 
   it('creates a downloadable PDF blob', () => {

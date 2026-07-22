@@ -13,7 +13,7 @@ interface LanguageOption {
 
 type PhraseMap = Record<string, Record<LocaleCode, string>>;
 
-const STORAGE_KEY = 'flavor-fleet-language';
+const STORAGE_KEY = 'golden-land-restaurant-language';
 const languages = translations.languages as LanguageOption[];
 const phrases = translations.phrases as PhraseMap;
 const fallbackLocale: LocaleCode = 'en';

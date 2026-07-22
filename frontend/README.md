@@ -1,6 +1,6 @@
-# Flavor Fleet Frontend
+# Golden Land Restaurant Frontend
 
-Flavor Fleet is a frontend-first restaurant and food ordering platform built with Vue 3, TypeScript, Vite, Tailwind CSS, Pinia, and Vue Router. It currently ships a working multi-role demo for customer browsing and ordering, admin operations, restaurant-owner tools, kitchen updates, and rider delivery progress.
+Golden Land Restaurant is a frontend-first restaurant and food ordering platform built with Vue 3, TypeScript, Vite, Tailwind CSS, Pinia, and Vue Router. It currently ships a working multi-role demo for customer browsing and ordering, admin operations, restaurant-owner tools, kitchen updates, and rider delivery progress.
 
 The repository is being aligned to the AGENTS milestone plan. Milestones 0 and 1 are implemented and verified, Milestone 2 now has a substantial restaurant, branch, and menu workflow layer, and Milestone 3 has a stronger customer ordering flow with branch-aware carts, checkout revalidation, vouchers, and loyalty redemption.
 

@@ -80,7 +80,7 @@ export function buildInvoicePdf(order: Order, formatter: InvoiceFormatter) {
   const commands: string[] = [];
   let y = 790;
 
-  commands.push(drawText('Flavor Fleet Invoice', left, y, 12, 'F2'));
+  commands.push(drawText('Golden Land Restaurant Invoice', left, y, 12, 'F2'));
   commands.push(drawText(order.restaurantName, left, y - 32, 26, 'F2'));
   commands.push(drawText(`Invoice ${order.id}`, left, y - 54, 12));
   commands.push(drawText(`Placed ${formatter.dateTime(order.createdAt)}`, left, y - 72, 10));

@@ -78,7 +78,7 @@ function normalizeRestaurant(restaurant: Restaurant) {
   const now = new Date().toISOString();
   return {
     ...restaurant,
-    description: restaurant.description ?? `${restaurant.name} is part of the Flavor Fleet demo marketplace with delivery-ready branches and seeded menu inventory.`,
+    description: restaurant.description ?? `${restaurant.name} is part of the Golden Land Restaurant demo marketplace with delivery-ready branches and seeded menu inventory.`,
     reviewCount: restaurant.reviewCount ?? Math.max(32, Math.round(restaurant.rating * 64)),
     partnerStatus: restaurant.partnerStatus ?? (restaurant.verified ? 'verified' : 'pending'),
     suspensionReason: restaurant.suspensionReason ?? null,

@@ -60,7 +60,7 @@
 
       <!-- Bottom Bar -->
       <div class="mt-12 pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-sm text-slate-500">
-        <p>© {{ currentYear }} Flavor Fleet. All rights reserved.</p>
+        <p>© {{ currentYear }} Golden Land Restaurant. All rights reserved.</p>
         <div class="flex gap-6 mt-4 md:mt-0 text-xs uppercase tracking-widest">
           <span>Fast Delivery</span>
           <span>Secure Payments</span>

@@ -1,6 +1,6 @@
 # Postman Environment Variables and API Endpoint Guide
 
-This file is for testing the full Flavor Fleet backend API in Postman.
+This file is for testing the full Golden Land Restaurant backend API in Postman.
 
 Backend base URL:
 
@@ -36,7 +36,7 @@ API smoke test passed: frontend CRUD/workflow API coverage is working against th
 Create a Postman environment named:
 
 ```txt
-Flavor Fleet Local
+Golden Land Restaurant Local
 ```
 
 Add these variables:

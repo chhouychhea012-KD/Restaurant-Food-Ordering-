@@ -148,7 +148,7 @@ export async function register(payload: RegisterPayload) {
   saveSession(session);
 
   createNotification({
-    title: 'Welcome to Flavor Fleet',
+    title: 'Welcome to Golden Land Restaurant',
     message: `Hi ${user.name}, your account is ready. Start browsing restaurants, categories, and live delivery updates anytime.`,
     kind: 'account',
     audienceRole: 'customer',

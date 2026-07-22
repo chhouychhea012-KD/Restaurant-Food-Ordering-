@@ -319,7 +319,7 @@ const filteredRestaurants = computed(() => {
 const blankForm = (): RestaurantInput => ({
   name: '',
   cuisine: [],
-  description: 'A new restaurant profile for the Flavor Fleet partner network.',
+  description: 'A new restaurant profile for the Golden Land Restaurant partner network.',
   deliveryTime: '20-30 min',
   deliveryFee: 29,
   coverImage: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80',

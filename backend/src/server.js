@@ -5,7 +5,7 @@ const { sequelize } = require('./models');
 async function start() {
   await sequelize.authenticate();
   app.listen(env.port, () => {
-    console.log(`Flavor Fleet API listening on http://localhost:${env.port}/api/v1`);
+    console.log(`Golden Land Restaurant API listening on http://localhost:${env.port}/api/v1`);
   });
 }
 

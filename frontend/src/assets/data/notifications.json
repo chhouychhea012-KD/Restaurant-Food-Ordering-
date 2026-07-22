@@ -1,7 +1,7 @@
 [
   {
     "id": "notif-customer-001",
-    "title": "Welcome to Flavor Fleet",
+    "title": "Welcome to Golden Land Restaurant",
     "message": "Your customer account is ready. Explore restaurants, browse categories, and track your next order from one protected workspace.",
     "kind": "account",
     "audienceRole": "customer",

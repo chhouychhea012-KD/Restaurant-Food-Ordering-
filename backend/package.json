@@ -1,8 +1,8 @@
 {
-  "name": "flavor-fleet-backend",
+  "name": "golden-land-restaurant-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "Node.js MVC backend API for the Flavor Fleet restaurant ordering platform.",
+  "description": "Node.js MVC backend API for the Golden Land Restaurant restaurant ordering platform.",
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",

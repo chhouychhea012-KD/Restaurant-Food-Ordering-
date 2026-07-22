@@ -44,7 +44,7 @@
 
         <section class="auth-form-scroll lg:h-screen lg:overflow-y-auto lg:overscroll-contain lg:[scrollbar-gutter:stable]">
           <div class="mx-auto w-full max-w-md pb-8 lg:mx-0 lg:mr-auto lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-8 lg:pl-4 lg:pr-8 xl:pl-8 xl:pr-10">
-            <img src="/image/logo.png" alt="Flavor Fleet" class="mx-auto h-24 w-auto sm:h-28" />
+            <img src="/image/logo.png" alt="Golden Land Restaurant" class="mx-auto h-24 w-auto sm:h-28" />
 
             <div class="surface-card mt-6 border border-white/80 bg-white/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.10)] sm:p-8">
               <RouterView />

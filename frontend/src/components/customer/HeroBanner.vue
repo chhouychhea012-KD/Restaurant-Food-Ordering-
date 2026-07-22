@@ -2,7 +2,7 @@
   <section class="surface-card overflow-hidden bg-gradient-to-br from-orange-50 via-white to-emerald-50 text-slate-900">
     <div class="grid min-h-[520px] lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)]">
       <div class="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12">
-        <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-600">Flavor Fleet</p>
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-600">Golden Land Restaurant</p>
         <h1 class="mt-4 max-w-xl text-4xl font-extrabold leading-tight sm:text-5xl">
           Fresh meals, clear delivery, no clutter.
         </h1>

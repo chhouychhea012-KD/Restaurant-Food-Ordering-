@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('main route namespaces resolve through working shells', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByText(/flavor fleet/i).first()).toBeVisible();
+  await expect(page.getByText(/golden spoon restaurant/i).first()).toBeVisible();
 
   await page.goto('/auth/login');
   await expect(page.getByRole('heading', { name: /sign in to your account/i })).toBeVisible();

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/health', (_req, res) => res.json({ data: { status: 'ok', service: 'flavor-fleet-api' } }));
+router.get('/health', (_req, res) => res.json({ data: { status: 'ok', service: 'golden-land-restaurant-api' } }));
 router.use('/auth', require('./auth.routes'));
 router.use('/roles', require('./role.routes'));
 router.use('/users', require('./user.routes'));
