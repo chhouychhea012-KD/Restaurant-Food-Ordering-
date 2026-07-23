@@ -1,6 +1,6 @@
 <template>
-  <header class="sticky top-0 z-20 border-b border-white/60 bg-white/80 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/82">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:h-24 sm:gap-4 sm:px-6 lg:px-8">
       <AppLogo />
       <button
         class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
@@ -188,7 +188,8 @@
           </RouterLink>
         </div>
       </nav>
-    </transition>  </header>
+    </transition>
+  </header>
 </template>
 
 <script setup lang="ts">
