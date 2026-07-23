@@ -1,9 +1,9 @@
 <template>
   <section class="surface-card overflow-hidden bg-gradient-to-br from-orange-50 via-white to-emerald-50 text-slate-900">
-    <div class="grid min-h-[520px] lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)]">
-      <div class="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12">
+    <div class="grid lg:min-h-[520px] lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)]">
+      <div class="flex flex-col justify-center px-4 py-8 sm:px-10 sm:py-10 lg:px-12">
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-600">Golden Land Restaurant</p>
-        <h1 class="mt-4 max-w-xl text-4xl font-extrabold leading-tight sm:text-5xl">
+        <h1 class="mt-4 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">
           Fresh meals, clear delivery, no clutter.
         </h1>
         <p class="mt-4 max-w-lg text-base leading-7 text-slate-600">
@@ -14,7 +14,7 @@
           <RouterLink to="/auth/login" class="btn-secondary border-brand-200 bg-white text-brand-700 hover:bg-brand-50">Demo login</RouterLink>
         </div>
 
-        <div class="mt-10 grid max-w-xl grid-cols-3 gap-3">
+        <div class="mt-8 grid max-w-xl grid-cols-1 gap-3 min-[420px]:grid-cols-3 sm:mt-10">
           <div v-for="metric in heroMetrics" :key="metric.label" class="rounded-lg border border-orange-100 bg-white/80 px-3 py-3 shadow-sm">
             <p class="text-lg font-bold text-slate-900">{{ metric.value }}</p>
             <p class="mt-1 text-xs text-slate-500">{{ metric.label }}</p>
@@ -22,17 +22,17 @@
         </div>
       </div>
 
-      <div v-if="activeSlide" class="relative min-h-[460px] overflow-hidden">
+      <div v-if="activeSlide" class="relative min-h-[320px] overflow-hidden sm:min-h-[420px] lg:min-h-[460px]">
         <transition name="hero-slide" mode="out-in">
           <img :key="activeSlide.id" :src="activeSlide.image" :alt="activeSlide.name" class="absolute inset-0 h-full w-full object-cover" />
         </transition>
         <div class="absolute inset-0 bg-gradient-to-t from-orange-950/72 via-orange-950/12 to-transparent lg:bg-gradient-to-r lg:from-orange-950/18 lg:via-transparent lg:to-transparent" />
 
-        <div class="absolute inset-x-4 bottom-4 rounded-lg border border-white/35 bg-white/88 p-4 text-slate-900 shadow-xl backdrop-blur sm:inset-x-8 sm:bottom-8">
+        <div class="absolute inset-x-3 bottom-3 rounded-lg border border-white/35 bg-white/90 p-3 text-slate-900 shadow-xl backdrop-blur sm:inset-x-8 sm:bottom-8 sm:p-4">
           <div class="flex flex-wrap items-start justify-between gap-4">
             <div class="min-w-0">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">{{ activeSlide.restaurantName }}</p>
-              <h2 class="mt-2 text-2xl font-bold text-slate-950">{{ activeSlide.name }}</h2>
+              <h2 class="mt-2 text-xl font-bold text-slate-950 sm:text-2xl">{{ activeSlide.name }}</h2>
               <p class="mt-2 line-clamp-1 text-sm text-slate-600">{{ activeSlide.description }}</p>
             </div>
             <span class="rounded-md bg-brand-500 px-3 py-1 text-sm font-bold text-white">{{ formatPrice(activeSlide.price) }}</span>

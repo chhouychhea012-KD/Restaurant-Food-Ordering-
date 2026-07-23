@@ -3,8 +3,8 @@
     <SectionCard eyebrow="Restaurant Directory" title="Browse all delivery partners" description="">
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <input v-model="query" class="field-input w-72" type="search" placeholder="Search cuisine, restaurant, or category" @input="updateRoute" />
-          <select v-model="activeCategory" class="field-input w-60" @change="updateRoute">
+          <input v-model="query" class="field-input w-full sm:w-72" type="search" placeholder="Search cuisine, restaurant, or category" @input="updateRoute" />
+          <select v-model="activeCategory" class="field-input w-full sm:w-60" @change="updateRoute">
             <option value="">All categories</option>
             <option v-for="category in restaurantStore.categories" :key="category.slug" :value="category.name">{{ category.name }}</option>
           </select>

@@ -17,6 +17,7 @@
 
   html {
     color-scheme: light;
+    overflow-x: hidden;
   }
 
   body {
@@ -25,6 +26,7 @@
       linear-gradient(180deg, rgba(255, 247, 237, 0.46), rgba(248, 250, 252, 0.74) 28rem),
       #f8fafc;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   h1,
@@ -92,11 +94,11 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex max-w-full items-center justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100;
+    @apply inline-flex max-w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-center text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100;
   }
 
   .pill {
@@ -108,11 +110,11 @@
   }
 
   .field-input {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
+    @apply w-full max-w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
   }
 
   .page-shell {
-    @apply mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8;
   }
   .thin-scrollbar {
     scrollbar-width: thin;
@@ -139,5 +141,16 @@
     background: rgba(100, 116, 139, 0.58);
     border: 2px solid transparent;
     background-clip: padding-box;
+  }
+  .responsive-actions {
+    @apply flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center;
+  }
+
+  .responsive-grid-cards {
+    @apply grid gap-4 sm:grid-cols-2 xl:grid-cols-4;
+  }
+
+  .safe-table-wrap {
+    @apply thin-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0;
   }
 }

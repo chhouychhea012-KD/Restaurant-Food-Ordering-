@@ -1,13 +1,13 @@
 <template>
-  <div class="grid min-h-screen gap-4 bg-slate-50/80 p-3 sm:p-4 lg:h-screen lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-5 lg:overflow-hidden lg:p-6 xl:grid-cols-[260px_minmax(0,1fr)]">
+  <div class="grid min-h-screen gap-3 bg-slate-50/80 p-3 sm:gap-4 sm:p-4 lg:h-screen lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-5 lg:overflow-hidden lg:p-6 xl:grid-cols-[260px_minmax(0,1fr)]">
     <SidebarNav :items="navItems" />
 
-    <div class="relative flex min-h-0 flex-col gap-4 overflow-visible lg:h-[calc(100vh-3rem)]">
-      <div class="surface-card relative z-20 shrink-0 overflow-visible px-5 py-4 sm:px-6 lg:px-7">
-        <div class="flex min-h-[4.5rem] flex-wrap items-center justify-between gap-4">
+    <div class="relative flex min-h-0 flex-col gap-3 overflow-visible sm:gap-4 lg:h-[calc(100vh-3rem)]">
+      <div class="surface-card relative z-20 shrink-0 overflow-visible px-4 py-4 sm:px-6 lg:px-7">
+        <div class="flex min-h-[4rem] flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="min-w-0">
             <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{{ workspaceLabel }}</p>
-            <h1 class="mt-1 truncate text-2xl font-bold text-slate-950">{{ authStore.user?.name }}</h1>
+            <h1 class="mt-1 truncate text-xl font-bold text-slate-950 sm:text-2xl">{{ authStore.user?.name }}</h1>
           </div>
 
           <div ref="menuRef" class="relative flex shrink-0 items-center gap-3 lg:ml-auto">

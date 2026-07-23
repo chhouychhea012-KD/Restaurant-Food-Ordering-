@@ -74,7 +74,7 @@
       <p v-if="message" class="mt-5 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
 
       <div v-if="filteredLogs.length" class="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-        <div class="thin-scrollbar overflow-x-auto">
+        <div class="safe-table-wrap">
           <table class="w-full min-w-[920px] text-left text-sm">
             <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
               <tr>

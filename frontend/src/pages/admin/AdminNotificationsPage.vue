@@ -56,7 +56,7 @@
       <template #actions>
         <div class="flex flex-wrap gap-3">
           <button class="btn-secondary" type="button" :disabled="!authStore.user || !notificationStore.unreadCount" @click="markAllRead">Mark all read</button>
-          <select v-model="filter" class="field-input w-52">
+          <select v-model="filter" class="field-input w-full sm:w-52">
             <option value="all">All notifications</option>
             <option value="unread">Unread only</option>
             <option value="order">Order updates</option>

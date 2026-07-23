@@ -44,7 +44,7 @@
           <button class="btn-secondary" :disabled="!hasUnread" @click="markAllRead">
             Mark all as read
           </button>
-          <select v-model="filter" class="field-input w-52">
+          <select v-model="filter" class="field-input w-full sm:w-52">
             <option value="all">All Notifications</option>
             <option value="unread">Unread Only</option>
             <option value="order">Order Updates</option>

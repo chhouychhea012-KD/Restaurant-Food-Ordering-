@@ -10,7 +10,7 @@
           <div class="relative">
             <input 
               v-model="query" 
-              class="field-input w-72 pl-11" 
+              class="field-input w-full sm:w-72 pl-11" 
               type="search" 
               placeholder="Search category, restaurant, or product" 
             />
@@ -83,7 +83,7 @@
       </div>
 
       <div v-if="filteredCategories.length" class="mt-6 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-        <div class="thin-scrollbar overflow-x-auto">
+        <div class="safe-table-wrap">
           <table class="w-full min-w-[760px] text-left text-sm">
             <thead class="bg-slate-50 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
               <tr>

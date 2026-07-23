@@ -2,6 +2,21 @@
   <header class="sticky top-0 z-20 border-b border-white/60 bg-white/80 backdrop-blur">
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
       <AppLogo />
+      <button
+        class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
+        type="button"
+        :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
+        aria-controls="mobile-customer-navigation"
+        aria-label="Toggle navigation"
+        @click="toggleMobileMenu"
+      >
+        <svg v-if="!isMobileMenuOpen" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg v-else class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
       <nav class="hidden items-center gap-1 text-sm font-medium lg:flex">
         <RouterLink
           v-for="item in navLinks"
@@ -17,7 +32,7 @@
           />
         </RouterLink>
       </nav>
-      <div class="flex items-center gap-3">
+      <div class="flex min-w-0 items-center gap-2 sm:gap-3">
         <LanguageSelect class="hidden sm:inline-flex" />
         <RouterLink
           v-if="authStore.isAuthenticated"
@@ -50,7 +65,7 @@
         <RouterLink
           v-if="canUseCustomerOrdering"
           to="/cart"
-          class="btn-secondary group relative inline-flex items-center gap-2"
+          class="btn-secondary group relative inline-flex items-center gap-2 px-3 sm:px-4"
           :aria-label="cartAriaLabel"
           title="Cart"
         >
@@ -68,12 +83,12 @@
             <circle cx="18" cy="20" r="1.5" />
             <path d="M3 4h2l2.3 10.1a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7" />
           </svg>
-          <span>Cart</span>
+          <span class="hidden sm:inline">Cart</span>
           <span v-if="cartItemCount" class="absolute -right-2 -top-2 flex h-6 min-w-[1.5rem] items-center justify-center rounded-full bg-brand-500 px-2 text-xs font-bold text-white shadow-lg shadow-brand-200">
             {{ cartBadgeCount }}
           </span>
         </RouterLink>
-        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary">
+        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary px-3 sm:px-4">
           Login
         </RouterLink>
         <div v-else ref="accountMenuRef" class="relative">
@@ -105,7 +120,7 @@
               class="absolute right-0 top-[calc(100%+0.85rem)] z-50 w-[290px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
             >
               <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_32%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
-                <div class="flex items-center gap-3">
+                <div class="flex min-w-0 items-center gap-2 sm:gap-3">
                   <UserAvatar :user="authStore.user" size="md" />
                   <div class="min-w-0">
                     <p class="truncate text-base font-bold text-slate-950">{{ authStore.user?.name }}</p>
@@ -147,7 +162,33 @@
         </div>
       </div>
     </div>
-  </header>
+    <transition
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="-translate-y-2 opacity-0"
+      enter-to-class="translate-y-0 opacity-100"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="translate-y-0 opacity-100"
+      leave-to-class="-translate-y-2 opacity-0"
+    >
+      <nav
+        v-if="isMobileMenuOpen"
+        id="mobile-customer-navigation"
+        class="border-t border-slate-100 bg-white/95 px-4 py-3 shadow-sm backdrop-blur lg:hidden"
+      >
+        <div class="mx-auto grid max-w-7xl gap-2 sm:grid-cols-2">
+          <RouterLink
+            v-for="item in navLinks"
+            :key="`mobile-${item.to}`"
+            :to="item.to"
+            class="rounded-lg px-4 py-3 text-sm font-semibold transition"
+            :class="isActiveLink(item.to) ? 'bg-brand-500 text-white shadow-sm' : 'bg-slate-50 text-slate-700 hover:bg-orange-50 hover:text-brand-700'"
+            @click="closeMobileMenu"
+          >
+            {{ item.label }}
+          </RouterLink>
+        </div>
+      </nav>
+    </transition>  </header>
 </template>
 
 <script setup lang="ts">
@@ -166,6 +207,7 @@ const notificationStore = useNotificationStore();
 const route = useRoute();
 const router = useRouter();
 const isAccountMenuOpen = ref(false);
+const isMobileMenuOpen = ref(false);
 const accountMenuRef = ref<HTMLElement | null>(null);
 
 const customerLinks = [
@@ -262,6 +304,14 @@ const dashboardMenuLabel = computed(() => {
   }
   return authStore.user?.role === 'customer' ? 'Dashboard' : 'Workspace';
 });
+
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+}
+
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false;
+}
 
 function toggleAccountMenu() {
   isAccountMenuOpen.value = !isAccountMenuOpen.value;
