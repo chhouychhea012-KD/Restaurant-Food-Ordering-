@@ -8,6 +8,7 @@ export const storageKeys = {
   notifications: 'flavorfleet.notifications',
   session: 'flavorfleet.session',
   cart: 'flavorfleet.cart',
+  vouchers: 'flavorfleet.vouchers',
 } as const;
 
 export function readStorage<T>(key: string, fallback: T): T {

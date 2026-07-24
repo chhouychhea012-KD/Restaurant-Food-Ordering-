@@ -1,15 +1,18 @@
 <template>
-  <div class="surface-card p-5">
-    <div class="flex items-center justify-between gap-4">
-      <div>
-        <p class="text-sm font-medium text-slate-500">Availability</p>
-        <h3 class="mt-2 text-2xl font-bold text-slate-950">{{ active ? 'Online and dispatchable' : 'Offline' }}</h3>
+  <div class="surface-card overflow-hidden">
+    <div class="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+      <div class="min-w-0">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Delivery Rider</p>
+        <h3 class="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">{{ active ? 'Online and dispatchable' : 'Offline' }}</h3>
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-500">{{ active ? 'You can receive pickup and delivery tasks now.' : 'Go online when you are ready to accept deliveries.' }}</p>
       </div>
-      <StatusBadge :status="active ? 'ONLINE' : 'OFFLINE'" />
+      <div class="flex shrink-0 flex-col gap-3 sm:items-end">
+        <StatusBadge :status="active ? 'ONLINE' : 'OFFLINE'" />
+        <button class="btn-primary w-full px-6 sm:w-auto" :disabled="saving" @click="$emit('toggle')">
+          {{ saving ? 'Updating...' : active ? 'Go Offline' : 'Go Online' }}
+        </button>
+      </div>
     </div>
-    <button class="btn-primary mt-5 w-full" @click="$emit('toggle')">
-      {{ active ? 'Go Offline' : 'Go Online' }}
-    </button>
   </div>
 </template>
 
@@ -22,5 +25,6 @@ defineEmits<{
 
 defineProps<{
   active: boolean;
+  saving?: boolean;
 }>();
 </script>

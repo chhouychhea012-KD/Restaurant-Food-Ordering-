@@ -5,7 +5,7 @@ export type UserStatus = 'active' | 'invited' | 'suspended' | 'disabled';
 export type AccessWindowState = 'active' | 'scheduled' | 'expired' | 'outside_days' | 'outside_hours';
 export type NotificationKind = 'order' | 'promo' | 'system' | 'catalog' | 'account';
 export type ActivityActorRole = UserRole | 'system';
-export type ActivityLogDomain = 'order' | 'dispatch' | 'menu' | 'refund' | 'restaurant' | 'system' | 'auth' | 'access';
+export type ActivityLogDomain = 'order' | 'dispatch' | 'menu' | 'refund' | 'restaurant' | 'system' | 'auth' | 'access' | 'promotion';
 export type RestaurantPartnerStatus = 'pending' | 'verified' | 'rejected' | 'suspended';
 export type BranchStatus = 'open' | 'closed' | 'paused' | 'suspended';
 
@@ -118,6 +118,7 @@ export interface AppNotification {
   userId?: string | null;
   ctaLabel?: string;
   ctaTo?: string;
+  scheduledAt?: string | null;
   createdAt: string;
   readBy: string[];
 }
@@ -190,6 +191,7 @@ export interface TimelineEntry {
 }
 
 export type PaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway' | 'card_mock' | 'wallet_mock';
+export type VoucherDiscountType = 'percentage' | 'fixed' | 'free_delivery';
 
 export interface Order {
   id: string;
@@ -219,6 +221,49 @@ export interface Order {
   refundReason?: string | null;
 }
 
+
+export interface Voucher {
+  id: string;
+  code: string;
+  title: string;
+  description?: string | null;
+  discountType: VoucherDiscountType;
+  discountValue: number;
+  minSubtotal: number;
+  maxDiscount?: number | null;
+  usageLimit?: number | null;
+  usedCount: number;
+  startsAt?: string | null;
+  endsAt?: string | null;
+  active: boolean;
+  restaurantId?: string | null;
+  restaurantName?: string | null;
+  createdBy?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface VoucherInput {
+  code: string;
+  title: string;
+  description?: string | null;
+  discountType: VoucherDiscountType;
+  discountValue: number;
+  minSubtotal: number;
+  maxDiscount?: number | null;
+  usageLimit?: number | null;
+  startsAt?: string | null;
+  endsAt?: string | null;
+  active: boolean;
+  restaurantId?: string | null;
+}
+
+export interface VoucherValidationResult {
+  valid: boolean;
+  message: string;
+  discount: number;
+  voucher: Voucher | null;
+}
 export interface ActivityLogEntry {
   id: string;
   createdAt: string;

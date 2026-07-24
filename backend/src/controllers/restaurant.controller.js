@@ -14,13 +14,13 @@ function defaultBranch() {
   return {
     id: `branch-${crypto.randomUUID()}`,
     name: 'Main Branch',
-    zone: 'Downtown',
-    lat: 13.7563,
-    lng: 100.5018,
-    phone: '+66 800 000 000',
+    zone: 'Phnom Penh - BKK1',
+    lat: 11.5526,
+    lng: 104.9282,
+    phone: '+855 12 000 000',
     status: 'open',
     averagePrepMinutes: 18,
-    minimumOrderAmount: 150,
+    minimumOrderAmount: 10,
     operatingHours: [
       { day: 0, label: 'Sun', open: '10:00', close: '21:00', closed: false },
       { day: 1, label: 'Mon', open: '10:00', close: '21:00', closed: false },

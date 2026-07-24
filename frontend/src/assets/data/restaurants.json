@@ -1,1803 +1,204 @@
 [
-    {
-        "id":  "rest-01",
-        "name":  "Bangkok Bowl Lab",
-        "slug":  "bangkok-bowl-lab",
-        "cuisine":  [
-                        "Thai",
-                        "Rice Bowls"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "18-28 min",
-        "deliveryFee":  29,
-        "heroColor":  "from-orange-500 to-amber-400",
-        "coverImage":  "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-01a",
-                             "name":  "Thonglor Hub",
-                             "zone":  "Central Bangkok",
-                             "lat":  13.7305,
-                             "lng":  100.5777
-                         },
-                         {
-                             "id":  "branch-01b",
-                             "name":  "Ari Kitchen",
-                             "zone":  "North Bangkok",
-                             "lat":  13.7797,
-                             "lng":  100.5447
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-101",
-                                   "name":  "Signature Bowls",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-101",
-                                                     "name":  "Crispy Basil Chicken Bowl",
-                                                     "description":  "Jasmine rice, basil chili glaze, fried egg and pickled cucumber.",
-                                                     "price":  159,
-                                                     "image":  "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Egg",
-                                                                       "Spicy Boost",
-                                                                       "Brown Rice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-102",
-                                                     "name":  "Lemongrass Beef Bowl",
-                                                     "description":  "Charred beef, lime aioli, grilled broccoli and toasted rice.",
-                                                     "price":  189,
-                                                     "image":  "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  17,
-                                                     "modifiers":  [
-                                                                       "Extra Beef",
-                                                                       "No Onion",
-                                                                       "Sticky Rice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-101-v3",
-                                                     "name":  "Crispy Basil Chicken Bowl House Special",
-                                                     "description":  "Jasmine rice, basil chili glaze, fried egg and pickled cucumber. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  189,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Egg",
-                                                                       "Spicy Boost",
-                                                                       "Brown Rice",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               },
-                               {
-                                   "id":  "cat-102",
-                                   "name":  "Fresh Sides",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-103",
-                                                     "name":  "Green Mango Slaw",
-                                                     "description":  "Crunchy mango, peanuts, chili-lime dressing.",
-                                                     "price":  79,
-                                                     "image":  "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  6,
-                                                     "modifiers":  [
-                                                                       "Extra Peanut",
-                                                                       "No Chili"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-103-v2",
-                                                     "name":  "Green Mango Slaw Supreme",
-                                                     "description":  "Crunchy mango, peanuts, chili-lime dressing. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  94,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  7,
-                                                     "modifiers":  [
-                                                                       "Extra Peanut",
-                                                                       "No Chili",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-103-v3",
-                                                     "name":  "Green Mango Slaw House Special",
-                                                     "description":  "Crunchy mango, peanuts, chili-lime dressing. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  109,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  8,
-                                                     "modifiers":  [
-                                                                       "Extra Peanut",
-                                                                       "No Chili",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-02",
-        "name":  "Firefly Pizza Club",
-        "slug":  "firefly-pizza-club",
-        "cuisine":  [
-                        "Pizza",
-                        "Italian"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "25-35 min",
-        "deliveryFee":  39,
-        "heroColor":  "from-rose-500 to-orange-400",
-        "coverImage":  "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-02a",
-                             "name":  "Sathorn Oven",
-                             "zone":  "CBD",
-                             "lat":  13.7201,
-                             "lng":  100.5271
-                         },
-                         {
-                             "id":  "branch-02b",
-                             "name":  "Ladprao Slice Bar",
-                             "zone":  "North",
-                             "lat":  13.8151,
-                             "lng":  100.5658
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-201",
-                                   "name":  "Stone Baked",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-201",
-                                                     "name":  "Truffle Mushroom Pizza",
-                                                     "description":  "Roasted mushrooms, mozzarella, truffle crema and rocket.",
-                                                     "price":  329,
-                                                     "image":  "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  20,
-                                                     "modifiers":  [
-                                                                       "Thin Crust",
-                                                                       "Extra Cheese",
-                                                                       "No Rocket"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-201-v2",
-                                                     "name":  "Truffle Mushroom Pizza Supreme",
-                                                     "description":  "Roasted mushrooms, mozzarella, truffle crema and rocket. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  344,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  21,
-                                                     "modifiers":  [
-                                                                       "Thin Crust",
-                                                                       "Extra Cheese",
-                                                                       "No Rocket",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-201-v3",
-                                                     "name":  "Truffle Mushroom Pizza House Special",
-                                                     "description":  "Roasted mushrooms, mozzarella, truffle crema and rocket. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  359,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  22,
-                                                     "modifiers":  [
-                                                                       "Thin Crust",
-                                                                       "Extra Cheese",
-                                                                       "No Rocket",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-03",
-        "name":  "Sushi Circuit",
-        "slug":  "sushi-circuit",
-        "cuisine":  [
-                        "Japanese",
-                        "Sushi"
-                    ],
-        "rating":  4.9,
-        "deliveryTime":  "22-30 min",
-        "deliveryFee":  45,
-        "heroColor":  "from-cyan-500 to-sky-400",
-        "coverImage":  "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Busy",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-03a",
-                             "name":  "Ekkamai Roll Bar",
-                             "zone":  "East",
-                             "lat":  13.7308,
-                             "lng":  100.5853
-                         },
-                         {
-                             "id":  "branch-03b",
-                             "name":  "Rama 9 Bento Station",
-                             "zone":  "East Central",
-                             "lat":  13.7578,
-                             "lng":  100.5656
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-301",
-                                   "name":  "Chef Specials",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-301",
-                                                     "name":  "Salmon Aburi Box",
-                                                     "description":  "Torched salmon nigiri, spicy cucumber and tamago.",
-                                                     "price":  249,
-                                                     "image":  "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Wasabi",
-                                                                       "Soy on Side"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-301-v2",
-                                                     "name":  "Salmon Aburi Box Supreme",
-                                                     "description":  "Torched salmon nigiri, spicy cucumber and tamago. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  264,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Wasabi",
-                                                                       "Soy on Side",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-301-v3",
-                                                     "name":  "Salmon Aburi Box House Special",
-                                                     "description":  "Torched salmon nigiri, spicy cucumber and tamago. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  279,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Wasabi",
-                                                                       "Soy on Side",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-04",
-        "name":  "Garden Wrap House",
-        "slug":  "garden-wrap-house",
-        "cuisine":  [
-                        "Healthy",
-                        "Wraps"
-                    ],
-        "rating":  4.6,
-        "deliveryTime":  "16-24 min",
-        "deliveryFee":  19,
-        "heroColor":  "from-emerald-500 to-lime-400",
-        "coverImage":  "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  false,
-        "branches":  [
-                         {
-                             "id":  "branch-04a",
-                             "name":  "Phrom Phong Wrap Lab",
-                             "zone":  "Central",
-                             "lat":  13.7304,
-                             "lng":  100.5698
-                         },
-                         {
-                             "id":  "branch-04b",
-                             "name":  "Victory Monument Prep",
-                             "zone":  "Central North",
-                             "lat":  13.7629,
-                             "lng":  100.5377
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-401",
-                                   "name":  "Power Wraps",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-401",
-                                                     "name":  "Chipotle Chicken Wrap",
-                                                     "description":  "Smoked chicken, romaine, avocado mash and corn salsa.",
-                                                     "price":  149,
-                                                     "image":  "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  10,
-                                                     "modifiers":  [
-                                                                       "Protein Boost",
-                                                                       "No Corn",
-                                                                       "Gluten Free Wrap"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-401-v2",
-                                                     "name":  "Chipotle Chicken Wrap Supreme",
-                                                     "description":  "Smoked chicken, romaine, avocado mash and corn salsa. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  164,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  11,
-                                                     "modifiers":  [
-                                                                       "Protein Boost",
-                                                                       "No Corn",
-                                                                       "Gluten Free Wrap",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-401-v3",
-                                                     "name":  "Chipotle Chicken Wrap House Special",
-                                                     "description":  "Smoked chicken, romaine, avocado mash and corn salsa. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  179,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Protein Boost",
-                                                                       "No Corn",
-                                                                       "Gluten Free Wrap",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-05",
-        "name":  "Midnight Noodle Dept",
-        "slug":  "midnight-noodle-dept",
-        "cuisine":  [
-                        "Noodles",
-                        "Asian Fusion"
-                    ],
-        "rating":  4.5,
-        "deliveryTime":  "20-32 min",
-        "deliveryFee":  35,
-        "heroColor":  "from-violet-500 to-fuchsia-500",
-        "coverImage":  "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-05a",
-                             "name":  "Asok Broth Line",
-                             "zone":  "Central",
-                             "lat":  13.7395,
-                             "lng":  100.5601
-                         },
-                         {
-                             "id":  "branch-05b",
-                             "name":  "Chatuchak Night Station",
-                             "zone":  "North",
-                             "lat":  13.7993,
-                             "lng":  100.5531
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-501",
-                                   "name":  "Ramen Nights",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-501",
-                                                     "name":  "Black Garlic Tonkotsu",
-                                                     "description":  "Creamy pork broth, slow chashu, ajitama and spring onion.",
-                                                     "price":  229,
-                                                     "image":  "https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Noodles",
-                                                                       "Spicy Oil",
-                                                                       "No Pork"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-501-v2",
-                                                     "name":  "Black Garlic Tonkotsu Supreme",
-                                                     "description":  "Creamy pork broth, slow chashu, ajitama and spring onion. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  244,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  17,
-                                                     "modifiers":  [
-                                                                       "Extra Noodles",
-                                                                       "Spicy Oil",
-                                                                       "No Pork",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-501-v3",
-                                                     "name":  "Black Garlic Tonkotsu House Special",
-                                                     "description":  "Creamy pork broth, slow chashu, ajitama and spring onion. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  259,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  18,
-                                                     "modifiers":  [
-                                                                       "Extra Noodles",
-                                                                       "Spicy Oil",
-                                                                       "No Pork",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-06",
-        "name":  "Seoul Sizzle Kitchen",
-        "slug":  "seoul-sizzle-kitchen",
-        "cuisine":  [
-                        "Korean",
-                        "BBQ"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "24-34 min",
-        "deliveryFee":  42,
-        "heroColor":  "from-red-500 to-orange-400",
-        "coverImage":  "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-06a",
-                             "name":  "Silom Grill Lab",
-                             "zone":  "CBD",
-                             "lat":  13.7286,
-                             "lng":  100.5332
-                         },
-                         {
-                             "id":  "branch-06b",
-                             "name":  "Huai Khwang Smoke Room",
-                             "zone":  "East Central",
-                             "lat":  13.7792,
-                             "lng":  100.5748
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-601",
-                                   "name":  "Hot Plate Favorites",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-601",
-                                                     "name":  "Bulgogi Beef Rice Set",
-                                                     "description":  "Sweet soy beef, sesame rice, kimchi and a soft scrambled egg.",
-                                                     "price":  219,
-                                                     "image":  "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Kimchi",
-                                                                       "Double Beef",
-                                                                       "No Sesame"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-601-v2",
-                                                     "name":  "Bulgogi Beef Rice Set Supreme",
-                                                     "description":  "Sweet soy beef, sesame rice, kimchi and a soft scrambled egg. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  234,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Kimchi",
-                                                                       "Double Beef",
-                                                                       "No Sesame",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-601-v3",
-                                                     "name":  "Bulgogi Beef Rice Set House Special",
-                                                     "description":  "Sweet soy beef, sesame rice, kimchi and a soft scrambled egg. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  249,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  17,
-                                                     "modifiers":  [
-                                                                       "Extra Kimchi",
-                                                                       "Double Beef",
-                                                                       "No Sesame",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-07",
-        "name":  "Harbor Grill \u0026 Greens",
-        "slug":  "harbor-grill-and-greens",
-        "cuisine":  [
-                        "Grill",
-                        "Salads"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "19-29 min",
-        "deliveryFee":  25,
-        "heroColor":  "from-teal-500 to-emerald-400",
-        "coverImage":  "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-07a",
-                             "name":  "Riverside Grill Deck",
-                             "zone":  "Riverside",
-                             "lat":  13.7193,
-                             "lng":  100.5138
-                         },
-                         {
-                             "id":  "branch-07b",
-                             "name":  "Bang Na Garden Hub",
-                             "zone":  "South East",
-                             "lat":  13.6682,
-                             "lng":  100.6185
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-701",
-                                   "name":  "Flame Grill Plates",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-701",
-                                                     "name":  "Herb Chicken Garden Plate",
-                                                     "description":  "Charcoal-grilled chicken breast, roasted sweet corn and lemon herb greens.",
-                                                     "price":  199,
-                                                     "image":  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Chicken",
-                                                                       "No Corn",
-                                                                       "Avocado Add-on"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-701-v2",
-                                                     "name":  "Herb Chicken Garden Plate Supreme",
-                                                     "description":  "Charcoal-grilled chicken breast, roasted sweet corn and lemon herb greens. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  214,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Chicken",
-                                                                       "No Corn",
-                                                                       "Avocado Add-on",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-701-v3",
-                                                     "name":  "Herb Chicken Garden Plate House Special",
-                                                     "description":  "Charcoal-grilled chicken breast, roasted sweet corn and lemon herb greens. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  229,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Chicken",
-                                                                       "No Corn",
-                                                                       "Avocado Add-on",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-08",
-        "name":  "Curry Cloud Express",
-        "slug":  "curry-cloud-express",
-        "cuisine":  [
-                        "Indian",
-                        "Curry"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "26-36 min",
-        "deliveryFee":  33,
-        "heroColor":  "from-amber-500 to-orange-500",
-        "coverImage":  "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-08a",
-                             "name":  "On Nut Curry Station",
-                             "zone":  "East",
-                             "lat":  13.7056,
-                             "lng":  100.6013
-                         },
-                         {
-                             "id":  "branch-08b",
-                             "name":  "Ratchada Spice Bar",
-                             "zone":  "Central East",
-                             "lat":  13.7677,
-                             "lng":  100.5724
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-801",
-                                   "name":  "House Curry Pots",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-801",
-                                                     "name":  "Butter Chicken Masala",
-                                                     "description":  "Creamy tomato masala, tandoori chicken and warm basmati rice.",
-                                                     "price":  239,
-                                                     "image":  "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  18,
-                                                     "modifiers":  [
-                                                                       "Garlic Naan",
-                                                                       "Extra Chicken",
-                                                                       "Medium Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-801-v2",
-                                                     "name":  "Butter Chicken Masala Supreme",
-                                                     "description":  "Creamy tomato masala, tandoori chicken and warm basmati rice. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  254,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  19,
-                                                     "modifiers":  [
-                                                                       "Garlic Naan",
-                                                                       "Extra Chicken",
-                                                                       "Medium Spice",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-801-v3",
-                                                     "name":  "Butter Chicken Masala House Special",
-                                                     "description":  "Creamy tomato masala, tandoori chicken and warm basmati rice. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  269,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  20,
-                                                     "modifiers":  [
-                                                                       "Garlic Naan",
-                                                                       "Extra Chicken",
-                                                                       "Medium Spice",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-09",
-        "name":  "Sunset Taco Foundry",
-        "slug":  "sunset-taco-foundry",
-        "cuisine":  [
-                        "Mexican",
-                        "Tacos"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "18-27 min",
-        "deliveryFee":  27,
-        "heroColor":  "from-orange-500 to-rose-400",
-        "coverImage":  "https://images.unsplash.com/photo-1565299585323-38174c4a6471?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-09a",
-                             "name":  "Rama 4 Taco Lab",
-                             "zone":  "Central",
-                             "lat":  13.7241,
-                             "lng":  100.5502
-                         },
-                         {
-                             "id":  "branch-09b",
-                             "name":  "Lat Phrao Salsa Bar",
-                             "zone":  "North",
-                             "lat":  13.8146,
-                             "lng":  100.5744
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-901",
-                                   "name":  "Street Taco Sets",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-901",
-                                                     "name":  "Smoky Beef Taco Trio",
-                                                     "description":  "Three corn tacos with chipotle beef, salsa verde and lime slaw.",
-                                                     "price":  189,
-                                                     "image":  "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  11,
-                                                     "modifiers":  [
-                                                                       "Extra Salsa",
-                                                                       "No Onion",
-                                                                       "Cheese Boost"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-901-v2",
-                                                     "name":  "Smoky Beef Taco Trio Supreme",
-                                                     "description":  "Three corn tacos with chipotle beef, salsa verde and lime slaw. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  204,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Salsa",
-                                                                       "No Onion",
-                                                                       "Cheese Boost",
-                                                                       "Extra Sauce",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-901-v3",
-                                                     "name":  "Smoky Beef Taco Trio House Special",
-                                                     "description":  "Three corn tacos with chipotle beef, salsa verde and lime slaw. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  219,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Salsa",
-                                                                       "No Onion",
-                                                                       "Cheese Boost",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-10",
-        "name":  "Ocean Bento Works",
-        "slug":  "ocean-bento-works",
-        "cuisine":  [
-                        "Japanese",
-                        "Bento"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "21-30 min",
-        "deliveryFee":  31,
-        "heroColor":  "from-sky-500 to-cyan-400",
-        "coverImage":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-10a",
-                             "name":  "Sukhumvit Bento Corner",
-                             "zone":  "Central East",
-                             "lat":  13.7346,
-                             "lng":  100.5704
-                         },
-                         {
-                             "id":  "branch-10b",
-                             "name":  "Pinklao Bento Box",
-                             "zone":  "West",
-                             "lat":  13.7764,
-                             "lng":  100.4761
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1001",
-                                   "name":  "Premium Bento",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1001",
-                                                     "name":  "Teriyaki Salmon Bento",
-                                                     "description":  "Glazed salmon, steamed rice, tamagoyaki and sesame greens.",
-                                                     "price":  259,
-                                                     "image":  "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "No Sesame",
-                                                                       "Miso Soup"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1001-v2",
-                                                     "name":  "Teriyaki Salmon Bento Supreme",
-                                                     "description":  "Glazed salmon, steamed rice, tamagoyaki and sesame greens. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  274,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "No Sesame",
-                                                                       "Miso Soup",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1001-v3",
-                                                     "name":  "Teriyaki Salmon Bento House Special",
-                                                     "description":  "Glazed salmon, steamed rice, tamagoyaki and sesame greens. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  289,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "No Sesame",
-                                                                       "Miso Soup",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-11",
-        "name":  "Brick Oven Pasta Lab",
-        "slug":  "brick-oven-pasta-lab",
-        "cuisine":  [
-                        "Italian",
-                        "Pasta"
-                    ],
-        "rating":  4.6,
-        "deliveryTime":  "24-33 min",
-        "deliveryFee":  36,
-        "heroColor":  "from-red-500 to-amber-400",
-        "coverImage":  "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-11a",
-                             "name":  "Phaya Thai Pasta Bar",
-                             "zone":  "Central",
-                             "lat":  13.7567,
-                             "lng":  100.5321
-                         },
-                         {
-                             "id":  "branch-11b",
-                             "name":  "Udom Suk Oven Kitchen",
-                             "zone":  "South East",
-                             "lat":  13.6796,
-                             "lng":  100.6112
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1101",
-                                   "name":  "Fresh Pasta",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1101",
-                                                     "name":  "Spicy Vodka Rigatoni",
-                                                     "description":  "Rigatoni pasta in creamy tomato sauce with chili flakes and parmesan.",
-                                                     "price":  229,
-                                                     "image":  "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Parmesan",
-                                                                       "No Chili",
-                                                                       "Garlic Bread"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1101-v2",
-                                                     "name":  "Spicy Vodka Rigatoni Supreme",
-                                                     "description":  "Rigatoni pasta in creamy tomato sauce with chili flakes and parmesan. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  244,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Parmesan",
-                                                                       "No Chili",
-                                                                       "Garlic Bread",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1101-v3",
-                                                     "name":  "Spicy Vodka Rigatoni House Special",
-                                                     "description":  "Rigatoni pasta in creamy tomato sauce with chili flakes and parmesan. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  259,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  17,
-                                                     "modifiers":  [
-                                                                       "Extra Parmesan",
-                                                                       "No Chili",
-                                                                       "Garlic Bread",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-12",
-        "name":  "Morning Congee Club",
-        "slug":  "morning-congee-club",
-        "cuisine":  [
-                        "Thai",
-                        "Breakfast"
-                    ],
-        "rating":  4.5,
-        "deliveryTime":  "15-22 min",
-        "deliveryFee":  15,
-        "heroColor":  "from-stone-500 to-orange-300",
-        "coverImage":  "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  false,
-        "branches":  [
-                         {
-                             "id":  "branch-12a",
-                             "name":  "Din Daeng Morning Pot",
-                             "zone":  "Central East",
-                             "lat":  13.7701,
-                             "lng":  100.5568
-                         },
-                         {
-                             "id":  "branch-12b",
-                             "name":  "Bang Kapi Rice Kitchen",
-                             "zone":  "East",
-                             "lat":  13.7655,
-                             "lng":  100.6421
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1201",
-                                   "name":  "Comfort Bowls",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1201",
-                                                     "name":  "Ginger Pork Congee",
-                                                     "description":  "Slow-cooked jasmine porridge with pork meatballs, ginger and spring onion.",
-                                                     "price":  119,
-                                                     "image":  "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  9,
-                                                     "modifiers":  [
-                                                                       "Soft Egg",
-                                                                       "Extra Ginger",
-                                                                       "Youtiao"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1201-v2",
-                                                     "name":  "Ginger Pork Congee Supreme",
-                                                     "description":  "Slow-cooked jasmine porridge with pork meatballs, ginger and spring onion. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  134,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  10,
-                                                     "modifiers":  [
-                                                                       "Soft Egg",
-                                                                       "Extra Ginger",
-                                                                       "Youtiao",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1201-v3",
-                                                     "name":  "Ginger Pork Congee House Special",
-                                                     "description":  "Slow-cooked jasmine porridge with pork meatballs, ginger and spring onion. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  149,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  11,
-                                                     "modifiers":  [
-                                                                       "Soft Egg",
-                                                                       "Extra Ginger",
-                                                                       "Youtiao",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-13",
-        "name":  "Golden Katsu House",
-        "slug":  "golden-katsu-house",
-        "cuisine":  [
-                        "Japanese",
-                        "Katsu"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "20-28 min",
-        "deliveryFee":  26,
-        "heroColor":  "from-amber-500 to-yellow-400",
-        "coverImage":  "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-13a",
-                             "name":  "Ari Katsu Counter",
-                             "zone":  "North Bangkok",
-                             "lat":  13.7791,
-                             "lng":  100.5441
-                         },
-                         {
-                             "id":  "branch-13b",
-                             "name":  "Bearing Fry Station",
-                             "zone":  "South East",
-                             "lat":  13.6597,
-                             "lng":  100.6033
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1301",
-                                   "name":  "Crispy Cutlets",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1301",
-                                                     "name":  "Pork Katsu Curry Rice",
-                                                     "description":  "Panko pork cutlet with Japanese curry sauce and steamed rice.",
-                                                     "price":  209,
-                                                     "image":  "https://images.unsplash.com/photo-1604908554165-e6b0fb39ab0b?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Curry",
-                                                                       "No Pickles",
-                                                                       "Soft Egg"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1301-v2",
-                                                     "name":  "Pork Katsu Curry Rice Supreme",
-                                                     "description":  "Panko pork cutlet with Japanese curry sauce and steamed rice. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  224,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Curry",
-                                                                       "No Pickles",
-                                                                       "Soft Egg",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1301-v3",
-                                                     "name":  "Pork Katsu Curry Rice House Special",
-                                                     "description":  "Panko pork cutlet with Japanese curry sauce and steamed rice. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  239,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Curry",
-                                                                       "No Pickles",
-                                                                       "Soft Egg",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-14",
-        "name":  "Pho Metro Kitchen",
-        "slug":  "pho-metro-kitchen",
-        "cuisine":  [
-                        "Vietnamese",
-                        "Noodles"
-                    ],
-        "rating":  4.6,
-        "deliveryTime":  "19-28 min",
-        "deliveryFee":  24,
-        "heroColor":  "from-emerald-500 to-teal-400",
-        "coverImage":  "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Busy",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-14a",
-                             "name":  "Mo Chit Pho Stop",
-                             "zone":  "North",
-                             "lat":  13.8062,
-                             "lng":  100.5538
-                         },
-                         {
-                             "id":  "branch-14b",
-                             "name":  "Rama 3 Broth Point",
-                             "zone":  "South",
-                             "lat":  13.6844,
-                             "lng":  100.5428
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1401",
-                                   "name":  "Pho Signatures",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1401",
-                                                     "name":  "Slow Beef Pho",
-                                                     "description":  "Rice noodles in fragrant beef broth with basil, bean sprouts and lime.",
-                                                     "price":  189,
-                                                     "image":  "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Beef",
-                                                                       "No Onion",
-                                                                       "Fresh Chili"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1401-v2",
-                                                     "name":  "Slow Beef Pho Supreme",
-                                                     "description":  "Rice noodles in fragrant beef broth with basil, bean sprouts and lime. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  204,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Beef",
-                                                                       "No Onion",
-                                                                       "Fresh Chili",
-                                                                       "Extra Sauce",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1401-v3",
-                                                     "name":  "Slow Beef Pho House Special",
-                                                     "description":  "Rice noodles in fragrant beef broth with basil, bean sprouts and lime. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  219,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Beef",
-                                                                       "No Onion",
-                                                                       "Fresh Chili",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-15",
-        "name":  "Melt \u0026 Toast Deli",
-        "slug":  "melt-and-toast-deli",
-        "cuisine":  [
-                        "Sandwiches",
-                        "Cafe"
-                    ],
-        "rating":  4.5,
-        "deliveryTime":  "14-21 min",
-        "deliveryFee":  18,
-        "heroColor":  "from-orange-400 to-amber-300",
-        "coverImage":  "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  false,
-        "branches":  [
-                         {
-                             "id":  "branch-15a",
-                             "name":  "Siam Toast Bench",
-                             "zone":  "Central",
-                             "lat":  13.7462,
-                             "lng":  100.5346
-                         },
-                         {
-                             "id":  "branch-15b",
-                             "name":  "Kaset Deli Stop",
-                             "zone":  "North",
-                             "lat":  13.8473,
-                             "lng":  100.5711
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1501",
-                                   "name":  "Hot Sandwiches",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1501",
-                                                     "name":  "Turkey Melt Sandwich",
-                                                     "description":  "Toasted sourdough with smoked turkey, cheddar and honey mustard slaw.",
-                                                     "price":  169,
-                                                     "image":  "https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  8,
-                                                     "modifiers":  [
-                                                                       "Extra Cheese",
-                                                                       "No Mustard",
-                                                                       "Potato Chips"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1501-v2",
-                                                     "name":  "Turkey Melt Sandwich Supreme",
-                                                     "description":  "Toasted sourdough with smoked turkey, cheddar and honey mustard slaw. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  184,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  9,
-                                                     "modifiers":  [
-                                                                       "Extra Cheese",
-                                                                       "No Mustard",
-                                                                       "Potato Chips",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1501-v3",
-                                                     "name":  "Turkey Melt Sandwich House Special",
-                                                     "description":  "Toasted sourdough with smoked turkey, cheddar and honey mustard slaw. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  199,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  10,
-                                                     "modifiers":  [
-                                                                       "Extra Cheese",
-                                                                       "No Mustard",
-                                                                       "Potato Chips",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-16",
-        "name":  "Volcano Wings Hub",
-        "slug":  "volcano-wings-hub",
-        "cuisine":  [
-                        "Chicken",
-                        "Wings"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "17-26 min",
-        "deliveryFee":  22,
-        "heroColor":  "from-rose-500 to-red-500",
-        "coverImage":  "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-16a",
-                             "name":  "Ramkhamhaeng Heat Lab",
-                             "zone":  "East",
-                             "lat":  13.7548,
-                             "lng":  100.6265
-                         },
-                         {
-                             "id":  "branch-16b",
-                             "name":  "Talat Phlu Wing Dock",
-                             "zone":  "West",
-                             "lat":  13.7148,
-                             "lng":  100.4768
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1601",
-                                   "name":  "Sauced Wings",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1601",
-                                                     "name":  "Honey Fire Wings",
-                                                     "description":  "Crispy chicken wings tossed in sweet chili honey glaze.",
-                                                     "price":  179,
-                                                     "image":  "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Dip",
-                                                                       "Boneless",
-                                                                       "Mild Sauce"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1601-v2",
-                                                     "name":  "Honey Fire Wings Supreme",
-                                                     "description":  "Crispy chicken wings tossed in sweet chili honey glaze. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  194,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Dip",
-                                                                       "Boneless",
-                                                                       "Mild Sauce",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1601-v3",
-                                                     "name":  "Honey Fire Wings House Special",
-                                                     "description":  "Crispy chicken wings tossed in sweet chili honey glaze. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  209,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Dip",
-                                                                       "Boneless",
-                                                                       "Mild Sauce",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-17",
-        "name":  "Mango Sticky Corner",
-        "slug":  "mango-sticky-corner",
-        "cuisine":  [
-                        "Desserts",
-                        "Thai Sweets"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "12-18 min",
-        "deliveryFee":  12,
-        "heroColor":  "from-yellow-400 to-orange-300",
-        "coverImage":  "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-17a",
-                             "name":  "Sathorn Dessert Cart",
-                             "zone":  "CBD",
-                             "lat":  13.7194,
-                             "lng":  100.5327
-                         },
-                         {
-                             "id":  "branch-17b",
-                             "name":  "Punnawithi Sweet Hub",
-                             "zone":  "South East",
-                             "lat":  13.6964,
-                             "lng":  100.6064
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1701",
-                                   "name":  "Classic Desserts",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1701",
-                                                     "name":  "Premium Mango Sticky Rice",
-                                                     "description":  "Sweet coconut sticky rice with ripe mango and toasted mung beans.",
-                                                     "price":  139,
-                                                     "image":  "https://images.unsplash.com/photo-1464306076886-da185f6a9d05?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  6,
-                                                     "modifiers":  [
-                                                                       "Extra Mango",
-                                                                       "Coconut Cream",
-                                                                       "Sesame Crunch"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1701-v2",
-                                                     "name":  "Premium Mango Sticky Rice Supreme",
-                                                     "description":  "Sweet coconut sticky rice with ripe mango and toasted mung beans. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  154,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  7,
-                                                     "modifiers":  [
-                                                                       "Extra Mango",
-                                                                       "Coconut Cream",
-                                                                       "Sesame Crunch",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1701-v3",
-                                                     "name":  "Premium Mango Sticky Rice House Special",
-                                                     "description":  "Sweet coconut sticky rice with ripe mango and toasted mung beans. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  169,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  8,
-                                                     "modifiers":  [
-                                                                       "Extra Mango",
-                                                                       "Coconut Cream",
-                                                                       "Sesame Crunch",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-18",
-        "name":  "Brewed Burger Garage",
-        "slug":  "brewed-burger-garage",
-        "cuisine":  [
-                        "Burgers",
-                        "American"
-                    ],
-        "rating":  4.6,
-        "deliveryTime":  "20-30 min",
-        "deliveryFee":  29,
-        "heroColor":  "from-slate-700 to-orange-500",
-        "coverImage":  "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-18a",
-                             "name":  "Ekamai Burger Garage",
-                             "zone":  "East",
-                             "lat":  13.7298,
-                             "lng":  100.5857
-                         },
-                         {
-                             "id":  "branch-18b",
-                             "name":  "Rangsit Smash Lab",
-                             "zone":  "North Fringe",
-                             "lat":  13.9895,
-                             "lng":  100.6188
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1801",
-                                   "name":  "Smash Burgers",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1801",
-                                                     "name":  "Double Smash Cheeseburger",
-                                                     "description":  "Two beef patties, cheddar, pickles and house burger sauce.",
-                                                     "price":  249,
-                                                     "image":  "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Patty",
-                                                                       "No Pickles",
-                                                                       "Bacon Add-on"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1801-v2",
-                                                     "name":  "Double Smash Cheeseburger Supreme",
-                                                     "description":  "Two beef patties, cheddar, pickles and house burger sauce. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  264,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  15,
-                                                     "modifiers":  [
-                                                                       "Extra Patty",
-                                                                       "No Pickles",
-                                                                       "Bacon Add-on",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1801-v3",
-                                                     "name":  "Double Smash Cheeseburger House Special",
-                                                     "description":  "Two beef patties, cheddar, pickles and house burger sauce. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  279,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  16,
-                                                     "modifiers":  [
-                                                                       "Extra Patty",
-                                                                       "No Pickles",
-                                                                       "Bacon Add-on",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-19",
-        "name":  "Green Curry Studio",
-        "slug":  "green-curry-studio",
-        "cuisine":  [
-                        "Thai",
-                        "Curries"
-                    ],
-        "rating":  4.7,
-        "deliveryTime":  "18-26 min",
-        "deliveryFee":  23,
-        "heroColor":  "from-green-500 to-lime-400",
-        "coverImage":  "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-19a",
-                             "name":  "Bang Sue Curry Pot",
-                             "zone":  "North Central",
-                             "lat":  13.8055,
-                             "lng":  100.5283
-                         },
-                         {
-                             "id":  "branch-19b",
-                             "name":  "Samyan Spice Studio",
-                             "zone":  "CBD",
-                             "lat":  13.7312,
-                             "lng":  100.5288
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-1901",
-                                   "name":  "Thai Curry Classics",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-1901",
-                                                     "name":  "Green Curry Chicken",
-                                                     "description":  "Coconut green curry with chicken thigh, Thai eggplant and basil.",
-                                                     "price":  179,
-                                                     "image":  "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "Mild Spice",
-                                                                       "No Eggplant"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1901-v2",
-                                                     "name":  "Green Curry Chicken Supreme",
-                                                     "description":  "Coconut green curry with chicken thigh, Thai eggplant and basil. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  194,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  13,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "Mild Spice",
-                                                                       "No Eggplant",
-                                                                       "Extra Sauce",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-1901-v3",
-                                                     "name":  "Green Curry Chicken House Special",
-                                                     "description":  "Coconut green curry with chicken thigh, Thai eggplant and basil. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  209,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  14,
-                                                     "modifiers":  [
-                                                                       "Extra Rice",
-                                                                       "Mild Spice",
-                                                                       "No Eggplant",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    },
-    {
-        "id":  "rest-20",
-        "name":  "Cloud Nine Dumpling Bar",
-        "slug":  "cloud-nine-dumpling-bar",
-        "cuisine":  [
-                        "Chinese",
-                        "Dumplings"
-                    ],
-        "rating":  4.8,
-        "deliveryTime":  "18-25 min",
-        "deliveryFee":  21,
-        "heroColor":  "from-indigo-500 to-sky-400",
-        "coverImage":  "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
-        "status":  "Open",
-        "verified":  true,
-        "branches":  [
-                         {
-                             "id":  "branch-20a",
-                             "name":  "Yaowarat Dumpling Room",
-                             "zone":  "Old Town",
-                             "lat":  13.7399,
-                             "lng":  100.5104
-                         },
-                         {
-                             "id":  "branch-20b",
-                             "name":  "Sena Steam Kitchen",
-                             "zone":  "North",
-                             "lat":  13.8277,
-                             "lng":  100.5626
-                         }
-                     ],
-        "menuCategories":  [
-                               {
-                                   "id":  "cat-2001",
-                                   "name":  "Steamed Baskets",
-                                   "items":  [
-                                                 {
-                                                     "id":  "item-2001",
-                                                     "name":  "Pork Chive Dumpling Set",
-                                                     "description":  "Hand-folded dumplings with black vinegar, chili crisp and bok choy.",
-                                                     "price":  169,
-                                                     "image":  "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  10,
-                                                     "modifiers":  [
-                                                                       "Extra Sauce",
-                                                                       "Fried Version",
-                                                                       "No Chive"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-2001-v2",
-                                                     "name":  "Pork Chive Dumpling Set Supreme",
-                                                     "description":  "Hand-folded dumplings with black vinegar, chili crisp and bok choy. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  184,
-                                                     "image":  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  11,
-                                                     "modifiers":  [
-                                                                       "Extra Sauce",
-                                                                       "Fried Version",
-                                                                       "No Chive",
-                                                                       "No Onion",
-                                                                       "Chef Spice"
-                                                                   ]
-                                                 },
-                                                 {
-                                                     "id":  "item-2001-v3",
-                                                     "name":  "Pork Chive Dumpling Set House Special",
-                                                     "description":  "Hand-folded dumplings with black vinegar, chili crisp and bok choy. Finished with a fresh house twist for a fuller menu selection.",
-                                                     "price":  199,
-                                                     "image":  "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format\u0026fit=crop\u0026w=900\u0026q=80",
-                                                     "available":  true,
-                                                     "prepTime":  12,
-                                                     "modifiers":  [
-                                                                       "Extra Sauce",
-                                                                       "Fried Version",
-                                                                       "No Chive",
-                                                                       "Protein Boost",
-                                                                       "Extra Veg",
-                                                                       "Signature Dip"
-                                                                   ]
-                                                 }
-                                             ]
-                               }
-                           ]
-    }
+  {
+    "id": "rest-01",
+    "name": "Phnom Penh Khmer Kitchen",
+    "slug": "phnom-penh-khmer-kitchen",
+    "cuisine": ["Khmer", "Rice Plates"],
+    "description": "Classic Cambodian comfort food prepared from a Phnom Penh kitchen with fresh herbs, rice, and bright local flavors.",
+    "rating": 4.8,
+    "reviewCount": 186,
+    "deliveryTime": "20-30 min",
+    "deliveryFee": 2,
+    "heroColor": "from-orange-500 to-amber-400",
+    "coverImage": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "partnerStatus": "verified",
+    "commissionRate": 0.18,
+    "branches": [
+      { "id": "branch-01a", "name": "BKK1 Kitchen", "zone": "Phnom Penh - BKK1", "lat": 11.5526, "lng": 104.9282, "phone": "+855 12 100 101", "status": "open", "averagePrepMinutes": 18, "minimumOrderAmount": 10 },
+      { "id": "branch-01b", "name": "Riverside Counter", "zone": "Phnom Penh - Riverside", "lat": 11.5701, "lng": 104.9306, "phone": "+855 12 100 102", "status": "open", "averagePrepMinutes": 20, "minimumOrderAmount": 10 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-101",
+        "name": "Khmer Classics",
+        "items": [
+          { "id": "item-101", "name": "Fish Amok Rice", "description": "Steamed coconut fish curry with kroeung, herbs, and jasmine rice.", "price": 10, "image": "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 18, "modifiers": ["Extra Rice", "Mild Spice", "Fresh Herbs"] },
+          { "id": "item-102", "name": "Beef Lok Lak", "description": "Peppery beef cubes, tomato, cucumber, fried egg, and lime pepper sauce.", "price": 15, "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 16, "modifiers": ["Fried Egg", "Extra Sauce", "No Onion"] },
+          { "id": "item-103", "name": "Nom Banh Chok Bowl", "description": "Fresh rice noodles with green curry gravy, cucumber, banana blossom, and herbs.", "price": 5, "image": "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 12, "modifiers": ["Extra Noodles", "More Herbs", "Chili Side"] }
+        ]
+      },
+      {
+        "id": "cat-102",
+        "name": "Street Snacks",
+        "items": [
+          { "id": "item-104", "name": "Num Pang Chicken", "description": "Cambodian baguette with grilled chicken, pickled vegetables, chili mayo, and cilantro.", "price": 5, "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 10, "modifiers": ["Extra Pickles", "No Chili", "Add Egg"] },
+          { "id": "item-105", "name": "Fried Spring Rolls", "description": "Crisp vegetable rolls served with sweet chili dipping sauce.", "price": 5, "image": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 9, "modifiers": ["Extra Sauce", "Vegetarian", "Spicy Dip"] },
+          { "id": "item-106", "name": "Grilled Lemongrass Chicken", "description": "Charred lemongrass chicken skewers with cucumber salad and rice.", "price": 10, "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 14, "modifiers": ["Extra Skewer", "Extra Rice", "Pepper Sauce"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-02",
+    "name": "Siem Reap Angkor Bites",
+    "slug": "siem-reap-angkor-bites",
+    "cuisine": ["Khmer", "Temple Town"],
+    "description": "A Siem Reap inspired menu with market noodles, grilled meats, and easy traveler favorites.",
+    "rating": 4.7,
+    "reviewCount": 142,
+    "deliveryTime": "18-28 min",
+    "deliveryFee": 2,
+    "heroColor": "from-amber-500 to-lime-400",
+    "coverImage": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "partnerStatus": "verified",
+    "commissionRate": 0.17,
+    "branches": [
+      { "id": "branch-02a", "name": "Old Market Kitchen", "zone": "Siem Reap - Old Market", "lat": 13.3549, "lng": 103.8552, "phone": "+855 12 200 201", "status": "open", "averagePrepMinutes": 17, "minimumOrderAmount": 10 },
+      { "id": "branch-02b", "name": "Wat Bo Prep", "zone": "Siem Reap - Wat Bo", "lat": 13.3608, "lng": 103.8647, "phone": "+855 12 200 202", "status": "open", "averagePrepMinutes": 19, "minimumOrderAmount": 10 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-201",
+        "name": "Angkor Favorites",
+        "items": [
+          { "id": "item-201", "name": "Kroeung Chicken Rice", "description": "Chicken marinated with Cambodian kroeung paste, served with rice and pickled vegetables.", "price": 10, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 15, "modifiers": ["Extra Chicken", "Mild Spice", "Extra Pickles"] },
+          { "id": "item-202", "name": "Prahok Ktis Set", "description": "Rich coconut pork dip with fresh vegetables and steamed rice.", "price": 15, "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 18, "modifiers": ["Extra Vegetables", "Extra Rice", "Less Chili"] },
+          { "id": "item-203", "name": "Khmer Omelet Rice", "description": "Golden omelet with herbs, pepper sauce, and jasmine rice.", "price": 5, "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 10, "modifiers": ["Add Pork", "Extra Egg", "No Chili"] }
+        ]
+      },
+      {
+        "id": "cat-202",
+        "name": "Market Noodles",
+        "items": [
+          { "id": "item-204", "name": "Lort Cha Beef", "description": "Stir-fried short rice noodles with beef, egg, bean sprouts, and sweet soy.", "price": 10, "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 13, "modifiers": ["Extra Beef", "Extra Egg", "Spicy"] },
+          { "id": "item-205", "name": "Mee Cha Seafood", "description": "Wok fried yellow noodles with seafood, vegetables, and garlic sauce.", "price": 15, "image": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 15, "modifiers": ["Extra Seafood", "No Garlic", "Chili Side"] },
+          { "id": "item-206", "name": "Vegetable Rice Noodles", "description": "Light rice noodles with seasonal vegetables, herbs, and soy lime dressing.", "price": 5, "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 11, "modifiers": ["Extra Veg", "Tofu", "Peanut Sauce"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-03",
+    "name": "Battambang Rice House",
+    "slug": "battambang-rice-house",
+    "cuisine": ["Cambodian", "Rice Bowls"],
+    "description": "Homestyle Battambang rice dishes, grilled pork, soups, and fresh salads for everyday ordering.",
+    "rating": 4.6,
+    "reviewCount": 118,
+    "deliveryTime": "22-32 min",
+    "deliveryFee": 2,
+    "heroColor": "from-emerald-500 to-teal-400",
+    "coverImage": "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "partnerStatus": "verified",
+    "commissionRate": 0.16,
+    "branches": [
+      { "id": "branch-03a", "name": "Central Market Rice House", "zone": "Battambang - Central Market", "lat": 13.0957, "lng": 103.2022, "phone": "+855 12 300 301", "status": "open", "averagePrepMinutes": 18, "minimumOrderAmount": 10 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-301",
+        "name": "Rice Plates",
+        "items": [
+          { "id": "item-301", "name": "Bai Sach Chrouk", "description": "Grilled pork over rice with pickled vegetables and clear soup.", "price": 5, "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 11, "modifiers": ["Extra Pork", "Fried Egg", "Extra Pickles"] },
+          { "id": "item-302", "name": "Chicken Ginger Rice", "description": "Ginger chicken stir fry over steamed rice with fresh cucumber.", "price": 10, "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 13, "modifiers": ["Extra Ginger", "Extra Rice", "Less Oil"] },
+          { "id": "item-303", "name": "Pepper Beef Rice", "description": "Cambodian pepper beef with onion, herbs, and jasmine rice.", "price": 15, "image": "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 15, "modifiers": ["Extra Beef", "Pepper Sauce", "No Onion"] }
+        ]
+      },
+      {
+        "id": "cat-302",
+        "name": "Fresh Soups",
+        "items": [
+          { "id": "item-304", "name": "Samlor Korko", "description": "Traditional vegetable soup with herbs, pumpkin, eggplant, and rice.", "price": 10, "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 17, "modifiers": ["Extra Vegetables", "Extra Rice", "Mild"] },
+          { "id": "item-305", "name": "Sour Fish Soup", "description": "Light tamarind fish soup with tomato, pineapple, herbs, and rice.", "price": 15, "image": "https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 18, "modifiers": ["Extra Fish", "Less Sour", "Chili Side"] },
+          { "id": "item-306", "name": "Pumpkin Coconut Soup", "description": "Creamy pumpkin coconut soup with herbs and toasted garlic.", "price": 5, "image": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 12, "modifiers": ["Extra Pumpkin", "No Garlic", "Add Rice"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-04",
+    "name": "Kampot Pepper Grill",
+    "slug": "kampot-pepper-grill",
+    "cuisine": ["Grill", "Kampot Pepper"],
+    "description": "Grilled meats and seafood seasoned with Kampot pepper, lime, and fresh Cambodian herbs.",
+    "rating": 4.9,
+    "reviewCount": 164,
+    "deliveryTime": "24-34 min",
+    "deliveryFee": 3,
+    "heroColor": "from-red-500 to-orange-400",
+    "coverImage": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "partnerStatus": "verified",
+    "commissionRate": 0.18,
+    "branches": [
+      { "id": "branch-04a", "name": "Old Town Grill", "zone": "Kampot - Old Town", "lat": 10.6104, "lng": 104.1815, "phone": "+855 12 400 401", "status": "open", "averagePrepMinutes": 20, "minimumOrderAmount": 10 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-401",
+        "name": "Pepper Grill",
+        "items": [
+          { "id": "item-401", "name": "Kampot Pepper Beef", "description": "Grilled beef with green Kampot pepper sauce and steamed rice.", "price": 15, "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 18, "modifiers": ["Extra Pepper", "Medium Rare", "Extra Rice"] },
+          { "id": "item-402", "name": "Pepper Chicken Skewers", "description": "Charcoal chicken skewers with Kampot pepper lime dip.", "price": 10, "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 14, "modifiers": ["Extra Skewer", "No Chili", "Pepper Dip"] },
+          { "id": "item-403", "name": "Grilled Corn Pepper Salt", "description": "Sweet corn with pepper salt, lime, and chili butter.", "price": 5, "image": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 9, "modifiers": ["No Butter", "Extra Lime", "Chili Side"] }
+        ]
+      },
+      {
+        "id": "cat-402",
+        "name": "Seafood Plates",
+        "items": [
+          { "id": "item-404", "name": "Pepper Crab Rice", "description": "Kampot-style crab with pepper sauce, herbs, and rice.", "price": 15, "image": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 20, "modifiers": ["Extra Crab", "Extra Rice", "Mild Pepper"] },
+          { "id": "item-405", "name": "Garlic Prawn Bowl", "description": "Prawns with garlic pepper sauce, cucumber salad, and steamed rice.", "price": 10, "image": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 16, "modifiers": ["Extra Prawns", "No Garlic", "Pepper Sauce"] },
+          { "id": "item-406", "name": "Lime Fish Salad", "description": "Fresh fish salad with lime, herbs, onion, and Kampot pepper.", "price": 5, "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 11, "modifiers": ["No Onion", "Extra Herbs", "Spicy"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rest-05",
+    "name": "Sihanoukville Bay Seafood",
+    "slug": "sihanoukville-bay-seafood",
+    "cuisine": ["Seafood", "Coastal Khmer"],
+    "description": "Coastal seafood bowls and grilled plates inspired by Sihanoukville markets and beachside kitchens.",
+    "rating": 4.5,
+    "reviewCount": 96,
+    "deliveryTime": "25-35 min",
+    "deliveryFee": 3,
+    "heroColor": "from-sky-500 to-cyan-400",
+    "coverImage": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=1200&q=80",
+    "status": "Open",
+    "verified": true,
+    "partnerStatus": "verified",
+    "commissionRate": 0.17,
+    "branches": [
+      { "id": "branch-05a", "name": "Ochheuteal Seafood Bar", "zone": "Sihanoukville - Ochheuteal", "lat": 10.6093, "lng": 103.5296, "phone": "+855 12 500 501", "status": "open", "averagePrepMinutes": 21, "minimumOrderAmount": 10 }
+    ],
+    "menuCategories": [
+      {
+        "id": "cat-501",
+        "name": "Bay Bowls",
+        "items": [
+          { "id": "item-501", "name": "Grilled Squid Rice Bowl", "description": "Charred squid with lime pepper sauce, herbs, and jasmine rice.", "price": 10, "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 15, "modifiers": ["Extra Squid", "Extra Sauce", "No Chili"] },
+          { "id": "item-502", "name": "Coconut Fish Curry", "description": "Coastal fish curry with coconut, herbs, eggplant, and rice.", "price": 15, "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 18, "modifiers": ["Extra Fish", "Mild", "Extra Rice"] },
+          { "id": "item-503", "name": "Seaweed Cucumber Salad", "description": "Cool cucumber salad with seaweed, lime dressing, sesame, and herbs.", "price": 5, "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 8, "modifiers": ["Extra Sesame", "No Onion", "Chili Side"] }
+        ]
+      },
+      {
+        "id": "cat-502",
+        "name": "Coastal Sets",
+        "items": [
+          { "id": "item-504", "name": "Prawn Fried Rice", "description": "Wok fried rice with prawns, egg, scallions, and pepper lime sauce.", "price": 10, "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 13, "modifiers": ["Extra Prawns", "No Egg", "Spicy"] },
+          { "id": "item-505", "name": "Seafood Sharing Set", "description": "Grilled prawns, squid, fish, rice, salad, and two dipping sauces.", "price": 15, "image": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 22, "modifiers": ["Extra Sauce", "Extra Rice", "Mild"] },
+          { "id": "item-506", "name": "Lime Pepper Fish Cake", "description": "Fish cakes with lime pepper dip and fresh cucumber salad.", "price": 5, "image": "https://images.unsplash.com/photo-1562967916-eb82221dfb36?auto=format&fit=crop&w=900&q=80", "available": true, "prepTime": 10, "modifiers": ["Extra Dip", "No Chili", "Extra Salad"] }
+        ]
+      }
+    ]
+  }
 ]

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref, watch } from 'vue';
 import type { CartItem } from '@/types';
+import { validateVoucherCode } from '@/services/voucher.service';
 import { storageKeys, writeStorage } from '@/utils/storage';
 
 const CART_SCHEMA_VERSION = 2;
@@ -70,19 +71,6 @@ function readStoredCartState(): StoredCartState {
   return { version: CART_SCHEMA_VERSION, items: [], voucherCode: null };
 }
 
-function getVoucherDiscount(subtotal: number, deliveryFee: number, voucherCode: string | null) {
-  switch (voucherCode) {
-    case 'FLAVOR10':
-      return subtotal >= 180 ? 10 : 0;
-    case 'FEAST25':
-      return subtotal >= 250 ? 25 : 0;
-    case 'FREEDELIVERY':
-      return deliveryFee;
-    default:
-      return 0;
-  }
-}
-
 function buildLineSignature(item: CartItem) {
   const modifiers = [...(item.modifiers ?? [])].map((modifier) => modifier.trim()).filter(Boolean).sort();
   return [item.menuItemId ?? item.id, item.note?.trim() ?? '', ...modifiers].join('|');
@@ -92,6 +80,7 @@ export const useCartStore = defineStore('cart', () => {
   const initialState = readStoredCartState();
   const items = ref<CartItem[]>(initialState.items);
   const voucherCode = ref<string | null>(initialState.voucherCode);
+  const voucherDiscountAmount = ref(0);
   const pendingReplacementItem = ref<CartItem | null>(null);
 
   watch(
@@ -115,7 +104,7 @@ export const useCartStore = defineStore('cart', () => {
   const subtotal = computed(() => items.value.reduce((sum, item) => sum + item.price * item.quantity, 0));
   const deliveryFee = computed(() => (items.value.length ? items.value[0]?.deliveryFee ?? 0 : 0));
   const campaignDiscount = computed(() => (subtotal.value >= 300 ? 30 : 0));
-  const voucherDiscount = computed(() => getVoucherDiscount(subtotal.value, deliveryFee.value, voucherCode.value));
+  const voucherDiscount = computed(() => voucherCode.value ? voucherDiscountAmount.value : 0);
   const discount = computed(() => campaignDiscount.value + voucherDiscount.value);
   const total = computed(() => Math.max(0, subtotal.value + deliveryFee.value - discount.value));
   const minimumOrderGap = computed(() => Math.max(0, minimumOrderAmount.value - subtotal.value));
@@ -188,23 +177,30 @@ export const useCartStore = defineStore('cart', () => {
     target.quantity = quantity;
   }
 
-  function applyVoucher(code: string) {
-    const normalized = code.trim().toUpperCase();
+  async function applyVoucher(code: string) {
+    const normalized = code.trim().toUpperCase().replace(/\s+/g, '');
     if (!normalized) {
       voucherCode.value = null;
+      voucherDiscountAmount.value = 0;
       return { valid: true, message: 'Voucher cleared.' };
     }
 
-    if (!['FLAVOR10', 'FEAST25', 'FREEDELIVERY'].includes(normalized)) {
-      return { valid: false, message: 'Voucher code not recognized in the demo environment.' };
+    const result = await validateVoucherCode({
+      code: normalized,
+      subtotal: subtotal.value,
+      deliveryFee: deliveryFee.value,
+      restaurantId: restaurantId.value,
+    });
+
+    if (!result.valid) {
+      voucherCode.value = null;
+      voucherDiscountAmount.value = 0;
+      return result;
     }
 
     voucherCode.value = normalized;
-    if (getVoucherDiscount(subtotal.value, deliveryFee.value, voucherCode.value) <= 0) {
-      return { valid: false, message: 'This voucher needs a larger subtotal before it can be applied.' };
-    }
-
-    return { valid: true, message: `${normalized} applied to the current cart.` };
+    voucherDiscountAmount.value = result.discount;
+    return result;
   }
 
   function clearVoucher() {

@@ -82,7 +82,7 @@
               <div class="mt-6 flex flex-wrap gap-3">
                 <RouterLink
                   v-if="notification.ctaTo && notification.ctaLabel"
-                  :to="notification.ctaTo"
+                  :to="notificationTarget(notification)"
                   class="btn-primary"
                   @click="markRead(notification.id)"
                 >
@@ -168,6 +168,22 @@ function notificationIcon(kind: string) {
 onMounted(() => notificationStore.initialize(authStore.user));
 
 watch(() => authStore.user, (user) => notificationStore.syncUser(user), { immediate: true });
+
+function notificationTarget(notification: any) {
+  const ctaTo = notification.ctaTo || '/dashboard';
+  const role = authStore.user?.role;
+  const looksLikeOrderAction = notification.kind === 'order' || /order/i.test(notification.ctaLabel || '') || /orders/.test(ctaTo);
+
+  if (role === 'kitchen' && looksLikeOrderAction) {
+    return '/kitchen';
+  }
+
+  if (role === 'rider' && looksLikeOrderAction) {
+    return '/rider/deliveries';
+  }
+
+  return ctaTo;
+}
 
 function isRead(notification: any) {
   return Boolean(authStore.user && notification.readBy.includes(authStore.user.id));

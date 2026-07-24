@@ -7,10 +7,12 @@ router.use('/users', require('./user.routes'));
 router.use('/restaurants', require('./restaurant.routes'));
 router.use('/menus', require('./menu.routes'));
 router.use('/orders', require('./order.routes'));
+router.use('/vouchers', require('./voucher.routes'));
 router.use('/customers', require('./customer.routes'));
 router.use('/notifications', require('./notification.routes'));
 router.use('/activity-logs', require('./activity-log.routes'));
 router.use('/analytics', require('./analytics.routes'));
 router.use('/riders', require('./rider.routes'));
+router.use('/realtime', require('./realtime.routes'));
 
 module.exports = router;

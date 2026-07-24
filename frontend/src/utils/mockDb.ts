@@ -65,7 +65,7 @@ function normalizeHolidayClosures(entries?: HolidayClosure[]) {
 function normalizeBranch(branch: Branch) {
   return {
     ...branch,
-    phone: branch.phone ?? '+66 800 000 000',
+    phone: branch.phone ?? '+855 12 000 000',
     status: branch.status ?? 'open',
     averagePrepMinutes: branch.averagePrepMinutes ?? 18,
     minimumOrderAmount: branch.minimumOrderAmount ?? 150,

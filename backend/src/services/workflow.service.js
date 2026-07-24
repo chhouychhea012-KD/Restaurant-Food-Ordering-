@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const { ActivityLog, Notification, User } = require('../models');
+const realtime = require('./realtime.service');
 
 function actorFromRequest(req) {
   return {
@@ -28,7 +29,7 @@ async function createActivity(req, input) {
 }
 
 async function createNotification(input) {
-  return Notification.create({
+  const notification = await Notification.create({
     id: input.id || `notif-${crypto.randomUUID()}`,
     title: input.title,
     message: input.message,
@@ -38,6 +39,8 @@ async function createNotification(input) {
     ctaLabel: input.ctaLabel || null,
     ctaTo: input.ctaTo || null,
   });
+  realtime.broadcastNotificationChanged(notification, 'created');
+  return notification;
 }
 
 async function notifyCustomer(order, title, message, ctaTo = '/track-order') {
@@ -69,17 +72,18 @@ async function notifyRestaurantTeam(order, title, message, ctaTo = '/partner/ord
   await Promise.all(
     users
       .filter((user) => ['owner', 'kitchen', 'branch_manager'].includes(user.role))
-      .map((user) =>
-        createNotification({
+      .map((user) => {
+        const isKitchen = user.role === 'kitchen';
+        return createNotification({
           title,
           message,
           kind: 'order',
           audienceRole: 'admin',
           userId: user.id,
-          ctaLabel: 'Open orders',
-          ctaTo,
-        }),
-      ),
+          ctaLabel: isKitchen ? 'Open kitchen queue' : 'Open orders',
+          ctaTo: isKitchen ? '/kitchen' : ctaTo,
+        });
+      }),
   );
 }
 
@@ -107,6 +111,7 @@ async function orderCreated(req, order, itemCount) {
       metadata: { total: Number(order.total), itemCount, status: order.status, paymentMethod: order.paymentMethod || null },
     }),
   ]);
+  realtime.broadcastOrderChanged(order, 'created');
 }
 
 async function orderUpdated(req, previousOrder, order) {
@@ -133,6 +138,22 @@ async function orderUpdated(req, previousOrder, order) {
   }
 
   if (previousOrder.riderName !== order.riderName) {
+    if (order.riderName) {
+      tasks.push((async () => {
+        const rider = await User.findOne({ where: { name: order.riderName, role: 'rider' } });
+        if (rider) {
+          await createNotification({
+            title: `Delivery assigned: ${order.id}`,
+            message: `${order.restaurantName} assigned ${order.id} for pickup at ${order.branchName || 'the branch'}.`,
+            kind: 'order',
+            audienceRole: 'admin',
+            userId: rider.id,
+            ctaLabel: 'Open deliveries',
+            ctaTo: '/rider/deliveries',
+          });
+        }
+      })());
+    }
     tasks.push(
       createActivity(req, {
         domain: 'dispatch',
@@ -148,6 +169,7 @@ async function orderUpdated(req, previousOrder, order) {
   }
 
   await Promise.all(tasks);
+  realtime.broadcastOrderChanged(order, 'updated');
 }
 
 async function refundApproved(req, order, reason) {
@@ -166,6 +188,7 @@ async function refundApproved(req, order, reason) {
       metadata: { reason: reason || null, total: Number(order.total) },
     }),
   ]);
+  realtime.broadcastOrderChanged(order, 'refunded');
 }
 
 module.exports = {

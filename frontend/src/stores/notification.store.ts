@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { AppNotification, User } from '@/types';
+import { subscribeRealtimeEvent } from '@/services/realtime/event-bus';
 import {
   deleteNotification,
   getNotificationsUpdatedEventName,

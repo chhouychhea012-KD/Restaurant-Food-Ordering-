@@ -159,7 +159,7 @@ describe('access control utilities', () => {
 
     expect(resolveWorkspaceArea(user, ['orders.accept', 'analytics.read', 'roles.read'])).toBe('admin');
   });
-  it('sends kitchen and rider logins to the customer-style dashboard while keeping role tools available', () => {
+  it('sends kitchen and rider logins to their operational workspaces while keeping role tools available', () => {
     const kitchenUser = buildUser({
       role: 'kitchen',
       roleAssignments: [
@@ -172,9 +172,8 @@ describe('access control utilities', () => {
       ],
     });
 
-    expect(getWorkspaceHome('kitchen')).toEqual({ name: 'customer-account-dashboard' });
-    expect(getWorkspaceHome('rider')).toEqual({ name: 'customer-account-dashboard' });
-    expect(canAccessWorkspace('customer', kitchenUser, ['profile.manage', 'orders.read'])).toBe(true);
+    expect(getWorkspaceHome('kitchen')).toEqual({ name: 'kitchen-queue' });
+    expect(getWorkspaceHome('rider')).toEqual({ name: 'rider-home' });
     expect(canAccessWorkspace('kitchen', kitchenUser, ['profile.manage', 'orders.accept'])).toBe(true);
   });
   it('treats suspended accounts as inactive even inside the time window', () => {

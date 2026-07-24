@@ -180,7 +180,7 @@
                 </div>
                 <div>
                   <label class="field-label">Phone</label>
-                  <input v-model="branch.phone" class="field-input" type="tel" placeholder="+66 800 000 000" />
+                  <input v-model="branch.phone" class="field-input" type="tel" placeholder="+855 12 000 000" />
                 </div>
                 <div>
                   <label class="field-label">Branch status</label>
@@ -540,7 +540,7 @@ function buildPayload(): RestaurantInput {
       ...branch,
       name: branch.name.trim(),
       zone: branch.zone.trim(),
-      phone: branch.phone?.trim() || '+66 800 000 000',
+      phone: branch.phone?.trim() || '+855 12 000 000',
       lat: Number(branch.lat),
       lng: Number(branch.lng),
       averagePrepMinutes: Number(branch.averagePrepMinutes ?? 18),

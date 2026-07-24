@@ -122,7 +122,7 @@ function branchRows() {
     zone: branch.zone,
     lat: branch.lat,
     lng: branch.lng,
-    phone: branch.phone || `+66 800 000 ${String(index + 1).padStart(3, '0')}`,
+    phone: branch.phone || `+855 12 000 ${String(index + 1).padStart(3, '0')}`,
     status: branch.status || 'open',
     average_prep_minutes: branch.averagePrepMinutes || 18,
     minimum_order_amount: branch.minimumOrderAmount || 150,

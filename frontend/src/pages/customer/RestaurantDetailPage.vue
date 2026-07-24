@@ -8,7 +8,7 @@
           <h1 class="mt-3 text-3xl font-extrabold sm:text-4xl">{{ restaurant.name }}</h1>
           <p class="mt-3 max-w-3xl text-sm text-slate-200">{{ restaurant.description }}</p>
           <p class="mt-3 text-sm text-slate-200">
-            {{ restaurant.cuisine.join(' â€¢ ') }} â€¢ {{ restaurant.deliveryTime }} â€¢ {{ formatCurrency(restaurant.deliveryFee) }} delivery fee
+            {{ restaurant.cuisine.join(' • ') }} • {{ restaurant.deliveryTime }} • {{ formatCurrency(restaurant.deliveryFee) }} delivery fee
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
               <label class="block text-sm font-semibold text-slate-700" for="branch-select">Branch</label>
               <select id="branch-select" v-model="selectedBranchId" class="field-input">
                 <option v-for="branch in restaurant.branches" :key="branch.id" :value="branch.id">
-                  {{ branch.name }} â€¢ {{ branch.zone }}
+                  {{ branch.name }} • {{ branch.zone }}
                 </option>
               </select>
             </div>
@@ -61,7 +61,7 @@
 
           <div class="grid gap-5">
             <MenuItemCard v-for="item in category.items" :key="item.id" :category="category.name" :item="item">
-              <button v-if="canOrder" class="btn-primary" :disabled="!item.available || !branchAvailability.isOpen" @click="openConfigurator(item)">
+              <button v-if="canOrder" class="btn-primary" :disabled="!item.available || !canCustomizeItems" @click="openConfigurator(item)">
                 {{ item.available ? 'Customize' : 'Unavailable' }}
               </button>
               <button v-else class="btn-secondary" disabled>Customer only</button>
@@ -106,7 +106,7 @@
       <div class="grid gap-4 sm:grid-cols-2">
         <div>
           <p class="text-sm font-semibold text-slate-900">Branch</p>
-          <p class="mt-2 text-sm text-slate-600">{{ activeBranch?.name }} â€¢ {{ activeBranch?.zone }}</p>
+          <p class="mt-2 text-sm text-slate-600">{{ activeBranch?.name }} • {{ activeBranch?.zone }}</p>
         </div>
         <div>
           <p class="text-sm font-semibold text-slate-900">Price</p>
@@ -152,7 +152,7 @@
       </div>
 
       <div class="flex flex-wrap gap-3">
-        <button class="btn-primary" type="button" :disabled="!branchAvailability.isOpen" @click="addConfiguredItem">
+        <button class="btn-primary" type="button" :disabled="!canCustomizeItems" @click="addConfiguredItem">
           Add to cart
         </button>
         <button class="btn-secondary" type="button" @click="closeConfigurator">Cancel</button>
@@ -170,10 +170,10 @@
   >
     <div class="space-y-4 text-sm text-slate-600">
       <p>
-        Current cart: <span class="font-semibold text-slate-900">{{ cartStore.restaurantName }} â€¢ {{ cartStore.branchName }}</span>
+        Current cart: <span class="font-semibold text-slate-900">{{ cartStore.restaurantName }} • {{ cartStore.branchName }}</span>
       </p>
       <p>
-        New item source: <span class="font-semibold text-slate-900">{{ restaurant?.name }} â€¢ {{ activeBranch?.name }}</span>
+        New item source: <span class="font-semibold text-slate-900">{{ restaurant?.name }} • {{ activeBranch?.name }}</span>
       </p>
       <div class="flex flex-wrap gap-3 pt-2">
         <button class="btn-primary" type="button" @click="confirmReplaceCart">Clear cart and add item</button>
@@ -220,6 +220,15 @@ const selectedItemId = computed(() => (typeof route.query.item === 'string' ? ro
 const isFocusedProductView = computed(() => Boolean(selectedItemId.value));
 const activeBranch = computed(() => getBranchById(restaurant.value, selectedBranchId.value));
 const branchAvailability = computed(() => evaluateBranchAvailability(activeBranch.value));
+const canCustomizeItems = computed(() => {
+  const branch = activeBranch.value;
+  if (!branch || ['suspended', 'paused', 'closed'].includes(String(branch.status))) {
+    return false;
+  }
+
+  const today = new Date().toISOString().slice(0, 10);
+  return !branch.holidayClosures?.some((entry) => entry.date === today);
+});
 const itemTotal = computed(() => (configuringItem.value ? configuringItem.value.price * quantity.value : 0));
 const cartConflictNotice = computed(() => {
   if (!cartStore.items.length || !restaurant.value || !activeBranch.value) {

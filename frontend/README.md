@@ -1,6 +1,6 @@
 # Golden Land Restaurant Frontend
 
-Golden Land Restaurant is a frontend-first restaurant and food ordering platform built with Vue 3, TypeScript, Vite, Tailwind CSS, Pinia, and Vue Router. It currently ships a working multi-role demo for customer browsing and ordering, admin operations, restaurant-owner tools, kitchen updates, and rider delivery progress.
+Golden Land Restaurant is a full-stack-ready restaurant and food ordering frontend built with Vue 3, TypeScript, Vite, Tailwind CSS, Pinia, and Vue Router. It supports both mock/local data mode and real backend API mode for customer browsing and ordering, admin operations, restaurant-owner tools, kitchen updates, rider delivery progress, vouchers, notifications, and live workflow refreshes.
 
 The repository is being aligned to the AGENTS milestone plan. Milestones 0 and 1 are implemented and verified, Milestone 2 now has a substantial restaurant, branch, and menu workflow layer, and Milestone 3 has a stronger customer ordering flow with branch-aware carts, checkout revalidation, vouchers, and loyalty redemption.
 
@@ -12,7 +12,7 @@ The repository is being aligned to the AGENTS milestone plan. Milestones 0 and 1
 - Tailwind CSS
 - Pinia
 - Vue Router
-- Axios mock client boundary
+- Axios API client boundary with mock and server modes
 - Vitest
 - Playwright
 - ESLint
@@ -88,6 +88,7 @@ await window.__flavorFleet?.resetMockData()
 - Kitchen queue with preparation and ready-state transitions
 - Rider availability, active deliveries, delivery progress updates, and rider profile
 - Activity logging for order, dispatch, refund, role, user, access-window, restaurant, and menu actions
+- Server-Sent Events realtime bridge for order and notification refreshes in backend API mode
 
 ## Milestone Status
 
@@ -114,6 +115,7 @@ npx playwright install chromium
 
 ## Build Notes
 
-- This is still a frontend-only demo. Backend APIs, realtime channels, payments, and delivery telemetry are simulated through typed mock services and seeded data.
+- Use mock mode for fast local UI testing, or `VITE_API_MODE=server` to connect to the Node/Express backend.
+- Backend API mode includes JWT auth, MySQL-backed data, voucher CRUD, order workflows, notifications, and realtime order/notification refreshes through SSE.
 - Keep `dist/` out of version control.
 

@@ -111,7 +111,7 @@
       </SectionCard>
     </section>
 
-    <SectionCard eyebrow="Owner Workspace" title="Restaurant profile" :description="restaurant.description || restaurant.cuisine.join(' • ')">
+    <SectionCard eyebrow="Owner Workspace" title="Restaurant profile" :description="restaurant.description || restaurant.cuisine.join(' ï¿½ ')">
       <template #actions>
         <button class="btn-primary" type="button" @click="openEditModal">Edit restaurant</button>
       </template>
@@ -145,7 +145,7 @@
           <div class="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p class="text-lg font-semibold text-slate-950">{{ branch.name }}</p>
-              <p class="mt-1 text-sm text-slate-500">{{ branch.zone }} • {{ branch.phone }}</p>
+              <p class="mt-1 text-sm text-slate-500">{{ branch.zone }} ï¿½ {{ branch.phone }}</p>
             </div>
             <span class="pill" :class="branch.status === 'open' ? 'bg-emerald-100 text-emerald-700' : branch.status === 'paused' ? 'bg-amber-100 text-amber-700' : 'bg-slate-200 text-slate-700'">
               {{ branch.status }}
@@ -477,7 +477,7 @@ function buildPayload(): RestaurantInput {
     ...branch,
     name: branch.name.trim(),
     zone: branch.zone.trim(),
-    phone: branch.phone?.trim() || '+66 800 000 000',
+    phone: branch.phone?.trim() || '+855 12 000 000',
     lat: Number(branch.lat),
     lng: Number(branch.lng),
     averagePrepMinutes: Number(branch.averagePrepMinutes ?? 18),

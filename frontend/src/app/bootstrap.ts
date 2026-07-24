@@ -5,6 +5,7 @@ import router from '@/router';
 import '@/main.css';
 import { seedMockDatabase, resetMockDatabase } from '@/mocks/database/runtime';
 import { storageKeys } from '@/utils/storage';
+import { startRealtimeClient } from '@/services/realtime/sse-client';
 
 export async function bootstrapApp() {
   await seedMockDatabase();
@@ -21,5 +22,6 @@ export async function bootstrapApp() {
   const app = createApp(App);
   app.use(createPinia());
   app.use(router);
+  startRealtimeClient();
   app.mount('#app');
 }

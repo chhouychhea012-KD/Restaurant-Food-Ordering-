@@ -15,6 +15,10 @@ function sortNotifications(notifications: AppNotification[]) {
   return [...notifications].sort((left, right) => new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime());
 }
 
+function isNotificationDue(notification: AppNotification) {
+  return !notification.scheduledAt || new Date(notification.scheduledAt).getTime() <= Date.now();
+}
+
 function matchesAudienceRole(notification: AppNotification, user: User) {
   if (notification.userId) {
     return notification.userId === user.id;
@@ -38,7 +42,7 @@ export function getNotificationsUpdatedEventName() {
 
 export async function listNotificationsForUser(user: User) {
   if (useBackendApi) return cachedGet<AppNotification[]>('/notifications', undefined, 8_000);
-  return sortNotifications(dbNotifications().filter((notification) => matchesAudienceRole(notification, user)));
+  return sortNotifications(dbNotifications().filter((notification) => isNotificationDue(notification) && matchesAudienceRole(notification, user)));
 }
 
 export function isNotificationRead(notification: AppNotification, userId: string) {
@@ -58,6 +62,7 @@ export async function createNotification(payload: {
   ctaLabel?: string;
   ctaTo?: string;
   createdAt?: string;
+  scheduledAt?: string | null;
 }) {
   if (useBackendApi) { const notification = unwrap<AppNotification>(await api.post('/notifications', payload)); clearApiCache('/notifications'); return notification; }
   const notifications = dbNotifications();
@@ -70,6 +75,7 @@ export async function createNotification(payload: {
     userId: payload.userId ?? null,
     ctaLabel: payload.ctaLabel?.trim(),
     ctaTo: payload.ctaTo?.trim(),
+    scheduledAt: payload.scheduledAt ?? null,
     createdAt: payload.createdAt ?? new Date().toISOString(),
     readBy: [],
   };
@@ -105,7 +111,7 @@ export async function markNotificationRead(notificationId: string, userId: strin
 export async function markAllNotificationsRead(user: User) {
   if (useBackendApi) { await api.patch('/notifications/read-all'); clearApiCache('/notifications'); return; }
   const nextNotifications = dbNotifications().map((notification) => {
-    const canSee = matchesAudienceRole(notification, user);
+    const canSee = isNotificationDue(notification) && matchesAudienceRole(notification, user);
     if (!canSee || notification.readBy.includes(user.id)) {
       return notification;
     }

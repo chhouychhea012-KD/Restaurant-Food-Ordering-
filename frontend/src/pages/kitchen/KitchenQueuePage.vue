@@ -68,6 +68,7 @@ import SectionCard from '@/components/common/SectionCard.vue';
 import StatCard from '@/components/common/StatCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
 import { useAuthStore } from '@/stores/auth.store';
+import { useSocket } from '@/composables/useSocket';
 import { listOrdersForRestaurant, updateOrderStatus } from '@/services/order.service';
 
 const authStore = useAuthStore();
@@ -83,6 +84,10 @@ async function load() {
 }
 
 onMounted(load);
+
+useSocket('order.changed', () => {
+  void load();
+});
 
 async function update(orderId: string, status: string, label: string) {
   await updateOrderStatus(orderId, status, label);

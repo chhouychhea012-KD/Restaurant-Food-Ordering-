@@ -1,13 +1,63 @@
 const { Op } = require('sequelize');
-const { Order, OrderItem, OrderTimeline } = require('../models');
+const { Order, OrderItem, OrderTimeline, Voucher } = require('../models');
 const { ApiError, created, noContent, ok } = require('../utils/http');
 const { serializeOrder } = require('../services/serializer.service');
 const workflow = require('../services/workflow.service');
+const orderPolicy = require('../services/order-policy.service');
 
 const includeOrder = [
   { model: OrderItem, as: 'items' },
   { model: OrderTimeline, as: 'timeline' },
 ];
+
+const allowedPaymentMethods = ['cash', 'visa_card', 'bank_account', 'paypal', 'aba_payway', 'card_mock', 'wallet_mock'];
+
+function normalizePaymentMethod(method) {
+  return allowedPaymentMethods.includes(method) ? method : null;
+}
+
+function paymentDigits(value) {
+  return String(value || '').replace(/\D/g, '');
+}
+
+function validatePaymentDetails(method, details = {}) {
+  const issues = [];
+  if (!method) {
+    issues.push('Choose a valid payment method.');
+    return issues;
+  }
+  if (method === 'cash') return issues;
+
+  if (method === 'visa_card' || method === 'card_mock') {
+    if (details.accountName && String(details.accountName).trim().length < 3) issues.push('Enter the cardholder name.');
+    const last4 = paymentDigits(details.last4);
+    if (last4 && last4.length !== 4) issues.push('Enter valid card details.');
+  }
+  if (method === 'bank_account' || method === 'wallet_mock') {
+    if (details.bankName !== undefined && !String(details.bankName).trim()) issues.push('Choose a bank.');
+    const last4 = paymentDigits(details.last4);
+    if (last4 && last4.length !== 4) issues.push('Enter valid bank account details.');
+  }
+  if (method === 'paypal' && details.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(details.email).trim())) {
+    issues.push('Enter a valid PayPal email address.');
+  }
+  if (method === 'aba_payway') {
+    if (details.accountName && String(details.accountName).trim().length < 3) issues.push('Enter the ABA account name.');
+    const phoneLast4 = paymentDigits(details.phoneLast4);
+    if (phoneLast4 && phoneLast4.length !== 4) issues.push('Enter valid ABA PayWay phone details.');
+  }
+  return issues;
+}
+
+async function nextOrderId() {
+  const count = await Order.count();
+  for (let index = count + 1; index < count + 10000; index += 1) {
+    const id = `ord-${String(index).padStart(3, '0')}`;
+    const existing = await Order.findByPk(id);
+    if (!existing) return id;
+  }
+  return `ord-${Date.now()}`;
+}
 
 function paymentSummary(method, details = {}) {
   if (method === 'visa_card' || method === 'card_mock') return 'Visa ending ' + (details.last4 || 'demo');
@@ -31,14 +81,24 @@ function statusLabel(status) {
 
 async function list(req, res) {
   const where = {};
-  if (req.query.customerId) {
+  if (req.user.role === 'customer') {
+    where.customerId = req.user.id;
+  } else if (['owner', 'branch_manager', 'kitchen'].includes(req.user.role)) {
+    where.restaurantId = req.user.restaurantId;
+  } else if (req.query.customerId) {
     where.customerId = req.query.customerId;
   }
-  if (req.query.restaurantId) {
+
+  if (!['customer', 'owner', 'branch_manager', 'kitchen'].includes(req.user.role) && req.query.restaurantId) {
     where.restaurantId = req.query.restaurantId;
   }
-  if (req.query.riderName) {
-    where[Op.or] = [{ riderName: req.query.riderName }, { status: 'RIDER_ASSIGNED' }];
+
+  if (req.query.riderName || req.user.role === 'rider') {
+    const riderName = req.user.role === 'rider' ? req.user.name : req.query.riderName;
+    where[Op.or] = [
+      { riderName },
+      { riderName: null, status: 'READY_FOR_PICKUP' },
+    ];
   }
   const orders = await Order.findAll({ where, include: includeOrder, order: [['createdAt', 'DESC']] });
   return ok(res, orders.map(serializeOrder));
@@ -49,13 +109,20 @@ async function show(req, res) {
   if (!order) {
     throw new ApiError(404, 'Order not found.');
   }
+  orderPolicy.assertCanReadOrder(req.user, order);
   return ok(res, serializeOrder(order));
 }
 
 async function create(req, res) {
-  const count = await Order.count();
-  const id = `ord-${String(count + 1).padStart(3, '0')}`;
-  const total = Number(req.body.subtotal) + Number(req.body.deliveryFee) - Number(req.body.discount || 0);
+  orderPolicy.assertCanCreateOrder(req.user, req.body);
+  orderPolicy.validateCreatePayload(req.body);
+  const id = await nextOrderId();
+  const paymentMethod = normalizePaymentMethod(req.body.paymentMethod);
+  const paymentIssues = validatePaymentDetails(paymentMethod, req.body.paymentDetails || {});
+  if (paymentIssues.length) {
+    throw new ApiError(422, paymentIssues.join(' '));
+  }
+  const total = Math.max(0, Number(req.body.subtotal) + Number(req.body.deliveryFee) - Number(req.body.discount || 0));
   const order = await Order.create({
     id,
     customerId: req.body.customerId || req.user.id,
@@ -71,15 +138,15 @@ async function create(req, res) {
     discount: req.body.discount || 0,
     total,
     riderName: null,
-    paymentMethod: req.body.paymentMethod,
-    paymentSummary: req.body.paymentSummary || paymentSummary(req.body.paymentMethod, req.body.paymentDetails),
+    paymentMethod,
+    paymentSummary: req.body.paymentSummary || paymentSummary(paymentMethod, req.body.paymentDetails),
     deliveryInstructions: req.body.deliveryInstructions || '',
     voucherCode: req.body.voucherCode || null,
     loyaltyPointsRedeemed: req.body.loyaltyPointsRedeemed || 0,
   });
   await OrderItem.bulkCreate(
-    (req.body.items || []).map((item) => ({
-      id: item.id,
+    (req.body.items || []).map((item, index) => ({
+      id: `${order.id}-item-${index + 1}-${item.menuItemId || item.id}`,
       orderId: order.id,
       menuItemId: item.menuItemId || item.id,
       name: item.name,
@@ -90,6 +157,12 @@ async function create(req, res) {
     })),
   );
   await OrderTimeline.create({ orderId: order.id, status: 'PLACED', label: 'Order placed', time: timelineTime() });
+  if (order.voucherCode) {
+    const voucher = await Voucher.findOne({ where: { code: String(order.voucherCode).toUpperCase() } });
+    if (voucher) {
+      await voucher.increment('usedCount');
+    }
+  }
   await workflow.orderCreated(req, order, (req.body.items || []).length);
   const fullOrder = await Order.findByPk(order.id, { include: includeOrder });
   return created(res, serializeOrder(fullOrder));
@@ -102,9 +175,19 @@ async function update(req, res) {
   }
   const previousOrder = order.get({ plain: true });
   const previousStatus = order.status;
+  let nextStatus = req.body.status || order.status;
+  let nextRiderName = req.body.riderName === undefined ? order.riderName : req.body.riderName;
+
+  orderPolicy.assertCanMutateOrder(req.user, order, nextStatus);
+  orderPolicy.assertValidStatusTransition(order.status, nextStatus);
+
+  if (req.user?.role === 'rider') {
+    nextRiderName = req.user.name;
+  }
+
   await order.update({
-    status: req.body.status || order.status,
-    riderName: req.body.riderName === undefined ? order.riderName : req.body.riderName,
+    status: nextStatus,
+    riderName: nextRiderName,
     estimatedDeliveryAt: req.body.estimatedDeliveryAt || order.estimatedDeliveryAt,
   });
   if (previousStatus !== order.status) {
@@ -125,6 +208,7 @@ async function approveRefund(req, res) {
   if (!order) {
     throw new ApiError(404, 'Order not found.');
   }
+  orderPolicy.assertCanReadOrder(req.user, order);
   const reason = req.body.reason || 'Approved by admin';
   await order.update({
     refundStatus: 'APPROVED',
@@ -141,6 +225,7 @@ async function remove(req, res) {
   if (!order) {
     throw new ApiError(404, 'Order not found.');
   }
+  orderPolicy.assertCanMutateOrder(req.user, order, 'CANCELLED');
   await workflow.createActivity(req, {
     domain: 'order',
     action: 'order.deleted',

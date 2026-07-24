@@ -40,7 +40,7 @@ export function authGuard(to: RouteLocationNormalized, _from: RouteLocationNorma
     return;
   }
 
-  if (requiresAuth && workspace !== 'customer' && requiresActiveAccess && !authStore.accessEvaluation.isActive) {
+  if (requiresAuth && workspace !== 'customer' && workspace !== 'rider' && requiresActiveAccess && !authStore.accessEvaluation.isActive) {
     next({
       name: 'forbidden',
       query: {

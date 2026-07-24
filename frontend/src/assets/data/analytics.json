@@ -1,18 +1,18 @@
 {
-  "totalOrdersToday": 184,
-  "grossSalesToday": 58240,
-  "avgDeliveryTime": 27,
-  "activeRiders": 24,
-  "breachedSla": 8,
+  "totalOrdersToday": 48,
+  "grossSalesToday": 682,
+  "avgDeliveryTime": 29,
+  "activeRiders": 12,
+  "breachedSla": 2,
   "topRestaurants": [
-    { "name": "Bangkok Bowl Lab", "orders": 44, "revenue": 18500 },
-    { "name": "Firefly Pizza Club", "orders": 36, "revenue": 16500 },
-    { "name": "Sushi Circuit", "orders": 27, "revenue": 13200 }
+    { "name": "Phnom Penh Khmer Kitchen", "orders": 16, "revenue": 218 },
+    { "name": "Siem Reap Angkor Bites", "orders": 12, "revenue": 176 },
+    { "name": "Kampot Pepper Grill", "orders": 9, "revenue": 144 }
   ],
-  "hourlyOrders": [12, 18, 22, 26, 17, 13, 19, 24],
+  "hourlyOrders": [4, 6, 8, 7, 5, 4, 6, 8],
   "zoneLoad": [
-    { "zone": "Central Bangkok", "value": 72 },
-    { "zone": "CBD", "value": 58 },
-    { "zone": "North", "value": 43 }
+    { "zone": "Phnom Penh", "value": 22 },
+    { "zone": "Siem Reap", "value": 14 },
+    { "zone": "Kampot", "value": 12 }
   ]
 }

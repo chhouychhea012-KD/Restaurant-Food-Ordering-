@@ -104,6 +104,7 @@ import SectionCard from '@/components/common/SectionCard.vue';
 import StatCard from '@/components/common/StatCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
 import { approveRefund, deleteOrder, listOrdersForRestaurant, updateOrder } from '@/services/order.service';
+import { useSocket } from '@/composables/useSocket';
 import { useAuthStore } from '@/stores/auth.store';
 import { getPrimaryRestaurantId } from '@/utils/access';
 import { formatCurrency, formatPreciseDateTime, titleCase } from '@/utils/format';
@@ -136,6 +137,10 @@ async function load() {
 onMounted(() => {
   void load();
   window.addEventListener('click', closeActionMenu);
+});
+
+useSocket('order.changed', () => {
+  void load();
 });
 
 onBeforeUnmount(() => {

@@ -64,10 +64,31 @@
         </div>
 
         <div class="rounded-lg border border-slate-200 bg-white p-5">
+          <div v-if="availableVouchers.length" class="mb-5 rounded-lg border border-orange-100 bg-orange-50/60 p-4">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p class="text-sm font-bold text-slate-950">Available voucher codes</p>
+                <p class="mt-1 text-sm text-slate-600">Choose a voucher and apply it to this cart before checkout.</p>
+              </div>
+              <span class="pill bg-white text-brand-700">{{ availableVouchers.length }} available</span>
+            </div>
+            <div class="mt-4 grid gap-3 md:grid-cols-2">
+              <div v-for="voucher in availableVouchers" :key="voucher.id" class="rounded-lg border border-orange-100 bg-white p-4 shadow-sm">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="font-bold text-slate-950">{{ voucher.code }}</p>
+                    <p class="mt-1 text-sm text-slate-600">{{ voucher.title }}</p>
+                    <p class="mt-2 text-xs text-slate-500">{{ voucherHelp(voucher) }}</p>
+                  </div>
+                  <button class="btn-secondary px-3 py-2" type="button" @click="useVoucher(voucher.code)">Use code</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="grid gap-4 lg:grid-cols-[1fr_auto]">
             <div>
               <label class="field-label" for="voucher-code">Voucher code</label>
-              <input id="voucher-code" v-model="voucherInput" class="field-input" type="text" placeholder="FLAVOR10, FEAST25, or FREEDELIVERY" />
+              <input id="voucher-code" v-model="voucherInput" class="field-input" type="text" placeholder="Enter voucher code" />
               <p class="mt-2 text-xs text-slate-500">Try FLAVOR10, FEAST25, or FREEDELIVERY.</p>
             </div>
             <div class="flex flex-wrap items-end gap-3">
@@ -124,7 +145,8 @@ import CartSummary from '@/components/customer/CartSummary.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 import { getRestaurantById } from '@/services/restaurant.service';
-import type { Restaurant } from '@/types';
+import { listAvailableVouchers } from '@/services/voucher.service';
+import type { Restaurant, Voucher } from '@/types';
 import { formatCurrency } from '@/utils/format';
 import { evaluateBranchAvailability, getBranchById } from '@/utils/ordering';
 
@@ -135,6 +157,7 @@ const restaurant = ref<Restaurant | null>(null);
 const voucherInput = ref(cartStore.voucherCode ?? '');
 const voucherMessage = ref('');
 const voucherSuccess = ref(true);
+const availableVouchers = ref<Voucher[]>([]);
 const showClearCartModal = ref(false);
 
 const canUseCart = computed(() => !authStore.isAuthenticated || authStore.hasPermission('orders.create'));
@@ -149,27 +172,37 @@ const minimumOrderProgress = computed(() => {
   return Math.max(8, Math.min(100, Math.round((cartStore.subtotal / cartStore.minimumOrderAmount) * 100)));
 });
 const menuItems = computed(() => new Map((restaurant.value?.menuCategories ?? []).flatMap((category) => category.items.map((item) => [item.id, item] as const))));
+const isBranchHardBlocked = computed(() => ['Suspended', 'Temporarily paused', 'Closed', 'Holiday closure', 'Branch unavailable'].includes(branchAvailability.value.label));
 const cartWarnings = computed(() => {
   const warnings: string[] = [];
 
-  if (cartStore.items.length && !branchAvailability.value.isOpen) {
+  if (cartStore.items.length && !branchAvailability.value.isOpen && !isBranchHardBlocked.value) {
     warnings.push(branchAvailability.value.detail);
+  }
+
+  return [...new Set(warnings)];
+});
+const cartBlockingIssues = computed(() => {
+  const issues: string[] = [];
+
+  if (cartStore.items.length && isBranchHardBlocked.value) {
+    issues.push(branchAvailability.value.detail);
   }
 
   for (const item of cartStore.items) {
     const currentItem = menuItems.value.get(item.menuItemId ?? item.id);
     if (!currentItem) {
-      warnings.push(`${item.name} is no longer listed on the menu.`);
+      issues.push(`${item.name} is no longer listed on the menu.`);
       continue;
     }
     if (!currentItem.available) {
-      warnings.push(`${item.name} is currently unavailable and should be removed before checkout.`);
+      issues.push(`${item.name} is currently unavailable and should be removed before checkout.`);
     }
   }
 
-  return [...new Set(warnings)];
+  return [...new Set(issues)];
 });
-const canProceedToCheckout = computed(() => cartStore.canCheckout && branchAvailability.value.isOpen && cartWarnings.value.length === 0);
+const canProceedToCheckout = computed(() => cartStore.canCheckout && cartBlockingIssues.value.length === 0);
 const checkoutMessage = computed(() => {
   if (!cartStore.items.length) {
     return 'Add items to start checkout.';
@@ -177,21 +210,44 @@ const checkoutMessage = computed(() => {
   if (cartStore.minimumOrderGap > 0) {
     return `Checkout stays disabled until you add ${formatCurrency(cartStore.minimumOrderGap)} more.`;
   }
-  if (!branchAvailability.value.isOpen) {
-    return branchAvailability.value.detail;
+  if (cartBlockingIssues.value.length) {
+    return cartBlockingIssues.value[0] ?? 'Resolve the cart issues before checkout.';
   }
   if (cartWarnings.value.length) {
-    return cartWarnings.value[0] ?? 'Resolve the cart warnings before checkout.';
+    return cartWarnings.value[0] ?? 'Ready to place after review.';
   }
   return 'Ready to place after review.';
 });
 
-async function syncRestaurant() {
-  restaurant.value = cartStore.restaurantId ? await getRestaurantById(cartStore.restaurantId) : null;
+
+function voucherHelp(voucher: Voucher) {
+  const scope = voucher.restaurantName ? `for ${voucher.restaurantName}` : 'platform-wide';
+  const minimum = voucher.minSubtotal > 0 ? ` Minimum order ${formatCurrency(voucher.minSubtotal)}.` : '';
+  if (voucher.discountType === 'free_delivery') {
+    return `Free delivery ${scope}.${minimum}`;
+  }
+  if (voucher.discountType === 'percentage') {
+    const cap = voucher.maxDiscount ? ` up to ${formatCurrency(voucher.maxDiscount)}` : '';
+    return `${voucher.discountValue}% off${cap} ${scope}.${minimum}`;
+  }
+  return `${formatCurrency(voucher.discountValue)} off ${scope}.${minimum}`;
 }
 
-function applyVoucher() {
-  const result = cartStore.applyVoucher(voucherInput.value);
+async function loadAvailableVouchers() {
+  availableVouchers.value = await listAvailableVouchers({ restaurantId: cartStore.restaurantId });
+}
+
+async function useVoucher(code: string) {
+  voucherInput.value = code;
+  await applyVoucher();
+}
+async function syncRestaurant() {
+  restaurant.value = cartStore.restaurantId ? await getRestaurantById(cartStore.restaurantId) : null;
+  await loadAvailableVouchers();
+}
+
+async function applyVoucher() {
+  const result = await cartStore.applyVoucher(voucherInput.value);
   voucherSuccess.value = result.valid;
   voucherMessage.value = result.message;
   if (result.valid) {

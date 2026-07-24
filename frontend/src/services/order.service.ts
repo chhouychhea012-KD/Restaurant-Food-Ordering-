@@ -59,14 +59,15 @@ function notifyRestaurantTeam(order: Order, title: string, message: string, ctaT
   dbUsers()
     .filter((user) => user.restaurantId === order.restaurantId && ['owner', 'kitchen'].includes(user.role))
     .forEach((user) => {
+      const isKitchen = user.role === 'kitchen';
       createNotification({
         title,
         message,
         kind: 'order',
         audienceRole: 'admin',
         userId: user.id,
-        ctaLabel: 'Open orders',
-        ctaTo,
+        ctaLabel: isKitchen ? 'Open kitchen queue' : 'Open orders',
+        ctaTo: isKitchen ? '/kitchen' : ctaTo,
       });
     });
 }

@@ -92,6 +92,7 @@ import { useAppDialog } from '@/composables/useAppDialog';
 import SectionCard from '@/components/common/SectionCard.vue';
 import StatusBadge from '@/components/common/StatusBadge.vue';
 import { approveRefund, deleteOrder, listOrders, updateOrder } from '@/services/order.service';
+import { useSocket } from '@/composables/useSocket';
 import { listUsers } from '@/services/user.service';
 import { formatPreciseDateTime, titleCase } from '@/utils/format';
 
@@ -122,6 +123,10 @@ async function load() {
 onMounted(() => {
   void load();
   window.addEventListener('click', closeActionMenu);
+});
+
+useSocket('order.changed', () => {
+  void load();
 });
 
 onBeforeUnmount(() => {

@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 
 export function useGeolocation() {
-  const coords = ref({ lat: 13.7563, lng: 100.5018 });
+  const coords = ref({ lat: 11.5526, lng: 104.9282 });
   const loading = ref(false);
 
   async function locate() {

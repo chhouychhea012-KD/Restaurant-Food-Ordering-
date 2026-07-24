@@ -11,6 +11,7 @@ Node.js + Express + Sequelize + MySQL backend for the Golden Land Restaurant Vue
 - JWT authentication
 - bcrypt password hashing
 - Helmet, CORS, and API rate limiting
+- Server-Sent Events for authenticated order and notification updates
 
 ## Structure
 
@@ -111,6 +112,7 @@ The seeder imports the existing frontend demo users and resets their backend bcr
 - `GET /api/v1/analytics/snapshot`
 - `GET /api/v1/riders`
 - `PATCH /api/v1/riders/:id/availability`
+- `GET /api/v1/realtime/events?token=<accessToken>`
 
 ## Frontend Server Mode
 
@@ -137,4 +139,23 @@ After MySQL is migrated and seeded, run:
 npm run smoke:api
 ```
 
-This starts the Express app on a temporary port, logs in with the seeded demo accounts, and verifies the current frontend-facing CRUD/workflows: auth, roles, users, restaurants, menu categories/items, orders, refunds, notifications, analytics, activity logs, riders, customer addresses, and loyalty.
+This starts the Express app on a temporary port, logs in with the seeded demo accounts, and verifies the current frontend-facing CRUD/workflows: auth, roles, users, restaurants, menu categories/items, protected order status transitions, refunds, notifications, analytics, activity logs, riders, customer addresses, and loyalty.
+
+## Workflow Safety
+
+Order mutations are guarded by a backend policy service. Customers can only create and view their own orders, restaurant operators can only work inside their assigned restaurant, kitchen users can only move preparation statuses, and riders can only pick up or deliver available/assigned deliveries. Invalid status jumps return a 409 response instead of silently corrupting the workflow.
+
+## Realtime Events
+
+Authenticated browser clients can subscribe with the access token through:
+
+```text
+GET /api/v1/realtime/events?token=<accessToken>
+```
+
+The stream emits:
+
+- `order.changed` for order creation, status updates, rider assignment, and refunds.
+- `notification.changed` for new/read/deleted notifications.
+
+The frontend SSE client clears cached API data and refreshes active order/notification screens automatically.

@@ -67,7 +67,7 @@ async function register(req, res) {
     id,
     name,
     email: normalizedEmail,
-    phone,
+    phone: phone || '',
     passwordHash: await hashPassword(password),
     role: 'customer',
     status: 'active',
@@ -89,13 +89,13 @@ async function register(req, res) {
   await Address.create({
     id: `addr-${crypto.randomUUID()}`,
     userId: id,
-    label: 'Primary',
-    line1: 'Set your delivery address',
-    district: 'Bangkok Central',
-    city: 'Bangkok',
+    label: 'Home',
+    line1: 'Street 310, BKK1',
+    district: 'Boeung Keng Kang',
+    city: 'Phnom Penh',
     isDefault: true,
-    lat: 13.7563,
-    lng: 100.5018,
+    lat: 11.5526,
+    lng: 104.9282,
   });
 
   const user = await userWithRelations(id);

@@ -205,7 +205,7 @@ const restaurant = ref<Restaurant | null>(null);
 const placing = ref(false);
 const selectedAddressId = ref('');
 const deliveryInstructions = ref('');
-const paymentMethod = ref<CheckoutPaymentMethod>('visa_card');
+const paymentMethod = ref<CheckoutPaymentMethod>('cash');
 const visaForm = ref({
   cardholderName: authStore.user?.name ?? '',
   cardNumber: '',
@@ -237,10 +237,26 @@ const paymentOptions = [
   { value: 'aba_payway' as const, label: 'ABA PayWay', help: 'ABA/KHQR demo.' },
 ];
 
-const bankOptions = ['ABA Bank', 'ACLEDA Bank', 'Wing Bank', 'Bangkok Bank', 'Kasikornbank', 'SCB', 'Krungthai Bank', 'Krungsri'];
+const bankOptions = ['ABA Bank', 'ACLEDA Bank', 'Wing Bank'];
+const phnomPenhCheckoutAddress: Address = {
+  id: 'checkout-phnom-penh-fallback',
+  label: 'Home',
+  line1: 'Street 310, BKK1',
+  district: 'Boeung Keng Kang',
+  city: 'Phnom Penh',
+  isDefault: true,
+  lat: 11.5526,
+  lng: 104.9282,
+};
 
-const addresses = computed(() => authStore.user?.addresses ?? []);
-const selectedAddress = computed<Address | null>(() => addresses.value.find((address) => address.id === selectedAddressId.value) ?? addresses.value[0] ?? null);
+function normalizeCheckoutAddress(address: Address): Address {
+  const lowerText = `${address.line1} ${address.district} ${address.city}`.toLowerCase();
+  const isOldPlaceholder = lowerText.includes('bangkok') || lowerText.includes('set your delivery address');
+  return isOldPlaceholder ? { ...phnomPenhCheckoutAddress, id: address.id, label: address.label === 'Primary' ? 'Home' : address.label, isDefault: address.isDefault } : address;
+}
+
+const addresses = computed(() => (authStore.user?.addresses?.length ? authStore.user.addresses.map(normalizeCheckoutAddress) : [phnomPenhCheckoutAddress]));
+const selectedAddress = computed<Address | null>(() => addresses.value.find((address) => address.id === selectedAddressId.value) ?? addresses.value.find((address) => address.isDefault) ?? addresses.value[0] ?? null);
 const branch = computed(() => getBranchById(restaurant.value, cartStore.branchId));
 const branchAvailability = computed(() => evaluateBranchAvailability(branch.value));
 const maxRedeemablePoints = computed(() => {

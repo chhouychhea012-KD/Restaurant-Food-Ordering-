@@ -28,7 +28,7 @@ function normalizeBranch(branch: Branch, index: number) {
     id: branch.id || `branch-${crypto.randomUUID()}`,
     name: branch.name.trim(),
     zone: branch.zone.trim(),
-    phone: branch.phone?.trim() || `+66 800 000 ${String(index + 1).padStart(3, '0')}`,
+    phone: branch.phone?.trim() || `+855 12 000 ${String(index + 1).padStart(3, '0')}`,
     status: branch.status ?? 'open',
     averagePrepMinutes: Number(branch.averagePrepMinutes ?? 18),
     minimumOrderAmount: Number(branch.minimumOrderAmount ?? 150),
@@ -420,14 +420,14 @@ export function buildBranch(): Branch {
     id: `branch-${crypto.randomUUID()}`,
     name: '',
     zone: '',
-    phone: '+66 800 000 000',
+    phone: '+855 12 000 000',
     status: 'open',
     averagePrepMinutes: 18,
-    minimumOrderAmount: 150,
+    minimumOrderAmount: 10,
     operatingHours: buildDefaultOperatingHours(),
     holidayClosures: [],
-    lat: 13.7563,
-    lng: 100.5018,
+    lat: 11.5526,
+    lng: 104.9282,
   };
 }
 

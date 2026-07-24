@@ -152,7 +152,12 @@ export function validateCheckoutCart(params: {
 
   const branchAvailability = evaluateBranchAvailability(branch);
   if (!branchAvailability.isOpen) {
-    issues.push(branchAvailability.detail);
+    const hardBlocked = ['Suspended', 'Temporarily paused', 'Closed', 'Holiday closure', 'Branch unavailable'].includes(branchAvailability.label);
+    if (hardBlocked) {
+      issues.push(branchAvailability.detail);
+    } else {
+      warnings.push(branchAvailability.detail);
+    }
   }
 
   if (!items.length) {

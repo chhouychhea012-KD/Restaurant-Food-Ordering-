@@ -7,8 +7,8 @@ router.use(authenticate);
 router.get('/', authorizeAny(['orders.read', 'orders.create', 'dispatch.read']), asyncHandler(controller.list));
 router.get('/:id', authorizeAny(['orders.read', 'orders.create', 'dispatch.read']), asyncHandler(controller.show));
 router.post('/', authorize(['orders.create']), asyncHandler(controller.create));
-router.put('/:id', authorize(['orders.status.update']), asyncHandler(controller.update));
-router.patch('/:id/status', authorize(['orders.status.update']), asyncHandler(controller.updateStatus));
+router.put('/:id', authorizeAny(['orders.status.update', 'dispatch.read']), asyncHandler(controller.update));
+router.patch('/:id/status', authorizeAny(['orders.status.update', 'dispatch.read']), asyncHandler(controller.updateStatus));
 router.patch('/:id/refund', authorizeAny(['orders.refund.approve', 'orders.status.update']), asyncHandler(controller.approveRefund));
 router.delete('/:id', authorizeAny(['orders.cancel', 'orders.status.update']), asyncHandler(controller.remove));
 

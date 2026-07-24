@@ -3,14 +3,16 @@
     "id": "ord-001",
     "customerId": "user-customer",
     "restaurantId": "rest-01",
-    "restaurantName": "Bangkok Bowl Lab",
+    "restaurantName": "Phnom Penh Khmer Kitchen",
+    "branchId": "branch-01a",
+    "branchName": "BKK1 Kitchen",
     "status": "ON_THE_WAY",
     "createdAt": "2026-06-22T12:05:00.000Z",
     "estimatedDeliveryAt": "2026-06-22T12:38:00.000Z",
-    "deliveryAddress": "88 Sukhumvit Road, Khlong Toei, Bangkok",
+    "deliveryAddress": "Street 310, BKK1, Phnom Penh",
     "items": [
-      { "id": "item-101", "name": "Crispy Basil Chicken Bowl", "quantity": 1, "price": 159 },
-      { "id": "item-103", "name": "Green Mango Slaw", "quantity": 1, "price": 79 }
+      { "id": "order-item-001", "menuItemId": "item-101", "name": "Fish Amok Rice", "quantity": 1, "price": 10, "modifiers": ["Fresh Herbs"], "note": "Mild spice" },
+      { "id": "order-item-002", "menuItemId": "item-104", "name": "Num Pang Chicken", "quantity": 1, "price": 5, "modifiers": ["Extra Pickles"], "note": "" }
     ],
     "timeline": [
       { "status": "PLACED", "label": "Order placed", "time": "12:05" },
@@ -21,53 +23,75 @@
       { "status": "PICKED_UP", "label": "Order picked up", "time": "12:30" },
       { "status": "ON_THE_WAY", "label": "Rider is on the way", "time": "12:31" }
     ],
-    "subtotal": 238,
-    "deliveryFee": 29,
-    "discount": 25,
-    "total": 242,
-    "riderName": "Rico Rider"
+    "subtotal": 15,
+    "deliveryFee": 2,
+    "discount": 0,
+    "total": 17,
+    "riderName": "Rico Rider",
+    "paymentMethod": "cash",
+    "paymentSummary": "Cash on delivery",
+    "deliveryInstructions": "Call when near the lobby.",
+    "voucherCode": null,
+    "loyaltyPointsRedeemed": 0,
+    "refundStatus": "NONE"
   },
   {
     "id": "ord-002",
     "customerId": "user-customer",
-    "restaurantId": "rest-02",
-    "restaurantName": "Firefly Pizza Club",
+    "restaurantId": "rest-04",
+    "restaurantName": "Kampot Pepper Grill",
+    "branchId": "branch-04a",
+    "branchName": "Old Town Grill",
     "status": "DELIVERED",
     "createdAt": "2026-06-20T10:18:00.000Z",
     "estimatedDeliveryAt": "2026-06-20T11:00:00.000Z",
-    "deliveryAddress": "45 Silom Complex, Bang Rak, Bangkok",
+    "deliveryAddress": "Old Market Street, Kampot",
     "items": [
-      { "id": "item-201", "name": "Truffle Mushroom Pizza", "quantity": 1, "price": 329 }
+      { "id": "order-item-003", "menuItemId": "item-401", "name": "Kampot Pepper Beef", "quantity": 1, "price": 15, "modifiers": ["Extra Pepper"], "note": "" }
     ],
     "timeline": [
       { "status": "PLACED", "label": "Order placed", "time": "10:18" },
       { "status": "DELIVERED", "label": "Delivered to customer", "time": "10:56" }
     ],
-    "subtotal": 329,
-    "deliveryFee": 39,
+    "subtotal": 15,
+    "deliveryFee": 3,
     "discount": 0,
-    "total": 368,
-    "riderName": "Rico Rider"
+    "total": 18,
+    "riderName": "Rico Rider",
+    "paymentMethod": "visa_card",
+    "paymentSummary": "Visa ending 1111",
+    "deliveryInstructions": "Leave at reception.",
+    "voucherCode": null,
+    "loyaltyPointsRedeemed": 0,
+    "refundStatus": "NONE"
   },
   {
     "id": "ord-003",
     "customerId": "user-customer",
-    "restaurantId": "rest-01",
-    "restaurantName": "Bangkok Bowl Lab",
+    "restaurantId": "rest-02",
+    "restaurantName": "Siem Reap Angkor Bites",
+    "branchId": "branch-02a",
+    "branchName": "Old Market Kitchen",
     "status": "PLACED",
     "createdAt": "2026-06-22T14:45:00.000Z",
     "estimatedDeliveryAt": "2026-06-22T15:15:00.000Z",
-    "deliveryAddress": "88 Sukhumvit Road, Khlong Toei, Bangkok",
+    "deliveryAddress": "Wat Bo Road, Siem Reap",
     "items": [
-      { "id": "item-102", "name": "Lemongrass Beef Bowl", "quantity": 2, "price": 189 }
+      { "id": "order-item-004", "menuItemId": "item-204", "name": "Lort Cha Beef", "quantity": 2, "price": 10, "modifiers": ["Extra Egg"], "note": "Spicy" }
     ],
     "timeline": [
       { "status": "PLACED", "label": "Order placed", "time": "14:45" }
     ],
-    "subtotal": 378,
-    "deliveryFee": 29,
-    "discount": 30,
-    "total": 377,
-    "riderName": null
+    "subtotal": 20,
+    "deliveryFee": 2,
+    "discount": 5,
+    "total": 17,
+    "riderName": null,
+    "paymentMethod": "aba_payway",
+    "paymentSummary": "ABA PayWay ending 5678",
+    "deliveryInstructions": "Meet at the hotel front desk.",
+    "voucherCode": "FLAVOR10",
+    "loyaltyPointsRedeemed": 0,
+    "refundStatus": "NONE"
   }
 ]

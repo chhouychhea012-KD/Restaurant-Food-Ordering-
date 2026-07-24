@@ -406,8 +406,9 @@ export function getWorkspaceHome(area: WorkspaceArea) {
     case 'partner':
       return { name: 'partner-overview' };
     case 'kitchen':
+      return { name: 'kitchen-queue' };
     case 'rider':
-      return { name: 'customer-account-dashboard' };
+      return { name: 'rider-home' };
     case 'customer':
     default:
       return { name: 'customer-account-dashboard' };

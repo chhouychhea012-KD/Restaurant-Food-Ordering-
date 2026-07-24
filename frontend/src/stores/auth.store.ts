@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import type { PermissionKey, Session, User } from '@/types';
 import { getActiveSession, getCurrentUser, login, logout, readCachedCurrentUser, register, validateSession } from '@/services/auth.service';
 import { useBackendApi } from '@/services/backend';
+import { startRealtimeClient, stopRealtimeClient } from '@/services/realtime/sse-client';
 import { dbRoles, dbUsers } from '@/utils/mockDb';
 import {
   evaluateUserOperationalAccess,
@@ -96,6 +97,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = response.user;
       session.value = response.session;
       serverPermissions.value = response.session.permissions ?? [];
+      startRealtimeClient();
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unable to login.';
       throw err;
@@ -104,7 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function performRegister(payload: { name: string; email: string; phone: string; password: string }) {
+  async function performRegister(payload: { name: string; email: string; password: string; phone?: string }) {
     loading.value = true;
     error.value = '';
     try {
@@ -112,6 +114,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = response.user;
       session.value = response.session;
       serverPermissions.value = response.session.permissions ?? [];
+      startRealtimeClient();
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unable to register.';
       throw err;

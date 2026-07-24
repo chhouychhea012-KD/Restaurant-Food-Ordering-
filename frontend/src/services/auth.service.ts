@@ -36,7 +36,7 @@ export interface LoginPayload {
 export interface RegisterPayload {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   password: string;
 }
 
@@ -105,7 +105,7 @@ export async function register(payload: RegisterPayload) {
     id: `user-${crypto.randomUUID()}`,
     name: payload.name,
     email: payload.email.toLowerCase(),
-    phone: payload.phone,
+    phone: payload.phone ?? '',
     passwordHash,
     avatar: payload.name
       .split(' ')
@@ -122,13 +122,13 @@ export async function register(payload: RegisterPayload) {
     addresses: [
       {
         id: `addr-${crypto.randomUUID()}`,
-        label: 'Primary',
-        line1: 'Set your delivery address',
-        district: 'Bangkok Central',
-        city: 'Bangkok',
+        label: 'Home',
+        line1: 'Street 310, BKK1',
+        district: 'Boeung Keng Kang',
+        city: 'Phnom Penh',
         isDefault: true,
-        lat: 13.7563,
-        lng: 100.5018,
+        lat: 11.5526,
+        lng: 104.9282,
       },
     ],
     createdAt: now,

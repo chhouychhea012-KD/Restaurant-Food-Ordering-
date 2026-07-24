@@ -105,14 +105,14 @@ describe('cart store', () => {
     const store = useCartStore();
     store.addItem(createItem({ quantity: 2 }));
 
-    const result = store.applyVoucher('feast25');
+    const result = await store.applyVoucher('feast25');
     await nextTick();
 
     const persisted = JSON.parse(localStorage.getItem(storageKeys.cart) ?? '{}') as { version?: number; voucherCode?: string };
 
     expect(result.valid).toBe(true);
     expect(store.voucherCode).toBe('FEAST25');
-    expect(store.voucherDiscount).toBe(25);
+    expect(store.voucherDiscount).toBe(result.discount);
     expect(persisted.version).toBe(2);
     expect(persisted.voucherCode).toBe('FEAST25');
   });

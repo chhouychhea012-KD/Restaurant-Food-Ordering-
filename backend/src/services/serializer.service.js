@@ -192,6 +192,30 @@ function serializeOrder(order) {
   };
 }
 
+
+function serializeVoucher(voucher) {
+  const value = plain(voucher);
+  return {
+    id: value.id,
+    code: value.code,
+    title: value.title,
+    description: value.description,
+    discountType: value.discountType,
+    discountValue: Number(value.discountValue),
+    minSubtotal: Number(value.minSubtotal),
+    maxDiscount: value.maxDiscount === null || value.maxDiscount === undefined ? null : Number(value.maxDiscount),
+    usageLimit: value.usageLimit,
+    usedCount: Number(value.usedCount || 0),
+    startsAt: value.startsAt,
+    endsAt: value.endsAt,
+    active: Boolean(value.active),
+    restaurantId: value.restaurantId,
+    restaurantName: value.restaurant?.name ?? null,
+    createdBy: value.createdBy,
+    createdAt: value.createdAt,
+    updatedAt: value.updatedAt,
+  };
+}
 function serializeNotification(notification) {
   const value = plain(notification);
   return {
@@ -203,6 +227,7 @@ function serializeNotification(notification) {
     userId: value.userId,
     ctaLabel: value.ctaLabel,
     ctaTo: value.ctaTo,
+    scheduledAt: value.scheduledAt,
     createdAt: value.createdAt,
     readBy: (value.reads || []).map((read) => read.userId),
   };
@@ -237,4 +262,5 @@ module.exports = {
   serializeRestaurant,
   serializeRole,
   serializeUser,
+  serializeVoucher,
 };

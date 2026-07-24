@@ -14,10 +14,6 @@
         <input id="email" v-model="form.email" class="field-input" type="email" required />
       </div>
       <div>
-        <label class="field-label" for="phone">Phone</label>
-        <input id="phone" v-model="form.phone" class="field-input" type="tel" required />
-      </div>
-      <div>
         <label class="field-label" for="password">Password</label>
         <input id="password" v-model="form.password" class="field-input" type="password" required minlength="8" />
       </div>
@@ -49,7 +45,6 @@ const localError = ref('');
 const form = reactive({
   name: '',
   email: '',
-  phone: '',
   password: '',
   confirmPassword: '',
 });
@@ -65,7 +60,6 @@ async function submit() {
     await authStore.performRegister({
       name: form.name,
       email: form.email,
-      phone: form.phone,
       password: form.password,
     });
     router.push('/dashboard');

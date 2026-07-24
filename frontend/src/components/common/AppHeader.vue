@@ -230,7 +230,6 @@ const navLinks = computed(() => {
 
   if (authStore.user?.role === 'rider') {
     return [
-      { label: 'Dashboard', to: '/dashboard' },
       { label: 'Rider Home', to: '/rider' },
       { label: 'Deliveries', to: '/rider/deliveries' },
       { label: 'Notifications', to: '/notifications' },
@@ -247,8 +246,9 @@ const dashboardLink = computed(() => {
     case 'owner':
       return '/restaurant';
     case 'kitchen':
-    case 'rider':
       return '/dashboard';
+    case 'rider':
+      return '/rider';
     case 'customer':
     default:
       return '/dashboard';
@@ -260,6 +260,7 @@ const profileLink = computed(() => {
     case 'admin':
       return '/admin/profile';
     case 'rider':
+      return '/rider/profile';
     case 'kitchen':
       return '/profile';
     case 'customer':
@@ -372,7 +373,21 @@ function isActiveLink(target: string) {
     return route.path === '/track-order';
   }
 
-  return route.path === target || route.path.startsWith(`${target}/`);
+  if (route.path === target) {
+    return true;
+  }
+
+  if (!route.path.startsWith(`${target}/`)) {
+    return false;
+  }
+
+  return !navLinks.value.some((item) => {
+    if (item.to === target || !item.to.startsWith(`${target}/`)) {
+      return false;
+    }
+
+    return route.path === item.to || route.path.startsWith(`${item.to}/`);
+  });
 }
 
 function handleLogout() {

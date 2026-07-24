@@ -194,6 +194,7 @@ const navItems = computed(() => {
       { label: 'Products', to: '/admin/products', permissions: ['menus.read'] },
       { label: 'Categories', to: '/admin/categories', permissions: ['menus.read'] },
       { label: 'Orders', to: '/admin/orders', permissions: ['orders.read'] },
+      { label: 'Vouchers', to: '/admin/vouchers', permissions: ['promotions.read'] },
       { label: 'Activity Log', to: '/admin/activity-log', permissions: ['activity_logs.read'] },
       { label: 'Analytics', to: '/admin/analytics', permissions: ['analytics.read'] },
     ],
@@ -201,6 +202,7 @@ const navItems = computed(() => {
       { label: 'Restaurant', to: '/partner', permissions: ['restaurants.read'] },
       { label: 'Products', to: '/partner/products', permissions: ['menus.read'] },
       { label: 'Orders', to: '/partner/orders', permissions: ['orders.read'] },
+      { label: 'Vouchers', to: '/partner/vouchers', permissions: ['promotions.read'] },
       { label: 'Staff Users', to: '/partner/users', permissions: ['users.manage'] },
     ],
     kitchen: [

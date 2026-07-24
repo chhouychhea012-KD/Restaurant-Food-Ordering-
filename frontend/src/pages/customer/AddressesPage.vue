@@ -95,10 +95,10 @@ const blankForm = () => ({
   label: '',
   line1: '',
   district: '',
-  city: 'Bangkok',
+  city: 'Phnom Penh',
   isDefault: false,
-  lat: 13.7563,
-  lng: 100.5018,
+  lat: 11.5526,
+  lng: 104.9282,
 });
 
 const form = reactive(blankForm());

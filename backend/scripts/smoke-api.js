@@ -248,7 +248,9 @@ async function run() {
     assert(order.status === 'PLACED', 'Order create failed');
     const updatedOrder = await request('PATCH', `/orders/${order.id}/status`, admin, { status: 'PREPARING', label: 'Smoke status update' });
     assert(updatedOrder.status === 'PREPARING', 'Order status update failed');
-    const assignedOrder = await request('PUT', `/orders/${order.id}`, admin, { status: 'RIDER_ASSIGNED', riderName: 'Rico Rider', estimatedDeliveryAt: updatedOrder.estimatedDeliveryAt });
+    const readyOrder = await request('PATCH', `/orders/${order.id}/status`, admin, { status: 'READY_FOR_PICKUP', label: 'Smoke ready for pickup' });
+    assert(readyOrder.status === 'READY_FOR_PICKUP', 'Order ready status update failed');
+    const assignedOrder = await request('PUT', `/orders/${order.id}`, admin, { status: 'RIDER_ASSIGNED', riderName: 'Rico Rider', estimatedDeliveryAt: readyOrder.estimatedDeliveryAt });
     assert(assignedOrder.riderName === 'Rico Rider', 'Order rider assignment failed');
     const refundedOrder = await request('PATCH', `/orders/${order.id}/refund`, admin, { reason: 'Smoke refund test' });
     assert(refundedOrder.refundStatus === 'APPROVED', 'Refund approval failed');

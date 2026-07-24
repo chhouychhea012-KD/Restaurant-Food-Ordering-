@@ -159,6 +159,7 @@ import StatusBadge from '@/components/common/StatusBadge.vue';
 import OrderTimeline from '@/components/orders/OrderTimeline.vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { useOrderStore } from '@/stores/order.store';
+import { useSocket } from '@/composables/useSocket';
 import type { Order } from '@/types';
 import { createInvoicePdfBlob } from '@/utils/invoice-pdf';
 
@@ -196,11 +197,15 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   minute: '2-digit',
 });
 
-onMounted(() => {
+function loadCustomerOrders() {
   if (authStore.user) {
-    orderStore.loadForCustomer(authStore.user.id);
+    void orderStore.loadForCustomer(authStore.user.id);
   }
-});
+}
+
+onMounted(loadCustomerOrders);
+
+useSocket('order.changed', loadCustomerOrders);
 
 function formatCurrency(value: number) {
   return currencyFormatter.format(value);
