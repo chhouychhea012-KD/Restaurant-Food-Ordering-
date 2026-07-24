@@ -19,21 +19,6 @@
       <button class="btn-primary w-full text-base" :disabled="loading">{{ loading ? 'Signing in...' : 'Continue' }}</button>
     </form>
 
-    <div class="mt-6">
-      <p class="text-center text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Quick Demo Access</p>
-      <div class="mt-3 flex flex-wrap justify-center gap-2">
-        <button
-          v-for="account in demoAccounts"
-          :key="account.email"
-          class="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
-          type="button"
-          @click="fillDemo(account.email, account.password)"
-        >
-          {{ account.role }}
-        </button>
-      </div>
-    </div>
-
     <p class="mt-8 text-center text-sm text-slate-500">
       Don't have an account?
       <RouterLink class="font-semibold text-brand-600" to="/auth/register">Sign up</RouterLink>
@@ -57,20 +42,9 @@ const form = reactive({
   password: 'Customer@123',
 });
 
-const demoAccounts = [
-  { role: 'Platform Admin', email: 'admin@flavorfleet.app', password: 'Admin@123' },
-  { role: 'Restaurant Owner', email: 'owner@flavorfleet.app', password: 'Owner@123' },
-  { role: 'Kitchen Staff', email: 'kitchen@flavorfleet.app', password: 'Kitchen@123' },
-  { role: 'Delivery Rider', email: 'rider@flavorfleet.app', password: 'Rider@123' },
-  { role: 'Customer', email: 'customer@flavorfleet.app', password: 'Customer@123' },
-];
 
 const errorMessage = error;
 
-function fillDemo(email: string, password: string) {
-  form.email = email;
-  form.password = password;
-}
 
 function getSafeRedirect() {
   const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : undefined;
