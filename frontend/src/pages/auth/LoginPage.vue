@@ -38,8 +38,8 @@ const router = useRouter();
 const route = useRoute();
 
 const form = reactive({
-  email: 'customer@flavorfleet.app',
-  password: 'Customer@123',
+  email: '',
+  password: '',
 });
 
 
