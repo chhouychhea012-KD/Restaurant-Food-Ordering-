@@ -6,6 +6,7 @@ import '@/main.css';
 import { seedMockDatabase, resetMockDatabase } from '@/mocks/database/runtime';
 import { storageKeys } from '@/utils/storage';
 import { startRealtimeClient } from '@/services/realtime/sse-client';
+import { installSeo } from '@/services/seo.service';
 
 export async function bootstrapApp() {
   await seedMockDatabase();
@@ -22,6 +23,7 @@ export async function bootstrapApp() {
   const app = createApp(App);
   app.use(createPinia());
   app.use(router);
+  installSeo(router);
   startRealtimeClient();
   app.mount('#app');
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://goldenlandrestaurant.store/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/categories</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants/phnom-penh-khmer-kitchen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants/siem-reap-angkor-bites</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants/battambang-rice-house</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants/kampot-pepper-grill</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://goldenlandrestaurant.store/restaurants/sihanoukville-bay-seafood</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>

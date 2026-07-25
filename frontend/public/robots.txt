@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /partner
+Disallow: /restaurant
+Disallow: /kitchen
+Disallow: /rider
+Disallow: /customer
+Disallow: /checkout
+Disallow: /cart
+Disallow: /track-order
+Disallow: /notifications
+Disallow: /profile
+Disallow: /addresses
+Disallow: /orders
+Disallow: /auth
+
+Sitemap: https://goldenlandrestaurant.store/sitemap.xml
