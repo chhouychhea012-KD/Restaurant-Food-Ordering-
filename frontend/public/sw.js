@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'golden-land-pwa-v1';
+const CACHE_VERSION = 'golden-land-pwa-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const APP_SHELL = ['/', '/offline.html', '/image/logo.png', '/manifest.webmanifest'];
