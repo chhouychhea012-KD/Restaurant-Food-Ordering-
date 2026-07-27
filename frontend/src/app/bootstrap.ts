@@ -8,6 +8,7 @@ import { storageKeys } from '@/utils/storage';
 import { startRealtimeClient } from '@/services/realtime/sse-client';
 import { installSeo } from '@/services/seo.service';
 import { registerServiceWorker } from '@/pwa/registerServiceWorker';
+import { installMobileInputFocusFix } from '@/utils/mobileInputFocus';
 
 export async function bootstrapApp() {
   await seedMockDatabase();
@@ -26,6 +27,7 @@ export async function bootstrapApp() {
   app.use(router);
   installSeo(router);
   startRealtimeClient();
+  installMobileInputFocusFix();
   registerServiceWorker();
   app.mount('#app');
 }
