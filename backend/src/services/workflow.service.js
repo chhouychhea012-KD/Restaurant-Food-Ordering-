@@ -1,6 +1,71 @@
 const crypto = require('crypto');
 const { ActivityLog, Notification, User } = require('../models');
 const realtime = require('./realtime.service');
+const { sendNotificationEmail, sendOrderEmail } = require('./email.service');
+
+const publicSiteUrl = (process.env.PUBLIC_SITE_URL || process.env.FRONTEND_ORIGIN || 'http://localhost:5173').replace(/\/$/, '');
+const scheduledEmailTimers = new Map();
+
+function absoluteUrl(path) {
+  if (!path) return publicSiteUrl;
+  if (/^https?:\/\//i.test(path)) return path;
+  return publicSiteUrl + (path.startsWith('/') ? path : '/' + path);
+}
+
+function notificationIsDue(notification) {
+  return !notification.scheduledAt || new Date(notification.scheduledAt).getTime() <= Date.now();
+}
+
+async function usersForNotification(notification) {
+  if (notification.userId) {
+    return User.findAll({ where: { id: notification.userId, status: 'active' } });
+  }
+  if (notification.audienceRole === 'customer') {
+    return User.findAll({ where: { role: 'customer', status: 'active' } });
+  }
+  if (notification.audienceRole === 'admin') {
+    return User.findAll({ where: { role: ['admin', 'operations_manager', 'support_agent'], status: 'active' } });
+  }
+  return [];
+}
+
+async function sendNotificationEmailFor(notification) {
+  const fresh = await Notification.findByPk(notification.id);
+  if (!fresh || fresh.emailSentAt || fresh.kind === 'order' || !notificationIsDue(fresh)) return;
+  const users = await usersForNotification(fresh);
+  const recipients = users.map((user) => user.email).filter(Boolean);
+  if (!recipients.length) return;
+  try {
+    await sendNotificationEmail({
+      to: recipients,
+      title: fresh.title,
+      message: fresh.message,
+      kind: fresh.kind,
+      ctaLabel: fresh.ctaLabel,
+      ctaUrl: fresh.ctaTo ? absoluteUrl(fresh.ctaTo) : null,
+    });
+    await fresh.update({ emailSentAt: new Date() });
+  } catch (error) {
+    console.error('Notification email failed:', error.message);
+  }
+}
+
+function scheduleNotificationEmail(notification) {
+  if (!notification || notification.emailSentAt || notification.kind === 'order') return;
+  const dueAt = notification.scheduledAt ? new Date(notification.scheduledAt).getTime() : Date.now();
+  const delay = Math.max(0, dueAt - Date.now());
+  if (scheduledEmailTimers.has(notification.id)) clearTimeout(scheduledEmailTimers.get(notification.id));
+  const timer = setTimeout(() => {
+    scheduledEmailTimers.delete(notification.id);
+    sendNotificationEmailFor(notification).catch((error) => console.error('Notification email failed:', error.message));
+  }, Math.min(delay, 2147483647));
+  scheduledEmailTimers.set(notification.id, timer);
+}
+
+async function schedulePendingNotificationEmails() {
+  const notifications = await Notification.findAll({ where: { emailSentAt: null } });
+  notifications.forEach(scheduleNotificationEmail);
+}
 
 function actorFromRequest(req) {
   return {
@@ -38,8 +103,10 @@ async function createNotification(input) {
     userId: input.userId || null,
     ctaLabel: input.ctaLabel || null,
     ctaTo: input.ctaTo || null,
+    scheduledAt: input.scheduledAt ? new Date(input.scheduledAt) : null,
   });
   realtime.broadcastNotificationChanged(notification, 'created');
+  scheduleNotificationEmail(notification);
   return notification;
 }
 
@@ -55,6 +122,7 @@ async function notifyCustomer(order, title, message, ctaTo = '/track-order') {
     ctaTo: `${ctaTo}${separator}`,
   });
 }
+
 
 async function notifyAdmin(title, message, ctaTo = '/admin/orders') {
   return createNotification({
@@ -87,6 +155,38 @@ async function notifyRestaurantTeam(order, title, message, ctaTo = '/partner/ord
   );
 }
 
+async function sendOrderEmailToUsers(users, title, message, order, ctaTo, ctaLabel) {
+  const recipients = users.map((user) => user.email).filter(Boolean);
+  if (!recipients.length) return;
+  try {
+    await sendOrderEmail({ to: recipients, title, message, order, ctaUrl: ctaTo ? absoluteUrl(ctaTo) : null, ctaLabel });
+  } catch (error) {
+    console.error('Order email failed:', error.message);
+  }
+}
+
+async function emailCustomer(order, title, message, ctaTo = '/track-order') {
+  const user = await User.findByPk(order.customerId);
+  if (!user || user.status !== 'active') return;
+  const separator = ctaTo.includes('?') ? '' : '?orderId=' + order.id;
+  await sendOrderEmailToUsers([user], title, message, order, ctaTo + separator, 'Track order');
+}
+
+async function emailAdmin(title, message, order, ctaTo = '/admin/orders') {
+  const users = await User.findAll({ where: { role: ['admin', 'operations_manager', 'support_agent'], status: 'active' } });
+  await sendOrderEmailToUsers(users, title, message, order, ctaTo, 'Open orders');
+}
+
+async function emailRestaurantTeam(order, title, message, ctaTo = '/partner/orders') {
+  const users = await User.findAll({ where: { restaurantId: order.restaurantId, status: 'active' } });
+  const team = users.filter((user) => ['owner', 'kitchen', 'branch_manager'].includes(user.role));
+  await sendOrderEmailToUsers(team, title, message, order, ctaTo, 'Open orders');
+}
+
+async function emailRider(rider, order, title, message, ctaTo = '/rider/deliveries') {
+  await sendOrderEmailToUsers([rider], title, message, order, ctaTo, 'Open deliveries');
+}
+
 function statusLabel(status) {
   return String(status || '')
     .toLowerCase()
@@ -98,8 +198,11 @@ function statusLabel(status) {
 async function orderCreated(req, order, itemCount) {
   await Promise.all([
     notifyCustomer(order, 'Order placed successfully', `${order.restaurantName} received ${order.id}. You can now follow status updates from preparation to delivery.`),
-    notifyAdmin('New customer order received', `${order.restaurantName} received ${order.id} for ${order.branchName || 'selected branch'} with ${itemCount} items and a total of THB ${order.total}.`),
+    notifyAdmin('New customer order received', `${order.restaurantName} received ${order.id} for ${order.branchName || 'selected branch'} with ${itemCount} items and a total of ${Number(order.total || 0).toFixed(2)}.`),
     notifyRestaurantTeam(order, 'New order for your restaurant', `${order.id} was placed for ${order.branchName || 'selected branch'} with ${itemCount} items.`),
+    emailCustomer(order, 'Order placed successfully', `${order.restaurantName} received ${order.id}. You can now follow status updates from preparation to delivery.`),
+    emailAdmin('New customer order received', `${order.restaurantName} received ${order.id} for ${order.branchName || 'selected branch'} with ${itemCount} items and a total of ${Number(order.total || 0).toFixed(2)}.`, order),
+    emailRestaurantTeam(order, 'New order for your restaurant', `${order.id} was placed for ${order.branchName || 'selected branch'} with ${itemCount} items.`),
     createActivity(req, {
       domain: 'order',
       action: 'order.created',
@@ -120,6 +223,9 @@ async function orderUpdated(req, previousOrder, order) {
     notifyCustomer(order, `Order update: ${nextLabel}`, `${order.restaurantName} moved ${order.id} to ${nextLabel}.`),
     notifyAdmin('Order status changed', `${order.id} is now ${nextLabel} for ${order.restaurantName}.`),
     notifyRestaurantTeam(order, 'Restaurant order status changed', `${order.id} moved to ${nextLabel}.`),
+    emailCustomer(order, `Order update: ${nextLabel}`, `${order.restaurantName} moved ${order.id} to ${nextLabel}.`),
+    emailAdmin('Order status changed', `${order.id} is now ${nextLabel} for ${order.restaurantName}.`, order),
+    emailRestaurantTeam(order, 'Restaurant order status changed', `${order.id} moved to ${nextLabel}.`),
   ];
 
   if (previousOrder.status !== order.status) {
@@ -151,6 +257,7 @@ async function orderUpdated(req, previousOrder, order) {
             ctaLabel: 'Open deliveries',
             ctaTo: '/rider/deliveries',
           });
+          await emailRider(rider, order, `Delivery assigned: ${order.id}`, `${order.restaurantName} assigned ${order.id} for pickup at ${order.branchName || 'the branch'}.`);
         }
       })());
     }
@@ -177,6 +284,9 @@ async function refundApproved(req, order, reason) {
     notifyCustomer(order, 'Refund approved', `${order.restaurantName} approved a refund review for ${order.id}.`, '/orders'),
     notifyAdmin('Refund approved', `${order.id} was approved for refund review.`, '/admin/activity-log'),
     notifyRestaurantTeam(order, 'Refund review approved', `${order.id} was approved for refund review.`, '/partner/orders'),
+    emailCustomer(order, 'Refund approved', `${order.restaurantName} approved a refund review for ${order.id}.`, '/orders'),
+    emailAdmin('Refund approved', `${order.id} was approved for refund review.`, order, '/admin/activity-log'),
+    emailRestaurantTeam(order, 'Refund review approved', `${order.id} was approved for refund review.`, '/partner/orders'),
     createActivity(req, {
       domain: 'refund',
       action: 'refund.approved',
@@ -200,5 +310,7 @@ module.exports = {
   orderCreated,
   orderUpdated,
   refundApproved,
+  schedulePendingNotificationEmails,
+  sendNotificationEmailFor,
   statusLabel,
 };

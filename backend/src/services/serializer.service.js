@@ -228,6 +228,7 @@ function serializeNotification(notification) {
     ctaLabel: value.ctaLabel,
     ctaTo: value.ctaTo,
     scheduledAt: value.scheduledAt,
+    emailSentAt: value.emailSentAt,
     createdAt: value.createdAt,
     readBy: (value.reads || []).map((read) => read.userId),
   };

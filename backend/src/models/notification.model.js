@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     ctaLabel: { type: DataTypes.STRING, allowNull: true },
     ctaTo: { type: DataTypes.STRING, allowNull: true },
     scheduledAt: { type: DataTypes.DATE, allowNull: true },
+    emailSentAt: { type: DataTypes.DATE, allowNull: true },
   });
 
   Notification.associate = (models) => {

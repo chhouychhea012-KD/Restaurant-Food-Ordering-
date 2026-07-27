@@ -1,9 +1,9 @@
-const crypto = require('crypto');
 const { Op } = require('sequelize');
 const { Notification, NotificationRead } = require('../models');
 const { created, noContent, ok } = require('../utils/http');
 const { serializeNotification } = require('../services/serializer.service');
 const realtime = require('../services/realtime.service');
+const workflow = require('../services/workflow.service');
 
 async function list(req, res) {
   const now = new Date();
@@ -28,8 +28,7 @@ async function list(req, res) {
 }
 
 async function create(req, res) {
-  const notification = await Notification.create({
-    id: `notif-${crypto.randomUUID()}`,
+  const notification = await workflow.createNotification({
     title: req.body.title,
     message: req.body.message,
     kind: req.body.kind,
@@ -37,9 +36,8 @@ async function create(req, res) {
     userId: req.body.userId || null,
     ctaLabel: req.body.ctaLabel || null,
     ctaTo: req.body.ctaTo || null,
-    scheduledAt: req.body.scheduledAt ? new Date(req.body.scheduledAt) : null,
+    scheduledAt: req.body.scheduledAt || null,
   });
-  realtime.broadcastNotificationChanged(notification, 'created');
   return created(res, serializeNotification({ ...notification.get({ plain: true }), reads: [] }));
 }
 

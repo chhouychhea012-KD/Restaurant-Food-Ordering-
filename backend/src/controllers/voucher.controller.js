@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const { Op } = require('sequelize');
-const { Notification, Restaurant, RoleAssignment, Voucher, sequelize } = require('../models');
+const { Restaurant, RoleAssignment, Voucher, sequelize } = require('../models');
 const { ApiError, created, noContent, ok } = require('../utils/http');
 const { serializeVoucher } = require('../services/serializer.service');
 const workflow = require('../services/workflow.service');
@@ -150,8 +150,19 @@ async function create(req, res) {
   const duplicate = await Voucher.findOne({ where: { code: payload.code } });
   if (duplicate) throw new ApiError(409, 'This voucher code already exists.');
   const voucher = await Voucher.create({ id: `voucher-${crypto.randomUUID()}`, ...payload, createdBy: req.user.id });
-  await workflow.createActivity(req, { domain: 'promotion', action: 'voucher.created', title: 'Voucher created: ' + voucher.code, description: voucher.title + ' was created for customer checkout.', restaurantId: voucher.restaurantId, metadata: { voucherId: voucher.id, code: voucher.code, discountType: voucher.discountType } });
   const fullVoucher = await Voucher.findByPk(voucher.id, { include: includeVoucher });
+  if (voucher.active) {
+    await workflow.createNotification({
+      title: voucher.title,
+      message: `${fullVoucher.restaurant?.name ? `${fullVoucher.restaurant.name}: ` : ''}Use voucher code ${voucher.code} on your next order. ${voucher.description || ''}`.trim(),
+      kind: 'promo',
+      audienceRole: 'customer',
+      ctaLabel: 'Use voucher code',
+      ctaTo: '/cart',
+      scheduledAt: voucher.startsAt && new Date(voucher.startsAt).getTime() > Date.now() ? voucher.startsAt : null,
+    });
+  }
+  await workflow.createActivity(req, { domain: 'promotion', action: 'voucher.created', title: 'Voucher created: ' + voucher.code, description: voucher.title + ' was created for customer checkout.', restaurantId: voucher.restaurantId, metadata: { voucherId: voucher.id, code: voucher.code, discountType: voucher.discountType } });
   return created(res, serializeVoucher(fullVoucher));
 }
 
@@ -169,8 +180,7 @@ async function createPromoEvent(req, res) {
   const fallbackMessage = `${restaurantName ? `${restaurantName}: ` : ''}Use promo code ${voucher.code} on your next order. ${payload.description || ''}`.trim();
   const notificationMessage = String(req.body.notification?.message || fallbackMessage).trim();
 
-  const notification = await Notification.create({
-    id: `notif-${crypto.randomUUID()}`,
+  const notification = await workflow.createNotification({
     title: notificationTitle,
     message: notificationMessage,
     kind: 'promo',
@@ -178,7 +188,7 @@ async function createPromoEvent(req, res) {
     userId: null,
     ctaLabel: req.body.notification?.ctaLabel || 'Use promo code',
     ctaTo: req.body.notification?.ctaTo || '/cart',
-    scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
+    scheduledAt: scheduledAt || null,
   });
 
   await workflow.createActivity(req, {
