@@ -1,15 +1,15 @@
 <template>
-  <div ref="menuRef" data-i18n-ignore class="relative inline-flex">
+  <div ref="menuRef" data-i18n-ignore class="relative inline-flex shrink-0">
     <button
-      class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-200"
+      :class="buttonClass"
       type="button"
       :aria-label="t('Language')"
-      :title="t('Language')"
+      :title="`${t('Language')}: ${currentLanguage.nativeName}`"
       aria-haspopup="listbox"
       :aria-expanded="isOpen ? 'true' : 'false'"
       @click="toggleMenu"
     >
-      <span class="flex h-5 w-7 shrink-0 overflow-hidden rounded-md ring-1 ring-slate-200">
+      <span :class="flagClass">
         <img
           v-if="currentLanguage.flagUrl && !failedImages[currentLanguage.code]"
           class="h-full w-full object-cover"
@@ -19,8 +19,8 @@
         />
         <span v-else class="flex h-full w-full items-center justify-center text-sm">{{ currentLanguage.flag }}</span>
       </span>
-      <span class="hidden sm:inline">{{ currentLanguage.nativeName }}</span>
-      <svg class="h-4 w-4 text-slate-400 transition" :class="isOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <span v-if="!compact" class="hidden sm:inline">{{ currentLanguage.nativeName }}</span>
+      <svg v-if="!compact" class="h-4 w-4 text-slate-400 transition" :class="isOpen ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
       </svg>
     </button>
@@ -70,13 +70,34 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { useI18n, type LocaleCode } from '@/composables/useI18n';
+
+const props = withDefaults(
+  defineProps<{
+    compact?: boolean;
+  }>(),
+  {
+    compact: false,
+  },
+);
 
 const { currentLanguage, languages, locale, setLocale, t } = useI18n();
 const isOpen = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 const failedImages = reactive<Partial<Record<LocaleCode, boolean>>>({});
+
+const compact = computed(() => props.compact);
+const buttonClass = computed(() =>
+  compact.value
+    ? 'inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white p-0 text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-200'
+    : 'inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-200',
+);
+const flagClass = computed(() =>
+  compact.value
+    ? 'flex h-6 w-8 shrink-0 overflow-hidden rounded-md ring-1 ring-slate-200'
+    : 'flex h-5 w-7 shrink-0 overflow-hidden rounded-md ring-1 ring-slate-200',
+);
 
 function toggleMenu() {
   isOpen.value = !isOpen.value;

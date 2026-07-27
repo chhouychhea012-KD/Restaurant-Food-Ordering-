@@ -36,6 +36,7 @@
           </svg>
         </button>
 
+        <LanguageSelect compact class="inline-flex sm:hidden" />
         <LanguageSelect class="hidden sm:inline-flex" />
 
         <RouterLink
@@ -94,7 +95,7 @@
           </span>
         </RouterLink>
 
-        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary shrink-0 px-4 py-3 sm:px-4 sm:py-2.5">
+        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary h-11 shrink-0 px-3 text-sm sm:h-auto sm:px-4 sm:py-2.5 sm:text-base">
           Login
         </RouterLink>
 
