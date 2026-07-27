@@ -10,8 +10,16 @@ const isInstalled = ref(
   typeof window !== 'undefined'
     && (window.matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true),
 );
+const isIos = ref(false);
+const isSafari = ref(false);
+const iosPromptDismissed = ref(false);
 
 if (typeof window !== 'undefined') {
+  const userAgent = window.navigator.userAgent;
+  isIos.value = /iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  isSafari.value = /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(userAgent);
+  iosPromptDismissed.value = window.localStorage.getItem('golden-land-ios-install-dismissed') === 'true';
+
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     installPrompt.value = event as BeforeInstallPromptEvent;
@@ -24,7 +32,9 @@ if (typeof window !== 'undefined') {
 }
 
 export function useInstallPrompt() {
-  const canInstall = computed(() => Boolean(installPrompt.value && !isInstalled.value));
+  const canNativeInstall = computed(() => Boolean(installPrompt.value && !isInstalled.value));
+  const canInstallIos = computed(() => Boolean(isIos.value && isSafari.value && !isInstalled.value && !iosPromptDismissed.value));
+  const canInstall = computed(() => canNativeInstall.value || canInstallIos.value);
 
   async function installApp() {
     const promptEvent = installPrompt.value;
@@ -42,10 +52,16 @@ export function useInstallPrompt() {
 
   function dismissInstallPrompt() {
     installPrompt.value = null;
+    if (canInstallIos.value) {
+      iosPromptDismissed.value = true;
+      window.localStorage.setItem('golden-land-ios-install-dismissed', 'true');
+    }
   }
 
   return {
     canInstall,
+    canInstallIos,
+    canNativeInstall,
     dismissInstallPrompt,
     installApp,
     isInstalled,
