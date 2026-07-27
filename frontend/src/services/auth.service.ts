@@ -33,6 +33,21 @@ export interface LoginPayload {
   password: string;
 }
 
+
+export interface ForgotPasswordResponse {
+  message: string;
+  expiresInSeconds: number;
+}
+
+export interface VerifyResetCodeResponse {
+  verified: boolean;
+  message: string;
+}
+
+export interface ResetPasswordResponse {
+  message: string;
+}
+
 export interface RegisterPayload {
   name: string;
   email: string;
@@ -48,6 +63,43 @@ function buildSession(userId: string): Session {
     expiresAt,
     userId,
   };
+}
+
+export async function requestPasswordReset(email: string) {
+  if (useBackendApi) {
+    return unwrap<ForgotPasswordResponse>(await api.post('/auth/forgot-password', { email }));
+  }
+
+  return {
+    message: 'If that email exists, a password reset code has been sent.',
+    expiresInSeconds: 60,
+  };
+}
+
+export async function verifyPasswordResetCode(email: string, code: string) {
+  if (useBackendApi) {
+    return unwrap<VerifyResetCodeResponse>(await api.post('/auth/verify-reset-code', { email, code }));
+  }
+
+  if (!email || !code) {
+    throw new Error('Email and reset code are required.');
+  }
+  return { verified: true, message: 'Reset code verified. You can create a new password now.' };
+}
+
+export async function resetPassword(payload: { email: string; code: string; password: string }) {
+  if (useBackendApi) {
+    return unwrap<ResetPasswordResponse>(await api.post('/auth/reset-password', payload));
+  }
+
+  const users = dbUsers();
+  const user = users.find((entry) => entry.email.toLowerCase() === payload.email.toLowerCase());
+  if (!user) {
+    throw new Error('Invalid or expired reset code.');
+  }
+  user.passwordHash = await hashValue(payload.password);
+  saveUsers(users);
+  return { message: 'Password changed successfully. Please sign in with your new password.' };
 }
 
 export async function login(payload: LoginPayload) {

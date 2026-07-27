@@ -1,13 +1,26 @@
 const crypto = require('crypto');
 const { OAuth2Client } = require('google-auth-library');
-const { Role, Permission, RoleAssignment, User, Address } = require('../models');
+const { Role, Permission, RoleAssignment, User, Address, PasswordResetToken } = require('../models');
 const { ApiError, created, ok } = require('../utils/http');
 const { hashPassword, verifyPassword } = require('../utils/password');
 const { signAccessToken, signRefreshToken } = require('../utils/token');
 const { serializeUser } = require('../services/serializer.service');
+const { sendPasswordResetCode } = require('../services/email.service');
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const GOOGLE_AUTH_PASSWORD_PREFIX = 'google-oauth:';
+
+const RESET_CODE_EXPIRES_SECONDS = 60;
+
+function hashResetCode(code) {
+  return crypto.createHash('sha256').update(String(code)).digest('hex');
+}
+
+function createResetCode() {
+  return String(crypto.randomInt(100000, 1000000));
+}
+
+
 
 function initials(name) {
   return String(name || '')
@@ -155,6 +168,103 @@ async function google(req, res) {
   return ok(res, { user: serializeUser(fullUser), session: await sessionFor(user) });
 }
 
+
+async function forgotPassword(req, res) {
+  const email = String(req.body.email || '').trim().toLowerCase();
+  const genericResponse = {
+    message: 'If that email exists, a password reset code has been sent.',
+    expiresInSeconds: RESET_CODE_EXPIRES_SECONDS,
+  };
+
+  if (!email) {
+    throw new ApiError(400, 'Email address is required.');
+  }
+
+  const user = await User.findOne({ where: { email } });
+  if (!user || user.status !== 'active') {
+    return ok(res, genericResponse);
+  }
+
+  const code = createResetCode();
+  const now = new Date();
+  await PasswordResetToken.update(
+    { usedAt: now },
+    { where: { userId: user.id, usedAt: null } },
+  );
+  await PasswordResetToken.create({
+    id: 'reset-' + crypto.randomUUID(),
+    userId: user.id,
+    tokenHash: hashResetCode(code),
+    expiresAt: new Date(Date.now() + RESET_CODE_EXPIRES_SECONDS * 1000),
+    usedAt: null,
+  });
+
+  await sendPasswordResetCode({
+    to: user.email,
+    name: user.name,
+    code,
+    expiresInSeconds: RESET_CODE_EXPIRES_SECONDS,
+  });
+
+  return ok(res, genericResponse);
+}
+
+async function verifyResetCode(req, res) {
+  const email = String(req.body.email || '').trim().toLowerCase();
+  const code = String(req.body.code || '').trim();
+  if (!email || !code) {
+    throw new ApiError(400, 'Email and reset code are required.');
+  }
+
+  const user = await User.findOne({ where: { email } });
+  if (!user) {
+    throw new ApiError(400, 'Invalid or expired reset code.');
+  }
+
+  const resetToken = await PasswordResetToken.findOne({
+    where: { userId: user.id, tokenHash: hashResetCode(code), usedAt: null },
+    order: [['createdAt', 'DESC']],
+  });
+  if (!resetToken || new Date(resetToken.expiresAt).getTime() < Date.now()) {
+    throw new ApiError(400, 'Invalid or expired reset code.');
+  }
+
+  return ok(res, { verified: true, message: 'Reset code verified. You can create a new password now.' });
+}
+
+async function resetPassword(req, res) {
+  const email = String(req.body.email || '').trim().toLowerCase();
+  const code = String(req.body.code || '').trim();
+  const password = String(req.body.password || '');
+
+  if (!email || !code || !password) {
+    throw new ApiError(400, 'Email, reset code, and new password are required.');
+  }
+  if (password.length < 8) {
+    throw new ApiError(400, 'Password must be at least 8 characters.');
+  }
+
+  const user = await User.findOne({ where: { email } });
+  if (!user || user.status !== 'active') {
+    throw new ApiError(400, 'Invalid or expired reset code.');
+  }
+
+  const resetToken = await PasswordResetToken.findOne({
+    where: { userId: user.id, tokenHash: hashResetCode(code), usedAt: null },
+    order: [['createdAt', 'DESC']],
+  });
+  if (!resetToken || new Date(resetToken.expiresAt).getTime() < Date.now()) {
+    throw new ApiError(400, 'Invalid or expired reset code.');
+  }
+
+  user.passwordHash = await hashPassword(password);
+  await user.save();
+  resetToken.usedAt = new Date();
+  await resetToken.save();
+
+  return ok(res, { message: 'Password changed successfully. Please sign in with your new password.' });
+}
+
 async function me(req, res) {
   const user = await userWithRelations(req.user.id);
   const session = await sessionFor(req.user);
@@ -162,8 +272,11 @@ async function me(req, res) {
 }
 
 module.exports = {
+  forgotPassword,
   google,
   login,
   me,
   register,
+  resetPassword,
+  verifyResetCode,
 };

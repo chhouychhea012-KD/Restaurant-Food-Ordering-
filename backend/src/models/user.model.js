@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.RoleAssignment, { foreignKey: 'userId', as: 'roleAssignments', onDelete: 'CASCADE' });
     User.hasMany(models.NotificationRead, { foreignKey: 'userId', as: 'notificationReads', onDelete: 'CASCADE' });
     User.hasMany(models.Voucher, { foreignKey: 'createdBy', as: 'createdVouchers' });
+    User.hasMany(models.PasswordResetToken, { foreignKey: 'userId', as: 'passwordResetTokens', onDelete: 'CASCADE' });
   };
 
   return User;
