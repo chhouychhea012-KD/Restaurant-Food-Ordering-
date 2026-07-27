@@ -19,11 +19,11 @@
     <form class="mt-5 space-y-5" @submit.prevent="submit">
       <div>
         <label class="field-label" for="email">Email</label>
-        <input id="email" v-model="form.email" class="field-input" type="email" placeholder="you@example.com" autocomplete="email" required />
+        <input id="email" v-model="form.email" class="field-input" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false" required />
       </div>
       <div>
         <label class="field-label" for="password">Password</label>
-        <input id="password" v-model="form.password" class="field-input" type="password" placeholder="Password" autocomplete="current-password" required minlength="8" />
+        <input id="password" v-model="form.password" class="field-input" type="password" placeholder="Password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required minlength="8" />
       </div>
       <div class="flex items-center justify-end text-sm">
         <RouterLink class="font-medium text-slate-500 transition hover:text-brand-600" to="/auth/forgot-password">Forgot password?</RouterLink>

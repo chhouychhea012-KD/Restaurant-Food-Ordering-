@@ -16,6 +16,10 @@
           type="email"
           placeholder="you@example.com"
           autocomplete="email"
+          inputmode="email"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
           :disabled="isLoading || step !== 'email'"
           required
         />
@@ -40,6 +44,9 @@
           maxlength="6"
           placeholder="000000"
           autocomplete="one-time-code"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
           :disabled="isLoading || step === 'password' || isCodeExpired"
           required
         />
@@ -54,6 +61,9 @@
             class="field-input"
             type="password"
             autocomplete="new-password"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
             minlength="8"
             required
           />
@@ -67,6 +77,9 @@
             class="field-input"
             type="password"
             autocomplete="new-password"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
             minlength="8"
             required
           />

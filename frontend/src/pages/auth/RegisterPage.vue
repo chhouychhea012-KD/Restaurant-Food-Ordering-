@@ -7,19 +7,19 @@
     <form class="mt-8 space-y-5" @submit.prevent="submit">
       <div>
         <label class="field-label" for="name">Full name</label>
-        <input id="name" v-model="form.name" class="field-input" type="text" required minlength="3" />
+        <input id="name" v-model="form.name" class="field-input" type="text" autocomplete="name" required minlength="3" />
       </div>
       <div>
         <label class="field-label" for="email">Email</label>
-        <input id="email" v-model="form.email" class="field-input" type="email" required />
+        <input id="email" v-model="form.email" class="field-input" type="email" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false" required />
       </div>
       <div>
         <label class="field-label" for="password">Password</label>
-        <input id="password" v-model="form.password" class="field-input" type="password" required minlength="8" />
+        <input id="password" v-model="form.password" class="field-input" type="password" autocomplete="new-password" autocapitalize="none" autocorrect="off" spellcheck="false" required minlength="8" />
       </div>
       <div>
         <label class="field-label" for="confirmPassword">Confirm password</label>
-        <input id="confirmPassword" v-model="form.confirmPassword" class="field-input" type="password" required minlength="8" />
+        <input id="confirmPassword" v-model="form.confirmPassword" class="field-input" type="password" autocomplete="new-password" autocapitalize="none" autocorrect="off" spellcheck="false" required minlength="8" />
       </div>
       <p v-if="localError" class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-600">{{ localError }}</p>
       <button class="btn-primary w-full" :disabled="loading">{{ loading ? 'Creating account...' : 'Register' }}</button>
