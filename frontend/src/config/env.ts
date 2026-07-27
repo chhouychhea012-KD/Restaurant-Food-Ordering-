@@ -5,6 +5,7 @@ const enableScenarioTools = import.meta.env.VITE_ENABLE_SCENARIO_TOOLS === 'true
 const apiMode = import.meta.env.MODE === 'test' ? 'mock' : import.meta.env.VITE_API_MODE?.trim() === 'server' ? 'server' : 'mock';
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || 'http://localhost:4000/api/v1';
 const siteUrl = import.meta.env.VITE_SITE_URL?.trim() || 'https://goldenlandrestaurant.store';
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() || '';
 
 export const appEnv = {
   appName,
@@ -14,4 +15,5 @@ export const appEnv = {
   apiMode,
   apiBaseUrl,
   siteUrl,
+  googleClientId,
 } as const;

@@ -1,9 +1,13 @@
 const crypto = require('crypto');
+const { OAuth2Client } = require('google-auth-library');
 const { Role, Permission, RoleAssignment, User, Address } = require('../models');
 const { ApiError, created, ok } = require('../utils/http');
 const { hashPassword, verifyPassword } = require('../utils/password');
 const { signAccessToken, signRefreshToken } = require('../utils/token');
 const { serializeUser } = require('../services/serializer.service');
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const GOOGLE_AUTH_PASSWORD_PREFIX = 'google-oauth:';
 
 function initials(name) {
   return String(name || '')
@@ -53,26 +57,19 @@ async function login(req, res) {
   return ok(res, { user: serializeUser(fullUser), session: await sessionFor(user) });
 }
 
-async function register(req, res) {
-  const { name, email, phone, password } = req.body;
-  const normalizedEmail = String(email || '').trim().toLowerCase();
-  const existing = await User.findOne({ where: { email: normalizedEmail } });
-  if (existing) {
-    throw new ApiError(409, 'This email is already registered.');
-  }
-
+async function createCustomerUser({ name, email, phone = '', avatarUrl = null, password }) {
   const customerRole = await Role.findOne({ where: { name: 'customer' } });
   const id = `user-${crypto.randomUUID()}`;
   await User.create({
     id,
     name,
-    email: normalizedEmail,
-    phone: phone || '',
+    email,
+    phone,
     passwordHash: await hashPassword(password),
     role: 'customer',
     status: 'active',
     avatar: initials(name),
-    avatarUrl: null,
+    avatarUrl,
     restaurantId: null,
     shiftActive: true,
     loyaltyPoints: 120,
@@ -98,8 +95,64 @@ async function register(req, res) {
     lng: 104.9282,
   });
 
-  const user = await userWithRelations(id);
+  return userWithRelations(id);
+}
+
+async function register(req, res) {
+  const { name, email, phone, password } = req.body;
+  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const existing = await User.findOne({ where: { email: normalizedEmail } });
+  if (existing) {
+    throw new ApiError(409, 'This email is already registered.');
+  }
+
+  const user = await createCustomerUser({
+    name,
+    email: normalizedEmail,
+    phone: phone || '',
+    password,
+  });
+
   return created(res, { user: serializeUser(user), session: await sessionFor(user) });
+}
+
+async function google(req, res) {
+  const { credential } = req.body;
+  if (!process.env.GOOGLE_CLIENT_ID) {
+    throw new ApiError(500, 'Google login is not configured on the server.');
+  }
+  if (!credential) {
+    throw new ApiError(400, 'Google credential is required.');
+  }
+
+  const ticket = await googleClient.verifyIdToken({
+    idToken: credential,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const email = String(payload?.email || '').trim().toLowerCase();
+  if (!email || !payload?.email_verified) {
+    throw new ApiError(401, 'Google account email is not verified.');
+  }
+
+  let user = await User.findOne({ where: { email } });
+  if (!user) {
+    user = await createCustomerUser({
+      name: payload.name || email.split('@')[0],
+      email,
+      avatarUrl: payload.picture || null,
+      password: GOOGLE_AUTH_PASSWORD_PREFIX + crypto.randomUUID(),
+    });
+  } else if (user.role !== 'customer') {
+    throw new ApiError(403, 'Google login is only available for customer accounts. Please use email and password for staff access.');
+  }
+
+  if (user.status !== 'active') {
+    throw new ApiError(403, `This account is ${user.status} and cannot sign in right now.`);
+  }
+
+  const fullUser = await userWithRelations(user.id);
+  return ok(res, { user: serializeUser(fullUser), session: await sessionFor(user) });
 }
 
 async function me(req, res) {
@@ -109,6 +162,7 @@ async function me(req, res) {
 }
 
 module.exports = {
+  google,
   login,
   me,
   register,

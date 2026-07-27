@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { PermissionKey, Session, User } from '@/types';
-import { getActiveSession, getCurrentUser, login, logout, readCachedCurrentUser, register, validateSession } from '@/services/auth.service';
+import { getActiveSession, getCurrentUser, login, loginWithGoogle, logout, readCachedCurrentUser, register, validateSession } from '@/services/auth.service';
 import { useBackendApi } from '@/services/backend';
 import { startRealtimeClient, stopRealtimeClient } from '@/services/realtime/sse-client';
 import { dbRoles, dbUsers } from '@/utils/mockDb';
@@ -106,6 +106,23 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function performGoogleLogin(credential: string) {
+    loading.value = true;
+    error.value = '';
+    try {
+      const response = await loginWithGoogle(credential);
+      user.value = response.user;
+      session.value = response.session;
+      serverPermissions.value = response.session.permissions ?? [];
+      startRealtimeClient();
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : 'Unable to login with Google.';
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  }
+
   async function performRegister(payload: { name: string; email: string; password: string; phone?: string }) {
     loading.value = true;
     error.value = '';
@@ -151,6 +168,7 @@ export const useAuthStore = defineStore('auth', () => {
     hasPermission,
     hasAllPermissions,
     performLogin,
+    performGoogleLogin,
     performRegister,
     performLogout,
   };

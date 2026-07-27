@@ -85,6 +85,17 @@ export async function login(payload: LoginPayload) {
   };
 }
 
+export async function loginWithGoogle(credential: string) {
+  if (useBackendApi) {
+    const response = unwrap<{ user: User; session: Session }>(await api.post('/auth/google', { credential }));
+    saveSession(response.session);
+    cacheCurrentUser(response.user);
+    return response;
+  }
+
+  throw new Error('Google login requires backend API mode.');
+}
+
 export async function register(payload: RegisterPayload) {
   if (useBackendApi) {
     const response = unwrap<{ user: User; session: Session }>(await api.post('/auth/register', payload));
