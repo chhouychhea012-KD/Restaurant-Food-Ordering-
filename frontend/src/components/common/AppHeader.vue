@@ -2,21 +2,7 @@
   <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/82">
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:h-24 sm:gap-4 sm:px-6 lg:px-8">
       <AppLogo />
-      <button
-        class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
-        type="button"
-        :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
-        aria-controls="mobile-customer-navigation"
-        aria-label="Toggle navigation"
-        @click="toggleMobileMenu"
-      >
-        <svg v-if="!isMobileMenuOpen" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-        <svg v-else class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" />
-        </svg>
-      </button>
+
       <nav class="hidden items-center gap-1 text-sm font-medium lg:flex">
         <RouterLink
           v-for="item in navLinks"
@@ -32,12 +18,30 @@
           />
         </RouterLink>
       </nav>
-      <div class="flex min-w-0 items-center gap-2 sm:gap-3">
+
+      <div class="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
+        <button
+          class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
+          type="button"
+          :aria-expanded="isMobileMenuOpen ? 'true' : 'false'"
+          aria-controls="mobile-customer-navigation"
+          aria-label="Toggle navigation"
+          @click="toggleMobileMenu"
+        >
+          <svg v-if="!isMobileMenuOpen" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg v-else class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
         <LanguageSelect class="hidden sm:inline-flex" />
+
         <RouterLink
           v-if="authStore.isAuthenticated"
           to="/notifications"
-          class="group relative flex h-12 w-12 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950"
+          class="group relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border bg-white text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:text-slate-950 sm:h-12 sm:w-12"
           :class="isActiveLink('/notifications')
             ? 'border-brand-200 bg-brand-50 text-brand-600 shadow-brand-100/70'
             : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -62,10 +66,11 @@
             {{ compactCount }}
           </span>
         </RouterLink>
+
         <RouterLink
           v-if="canUseCustomerOrdering"
           to="/cart"
-          class="btn-secondary group relative inline-flex items-center gap-2 px-3 sm:px-4"
+          class="btn-secondary group relative inline-flex h-11 w-11 shrink-0 items-center justify-center gap-2 px-0 sm:h-auto sm:w-auto sm:px-4"
           :aria-label="cartAriaLabel"
           title="Cart"
         >
@@ -88,12 +93,14 @@
             {{ cartBadgeCount }}
           </span>
         </RouterLink>
-        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary px-3 sm:px-4">
+
+        <RouterLink v-if="!authStore.isAuthenticated" to="/auth/login" class="btn-primary shrink-0 px-4 py-3 sm:px-4 sm:py-2.5">
           Login
         </RouterLink>
+
         <div v-else ref="accountMenuRef" class="relative">
           <button
-            class="flex h-12 w-12 items-center justify-center rounded-xl border bg-white p-1 shadow-sm ring-offset-2 transition hover:-translate-y-0.5"
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border bg-white p-1 shadow-sm ring-offset-2 transition hover:-translate-y-0.5 sm:h-12 sm:w-12"
             :class="isAccountMenuOpen
               ? 'border-brand-200 bg-brand-50 shadow-brand-100/70 ring-2 ring-brand-200'
               : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'"
@@ -162,6 +169,7 @@
         </div>
       </div>
     </div>
+
     <transition
       enter-active-class="transition duration-150 ease-out"
       enter-from-class="-translate-y-2 opacity-0"
@@ -191,7 +199,6 @@
     </transition>
   </header>
 </template>
-
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
