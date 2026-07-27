@@ -1,0 +1,5 @@
+package store.goldenlandrestaurant.app;
+
+import com.getcapacitor.BridgeActivity;
+
+public class MainActivity extends BridgeActivity {}

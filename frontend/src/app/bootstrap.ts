@@ -7,6 +7,7 @@ import { seedMockDatabase, resetMockDatabase } from '@/mocks/database/runtime';
 import { storageKeys } from '@/utils/storage';
 import { startRealtimeClient } from '@/services/realtime/sse-client';
 import { installSeo } from '@/services/seo.service';
+import { registerServiceWorker } from '@/pwa/registerServiceWorker';
 
 export async function bootstrapApp() {
   await seedMockDatabase();
@@ -25,5 +26,6 @@ export async function bootstrapApp() {
   app.use(router);
   installSeo(router);
   startRealtimeClient();
+  registerServiceWorker();
   app.mount('#app');
 }
