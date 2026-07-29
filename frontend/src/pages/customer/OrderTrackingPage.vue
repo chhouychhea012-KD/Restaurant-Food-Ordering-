@@ -243,6 +243,8 @@ function paymentLabel(currentOrder: Order) {
       return 'PayPal';
     case 'aba_payway':
       return 'ABA PayWay';
+    case 'bakong':
+      return 'Bakong';
     case 'cash':
       return 'Cash on delivery';
     default:

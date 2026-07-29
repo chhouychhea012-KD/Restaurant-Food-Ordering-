@@ -13,8 +13,8 @@ function normalizeCheckoutPaymentMethod(method: PaymentMethod): CheckoutPaymentM
     return 'visa_card';
   }
 
-  if (method === 'wallet_mock') {
-    return 'bank_account';
+  if (method === 'wallet_mock' || method === 'bank_account') {
+    return 'aba_payway';
   }
 
   return method;

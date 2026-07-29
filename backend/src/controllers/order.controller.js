@@ -10,7 +10,7 @@ const includeOrder = [
   { model: OrderTimeline, as: 'timeline' },
 ];
 
-const allowedPaymentMethods = ['cash', 'visa_card', 'bank_account', 'paypal', 'aba_payway', 'card_mock', 'wallet_mock'];
+const allowedPaymentMethods = ['cash', 'visa_card', 'bank_account', 'paypal', 'aba_payway', 'bakong', 'card_mock', 'wallet_mock'];
 
 function normalizePaymentMethod(method) {
   return allowedPaymentMethods.includes(method) ? method : null;
@@ -46,6 +46,11 @@ function validatePaymentDetails(method, details = {}) {
     const phoneLast4 = paymentDigits(details.phoneLast4);
     if (phoneLast4 && phoneLast4.length !== 4) issues.push('Enter valid ABA PayWay phone details.');
   }
+  if (method === 'bakong') {
+    if (details.accountName && String(details.accountName).trim().length < 3) issues.push('Enter the Bakong account name.');
+    const phoneLast4 = paymentDigits(details.phoneLast4);
+    if (phoneLast4 && phoneLast4.length !== 4) issues.push('Enter valid Bakong phone details.');
+  }
   return issues;
 }
 
@@ -64,6 +69,7 @@ function paymentSummary(method, details = {}) {
   if (method === 'bank_account' || method === 'wallet_mock') return (details.bankName || 'Bank account') + ' ending ' + (details.last4 || 'demo');
   if (method === 'paypal') return 'PayPal ' + (details.email || 'demo account');
   if (method === 'aba_payway') return 'ABA PayWay ending ' + (details.phoneLast4 || 'demo');
+  if (method === 'bakong') return 'Bakong ending ' + (details.phoneLast4 || 'demo');
   return 'Cash on delivery';
 }
 

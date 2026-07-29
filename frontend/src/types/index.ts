@@ -190,7 +190,7 @@ export interface TimelineEntry {
   time: string;
 }
 
-export type PaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway' | 'card_mock' | 'wallet_mock';
+export type PaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway' | 'bakong' | 'card_mock' | 'wallet_mock';
 export type VoucherDiscountType = 'percentage' | 'fixed' | 'free_delivery';
 
 export interface Order {

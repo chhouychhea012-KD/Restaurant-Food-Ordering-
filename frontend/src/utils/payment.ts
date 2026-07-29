@@ -1,4 +1,4 @@
-export type CheckoutPaymentMethod = 'cash' | 'visa_card' | 'bank_account' | 'paypal' | 'aba_payway';
+export type CheckoutPaymentMethod = 'cash' | 'visa_card' | 'paypal' | 'aba_payway' | 'bakong';
 
 export interface VisaPaymentDetails {
   cardholderName: string;
@@ -7,11 +7,6 @@ export interface VisaPaymentDetails {
   cvc: string;
 }
 
-export interface BankPaymentDetails {
-  bankName: string;
-  accountName: string;
-  accountNumber: string;
-}
 
 export interface PaypalPaymentDetails {
   email: string;
@@ -22,11 +17,15 @@ export interface AbaPaywayPaymentDetails {
   phone: string;
 }
 
+export interface BakongPaymentDetails {
+  accountName: string;
+  phone: string;
+}
+
 export interface PaymentDetailsPayload {
-  provider: 'cash' | 'visa' | 'bank' | 'paypal' | 'aba_payway';
+  provider: 'cash' | 'visa' | 'paypal' | 'aba_payway' | 'bakong';
   label: string;
   last4?: string;
-  bankName?: string;
   accountName?: string;
   email?: string;
   phoneLast4?: string;
@@ -34,9 +33,9 @@ export interface PaymentDetailsPayload {
 
 export interface CheckoutPaymentForms {
   visa: VisaPaymentDetails;
-  bank: BankPaymentDetails;
   paypal: PaypalPaymentDetails;
   abaPayway: AbaPaywayPaymentDetails;
+  bakong: BakongPaymentDetails;
 }
 
 function digitsOnly(value: string) {
@@ -84,19 +83,6 @@ export function validatePayment(method: CheckoutPaymentMethod, forms: CheckoutPa
     }
   }
 
-  if (method === 'bank_account') {
-    const accountNumber = digitsOnly(forms.bank.accountNumber);
-
-    if (!forms.bank.bankName.trim()) {
-      issues.push('Choose a bank.');
-    }
-    if (forms.bank.accountName.trim().length < 3) {
-      issues.push('Enter the bank account name.');
-    }
-    if (accountNumber.length < 6 || accountNumber.length > 18) {
-      issues.push('Enter a valid bank account number.');
-    }
-  }
 
   if (method === 'paypal') {
     if (!isEmail(forms.paypal.email)) {
@@ -114,6 +100,16 @@ export function validatePayment(method: CheckoutPaymentMethod, forms: CheckoutPa
     }
   }
 
+  if (method === 'bakong') {
+    const phone = digitsOnly(forms.bakong.phone);
+    if (forms.bakong.accountName.trim().length < 3) {
+      issues.push('Enter the Bakong account name.');
+    }
+    if (phone.length < 8 || phone.length > 15) {
+      issues.push('Enter a valid Bakong phone number.');
+    }
+  }
+
   return issues;
 }
 
@@ -128,16 +124,6 @@ export function buildPaymentDetails(method: CheckoutPaymentMethod, forms: Checko
     };
   }
 
-  if (method === 'bank_account') {
-    const accountNumber = digitsOnly(forms.bank.accountNumber);
-    return {
-      provider: 'bank',
-      label: 'Bank account',
-      last4: accountNumber.slice(-4),
-      bankName: forms.bank.bankName.trim(),
-      accountName: forms.bank.accountName.trim(),
-    };
-  }
 
   if (method === 'paypal') {
     return {
@@ -157,6 +143,16 @@ export function buildPaymentDetails(method: CheckoutPaymentMethod, forms: Checko
     };
   }
 
+  if (method === 'bakong') {
+    const phone = digitsOnly(forms.bakong.phone);
+    return {
+      provider: 'bakong',
+      label: 'Bakong',
+      accountName: forms.bakong.accountName.trim(),
+      phoneLast4: phone.slice(-4),
+    };
+  }
+
   return {
     provider: 'cash',
     label: 'Cash on delivery',
@@ -168,9 +164,6 @@ export function formatPaymentSummary(method: CheckoutPaymentMethod, details?: Pa
     return `Visa ending ${details?.last4 || 'demo'}`;
   }
 
-  if (method === 'bank_account') {
-    return `${details?.bankName || 'Bank account'} ending ${details?.last4 || 'demo'}`;
-  }
 
   if (method === 'paypal') {
     return `PayPal ${details?.email || 'demo account'}`;
@@ -178,6 +171,10 @@ export function formatPaymentSummary(method: CheckoutPaymentMethod, details?: Pa
 
   if (method === 'aba_payway') {
     return `ABA PayWay ending ${details?.phoneLast4 || 'demo'}`;
+  }
+
+  if (method === 'bakong') {
+    return `Bakong ending ${details?.phoneLast4 || 'demo'}`;
   }
 
   return 'Cash on delivery';

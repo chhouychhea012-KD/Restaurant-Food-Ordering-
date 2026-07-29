@@ -43,11 +43,33 @@
             <span class="pill bg-emerald-50 text-emerald-700">Mock secure payment</span>
           </div>
 
-          <div class="mt-4 grid min-w-0 gap-3 min-[420px]:grid-cols-2 lg:grid-cols-5">
-            <label v-for="option in paymentOptions" :key="option.value" class="rounded-lg border px-3 py-3 text-sm transition sm:px-4 sm:py-4" :class="paymentMethod === option.value ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-orange-50'">
+          <div class="mt-4 grid min-w-0 gap-3 min-[420px]:grid-cols-2 lg:grid-cols-3 min-[1180px]:grid-cols-5">
+            <label
+              v-for="option in paymentOptions"
+              :key="option.value"
+              class="group relative flex min-h-[136px] cursor-pointer flex-col justify-between overflow-hidden rounded-lg border p-3 text-sm transition sm:p-4"
+              :class="paymentMethod === option.value ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm ring-1 ring-brand-100' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-orange-50'"
+            >
               <input v-model="paymentMethod" class="sr-only" type="radio" name="payment-method" :value="option.value" />
-              <span class="block text-base font-semibold">{{ option.label }}</span>
-              <span class="mt-1 block text-xs leading-5 text-slate-500">{{ option.help }}</span>
+              <span class="flex min-h-[50px] items-start pr-12">
+                <span class="flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-slate-200">
+                  <img
+                    v-if="option.imageUrl && !failedPaymentImages[option.value]"
+                    :src="option.imageUrl"
+                    :alt="`${option.label} logo`"
+                    class="max-h-8 max-w-14 object-contain"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                    @error="markPaymentImageFailed(option.value)"
+                  />
+                  <span v-else class="text-sm font-black" :class="option.logoTextClass">{{ option.logoText }}</span>
+                </span>
+                <span class="pill absolute right-3 top-3 max-w-[64px] truncate px-2 py-1 text-[10px] leading-4" :class="option.badgeClass" :title="option.badge">{{ option.badge }}</span>
+              </span>
+              <span class="mt-3 block min-w-0">
+                <span class="block break-words text-base font-bold leading-5" :class="paymentMethod === option.value ? 'text-brand-700' : 'text-slate-950'">{{ option.label }}</span>
+                <span class="mt-1 block max-w-full break-words text-xs leading-5 text-slate-500">{{ option.help }}</span>
+              </span>
             </label>
           </div>
 
@@ -58,60 +80,61 @@
           <div v-else-if="paymentMethod === 'visa_card'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="cardholder-name">Cardholder name</label>
-              <input id="cardholder-name" v-model="visaForm.cardholderName" class="field-input" type="text" autocomplete="cc-name" placeholder="Clara Customer" />
+              <input id="cardholder-name" v-model="visaForm.cardholderName" class="field-input" :class="paymentFieldErrors.cardholderName ? paymentErrorInputClass : ''" type="text" autocomplete="cc-name" placeholder="Clara Customer" />
+              <p v-if="paymentFieldErrors.cardholderName" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.cardholderName }}</p>
             </div>
             <div>
               <label class="field-label" for="card-number">Visa card number</label>
-              <input id="card-number" v-model="visaForm.cardNumber" class="field-input" inputmode="numeric" autocomplete="cc-number" placeholder="4111 1111 1111 1111" />
+              <input id="card-number" v-model="visaForm.cardNumber" class="field-input" :class="paymentFieldErrors.cardNumber ? paymentErrorInputClass : ''" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="4026 4503 5810 4502" @input="formatVisaCardNumber" />
+              <p v-if="paymentFieldErrors.cardNumber" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.cardNumber }}</p>
             </div>
             <div>
               <label class="field-label" for="card-expiry">Expiry</label>
-              <input id="card-expiry" v-model="visaForm.expiry" class="field-input" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" />
+              <input id="card-expiry" v-model="visaForm.expiry" class="field-input" :class="paymentFieldErrors.expiry ? paymentErrorInputClass : ''" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="12/26" @input="formatVisaExpiry" />
+              <p v-if="paymentFieldErrors.expiry" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.expiry }}</p>
             </div>
             <div>
               <label class="field-label" for="card-cvc">Security code</label>
-              <input id="card-cvc" v-model="visaForm.cvc" class="field-input" inputmode="numeric" autocomplete="cc-csc" placeholder="123" />
+              <input id="card-cvc" v-model="visaForm.cvc" class="field-input" :class="paymentFieldErrors.cvc ? paymentErrorInputClass : ''" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123" />
+              <p v-if="paymentFieldErrors.cvc" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.cvc }}</p>
             </div>
           </div>
-
-          <div v-else-if="paymentMethod === 'bank_account'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
-            <div>
-              <label class="field-label" for="bank-name">Bank</label>
-              <select id="bank-name" v-model="bankForm.bankName" class="field-input">
-                <option value="">Select bank</option>
-                <option v-for="bank in bankOptions" :key="bank" :value="bank">{{ bank }}</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="account-name">Account name</label>
-              <input id="account-name" v-model="bankForm.accountName" class="field-input" type="text" placeholder="Clara Customer" />
-            </div>
-            <div class="md:col-span-2">
-              <label class="field-label" for="account-number">Account number</label>
-              <input id="account-number" v-model="bankForm.accountNumber" class="field-input" inputmode="numeric" placeholder="1234567890" />
-            </div>
-          </div>
-
-
           <div v-else-if="paymentMethod === 'paypal'" class="mt-4 rounded-xl border border-sky-100 bg-sky-50 p-4">
             <label class="field-label" for="paypal-email">PayPal email</label>
-            <input id="paypal-email" v-model="paypalForm.email" class="field-input bg-white" type="email" autocomplete="email" placeholder="customer@example.com" />
+            <input id="paypal-email" v-model="paypalForm.email" class="field-input bg-white" :class="paymentFieldErrors.paypalEmail ? paymentErrorInputClass : ''" type="email" autocomplete="email" placeholder="customer@example.com" />
+            <p v-if="paymentFieldErrors.paypalEmail" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.paypalEmail }}</p>
             <p class="mt-2 text-xs text-sky-700">Demo authorization records the PayPal account on the order summary.</p>
           </div>
 
           <div v-else-if="paymentMethod === 'aba_payway'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-sky-100 bg-sky-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="aba-account-name">ABA account name</label>
-              <input id="aba-account-name" v-model="abaPaywayForm.accountName" class="field-input bg-white" type="text" placeholder="Clara Customer" />
+              <input id="aba-account-name" v-model="abaPaywayForm.accountName" class="field-input bg-white" :class="paymentFieldErrors.abaAccountName ? paymentErrorInputClass : ''" type="text" placeholder="Clara Customer" />
+              <p v-if="paymentFieldErrors.abaAccountName" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.abaAccountName }}</p>
             </div>
             <div>
               <label class="field-label" for="aba-phone">ABA phone number</label>
-              <input id="aba-phone" v-model="abaPaywayForm.phone" class="field-input bg-white" inputmode="tel" placeholder="012345678" />
+              <input id="aba-phone" v-model="abaPaywayForm.phone" class="field-input bg-white" :class="paymentFieldErrors.abaPhone ? paymentErrorInputClass : ''" inputmode="tel" placeholder="012345678" />
+              <p v-if="paymentFieldErrors.abaPhone" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.abaPhone }}</p>
             </div>
             <p class="text-xs text-sky-700 md:col-span-2">Demo ABA PayWay payment simulates a KHQR/mobile banking confirmation.</p>
           </div>
-          <div v-if="paymentIssues.length" class="mt-4 space-y-2">
-            <div v-for="issue in paymentIssues" :key="issue" class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
+
+          <div v-else-if="paymentMethod === 'bakong'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-rose-100 bg-rose-50 p-4 md:grid-cols-2">
+            <div>
+              <label class="field-label" for="bakong-account-name">Bakong account name</label>
+              <input id="bakong-account-name" v-model="bakongForm.accountName" class="field-input bg-white" :class="paymentFieldErrors.bakongAccountName ? paymentErrorInputClass : ''" type="text" placeholder="Clara Customer" />
+              <p v-if="paymentFieldErrors.bakongAccountName" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.bakongAccountName }}</p>
+            </div>
+            <div>
+              <label class="field-label" for="bakong-phone">Bakong phone number</label>
+              <input id="bakong-phone" v-model="bakongForm.phone" class="field-input bg-white" :class="paymentFieldErrors.bakongPhone ? paymentErrorInputClass : ''" inputmode="tel" placeholder="012345678" />
+              <p v-if="paymentFieldErrors.bakongPhone" class="mt-1 text-xs text-rose-600">{{ paymentFieldErrors.bakongPhone }}</p>
+            </div>
+            <p class="text-xs text-rose-700 md:col-span-2">Demo Bakong payment simulates a KHQR/mobile banking confirmation.</p>
+          </div>
+          <div v-if="nonFieldPaymentIssues.length" class="mt-4 space-y-2">
+            <div v-for="issue in nonFieldPaymentIssues" :key="issue" class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
               {{ issue }}
             </div>
           </div>
@@ -212,11 +235,6 @@ const visaForm = ref({
   expiry: '',
   cvc: '',
 });
-const bankForm = ref({
-  bankName: '',
-  accountName: authStore.user?.name ?? '',
-  accountNumber: '',
-});
 const paypalForm = ref({
   email: authStore.user?.email ?? '',
 });
@@ -224,20 +242,154 @@ const abaPaywayForm = ref({
   accountName: authStore.user?.name ?? '',
   phone: authStore.user?.phone ?? '',
 });
+const bakongForm = ref({
+  accountName: authStore.user?.name ?? '',
+  phone: authStore.user?.phone ?? '',
+});
 const redeemLoyalty = ref(false);
 const acceptTerms = ref(false);
 const orderMessage = ref('');
 const orderMessageTone = ref<'success' | 'error'>('success');
+const paymentErrorInputClass = 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:ring-rose-100';
 
 const paymentOptions = [
-  { value: 'cash' as const, label: 'Cash', help: 'Pay on delivery.' },
-  { value: 'visa_card' as const, label: 'Visa card', help: 'Card authorization.' },
-  { value: 'bank_account' as const, label: 'Bank account', help: 'Bank debit.' },
-  { value: 'paypal' as const, label: 'PayPal', help: 'PayPal account.' },
-  { value: 'aba_payway' as const, label: 'ABA PayWay', help: 'ABA/KHQR demo.' },
+  {
+    value: 'cash' as const,
+    label: 'Cash',
+    help: 'Pay on delivery.',
+    badge: 'Delivery',
+    imageUrl: 'https://www.svgrepo.com/show/425138/cash-on-delivery.svg',
+    logoText: 'COD',
+    badgeClass: 'bg-emerald-50 text-emerald-700',
+    logoTextClass: 'text-emerald-700',
+  },
+  {
+    value: 'visa_card' as const,
+    label: 'Visa card',
+    help: 'Card authorization.',
+    badge: 'Card',
+    imageUrl: 'https://logos-world.net/wp-content/uploads/2020/04/Visa-Symbol.png',
+    logoText: 'VISA',
+    badgeClass: 'bg-blue-50 text-blue-700',
+    logoTextClass: 'text-blue-700',
+  },
+  {
+    value: 'paypal' as const,
+    label: 'PayPal',
+    help: 'PayPal account.',
+    badge: 'Wallet',
+    imageUrl: 'https://freelogopng.com/images/all_img/1655979457paypal-logo.png',
+    logoText: 'PP',
+    badgeClass: 'bg-sky-50 text-sky-700',
+    logoTextClass: 'text-sky-700',
+  },
+  {
+    value: 'aba_payway' as const,
+    label: 'ABA PayWay',
+    help: 'ABA/KHQR demo.',
+    badge: 'KHQR',
+    imageUrl: 'https://i.pinimg.com/originals/e2/33/f5/e233f5b0c5a358449398f202b03f063a.jpg',
+    logoText: 'ABA',
+    badgeClass: 'bg-indigo-50 text-indigo-700',
+    logoTextClass: 'text-indigo-700',
+  },
+  {
+    value: 'bakong' as const,
+    label: 'Bakong',
+    help: 'Bakong/KHQR demo.',
+    badge: 'NBC',
+    imageUrl: 'https://www.des.gov.kh/uploads/Bakong_Logo_6981db9114.png',
+    logoText: 'BK',
+    badgeClass: 'bg-rose-50 text-rose-700',
+    logoTextClass: 'text-rose-700',
+  },
 ];
+const failedPaymentImages = ref<Partial<Record<CheckoutPaymentMethod, boolean>>>({});
 
-const bankOptions = ['ABA Bank', 'ACLEDA Bank', 'Wing Bank'];
+function markPaymentImageFailed(method: CheckoutPaymentMethod) {
+  failedPaymentImages.value[method] = true;
+}
+
+function formatVisaCardNumber() {
+  const digits = visaForm.value.cardNumber.replace(/\D/g, '').slice(0, 19);
+  visaForm.value.cardNumber = digits.replace(/(.{4})/g, '$1 ').trim();
+}
+
+function formatVisaExpiry() {
+  const digits = visaForm.value.expiry.replace(/\D/g, '').slice(0, 4);
+  const month = digits.slice(0, 2);
+  const year = digits.slice(2);
+  visaForm.value.expiry = year ? `${month}/${year}` : month;
+}
+
+function onlyDigits(value: string) {
+  return value.replace(/\D/g, '');
+}
+
+function isExpiryInFuture(value: string) {
+  const match = value.trim().match(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+  if (!match) {
+    return false;
+  }
+  const month = Number(match[1]);
+  const year = 2000 + Number(match[2]);
+  return new Date(year, month, 0, 23, 59, 59, 999) >= new Date();
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+const paymentFieldErrors = computed(() => {
+  const errors: Record<string, string> = {};
+
+  if (paymentMethod.value === 'visa_card') {
+    const cardNumber = onlyDigits(visaForm.value.cardNumber);
+    const cvc = onlyDigits(visaForm.value.cvc);
+    if (visaForm.value.cardholderName.trim().length < 3) {
+      errors.cardholderName = 'Enter the cardholder name.';
+    }
+    if (!cardNumber.startsWith('4') || cardNumber.length < 13 || cardNumber.length > 19) {
+      errors.cardNumber = 'Enter a valid Visa card number.';
+    }
+    if (!isExpiryInFuture(visaForm.value.expiry)) {
+      errors.expiry = 'Enter a valid future expiry date in MM/YY format.';
+    }
+    if (cvc.length < 3 || cvc.length > 4) {
+      errors.cvc = 'Enter a valid card security code.';
+    }
+  }
+
+  if (paymentMethod.value === 'paypal' && !isValidEmail(paypalForm.value.email)) {
+    errors.paypalEmail = 'Enter a valid PayPal email address.';
+  }
+
+  if (paymentMethod.value === 'aba_payway') {
+    const phone = onlyDigits(abaPaywayForm.value.phone);
+    if (abaPaywayForm.value.accountName.trim().length < 3) {
+      errors.abaAccountName = 'Enter the ABA account name.';
+    }
+    if (phone.length < 8 || phone.length > 15) {
+      errors.abaPhone = 'Enter a valid ABA phone number.';
+    }
+  }
+
+  if (paymentMethod.value === 'bakong') {
+    const phone = onlyDigits(bakongForm.value.phone);
+    if (bakongForm.value.accountName.trim().length < 3) {
+      errors.bakongAccountName = 'Enter the Bakong account name.';
+    }
+    if (phone.length < 8 || phone.length > 15) {
+      errors.bakongPhone = 'Enter a valid Bakong phone number.';
+    }
+  }
+
+  return errors;
+});
+
+const inlinePaymentIssueMessages = computed(() => new Set(Object.values(paymentFieldErrors.value)));
+const nonFieldPaymentIssues = computed(() => paymentIssues.value.filter((issue) => !inlinePaymentIssueMessages.value.has(issue)));
+
 const phnomPenhCheckoutAddress: Address = {
   id: 'checkout-phnom-penh-fallback',
   label: 'Home',
@@ -269,9 +421,9 @@ const checkoutTotal = computed(() => Math.max(0, cartStore.subtotal + cartStore.
 const paymentIssues = computed(() =>
   validatePayment(paymentMethod.value, {
     visa: visaForm.value,
-    bank: bankForm.value,
     paypal: paypalForm.value,
     abaPayway: abaPaywayForm.value,
+    bakong: bakongForm.value,
   }),
 );
 
@@ -316,9 +468,9 @@ async function placeOrder() {
       paymentMethod: paymentMethod.value as PaymentMethod,
       paymentDetails: buildPaymentDetails(paymentMethod.value, {
         visa: visaForm.value,
-        bank: bankForm.value,
         paypal: paypalForm.value,
         abaPayway: abaPaywayForm.value,
+        bakong: bakongForm.value,
       }),
       deliveryInstructions: deliveryInstructions.value.trim(),
       voucherCode: cartStore.voucherCode,
