@@ -40,7 +40,7 @@ async function sendMail({ to, subject, text, html }) {
 
   if (!hasSmtpConfig()) {
     console.log(['Email preview', 'To: ' + recipients.join(', '), 'Subject: ' + subject, '', text].join('\n'));
-    return { delivered: true, provider: 'console', recipients };
+    return { delivered: false, provider: 'console', recipients, message: 'SMTP is not configured; email was written to the console preview only.' };
   }
 
   const info = await createTransporter().sendMail({ from: sender(), to: recipients, subject, text, html });

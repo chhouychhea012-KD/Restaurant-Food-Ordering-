@@ -36,7 +36,7 @@ async function sendNotificationEmailFor(notification) {
   const recipients = users.map((user) => user.email).filter(Boolean);
   if (!recipients.length) return;
   try {
-    await sendNotificationEmail({
+    const result = await sendNotificationEmail({
       to: recipients,
       title: fresh.title,
       message: fresh.message,
@@ -44,7 +44,9 @@ async function sendNotificationEmailFor(notification) {
       ctaLabel: fresh.ctaLabel,
       ctaUrl: fresh.ctaTo ? absoluteUrl(fresh.ctaTo) : null,
     });
-    await fresh.update({ emailSentAt: new Date() });
+    if (result.delivered && result.provider === 'smtp') {
+      await fresh.update({ emailSentAt: new Date() });
+    }
   } catch (error) {
     console.error('Notification email failed:', error.message);
   }
