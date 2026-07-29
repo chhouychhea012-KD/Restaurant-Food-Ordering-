@@ -2288,8 +2288,8 @@
       "en": "Branch",
       "km": "សាខា"
     },
-    "Browse food": {
-      "en": "Browse food",
+    "Restaurant Food": {
+      "en": "Restaurant Food",
       "km": "រុករកអាហារ"
     },
     "Browse top restaurants, order from one branch, and track every handoff.": {
@@ -2432,8 +2432,8 @@
       "en": "Demo authorization records the PayPal account on the order summary.",
       "km": "Demo authorization records the PayPal account on the ការកម្មង់ summary."
     },
-    "Demo login": {
-      "en": "Demo login",
+    "Buy now": {
+      "en": "Buy now",
       "km": "សាកល្បងការចូលប្រើ"
     },
     "Distance": {

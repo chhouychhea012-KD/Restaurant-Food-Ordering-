@@ -104,11 +104,11 @@
 
 @layer components {
   .surface-card {
-    @apply rounded-lg border border-slate-200 bg-white shadow-sm;
+    @apply w-full min-w-0 rounded-lg border border-slate-200 bg-white shadow-sm;
   }
 
   .surface-muted {
-    @apply rounded-lg border border-slate-200 bg-slate-50;
+    @apply w-full min-w-0 rounded-lg border border-slate-200 bg-slate-50;
   }
 
   .btn-primary {
@@ -120,7 +120,7 @@
   }
 
   .pill {
-    @apply inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold;
+    @apply inline-flex min-h-8 items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-center text-xs font-semibold leading-none;
   }
 
   .field-label {
@@ -170,5 +170,38 @@
 
   .safe-table-wrap {
     @apply thin-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0;
+  }
+}
+
+@layer utilities {
+  .mobile-text-wrap {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-shell,
+  main {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  .surface-card,
+  .surface-muted {
+    border-radius: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    min-height: 2.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-shell,
+  main {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }

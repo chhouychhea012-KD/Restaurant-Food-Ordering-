@@ -10,9 +10,10 @@
       />
       <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-orange-950/58 to-transparent" />
 
-      <div class="absolute left-3 top-3 flex gap-2">
-        <span v-if="restaurant.verified" class="pill bg-white text-emerald-700 shadow-sm">Verified</span>
-        <StatusBadge :status="restaurant.status" :label="restaurant.status" />
+      <div class="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+        <span v-if="restaurant.verified" class="pill min-w-[5.25rem] bg-white/95 text-emerald-700 shadow-sm backdrop-blur">Verified</span>
+        <span v-else aria-hidden="true" />
+        <StatusBadge :status="restaurant.status" :label="restaurant.status" class="min-w-[4.5rem] bg-white/95 shadow-sm backdrop-blur" />
       </div>
     </div>
 

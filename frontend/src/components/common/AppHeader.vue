@@ -1,6 +1,6 @@
 <template>
   <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/82">
-    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:h-24 sm:gap-4 sm:px-6 lg:px-8">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-3 min-[380px]:gap-3 min-[380px]:px-4 sm:h-24 sm:gap-4 sm:px-6 lg:px-8">
       <AppLogo />
 
       <nav class="hidden items-center gap-1 text-sm font-medium lg:flex">
@@ -19,7 +19,7 @@
         </RouterLink>
       </nav>
 
-      <div class="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
+      <div class="flex min-w-0 items-center justify-end gap-1.5 min-[380px]:gap-2 sm:gap-3">
         <button
           class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
           type="button"
@@ -125,7 +125,7 @@
           >
             <div
               v-if="isAccountMenuOpen"
-              class="absolute right-0 top-[calc(100%+0.85rem)] z-50 w-[290px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
+              class="absolute right-0 top-[calc(100%+0.85rem)] z-50 w-[min(290px,calc(100vw-1.5rem))] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
             >
               <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_32%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                 <div class="flex min-w-0 items-center gap-2 sm:gap-3">
@@ -182,7 +182,7 @@
       <nav
         v-if="isMobileMenuOpen"
         id="mobile-customer-navigation"
-        class="border-t border-slate-100 bg-white/95 px-4 py-3 shadow-sm backdrop-blur lg:hidden"
+        class="border-t border-slate-100 bg-white/95 px-3 py-3 shadow-sm backdrop-blur min-[380px]:px-4 lg:hidden"
       >
         <div class="mx-auto grid max-w-7xl gap-2 sm:grid-cols-2">
           <RouterLink

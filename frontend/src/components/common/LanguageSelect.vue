@@ -35,7 +35,7 @@
     >
       <div
         v-if="isOpen"
-        class="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]"
+        class="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(12rem,calc(100vw-1.5rem))] overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-[0_18px_50px_rgba(15,23,42,0.16)]"
         role="listbox"
         :aria-label="t('Language')"
       >

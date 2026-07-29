@@ -3,9 +3,9 @@
     <section class="surface-card overflow-hidden">
       <div class="relative h-64 bg-cover bg-center" :style="{ backgroundImage: `url(${restaurant.coverImage})` }">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent" />
-        <div class="absolute bottom-0 left-0 p-6 text-white sm:p-8">
-          <StatusBadge :status="restaurant.status" :label="restaurant.status" />
-          <h1 class="mt-3 text-3xl font-extrabold sm:text-4xl">{{ restaurant.name }}</h1>
+        <StatusBadge :status="restaurant.status" :label="restaurant.status" class="absolute right-4 top-4 min-w-[4.5rem] bg-white/95 shadow-sm backdrop-blur" />
+        <div class="absolute bottom-0 left-0 p-5 text-white sm:p-8">
+          <h1 class="text-3xl font-extrabold leading-tight sm:text-4xl">{{ restaurant.name }}</h1>
           <p class="mt-3 max-w-3xl text-sm text-slate-200">{{ restaurant.description }}</p>
           <p class="mt-3 text-sm text-slate-200">
             {{ restaurant.cuisine.join(' • ') }} • {{ restaurant.deliveryTime }} • {{ formatCurrency(restaurant.deliveryFee) }} delivery fee
@@ -102,7 +102,7 @@
     @close="closeConfigurator"
   >
     <div v-if="configuringItem" class="space-y-5">
-      <img :src="configuringItem.image" :alt="configuringItem.name" class="h-56 w-full rounded-lg object-cover" />
+      <img :src="configuringItem.image" :alt="configuringItem.name" class="h-36 w-full rounded-lg object-cover sm:h-56" />
       <div class="grid gap-4 sm:grid-cols-2">
         <div>
           <p class="text-sm font-semibold text-slate-900">Branch</p>
@@ -151,11 +151,11 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap gap-3">
-        <button class="btn-primary" type="button" :disabled="!canCustomizeItems" @click="addConfiguredItem">
+      <div class="grid gap-3 sm:flex sm:flex-wrap">
+        <button class="btn-primary w-full sm:w-auto" type="button" :disabled="!canCustomizeItems" @click="addConfiguredItem">
           Add to cart
         </button>
-        <button class="btn-secondary" type="button" @click="closeConfigurator">Cancel</button>
+        <button class="btn-secondary w-full sm:w-auto" type="button" @click="closeConfigurator">Cancel</button>
       </div>
     </div>
   </AppModal>

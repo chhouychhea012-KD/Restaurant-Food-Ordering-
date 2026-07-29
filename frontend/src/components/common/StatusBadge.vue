@@ -1,7 +1,6 @@
 <template>
-  <span :class="badgeClass" data-i18n-ignore class="pill">
-    <span class="mr-2 h-2 w-2 rounded-full bg-current/70" />
-    {{ translatedLabel }}
+  <span :class="badgeClass" data-i18n-ignore class="pill leading-none">
+    <span class="flex h-full items-center justify-center leading-none">{{ translatedLabel }}</span>
   </span>
 </template>
 

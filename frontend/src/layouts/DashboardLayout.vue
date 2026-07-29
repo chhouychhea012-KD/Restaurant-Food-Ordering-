@@ -1,17 +1,18 @@
 <template>
-  <div class="grid min-h-screen gap-3 bg-slate-50/80 p-3 sm:gap-4 sm:p-4 lg:h-screen lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-5 lg:overflow-hidden lg:p-6 xl:grid-cols-[260px_minmax(0,1fr)]">
+  <div class="grid min-h-screen min-w-0 gap-2 bg-slate-50/80 p-2 sm:gap-4 sm:p-4 lg:h-screen lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-5 lg:overflow-hidden lg:p-6 xl:grid-cols-[260px_minmax(0,1fr)]">
     <SidebarNav :items="navItems" />
 
-    <div class="relative flex min-h-0 flex-col gap-3 overflow-visible sm:gap-4 lg:h-[calc(100vh-3rem)]">
-      <div class="surface-card relative z-20 shrink-0 overflow-visible px-4 py-4 sm:px-6 lg:px-7">
-        <div class="flex min-h-[4rem] flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="relative flex min-h-0 min-w-0 flex-col gap-3 overflow-visible sm:gap-4 lg:h-[calc(100vh-3rem)]">
+      <div class="surface-card relative z-20 shrink-0 overflow-visible px-3 py-3 sm:px-6 sm:py-4 lg:px-7">
+        <div class="flex min-h-[4rem] min-w-0 flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div class="min-w-0">
             <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{{ workspaceLabel }}</p>
             <h1 class="mt-1 truncate text-xl font-bold text-slate-950 sm:text-2xl">{{ authStore.user?.name }}</h1>
           </div>
 
-          <div ref="menuRef" class="relative flex shrink-0 items-center gap-3 lg:ml-auto">
-            <LanguageSelect />
+          <div ref="menuRef" class="relative flex shrink-0 flex-wrap items-center justify-end gap-2 sm:gap-3 lg:ml-auto">
+            <LanguageSelect compact class="inline-flex sm:hidden" />
+            <LanguageSelect class="hidden sm:inline-flex" />
             <RouterLink
               v-if="showWorkspaceNotifications"
               :to="notificationsLink"
@@ -62,7 +63,7 @@
             >
               <div
                 v-if="isMenuOpen"
-                class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[300px] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
+                class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[min(300px,calc(100vw-1.5rem))] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.18)]"
               >
                 <div class="bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_30%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.96))] px-5 py-4">
                   <div class="flex items-center gap-3">
@@ -118,7 +119,7 @@
         </div>
       </div>
 
-      <div class="thin-scrollbar relative z-0 min-h-0 flex-1 overflow-visible lg:overflow-y-auto lg:pr-1 lg:[scrollbar-gutter:stable]">
+      <div class="thin-scrollbar relative z-0 min-h-0 min-w-0 flex-1 overflow-visible lg:overflow-y-auto lg:pr-1 lg:[scrollbar-gutter:stable]">
         <div class="pb-6 pt-1">
           <RouterView />
         </div>

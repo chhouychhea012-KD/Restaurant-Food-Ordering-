@@ -123,7 +123,7 @@ const workspaceDescription = computed(() => {
 const primaryAction = computed(() => {
   if (isKitchen.value) return { label: 'Open kitchen queue', to: '/kitchen' };
   if (isRider.value) return { label: 'Open deliveries', to: '/rider/deliveries' };
-  return { label: 'Browse food', to: '/restaurants' };
+  return { label: 'Restaurant Food', to: '/restaurants' };
 });
 
 const dashboardMetrics = computed(() => {

@@ -9,8 +9,8 @@
       leave-to-class="opacity-0"
     >
       <div v-if="open" ref="modalRoot" class="fixed inset-0 z-50 flex items-end justify-center bg-slate-700/45 px-3 py-3 backdrop-blur-sm sm:items-center sm:px-4 sm:py-8" @click.self="emit('close')">
-        <div class="w-full overflow-hidden rounded-xl border border-white/40 bg-white shadow-[0_30px_80px_rgba(15,23,42,0.28)]" :class="sizeClass">
-          <div class="border-b border-slate-200/80 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.15),transparent_28%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.92))] px-4 py-4 sm:px-7 sm:py-5">
+        <div class="flex max-h-[calc(100dvh-1.5rem)] w-full flex-col overflow-hidden rounded-xl border border-white/40 bg-white shadow-[0_30px_80px_rgba(15,23,42,0.28)] sm:max-h-[calc(100dvh-4rem)]" :class="sizeClass">
+          <div class="shrink-0 border-b border-slate-200/80 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.15),transparent_28%),linear-gradient(180deg,#ffffff,rgba(248,250,252,0.92))] px-4 py-4 sm:px-7 sm:py-5">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p v-if="eyebrow" data-i18n-ignore class="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">{{ t(eyebrow) }}</p>
@@ -22,10 +22,10 @@
               </button>
             </div>
           </div>
-          <div class="max-h-[78vh] overflow-y-auto px-4 py-5 sm:max-h-[75vh] sm:px-7 sm:py-6">
+          <div class="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-7 sm:py-6">
             <slot />
           </div>
-          <div v-if="$slots.footer" class="border-t border-slate-200 bg-slate-50/80 px-4 py-4 sm:px-7">
+          <div v-if="$slots.footer" class="shrink-0 border-t border-slate-200 bg-slate-50/80 px-4 py-4 sm:px-7">
             <slot name="footer" />
           </div>
         </div>

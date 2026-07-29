@@ -3,15 +3,15 @@
     <EmptyState title="Customer cart only" message="Use a customer account to build a cart and checkout." />
   </div>
 
-  <div v-else class="grid gap-6 xl:grid-cols-[1fr_340px]">
+  <div v-else class="grid min-w-0 gap-4 sm:gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
     <SectionCard eyebrow="Customer Cart" title="Review your items" >
       <template #actions>
         <button v-if="cartStore.items.length" class="btn-secondary" type="button" @click="showClearCartModal = true">Clear cart</button>
       </template>
 
-      <div v-if="cartStore.items.length" class="space-y-5">
-        <div class="grid gap-4 lg:grid-cols-2">
-          <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+      <div v-if="cartStore.items.length" class="space-y-4 sm:space-y-5">
+        <div class="grid min-w-0 gap-4 lg:grid-cols-2">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 sm:p-5">
             <p class="text-sm font-semibold text-slate-900">Ordering branch</p>
             <p class="mt-2 text-base font-bold text-slate-950">{{ cartStore.branchName }}</p>
             <p class="mt-1 text-sm text-slate-500">{{ restaurant?.name }}</p>
@@ -22,7 +22,7 @@
             <p class="mt-4 text-sm text-slate-600">{{ branchAvailability.detail }}</p>
           </div>
 
-          <div class="rounded-lg border border-slate-200 bg-white p-5">
+          <div class="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
             <p class="text-sm font-semibold text-slate-900">Checkout readiness</p>
             <div class="mt-4 h-3 overflow-hidden rounded-full bg-slate-100">
               <div class="h-full rounded-full bg-brand-500 transition-all" :style="{ width: `${minimumOrderProgress}%` }" />
@@ -43,27 +43,27 @@
           </div>
         </div>
 
-        <div v-for="item in cartStore.items" :key="item.id" class="surface-muted flex flex-col gap-4 p-4 lg:flex-row lg:items-center lg:justify-between">
-          <div class="space-y-2">
+        <div v-for="item in cartStore.items" :key="item.id" class="surface-muted flex min-w-0 flex-col gap-4 p-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="min-w-0 space-y-2">
             <div>
               <p class="text-lg font-semibold text-slate-950">{{ item.name }}</p>
-              <p class="text-sm text-slate-500">{{ item.restaurantName }} • {{ item.branchName }}</p>
+              <p class="mobile-text-wrap text-sm text-slate-500">{{ item.restaurantName }} • {{ item.branchName }}</p>
             </div>
             <p v-if="item.modifiers?.length" class="text-sm text-slate-600">Modifiers: {{ item.modifiers.join(', ') }}</p>
             <p v-if="item.note" class="text-sm text-slate-600">Note: {{ item.note }}</p>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex shrink-0 items-center gap-3">
             <button class="btn-secondary px-3 py-2" @click="cartStore.updateQuantity(item.id, item.quantity - 1)">-</button>
             <span class="min-w-8 text-center text-sm font-semibold">{{ item.quantity }}</span>
             <button class="btn-secondary px-3 py-2" @click="cartStore.updateQuantity(item.id, item.quantity + 1)">+</button>
           </div>
-          <div class="flex items-center gap-4">
+          <div class="flex shrink-0 items-center justify-between gap-4 sm:justify-start">
             <p class="text-base font-bold text-slate-950">{{ formatCurrency(item.price * item.quantity) }}</p>
             <button class="text-sm font-semibold text-rose-500" @click="removeCartItem(item.id)">Remove</button>
           </div>
         </div>
 
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
+        <div class="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
           <div v-if="availableVouchers.length" class="mb-5 rounded-lg border border-orange-100 bg-orange-50/60 p-4">
             <div class="flex flex-wrap items-start justify-between gap-3">
               <div>
@@ -72,8 +72,8 @@
               </div>
               <span class="pill bg-white text-brand-700">{{ availableVouchers.length }} available</span>
             </div>
-            <div class="mt-4 grid gap-3 md:grid-cols-2">
-              <div v-for="voucher in availableVouchers" :key="voucher.id" class="rounded-lg border border-orange-100 bg-white p-4 shadow-sm">
+            <div class="mt-4 grid min-w-0 gap-3 md:grid-cols-2">
+              <div v-for="voucher in availableVouchers" :key="voucher.id" class="min-w-0 rounded-lg border border-orange-100 bg-white p-4 shadow-sm">
                 <div class="flex flex-wrap items-start justify-between gap-3">
                   <div class="min-w-0">
                     <p class="font-bold text-slate-950">{{ voucher.code }}</p>
@@ -85,13 +85,13 @@
               </div>
             </div>
           </div>
-          <div class="grid gap-4 lg:grid-cols-[1fr_auto]">
+          <div class="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_auto]">
             <div>
               <label class="field-label" for="voucher-code">Voucher code</label>
               <input id="voucher-code" v-model="voucherInput" class="field-input" type="text" placeholder="Enter voucher code" />
               <p class="mt-2 text-xs text-slate-500">Try FLAVOR10, FEAST25, or FREEDELIVERY.</p>
             </div>
-            <div class="flex flex-wrap items-end gap-3">
+            <div class="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-end">
               <button class="btn-primary" type="button" @click="applyVoucher">Apply voucher</button>
               <button v-if="cartStore.voucherCode" class="btn-secondary" type="button" @click="clearVoucher">Remove voucher</button>
             </div>

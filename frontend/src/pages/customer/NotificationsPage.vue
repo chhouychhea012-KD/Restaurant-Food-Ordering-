@@ -41,7 +41,7 @@
     >
       <template #actions>
         <div class="flex flex-wrap gap-3">
-          <button class="btn-secondary" :disabled="!hasUnread" @click="markAllRead">
+          <button class="btn-secondary w-full justify-center sm:w-auto" :disabled="!hasUnread" @click="markAllRead">
             Mark all as read
           </button>
           <select v-model="filter" class="field-input w-full sm:w-52">
@@ -58,32 +58,37 @@
         <article
           v-for="notification in filteredNotifications"
           :key="notification.id"
-          class="rounded-xl border p-6 shadow-sm hover:shadow transition-all duration-200"
+          class="rounded-xl border p-4 shadow-sm transition-all duration-200 hover:shadow sm:p-6"
           :class="isRead(notification) ? 'bg-white border-slate-200' : 'bg-brand-50 border-brand-200'"
         >
-          <div class="flex gap-5">
+          <div class="flex gap-3 sm:gap-5">
             <!-- Icon -->
             <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-white text-brand-500 shadow-sm"><component :is="notificationIcon(notification.kind)" :size="24" /></div>
 
             <!-- Content -->
-            <div class="flex-1">
-              <div class="flex items-center gap-3">
-                <span class="pill text-sm font-medium" :class="toneClass(notification.kind)">
-                  {{ formatKind(notification.kind) }}
-                </span>
-                <span v-if="!isRead(notification)" class="inline-block px-3 py-1 text-xs font-semibold bg-white text-brand-600 rounded-full border border-brand-200">
-                  New
-                </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="pill text-sm font-medium" :class="toneClass(notification.kind)">
+                    {{ formatKind(notification.kind) }}
+                  </span>
+                  <span v-if="!isRead(notification)" class="inline-block rounded-full border border-brand-200 bg-white px-3 py-1 text-xs font-semibold text-brand-600">
+                    New
+                  </span>
+                </div>
+                <div class="max-w-full break-words text-left text-xs font-medium leading-5 text-slate-400 sm:text-right">
+                  {{ formatShortDate(notification.createdAt) }}
+                </div>
               </div>
 
               <h3 class="mt-4 text-xl font-semibold leading-tight text-slate-900">{{ notification.title }}</h3>
               <p class="mt-3 text-slate-600 leading-relaxed">{{ notification.message }}</p>
 
-              <div class="mt-6 flex flex-wrap gap-3">
+              <div class="mt-6 grid gap-3 sm:flex sm:flex-wrap">
                 <RouterLink
                   v-if="notification.ctaTo && notification.ctaLabel"
                   :to="notificationTarget(notification)"
-                  class="btn-primary"
+                  class="btn-primary w-full justify-center sm:w-auto"
                   @click="markRead(notification.id)"
                 >
                   {{ notification.ctaLabel }}
@@ -91,24 +96,19 @@
                 
                 <button 
                   v-if="!isRead(notification)" 
-                  class="btn-secondary"
+                  class="btn-secondary w-full justify-center sm:w-auto"
                   @click="markRead(notification.id)"
                 >
                   Mark as read
                 </button>
 
                 <button 
-                  class="text-rose-600 hover:text-rose-700 font-medium text-sm py-2 px-4"
+                  class="w-full rounded-lg px-4 py-2 text-center text-sm font-semibold text-rose-600 transition hover:bg-rose-50 hover:text-rose-700 sm:w-auto"
                   @click="removeNotification(notification.id)"
                 >
                   Remove
                 </button>
               </div>
-            </div>
-
-            <!-- Date -->
-            <div class="text-xs text-slate-400 font-medium whitespace-nowrap">
-              {{ formatShortDate(notification.createdAt) }}
             </div>
           </div>
         </article>

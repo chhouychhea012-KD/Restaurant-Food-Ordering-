@@ -1,30 +1,30 @@
 <template>
-  <div class="grid gap-6 xl:grid-cols-[1fr_340px]">
+  <div class="grid min-w-0 gap-4 sm:gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
     <SectionCard eyebrow="Secure Checkout" title="Confirm order details" >
       <div v-if="!cartStore.items.length" class="rounded-lg border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
         Your cart is empty.
       </div>
 
-      <div v-else class="space-y-6">
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="surface-muted p-5">
+      <div v-else class="space-y-4 sm:space-y-6">
+        <div class="grid min-w-0 gap-4 md:grid-cols-2">
+          <div class="surface-muted min-w-0 p-4 sm:p-5">
             <p class="text-sm font-semibold text-slate-900">Customer</p>
-            <p class="mt-2 text-sm text-slate-600">{{ authStore.user?.name }}</p>
-            <p class="text-sm text-slate-500">{{ authStore.user?.email }}</p>
+            <p class="mt-2 break-words text-sm text-slate-600">{{ authStore.user?.name }}</p>
+            <p class="break-all text-sm leading-6 text-slate-500">{{ authStore.user?.email }}</p>
           </div>
-          <div class="surface-muted p-5">
+          <div class="surface-muted min-w-0 p-4 sm:p-5">
             <p class="text-sm font-semibold text-slate-900">Branch</p>
-            <p class="mt-2 text-sm text-slate-600">{{ branch?.name }}</p>
-            <p class="text-sm text-slate-500">{{ restaurant?.name }}</p>
-            <p class="mt-3 text-sm text-slate-500">{{ branchAvailability.detail }}</p>
+            <p class="mt-2 break-words text-sm text-slate-600">{{ branch?.name }}</p>
+            <p class="break-words text-sm text-slate-500">{{ restaurant?.name }}</p>
+            <p class="mt-3 break-words text-sm leading-6 text-slate-500">{{ branchAvailability.detail }}</p>
           </div>
         </div>
 
         <div>
           <label class="field-label" for="address-select">Delivery address</label>
-          <select id="address-select" v-model="selectedAddressId" class="field-input">
+          <select id="address-select" v-model="selectedAddressId" class="field-input min-w-0 truncate">
             <option v-for="address in addresses" :key="address.id" :value="address.id">
-              {{ address.label }} • {{ address.line1 }} • {{ address.district }}
+              {{ address.label }} - {{ address.line1 }} - {{ address.district }}
             </option>
           </select>
         </div>
@@ -34,7 +34,7 @@
           <textarea id="delivery-instructions" v-model="deliveryInstructions" class="field-input min-h-28" placeholder="Leave at lobby, call on arrival, no doorbell, and similar delivery notes." />
         </div>
 
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <div class="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
           <div class="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p class="text-sm font-semibold text-slate-900">Payment method</p>
@@ -43,8 +43,8 @@
             <span class="pill bg-emerald-50 text-emerald-700">Mock secure payment</span>
           </div>
 
-          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            <label v-for="option in paymentOptions" :key="option.value" class="rounded-xl border px-4 py-4 text-sm transition" :class="paymentMethod === option.value ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-orange-50'">
+          <div class="mt-4 grid min-w-0 gap-3 min-[420px]:grid-cols-2 lg:grid-cols-5">
+            <label v-for="option in paymentOptions" :key="option.value" class="rounded-lg border px-3 py-3 text-sm transition sm:px-4 sm:py-4" :class="paymentMethod === option.value ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-orange-50'">
               <input v-model="paymentMethod" class="sr-only" type="radio" name="payment-method" :value="option.value" />
               <span class="block text-base font-semibold">{{ option.label }}</span>
               <span class="mt-1 block text-xs leading-5 text-slate-500">{{ option.help }}</span>
@@ -55,7 +55,7 @@
             The rider collects cash on delivery. No online authorization is needed.
           </div>
 
-          <div v-else-if="paymentMethod === 'visa_card'" class="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
+          <div v-else-if="paymentMethod === 'visa_card'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="cardholder-name">Cardholder name</label>
               <input id="cardholder-name" v-model="visaForm.cardholderName" class="field-input" type="text" autocomplete="cc-name" placeholder="Clara Customer" />
@@ -74,7 +74,7 @@
             </div>
           </div>
 
-          <div v-else-if="paymentMethod === 'bank_account'" class="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
+          <div v-else-if="paymentMethod === 'bank_account'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="bank-name">Bank</label>
               <select id="bank-name" v-model="bankForm.bankName" class="field-input">
@@ -99,7 +99,7 @@
             <p class="mt-2 text-xs text-sky-700">Demo authorization records the PayPal account on the order summary.</p>
           </div>
 
-          <div v-else-if="paymentMethod === 'aba_payway'" class="mt-4 grid gap-4 rounded-xl border border-sky-100 bg-sky-50 p-4 md:grid-cols-2">
+          <div v-else-if="paymentMethod === 'aba_payway'" class="mt-4 grid min-w-0 gap-4 rounded-lg border border-sky-100 bg-sky-50 p-4 md:grid-cols-2">
             <div>
               <label class="field-label" for="aba-account-name">ABA account name</label>
               <input id="aba-account-name" v-model="abaPaywayForm.accountName" class="field-input bg-white" type="text" placeholder="Clara Customer" />
@@ -117,7 +117,7 @@
           </div>
         </div>
 
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
+        <div class="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
           <div class="flex items-start justify-between gap-4">
             <div>
               <p class="text-sm font-semibold text-slate-900">Loyalty redemption</p>
@@ -131,7 +131,7 @@
           </label>
         </div>
 
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
+        <div class="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
           <p class="text-sm font-semibold text-slate-900">Order summary</p>
           <div class="mt-4 space-y-3 text-sm text-slate-600">
             <div v-for="item in cartStore.items" :key="item.id" class="flex items-start justify-between gap-4">
@@ -159,7 +159,7 @@
           {{ orderMessage }}
         </div>
 
-        <label class="flex items-center gap-3 rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700">
+        <label class="flex items-center gap-3 rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 mobile-text-wrap">
           <input v-model="acceptTerms" type="checkbox" />
           I confirm this order.
         </label>
