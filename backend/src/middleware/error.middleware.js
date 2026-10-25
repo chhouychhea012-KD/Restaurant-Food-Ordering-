@@ -6,6 +6,9 @@ function notFound(req, _res, next) {
 
 function errorHandler(error, _req, res, _next) {
   const status = error.status || 500;
+  if (status >= 500) {
+    console.error('Unhandled API error:', error);
+  }
   res.status(status).json({
     error: {
       message: status === 500 ? 'Internal server error.' : error.message,
